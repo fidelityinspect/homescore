@@ -1,0 +1,18 @@
+<!-- Inside #lifecycleScreen .button-container, after <button id="resetButton"> -->
+<button class="reset-button" id="exportCsvButton" aria-label="Download component data as CSV">Download CSV</button>
+// Inside <script>, after resetButton event listener (around line 550)
+document.getElementById('exportCsvButton').addEventListener('click', () => {
+  const houseAge = parseInt(document.getElementById('houseAge').value || 0);
+  const top10 = getTop10Components(houseAge);
+  const csv = [
+    'Name,Lifespan,Cost,Age,Status',
+    ...top10.map(c => `"${c.name}",${c.lifespan},${c.cost},${c.displayAge.toFixed(1)},"${c.status}"`)
+  ].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'homescore-components.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+});
