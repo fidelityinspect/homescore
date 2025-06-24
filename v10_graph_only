@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Home Inspection Insights</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f3f4f6;
+      color: #1f2937;
+      overflow-x: hidden;
+      overscroll-behavior: none;
+      touch-action: manipulation;
+    }
+    .chart-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 10px auto;
+      padding: 15px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .chart-container:hover { transform: scale(1.01); }
+    .canvas-container { height: 400px; position: relative; }
+    canvas { max-width: 100%; height: 100% !important; }
+    #errorMessage {
+      color: #dc2626;
+      margin: 10px;
+      font-size: 14px;
+      text-align: center;
+      display: none;
+    }
+    .flex {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    label {
+      font-size: 16px;
+      margin-right: 5px;
+    }
+    input {
+      font-size: 16px;
+      padding: 5px;
+      width: 60px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    @media (max-width: 600px) {
+      .chart-container { width: 95%; padding: 10px; margin: 5px auto; }
+      .canvas-container { height: 300px; }
+      label { font-size: 14px; }
+      input { font-size: 14px; width: 50px; padding: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <div class="flex items-center justify-center gap-4 mb-4">
+      <div class="flex items-center gap-2">
+        <label for="houseAge">Set House Age:</label>
+        <input id="houseAge" type="number" min="0" max="100" value="10" class="w-16 p-1 border rounded-md" onchange="setHouseAge(this.value)">
+      </div>
+    </div>
+    <div class="canvas-container">
+      <canvas id="riskGraph"></canvas>
+    </div>
+    <div id="errorMessage"></div>
+  </div>
+  <script>
+    const log = (msg) => console.log(`[${new Date().toISOString()}] ${msg}`);
+    const allComponents = [
+      { name: 'Roofing (Asphalt Shingles)', lifespan: 22.5, cost: 12000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'HVAC System', lifespan: 17.5, cost: 18000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Water Heater (Tank)', lifespan: 10, cost: 2500 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Water Heater (Tankless)', lifespan: 17.5, cost: 5000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Gutters (Aluminum/Vinyl)', lifespan: 25, cost: 4500 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Windows (Vinyl)', lifespan: 25, cost: 12000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Exterior Siding', lifespan: 30, cost: 18000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Driveway (Concrete)', lifespan: 35, cost: 12000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Deck', lifespan: 12.5, cost: 15000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Plumbing (Cast Iron Drain Line)', lifespan: 50, cost: 15000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Garage Door', lifespan: 22.5, cost: 4000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Carpet', lifespan: 10, cost: 6000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Refrigerator', lifespan: 12.5, cost: 3000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Oven/Range', lifespan: 12.5, cost: 2500 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Dishwasher', lifespan: 10, cost: 1500 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Washer/Dryer', lifespan: 12, cost: 3000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Septic System', lifespan: 30, cost: 18000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Well Pump', lifespan: 11.5, cost: 5000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Attic Insulation', lifespan: 25, cost: 5000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Fireplace Insert', lifespan: 20, cost: 5000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Smoke/CO Detectors', lifespan: 7.5, cost: 500 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Water Softener', lifespan: 15, cost: 3000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Fencing (Wood)', lifespan: 15, cost: 8000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Sprinkler System', lifespan: 20, cost: 7000 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null },
+      { name: 'Pool Pump/Filter', lifespan: 10, cost: 2500 * (1 + (Math.random() - 0.5) * 0.2), manualAge: null }
+    ];
+
+    const hiddenDefects = [
+      { name: 'Foundation Perimeter Soils Heaving/Settling', risk: 24, cost: 12000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Foundation Repairs Present', risk: 12, cost: 5000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Roofing Seek Repairs/Replacement', risk: 45, cost: 20000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Insulation Insufficient Depth/Missing', risk: 30, cost: 10000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Insulation Pest Damage', risk: 13, cost: 6000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Structural Truss Repairs Needed', risk: 31, cost: 12000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Moisture Intrusion Leaks Present', risk: 45, cost: 20000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Insulation Inadequate Behind Walls/Ceilings', risk: 41, cost: 15000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Windows Failed Seal(s)', risk: 33, cost: 12000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Electrical Wiring Circuit Deficiencies', risk: 26, cost: 10000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Electrical Receptacles Missing GFCI Protection', risk: 40, cost: 15000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'HVAC Insufficient Makeup/Combustion Air', risk: 16, cost: 7000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'HVAC Operational Service Life Reached', risk: 16, cost: 7000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'HVAC Under/Oversized', risk: 18, cost: 8000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'HVAC System Repairs Needed', risk: 26, cost: 10000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'HVAC Evaluate/Balance HVAC Zones', risk: 29, cost: 10000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Plumbing Supply Damaged', risk: 24, cost: 12000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Plumbing Fixtures Damaged', risk: 32, cost: 12000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Plumbing Leak Detected', risk: 32, cost: 12000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Water Heater Damaged', risk: 45, cost: 20000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Main Drain Standing Water/Debris', risk: 43, cost: 15000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Main Drain Cast Iron Damaged', risk: 37, cost: 15000 * (1 + (Math.random() - 0.5) * 0.2) }
+    ];
+
+    const immediateMaintenance = [
+      { name: 'Concrete Damages Present', risk: 24, cost: 5000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Grading Improper Drainage', risk: 12, cost: 2000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Roof Flashings Maintenance Needed', risk: 45, cost: 1845 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Roof Decking Sagging', risk: 22, cost: 5000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Rodent Accesses Present', risk: 13, cost: 2000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Wallboard Damages/Wavy', risk: 20, cost: 3000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Lintels Rusted', risk: 18, cost: 3000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Door Out of Square', risk: 17, cost: 2000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Windows Damaged', risk: 16, cost: 2000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'HVAC Emergency Float Switch Not Present', risk: 15, cost: 2000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'HVAC Condensate Drain Damaged', risk: 14, cost: 2000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'HVAC Rust Present In Secondary Pan', risk: 12, cost: 2000 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Plumbing Insulation Needed', risk: 11, cost: 1500 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Sprinkler System Damaged', risk: 10, cost: 1500 * (1 + (Math.random() - 0.5) * 0.2) },
+      { name: 'Dryer Exhaust System Cleaning', risk: 9, cost: 1000 * (1 + (Math.random() - 0.5) * 0.2) }
+    ];
+
+    const highVisibilityComponents = [
+      'Roofing (Asphalt Shingles)',
+      'HVAC System',
+      'Water Heater (Tank)',
+      'Water Heater (Tankless)',
+      'Windows (Vinyl)',
+      'Exterior Siding',
+      'Septic System'
+    ];
+
+    const maxCost = 20000; // Reduced max cost to $20,000 as requested
+    let riskGraph = null;
+    let debounceTimeout = null;
+
+    function setHouseAge(age) {
+      try {
+        log(`setHouseAge called with age: ${age}`);
+        if (debounceTimeout) clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => {
+          updateGraph();
+        }, 300); // Debounce 300ms
+      } catch (e) {
+        log(`Error in setHouseAge: ${e.message}`);
+        showError(`House age update failed: ${e.message}`);
+      }
+    }
+
+    function showError(message) {
+      const err = document.getElementById('errorMessage');
+      if (err) {
+        err.textContent = message;
+        err.style.display = 'block';
+      }
+    }
+
+    function getTopComponents(houseAge) {
+      try {
+        log(`getTopComponents called with houseAge: ${houseAge}`);
+        const components = [
+          ...allComponents.map(c => ({ ...c, category: 'Lifecycle', risk: 0, cost: c.cost || 0 })),
+          ...hiddenDefects.map(d => ({ ...d, category: 'Deficiency', lifespan: 0, cost: d.cost || 0 })),
+          ...immediateMaintenance.map(m => ({ ...m, category: 'Maintenance', lifespan: 0, cost: m.cost || 0 }))
+        ];
+        return components.map(c => {
+          const newC = { ...c }; // Create a new object to avoid modifying the original
+          if (newC.category === 'Lifecycle') {
+            let age = newC.manualAge ?? houseAge;
+            if (newC.manualAge !== null) {
+              age = houseAge - newC.manualAge; // Elapsed time since manualAge
+            }
+            let cycles = Math.floor(age / (newC.lifespan * 1.25)); // Number of complete 125% lifecycles
+            let currentAge = age - (cycles * newC.lifespan * 1.25); // Age within current cycle, reset at 125%
+            if (currentAge > newC.lifespan) {
+              currentAge = currentAge % newC.lifespan; // Restart age within new cycle
+            }
+            const totalAge = age; // Total elapsed time for display
+            const lifeLeft = newC.lifespan - currentAge; // Life Left within current cycle
+            let rs = (currentAge / newC.lifespan) * 0.98; // Base risk calculation
+            if (totalAge > newC.lifespan && totalAge <= newC.lifespan * 1.25) {
+              newC.risk = 98; // Force 98% risk when past lifespan until reset
+            } else {
+              newC.risk = Math.min(rs * 100, 98); // Normal risk calculation otherwise
+            }
+            newC.riskScore = rs;
+            newC.currentAge = currentAge;
+            newC.displayAge = totalAge + (newC.manualAge ?? 0); // Total age from manualAge start
+            newC.remainingLife = lifeLeft > 0 ? lifeLeft : null; // Remaining Life in current cycle
+            if (newC.displayAge > newC.lifespan && newC.displayAge <= newC.lifespan * 1.25) {
+              newC.yearsPastLifecycle = newC.displayAge - newC.lifespan; // Years past lifecycle until reset
+            } else {
+              newC.yearsPastLifecycle = null;
+            }
+          } else {
+            newC.remainingLife = null; // Avoid NaN for non-Lifecycle
+            newC.currentAge = 0;
+            newC.displayAge = houseAge;
+            newC.yearsPastLifecycle = null;
+            newC.risk = newC.risk || 0; // Static risk for Deficiencies and Maintenance
+          }
+          newC.cost = newC.cost || 0; // Ensure cost is defined
+          log(`Component: ${newC.name}, Age: ${newC.displayAge || newC.manualAge || houseAge}, Current Age: ${newC.currentAge}, Risk: ${newC.risk}, Remaining: ${newC.remainingLife !== null ? newC.remainingLife.toFixed(1) : 'N/A'} yrs, Years Past Lifecycle: ${newC.yearsPastLifecycle !== null ? newC.yearsPastLifecycle.toFixed(1) : 'N/A'}, Cost: ${newC.cost}`);
+          return newC;
+        });
+      } catch (e) {
+        log(`Error in getTopComponents: ${e.message}`);
+        showError(`Component calculation failed: ${e.message}`);
+        return [...allComponents, ...hiddenDefects, ...immediateMaintenance].map(c => ({ ...c, category: c.category || 'Lifecycle', risk: c.risk || 0, cost: c.cost || 0 }));
+      }
+    }
+
+    function updateGraph() {
+      try {
+        log(`updateGraph called`);
+        if (!riskGraph) {
+          const ctx = document.getElementById('riskGraph');
+          if (ctx && ctx.getContext) {
+            riskGraph = new Chart(ctx.getContext('2d'), {
+              type: 'scatter',
+              data: {
+                datasets: [
+                  {
+                    label: 'Maintenance',
+                    data: [],
+                    pointStyle: 'circle',
+                    backgroundColor: 'blue',
+                    borderColor: 'blue',
+                    pointRadius: 10,
+                    pointHoverRadius: 15,
+                    pointHitRadius: 20
+                  },
+                  {
+                    label: 'Defects',
+                    data: [],
+                    pointStyle: 'circle',
+                    backgroundColor: 'orange',
+                    borderColor: 'orange',
+                    pointRadius: 10,
+                    pointHoverRadius: 15,
+                    pointHitRadius: 20
+                  },
+                  {
+                    label: 'Lifecycle',
+                    data: [],
+                    pointStyle: 'triangle',
+                    backgroundColor: [],
+                    borderColor: [],
+                    pointRadius: 10,
+                    pointHoverRadius: 15,
+                    pointHitRadius: 20
+                  }
+                ]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                  x: {
+                    title: { display: true, text: 'Risk', font: { size: 14, weight: 'bold' }, color: '#1f2937' },
+                    min: 0,
+                    max: 100,
+                    ticks: { maxTicksLimit: 5, font: { size: 12 }, color: '#4b5563' },
+                    grid: { color: '#e5e7eb', lineWidth: 1 },
+                    padding: 20
+                  },
+                  y: {
+                    title: { display: true, text: 'Avg. Repair Cost', font: { size: 14, weight: 'bold' }, color: '#1f2937' },
+                    min: 0,
+                    max: maxCost,
+                    ticks: {
+                      maxTicksLimit: 5,
+                      font: { size: 12 },
+                      color: '#4b5563',
+                      callback: function(value) {
+                        if (value === 0) return '$0';
+                        if (value <= 15000) return `$${Math.round(value / 1000)}K`; // Wider spacing for 0-15k
+                        return `$${Math.round(value / 5000) * 5}K`; // Compressed 15-20k
+                      }
+                    },
+                    grid: { color: '#e5e7eb', lineWidth: 1 },
+                    padding: 20
+                  }
+                },
+                plugins: {
+                  legend: { display: false },
+                  tooltip: {
+                    padding: 12,
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                    titleColor: '#1f2937',
+                    bodyColor: '#374151',
+                    borderColor: '#d1d5db',
+                    borderWidth: 2,
+                    cornerRadius: 6,
+                    callbacks: {
+                      label: ctx => {
+                        const topComp = getTopComponents(parseInt(document.getElementById('houseAge')?.value || 0)).find(t => t.name === ctx.raw.name) || { name: ctx.raw.name, risk: 0, cost: 0, lifespan: 0 };
+                        const baseInfo = [
+                          `${topComp.name || 'Unknown'}`,
+                          `Risk: ${topComp.risk || 0}%`,
+                          `Avg. Repair Cost: $${(topComp.cost || 0).toLocaleString()}`
+                        ];
+                        if (topComp.lifespan > 0) {
+                          if (topComp.yearsPastLifecycle !== null) {
+                            baseInfo.push(`Years Past Lifecycle: ${topComp.yearsPastLifecycle.toFixed(1)} yrs`);
+                          } else {
+                            baseInfo.push(`Remaining: ${topComp.remainingLife !== null ? (topComp.remainingLife >= 0 ? topComp.remainingLife.toFixed(1) : 'Overdue ' + (-topComp.remainingLife).toFixed(1)) : 'N/A'} yrs`);
+                          }
+                        }
+                        return baseInfo;
+                      }
+                    }
+                  },
+                  annotation: {
+                    annotations: [{
+                      type: 'line',
+                      mode: 'vertical',
+                      scaleID: 'x',
+                      value: 40,
+                      borderColor: 'rgba(220, 38, 38, 0.5)',
+                      borderWidth: 2
+                    }]
+                  }
+                },
+                animation: {
+                  duration: 500,
+                  easing: 'easeOutQuad'
+                },
+                hover: {
+                  mode: 'nearest',
+                  intersect: true
+                },
+                onHover: (event, chartElement) => {
+                  event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+                },
+                layout: { padding: { top: 20, bottom: 20, left: 30, right: 30 } }
+              }
+            });
+            log('Chart initialized');
+          } else {
+            log('Canvas not found or context unavailable');
+            showError('Graph canvas not found or context unavailable');
+            return;
+          }
+        }
+
+        const ha = parseInt(document.getElementById('houseAge')?.value || 0);
+        const tc = getTopComponents(ha);
+        // Populate datasets
+        riskGraph.data.datasets[0].data = tc.filter(c => c.category === 'Maintenance').map(c => ({
+          x: c.risk || 0,
+          y: c.cost,
+          name: c.name
+        }));
+        riskGraph.data.datasets[1].data = tc.filter(c => c.category === 'Deficiency').map(c => ({
+          x: c.risk || 0,
+          y: c.cost,
+          name: c.name
+        }));
+        const lifecycleData = tc.filter(c => c.category === 'Lifecycle').map(c => ({
+          x: c.risk || 0,
+          y: c.cost,
+          name: c.name
+        }));
+        riskGraph.data.datasets[2].data = lifecycleData;
+        // Dynamically set colors based on risk and years past lifecycle
+        riskGraph.data.datasets[2].backgroundColor = lifecycleData.map(c => {
+          const comp = tc.find(t => t.name === c.name);
+          return (comp.displayAge > comp.lifespan && comp.displayAge <= comp.lifespan * 1.25) || c.x > 40 ? 'red' : 'orange';
+        });
+        riskGraph.data.datasets[2].borderColor = lifecycleData.map(c => {
+          const comp = tc.find(t => t.name === c.name);
+          return (comp.displayAge > comp.lifespan && comp.displayAge <= comp.lifespan * 1.25) || c.x > 40 ? 'red' : 'orange';
+        });
+
+        log(`Raw components: ${JSON.stringify(tc.map(c => ({ name: c.name, risk: c.risk, cost: c.cost })))}`);
+        log(`Graph data: ${JSON.stringify(riskGraph.data.datasets.map(d => ({ label: d.label, count: d.data.length })))}`);
+        riskGraph.update({ duration: 500 });
+      } catch (e) {
+        log(`Error in updateGraph: ${e.message}`);
+        showError(`Graph update failed: ${e.message}`);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        log('Initializing app');
+        updateGraph();
+      } catch (e) {
+        log(`Error during init: ${e.message}`);
+        showError(`Initialization failed: ${e.message}`);
+      }
+    });
+  </script>
+</body>
+</html>
