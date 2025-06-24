@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Home Inspection Insights</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f3f4f6;
+      overscroll-behavior: none;
+      touch-action: manipulation;
+    }
+    .canvas-container { height: 400px; position: relative; }
+    canvas { max-width: 100%; height: 100% !important; }
+    .card-image { width: 80px; height: 80px; object-fit: cover; }
+    @media (max-width: 600px) {
+      .canvas-container { height: 300px; }
+      .card-image { width: 60px; height: 60px; }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <div class="container mx-auto p-4 max-w-5xl">
+    <!-- Header -->
+    <h1 class="text-2xl font-bold text-center mb-6">Home Inspection Insights</h1>
+
+    <!-- Chart and House Age Input -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+        <div class="flex items-center gap-2">
+          <label for="houseAge" class="text-sm font-medium">Set House Age:</label>
+          <input id="houseAge" type="number" min="0" max="100" value="10" class="w-16 p-1 border rounded-md" onchange="setHouseAge(this.value)">
+        </div>
+        <button onclick="resetAges()" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Reset Ages</button>
+        <button onclick="downloadReport()" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Download Report</button>
+      </div>
+      <div class="canvas-container">
+        <canvas id="riskGraph"></canvas>
+      </div>
+      <div id="errorMessage" class="text-red-600 text-center text-sm mt-2 hidden"></div>
+    </div>
+
+    <!-- Collapsible Sections -->
+    <div class="space-y-4">
+      <!-- Lifecycle Section -->
+      <div class="bg-white rounded-lg shadow">
+        <button onclick="toggleSection('lifecycle')" class="w-full bg-red-500 text-white text-left p-4 font-semibold rounded-t-lg flex justify-between items-center">
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Lifecycle Components
+          </span>
+          <span id="lifecycle-toggle" class="text-xl">−</span>
+        </button>
+        <div id="lifecycle-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4"></div>
+      </div>
+
+      <!-- Hidden Defects Section -->
+      <div class="bg-white rounded-lg shadow">
+        <button onclick="toggleSection('defects')" class="w-full bg-orange-500 text-white text-left p-4 font-semibold rounded-t-lg flex justify-between items-center">
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            High Cost/Hidden Defects
+          </span>
+          <span id="defects-toggle" class="text-xl">−</span>
+        </button>
+        <div id="defects-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4"></div>
+      </div>
+
+      <!-- Maintenance Section -->
+      <div class="bg-white rounded-lg shadow">
+        <button onclick="toggleSection('maintenance')" class="w-full bg-blue-500 text-white text-left p-4 font-semibold rounded-t-lg flex justify-between items-center">
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Immediate Maintenance
+          </span>
+          <span id="maintenance-toggle" class="text-xl">−</span>
+        </button>
+        <div id="maintenance-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const log = (msg) => console.log(`[${new Date().toISOString()}] ${msg}`);
+    const allComponents = [
+      { name: 'Roofing (Asphalt Shingles)', lifespan: 22.5, cost: 12000, manualAge: null, image: 'https://via.placeholder.com/80?text=Roof' },
+      { name: 'HVAC System', lifespan: 17.5, cost: 18000, manualAge: null, image: 'https://via.placeholder.com/80?text=HVAC' },
+      { name: 'Water Heater (Tank)', lifespan: 10, cost: 2500, manualAge: null, image: 'https://via.placeholder.com/80?text=Heater' }
+    ];
+
+    const hiddenDefects = [
+      { name: 'Foundation Perimeter Soils Heaving/Settling', risk: 24, cost: 12000, image: 'https://via.placeholder.com/80?text=Foundation' },
+      { name: 'Roofing Seek Repairs/Replacement', risk: 45, cost: 20000, image: 'https://via.placeholder.com/80?text=Roof' }
+    ];
+
+    const immediateMaintenance = [
+      { name: 'Concrete Damages Present', risk: 24, cost: 5000, image: 'https://via.placeholder.com/80?text=Concrete' },
+      { name: 'Roof Flashings Maintenance Needed', risk: 45, cost: 1845, image: 'https://via.placeholder.com/80?text=Flashing' }
+    ];
+
+    const maxCost = 20000;
+    let riskGraph = null;
+    let debounceTimeout = null;
+
+    function toggleSection(section) {
+      const sectionDiv = document.getElementById(`${section}-section`);
+      const toggleSpan = document.getElementById(`${section}-toggle`);
+      if (sectionDiv.classList.toggle('hidden')) {
+        toggleSpan.textContent = '+';
+      } else {
+        toggleSpan.textContent = '−';
+      }
+    }
+
+    function toggleDetails(cardId) {
+      const details = document.getElementById(`details-${cardId}`);
+      const button = document.getElementById(`toggle-${cardId}`);
+      if (details.classList.toggle('hidden')) {
+        button.textContent = 'See More';
+      } else {
+        button.textContent = 'See Less';
+      }
+    }
+
+    function setHouseAge(age) {
+      try {
+        log(`setHouseAge called with age: ${age}`);
+        if (debounceTimeout) clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => {
+          updateGraph();
+          updateComponentCards();
+        }, 300);
+      } catch (e) {
+        log(`Error in setHouseAge: ${e.message}`);
+        showError(`House age update failed: ${e.message}`);
+      }
+    }
+
+    function setComponentAge(componentName, age) {
+      try {
+        log(`setComponentAge called for ${componentName} with age: ${age}`);
+        const component = allComponents.find(c => c.name === componentName);
+        if (component) {
+          component.manualAge = age !== '' ? parseInt(age) : null;
+          updateGraph();
+          updateComponentCards();
+        }
+      } catch (e) {
+        log(`Error in setComponentAge: ${e.message}`);
+        showError(`Component age update failed: ${e.message}`);
+      }
+    }
+
+    function resetAges() {
+      try {
+        log('resetAges called');
+        document.getElementById('houseAge').value = 10;
+        allComponents.forEach(c => c.manualAge = null);
+        updateGraph();
+        updateComponentCards();
+      } catch (e) {
+        log(`Error in resetAges: ${e.message}`);
+        showError(`Age reset failed: ${e.message}`);
+      }
+    }
+
+    function showError(message) {
+      const err = document.getElementById('errorMessage');
+      if (err) {
+        err.textContent = message;
+        err.classList.remove('hidden');
+      }
+    }
+
+    function getTopComponents(houseAge) {
+      try {
+        log(`getTopComponents called with houseAge: ${houseAge}`);
+        const components = [
+          ...allComponents.map(c => ({ ...c, category: 'Lifecycle', risk: 0, cost: c.cost || 0 })),
+          ...hiddenDefects.map(d => ({ ...d, category: 'Deficiency', lifespan: 0, cost: d.cost || 0 })),
+          ...immediateMaintenance.map(m => ({ ...m, category: 'Maintenance', lifespan: 0, cost: m.cost || 0 }))
+        ];
+        return components.map(c => {
+          const newC = { ...c };
+          if (newC.category === 'Lifecycle') {
+            let age = newC.manualAge !== null ? newC.manualAge : houseAge;
+            let cycles = Math.floor(age / (newC.lifespan * 1.25));
+            let currentAge = age - (cycles * newC.lifespan * 1.25);
+            if (currentAge > newC.lifespan) {
+              currentAge = currentAge % newC.lifespan;
+            }
+            const totalAge = age;
+            const lifeLeft = newC.lifespan - currentAge;
+            let rs = (currentAge / newC.lifespan) * 0.98;
+            if (totalAge > newC.lifespan && totalAge <= newC.lifespan * 1.25) {
+              newC.risk = 98;
+            } else {
+              newC.risk = Math.min(rs * 100, 98);
+            }
+            newC.riskScore = rs;
+            newC.currentAge = currentAge;
+            newC.displayAge = totalAge;
+            newC.remainingLife = lifeLeft > 0 ? lifeLeft : null;
+            newC.yearsPastLifecycle = totalAge > newC.lifespan && totalAge <= newC.lifespan * 1.25 ? totalAge - newC.lifespan : null;
+          } else {
+            newC.remainingLife = null;
+            newC.currentAge = 0;
+            newC.displayAge = houseAge;
+            newC.yearsPastLifecycle = null;
+            newC.risk = newC.risk || 0;
+          }
+          newC.cost = newC.cost || 0;
+          return newC;
+        });
+      } catch (e) {
+        log(`Error in getTopComponents: ${e.message}`);
+        showError(`Component calculation failed: ${e.message}`);
+        return [...allComponents, ...hiddenDefects, ...immediateMaintenance].map(c => ({ ...c, category: c.category || 'Lifecycle', risk: c.risk || 0, cost: c.cost || 0 }));
+      }
+    }
+
+    function updateComponentCards() {
+      try {
+        log('updateComponentCards called');
+        const houseAge = parseInt(document.getElementById('houseAge')?.value || 0);
+        const components = getTopComponents(houseAge);
+
+        // Lifecycle Cards
+        const lifecycleGrid = document.getElementById('lifecycle-section');
+        lifecycleGrid.innerHTML = '';
+        components.filter(c => c.category === 'Lifecycle').forEach(c => {
+          const cardId = c.name.replace(/\s+/g, '');
+          const card = document.createElement('div');
+          card.className = 'bg-white rounded-lg shadow p-4 flex';
+          card.innerHTML = `
+            <div class="flex-1">
+              <div class="bg-red-100 text-red-800 p-2 rounded flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <h3 class="text-lg font-semibold">${c.name}</h3>
+              </div>
+              <div class="flex items-start mt-2">
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600">Lifespan: ${c.lifespan} yrs</p>
+                  <p class="text-sm text-gray-600">Cost: $${c.cost.toLocaleString()}</p>
+                  <p class="text-sm text-gray-600">Risk: ${c.risk.toFixed(1)}%</p>
+                  <p class="text-sm text-gray-600">Remaining Life: ${c.remainingLife !== null ? c.remainingLife.toFixed(1) : 'N/A'} yrs</p>
+                  <div class="mt-2">
+                    <label for="${cardId}-age" class="text-sm">Set Age:</label>
+                    <input id="${cardId}-age" type="number" min="0" max="100" value="${c.manualAge !== null ? c.manualAge : houseAge}" class="w-16 p-1 border rounded-md" onchange="setComponentAge('${c.name}', this.value)">
+                  </div>
+                  <button id="toggle-${cardId}" onclick="toggleDetails('${cardId}')" class="text-blue-500 text-sm mt-2">See More</button>
+                  <div id="details-${cardId}" class="hidden mt-2 text-sm text-gray-600">
+                    <p>Additional Info: Monitor for wear and tear. Schedule regular inspections every 5 years.</p>
+                  </div>
+                </div>
+                <img src="${c.image}" alt="${c.name}" class="card-image rounded ml-4">
+              </div>
+            </div>
+          `;
+          lifecycleGrid.appendChild(card);
+        });
+
+        // Defects Cards
+        const defectsGrid = document.getElementById('defects-section');
+        defectsGrid.innerHTML = '';
+        components.filter(c => c.category === 'Deficiency').forEach(c => {
+          const cardId = c.name.replace(/\s+/g, '');
+          const card = document.createElement('div');
+          card.className = 'bg-white rounded-lg shadow p-4 flex';
+          card.innerHTML = `
+            <div class="flex-1">
+              <div class="bg-orange-100 text-orange-800 p-2 rounded flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                <h3 class="text-lg font-semibold">${c.name}</h3>
+              </div>
+              <div class="flex items-start mt-2">
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600">Cost: $${c.cost.toLocaleString()}</p>
+                  <p class="text-sm text-gray-600">Risk: ${c.risk.toFixed(1)}%</p>
+                  <button id="toggle-${cardId}" onclick="toggleDetails('${cardId}')" class="text-blue-500 text-sm mt-2">See More</button>
+                  <div id="details-${cardId}" class="hidden mt-2 text-sm text-gray-600">
+                    <p>Additional Info: Requires professional inspection. Potential structural impact.</p>
+                  </div>
+                </div>
+                <img src="${c.image}" alt="${c.name}" class="card-image rounded ml-4">
+              </div>
+            </div>
+          `;
+          defectsGrid.appendChild(card);
+        });
+
+        // Maintenance Cards
+        const maintenanceGrid = document.getElementById('maintenance-section');
+        maintenanceGrid.innerHTML = '';
+        components.filter(c => c.category === 'Maintenance').forEach(c => {
+          const cardId = c.name.replace(/\s+/g, '');
+          const card = document.createElement('div');
+          card.className = 'bg-white rounded-lg shadow p-4 flex';
+          card.innerHTML = `
+            <div class="flex-1">
+              <div class="bg-blue-100 text-blue-800 p-2 rounded flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <h3 class="text-lg font-semibold">${c.name}</h3>
+              </div>
+              <div class="flex items-start mt-2">
+                <div class="flex-1">
+                  <p class="text-sm text-gray-600">Cost: $${c.cost.toLocaleString()}</p>
+                  <p class="text-sm text-gray-600">Risk: ${c.risk.toFixed(1)}%</p>
+                  <button id="toggle-${cardId}" onclick="toggleDetails('${cardId}')" class="text-blue-500 text-sm mt-2">See More</button>
+                  <div id="details-${cardId}" class="hidden mt-2 text-sm text-gray-600">
+                    <p>Additional Info: Address immediately to prevent further damage.</p>
+                  </div>
+                </div>
+                <img src="${c.image}" alt="${c.name}" class="card-image rounded ml-4">
+              </div>
+            </div>
+          `;
+          maintenanceGrid.appendChild(card);
+        });
+      } catch (e) {
+        log(`Error in updateComponentCards: ${e.message}`);
+        showError(`Card update failed: ${e.message}`);
+      }
+    }
+
+    function updateGraph() {
+      try {
+        log(`updateGraph called`);
+        if (!riskGraph) {
+          const ctx = document.getElementById('riskGraph');
+          if (ctx && ctx.getContext) {
+            riskGraph = new Chart(ctx.getContext('2d'), {
+              type: 'scatter',
+              data: {
+                datasets: [
+                  { label: 'Maintenance', data: [], pointStyle: 'circle', backgroundColor: 'blue', borderColor: 'blue', pointRadius: 10, pointHoverRadius: 15, pointHitRadius: 20 },
+                  { label: 'Defects', data: [], pointStyle: 'circle', backgroundColor: 'orange', borderColor: 'orange', pointRadius: 10, pointHoverRadius: 15, pointHitRadius: 20 },
+                  { label: 'Lifecycle', data: [], pointStyle: 'triangle', backgroundColor: [], borderColor: [], pointRadius: 10, pointHoverRadius: 15, pointHitRadius: 20 }
+                ]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                  x: { title: { display: true, text: 'Risk', font: { size: 14, weight: 'bold' }, color: '#1f2937' }, min: 0, max: 100, ticks: { maxTicksLimit: 5, font: { size: 12 }, color: '#4b5563' }, grid: { color: '#e5e7eb', lineWidth: 1 }, padding: 20 },
+                  y: {
+                    title: { display: true, text: 'Avg. Repair Cost', font: { size: 14, weight: 'bold' }, color: '#1f2937' },
+                    min: 0,
+                    max: maxCost,
+                    ticks: {
+                      maxTicksLimit: 5,
+                      font: { size: 12 },
+                      color: '#4b5563',
+                      callback: function(value) {
+                        if (value === 0) return '$0';
+                        if (value <= 15000) return `$${Math.round(value / 1000)}K`;
+                        return `$${Math.round(value / 5000) * 5}K`;
+                      }
+                    },
+                    grid: { color: '#e5e7eb', lineWidth: 1 },
+                    padding: 20
+                  }
+                },
+                plugins: {
+                  legend: { display: false },
+                  tooltip: {
+                    padding: 12,
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                    titleColor: '#1f2937',
+                    bodyColor: '#374151',
+                    borderColor: '#d1d5db',
+                    borderWidth: 2,
+                    cornerRadius: 6,
+                    callbacks: {
+                      label: ctx => {
+                        const topComp = getTopComponents(parseInt(document.getElementById('houseAge')?.value || 0)).find(t => t.name === ctx.raw.name) || { name: ctx.raw.name, risk: 0, cost: 0, lifespan: 0 };
+                        const baseInfo = [
+                          `${topComp.name || 'Unknown'}`,
+                          `Risk: ${topComp.risk || 0}%`,
+                          `Avg. Repair Cost: $${(topComp.cost || 0).toLocaleString()}`
+                        ];
+                        if (topComp.lifespan > 0) {
+                          if (topComp.yearsPastLifecycle !== null) {
+                            baseInfo.push(`Years Past Lifecycle: ${topComp.yearsPastLifecycle.toFixed(1)} yrs`);
+                          } else {
+                            baseInfo.push(`Remaining: ${topComp.remainingLife !== null ? (topComp.remainingLife >= 0 ? topComp.remainingLife.toFixed(1) : 'Overdue ' + (-topComp.remainingLife).toFixed(1)) : 'N/A'} yrs`);
+                          }
+                        }
+                        return baseInfo;
+                      }
+                    }
+                  },
+                  annotation: { annotations: [{ type: 'line', mode: 'vertical', scaleID: 'x', value: 40, borderColor: 'rgba(220, 38, 38, 0.5)', borderWidth: 2 }] }
+                },
+                animation: { duration: 500, easing: 'easeOutQuad' },
+                hover: { mode: 'nearest', intersect: true },
+                onHover: (event, chartElement) => { event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default'; },
+                layout: { padding: { top: 20, bottom: 20, left: 30, right: 30 } }
+              }
+            });
+            log('Chart initialized');
+          } else {
+            log('Canvas not found or context unavailable');
+            showError('Graph canvas not found or context unavailable');
+            return;
+          }
+        }
+
+        const ha = parseInt(document.getElementById('houseAge')?.value || 0);
+        const tc = getTopComponents(ha);
+        riskGraph.data.datasets[0].data = tc.filter(c => c.category === 'Maintenance').map(c => ({ x: c.risk || 0, y: c.cost, name: c.name }));
+        riskGraph.data.datasets[1].data = tc.filter(c => c.category === 'Deficiency').map(c => ({ x: c.risk || 0, y: c.cost, name: c.name }));
+        const lifecycleData = tc.filter(c => c.category === 'Lifecycle').map(c => ({ x: c.risk || 0, y: c.cost, name: c.name }));
+        riskGraph.data.datasets[2].data = lifecycleData;
+        riskGraph.data.datasets[2].backgroundColor = lifecycleData.map(c => {
+          const comp = tc.find(t => t.name === c.name);
+          return (comp.displayAge > comp.lifespan && comp.displayAge <= comp.lifespan * 1.25) || c.x > 40 ? 'red' : 'orange';
+        });
+        riskGraph.data.datasets[2].borderColor = lifecycleData.map(c => {
+          const comp = tc.find(t => t.name === c.name);
+          return (comp.displayAge > comp.lifespan && comp.displayAge <= comp.lifespan * 1.25) || c.x > 40 ? 'red' : 'orange';
+        });
+        riskGraph.update({ duration: 500 });
+      } catch (e) {
+        log(`Error in updateGraph: ${e.message}`);
+        showError(`Graph update failed: ${e.message}`);
+      }
+    }
+
+    function downloadReport() {
+      try {
+        log('downloadReport called');
+        const houseAge = parseInt(document.getElementById('houseAge')?.value || 0);
+        const components = getTopComponents(houseAge);
+        const lifecycleItems = components.filter(c => c.category === 'Lifecycle' && c.risk > 40).map(c => ({
+          name: c.name,
+          risk: c.risk.toFixed(1),
+          cost: c.cost.toLocaleString(),
+          remainingLife: c.remainingLife !== null ? c.remainingLife.toFixed(1) : 'N/A'
+        }));
+        const defects = components.filter(c => c.category === 'Deficiency' && c.risk > 40).map(c => ({
+          name: c.name,
+          risk: c.risk.toFixed(1),
+          cost: c.cost.toLocaleString()
+        }));
+        const maintenance = components.filter(c => c.category === 'Maintenance' && c.risk > 40).map(c => ({
+          name: c.name,
+          risk: c.risk.toFixed(1),
+          cost: c.cost.toLocaleString()
+        }));
+
+        const latexContent = `
+\\documentclass[a4paper,12pt]{article}
+\\usepackage[utf8]{inputenc}
+\\usepackage{geometry}
+\\usepackage{booktabs}
+\\usepackage{parskip}
+\\geometry{margin=1in}
+\\begin{document}
+\\section*{Home Inspection Report}
+\\textbf{House Age:} ${houseAge} years \\\\
+This report summarizes high-risk components and defects based on the current house age and component ages provided.
+
+\\subsection*{High-Risk Lifecycle Components}
+\\begin{tabular}{l c c c}
+\\toprule
+\\textbf{Component} & \\textbf{Risk (\%)} & \\textbf{Cost (\\\$)} & \\textbf{Remaining Life (yrs)} \\\\
+\\midrule
+${lifecycleItems.map(item => `${item.name.replace(/&/g, '\\&')} & ${item.risk} & ${item.cost} & ${item.remainingLife}`).join(' \\\\ ')}
+\\bottomrule
+\\end{tabular}
+
+\\subsection*{High-Risk Hidden Defects}
+\\begin{tabular}{l c c}
+\\toprule
+\\textbf{Defect} & \\textbf{Risk (\%)} & \\textbf{Cost (\\\$)} \\\\
+\\midrule
+${defects.map(item => `${item.name.replace(/&/g, '\\&')} & ${item.risk} & ${item.cost}`).join(' \\\\ ')}
+\\bottomrule
+\\end{tabular}
+
+\\subsection*{High-Risk Maintenance Issues}
+\\begin{tabular}{l c c}
+\\toprule
+\\textbf{Issue} & \\textbf{Risk (\%)} & \\textbf{Cost (\\\$)} \\\\
+\\midrule
+${maintenance.map(item => `${item.name.replace(/&/g, '\\&')} & ${item.risk} & ${item.cost}`).join(' \\\\ ')}
+\\bottomrule
+\\end{tabular}
+
+\\section*{Recommended Actions}
+\\begin{itemize}
+  \\item Request seller to provide ages of key lifecycle components (e.g., HVAC, Roofing).
+  \\item Notify seller of high-risk defects for potential repairs before purchase.
+  \\item Budget for first-year repairs: Approximately \\$${components.filter(c => c.risk > 40).reduce((sum, c) => sum + c.cost, 0).toLocaleString()}.
+\\end{itemize}
+
+\\end{document}
+        `;
+
+        const blob = new Blob([latexContent], { type: 'text/latex' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Home_Inspection_Report.tex';
+        a.click();
+        URL.revokeObjectURL(url);
+      } catch (e) {
+        log(`Error in downloadReport: ${e.message}`);
+        showError(`Report generation failed: ${e.message}`);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        log('Initializing app');
+        updateGraph();
+        updateComponentCards();
+      } catch (e) {
+        log(`Error during init: ${e.message}`);
+        showError(`Initialization failed: ${e.message}`);
+      }
+    });
+  </script>
+</body>
+</html>
