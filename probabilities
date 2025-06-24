@@ -1,0 +1,144 @@
+# Home Score Sample Script for Python Developer
+# Demonstrates Home Score calculation using local/regional benchmarks and a static lifecycle chart
+# Includes sliding scale (age penalty) and user input simulation for component ages
+# Aligns with web-based mobile app for homebuyers (index (8).html)
+
+def get_age_group(age):
+    """Return age group for a given home age."""
+    if age <= 10:
+        return "0-10"
+    elif age <= 20:
+        return "11-20"
+    elif age <= 30:
+        return "21-30"
+    else:
+        return "31+"
+
+def get_lifecycle_replacements(age, user_component_ages=None):
+    """
+    Get expected lifecycle replacements from static chart.
+    Adjust based on user-provided component ages (e.g., 'HVAC': 2 years old).
+    """
+    # Static lifecycle chart (based on lifecycle_chart.json)
+    lifecycle_chart = {
+        5: {"replacements": 0, "components": []},
+        10: {"replacements": 1, "components": ["Water Heater"]},
+        15: {"replacements": 2, "components": ["Water Heater", "HVAC System"]},
+        20: {"replacements": 3, "components": ["Water Heater", "HVAC System", "Roof"]},
+        25: {"replacements": 4, "components": ["Water Heater", "HVAC System", "Roof", "Windows"]},
+        30: {"replacements": 5, "components": ["Water Heater", "HVAC System", "Roof", "Windows", "Plumbing System"]},
+        40: {"replacements": 6, "components": ["Water Heater", "HVAC System", "Roof", "Windows", "Plumbing System", "Electrical System"]}
+    }
+    # Component lifespans (years) for user input adjustments
+    component_lifespans = {
+        "Water Heater": 10,
+        "HVAC System": 15,
+        "Roof": 20,
+        "Windows": 25,
+        "Plumbing System": 30,
+        "Electrical System": 40
+    }
+    # Find closest age in chart
+    ages = sorted(lifecycle_chart.keys())
+    closest_age = min(ages, key=lambda x: abs(x - age))
+    base_replacements = lifecycle_chart[closest_age]["replacements"]
+    base_components = lifecycle_chart[closest_age]["components"]
+    
+    # Adjust replacements based on user inputs (e.g., 'HVAC System': 2 years old)
+    if user_component_ages:
+        adjusted_replacements = base_replacements
+        adjusted_components = base_components.copy()
+        for component, comp_age in user_component_ages.items():
+            if component in base_components and comp_age < component_lifespans[component]:
+                # Component is newer than expected lifespan, remove from replacements
+                if component in adjusted_components:
+                    adjusted_components.remove(component)
+                    adjusted_replacements -= 1
+        return adjusted_replacements
+    return base_replacements
+
+def calculate_factor_score(home_value, avg_value, age, cap_ratio=2, age_penalty_factor=0.5):
+    """Calculate factor score (0-100) with outlier capping and age penalty."""
+    if avg_value == 0:
+        base_score = 100 if home_value == 0 else 0
+    else:
+        ratio = min(home_value / avg_value, cap_ratio)
+        base_score = 100 - (ratio * 100)
+    age_penalty = age * age_penalty_factor  # 0.5% penalty per year
+    return max(base_score - age_penalty, 0)
+
+def calculate_home_score(lifecycle_score, defects_score, maintenance_score, weights=(0.5, 0.3, 0.2)):
+    """Calculate weighted raw score and scale to 72-89% range."""
+    raw_score = (lifecycle_score * weights[0]) + (defects_score * weights[1]) + (maintenance_score * weights[2])
+    final_score = 72 + (raw_score / 100) * 17
+    return round(final_score, 2), raw_score
+
+# Sample benchmarks (local: 10 closest homes, regional: San Antonio/Austin, matched by age and sq ft)
+benchmarks = {
+    "0-10": {
+        "defect_prob": (0.07 * 0.5) + (0.05 * 0.5),  # Local 7%, Regional 5%
+        "maintenance": (2.5 * 0.5) + (1.5 * 0.5)      # Local 2.5, Regional 1.5
+    },
+    "11-20": {
+        "defect_prob": (0.17 * 0.5) + (0.13 * 0.5),   # Local 17%, Regional 13%
+        "maintenance": (5.5 * 0.5) + (4.5 * 0.5)      # Local 5.5, Regional 4.5
+    },
+    "21-30": {
+        "defect_prob": (0.23 * 0.5) + (0.19 * 0.5),   # Local 23%, Regional 19%
+        "maintenance": (8.5 * 0.5) + (7.5 * 0.5)      # Local 8.5, Regional 7.5
+    },
+    "31+": {
+        "defect_prob": (0.28 * 0.5) + (0.24 * 0.5),   # Local 28%, Regional 24%
+        "maintenance": (10.5 * 0.5) + (9.5 * 0.5)     # Local 10.5, Regional 9.5
+    }
+}
+
+# Sample home data (simulating real homes)
+homes = [
+    {"id": 1, "age": 5, "defect_prob": 0.06, "maintenance": 2, "user_component_ages": None},
+    {"id": 2, "age": 15, "defect_prob": 0.15, "maintenance": 5, "user_component_ages": None},
+    {"id": 3, "age": 22, "defect_prob": 0.21, "maintenance": 8, "user_component_ages": None},
+    {"id": 4, "age": 10, "defect_prob": 0.10, "maintenance": 3, "user_component_ages": {"HVAC System": 2}},  # HVAC replaced in 2023
+    {"id": 5, "age": 30, "defect_prob": 0.26, "maintenance": 10, "user_component_ages": None}
+]
+
+# Calculate and display scores
+print("Home Score Sample Results")
+print("=========================")
+for home in homes:
+    # Get age-specific benchmarks
+    age_group = get_age_group(home["age"])
+    avg_defect_prob = benchmarks[age_group]["defect_prob"]
+    avg_maintenance = benchmarks[age_group]["maintenance"]
+    
+    # Get lifecycle replacements from static chart, adjusted for user inputs
+    home_replacements = get_lifecycle_replacements(home["age"], home["user_component_ages"])
+    avg_replacements = get_lifecycle_replacements(home["age"])  # Benchmark is chart's default
+    
+    # Calculate factor scores
+    lifecycle_score = calculate_factor_score(home_replacements, avg_replacements, home["age"])
+    defects_score = calculate_factor_score(home["defect_prob"], avg_defect_prob, home["age"])
+    maintenance_score = calculate_factor_score(home["maintenance"], avg_maintenance, home["age"])
+    
+    # Calculate Home Score
+    final_score, raw_score = calculate_home_score(lifecycle_score, defects_score, maintenance_score)
+    
+    # Output results
+    print(f"Home {home['id']} (Age: {home['age']} yrs, Age Group: {age_group})")
+    print(f"  Lifecycle Score: {lifecycle_score:.2f} (Replacements: {home_replacements}, Avg: {avg_replacements})")
+    print(f"  Defects Score: {lifecycle_score:.2f} (Defect Prob: {home['defect_prob']:.2%}, Avg: {avg_defect_prob:.2%})")
+    print(f"  Maintenance Score: {maintenance_score:.2f} (Issues: {home['maintenance']}, Avg: {avg_maintenance:.2f})")
+    print(f"  Raw Score: {raw_score:.2f}")
+    print(f"  Final Home Score: {final_score}%")
+    if home["user_component_ages"]:
+        print(f"  Note: Adjusted for user inputs: {home['user_component_ages']}")
+    print("-------------------------")
+
+# Developer notes
+print("\nDeveloper Notes:")
+print("- Replace 'benchmarks' with real local/regional data from your database (e.g., CSV, SQL query).")
+print("- Update 'homes' with real home data (age, defect_prob, maintenance, user_component_ages).")
+print("- Integrate with backend (e.g., Flask) to query data on address search.")
+print("- Use JavaScript for frontend (index (8).html) to display scores and handle dynamic updates.")
+print("- Adjust age_penalty_factor (0.5) or weights (0.5, 0.3, 0.2) based on user feedback.")
+print("- Connect to app features: 'Request Component Ages' updates user_component_ages, 'Notify Seller of Defects' lists high defect_probs, 'Budget Repairs' estimates costs.")
