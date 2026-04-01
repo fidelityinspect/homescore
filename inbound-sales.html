@@ -68,7 +68,7 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .revc .circ{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;font-family:ui-monospace,monospace}
 .revc .price{position:absolute;bottom:6px;left:8px;padding:2px 6px;background:rgba(0,0,0,0.6);border-radius:3px;font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
 .revc .txt{padding:10px 10px 12px}
-.revc .txt p{font-size:12px;color:#ccc;font-family:Georgia;line-height:1.4;margin-bottom:6px}
+.revc .txt p{font-size:12px;color:#ccc;font-family:Georgia;line-height:1.4;margin-bottom:6px;font-style:italic}
 .revc .txt a{font-size:10px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600}
 .pkg{padding:24px}
 .pkg .qlbl{font-size:11px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;letter-spacing:0.15em;margin-bottom:4px}
@@ -164,7 +164,7 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 
 <div class="insp">
   <div class="top">
-    <div class="av" style="overflow:hidden;padding:0"><img src="https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0" alt="Michael Street" style="width:100%;height:100%;object-fit:cover;object-position:center 15%"></div>
+    <div class="av" style="overflow:hidden;padding:0"><img src="https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0" alt="Michael Street" style="width:150%;height:150%;object-fit:cover;object-position:center 20%"></div>
     <div><div style="font-size:17px;font-weight:700">Michael Street</div><div style="font-size:13px;color:#C9A96E;font-family:ui-monospace,monospace;margin-top:2px">Professional Real Estate Inspector</div><div style="font-size:12px;color:#888;font-family:ui-monospace,monospace;margin-top:2px">License #22402</div></div>
   </div>
   <div class="badges"><div class="badge">5,000+ inspections</div><div class="badge">San Antonio + Austin</div><div class="badge">5-star Google + Yelp</div></div>
@@ -228,7 +228,7 @@ document.getElementById("nearbySection").innerHTML=nbHTML;
 var reviews=[{i:"JM",a:22050,t:"Seller covered $22,050 in repairs we would have never known about.",c:"#3D6B8B",img:"https://lh3.googleusercontent.com/d/1gluUrCdylr_3Lwmw6VJ9lZf1x8iLtk3c"},{i:"MR",a:10300,t:"Foundation and drain damage caught before closing. Seller paid every dollar.",c:"#C17A3A",img:"https://lh3.googleusercontent.com/d/1r8VpiWZbAW8-g0Gk7zJA41Z90uFv2qf0"},{i:"RG",a:5750,t:"The inspection found what the first inspector missed.",c:"#3D8B5B",img:"https://lh3.googleusercontent.com/d/1vpo3HFIKRRjTwrfH_iEKlDxVdY_rq_5C"},{i:"KW",a:18170,t:"Could not believe what was hiding in that house. Fidelity found it all.",c:"#8B8535",img:"https://lh3.googleusercontent.com/d/14pdmUEXKnmkTp-Qm5GSRclei26iC098A"}];
 var rHTML="";
 reviews.forEach(function(r){
-  rHTML+='<div class="revc"><div class="img" style="background:'+r.c+'30"><img src="'+r.img+'" alt="'+r.i+'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0"><div class="price">$'+r.a.toLocaleString()+'</div></div><div class="txt"><p>'+r.t+'</p><a>See more</a></div></div>';
+  rHTML+='<div class="revc"><div class="img" style="background:'+r.c+'30"><img src="'+r.img+'" alt="'+r.i+'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0"><div class="price">$'+r.a.toLocaleString()+'</div></div><div class="txt"><p>\u201C'+r.t+'\u201D</p><a>See more</a></div></div>';
 });
 document.getElementById("reviewCards").innerHTML=rHTML;
 
