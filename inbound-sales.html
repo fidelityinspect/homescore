@@ -252,10 +252,10 @@ var riskMap=[
 ];
 var compRisk=riskMap;
 var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
-var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos","Negotiation addendum"];
+var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos","Negotiation addendum","Inspector consultation"];
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"All 7 major risk factors covered",desc:"Every repair priced so you don't leave money on the table.",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,bonuses:["Instant ballpark repair quotes","Agent-ready repair request with photos"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
-  {n:"Optimized Value Pack",sub:"Top 3/7 major risk factors covered",desc:"Covers the highest-risk categories others miss.",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:["Inspector consultation"],guarantee:null,std:null},
+  {n:"Comprehensive Risk Elimination",sub:"All 7 major risk factors covered",desc:"Every repair priced so you don't leave money on the table.",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos","Home Score property grade report"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
+  {n:"Optimized Value Pack",sub:"Top 3/7 major risk factors covered",desc:"Covers the highest-risk categories others miss.",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:[],guarantee:null,std:null},
   {n:"Standard Inspection",sub:"Professional visual inspection",desc:"A quality inspection covering all major systems and components.",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
 ];
 var pHTML="";
@@ -266,7 +266,7 @@ pkgs.forEach(function(pk,pi){
   var bodyBg=pk.dk?"#1E1E20":"#FAFAF8";
   var openClass=pi===0?"open":"";
   var totalRepair=0;
-  pk.risk.forEach(function(r){if(r.d)totalRepair+=r.d.c;});
+  pk.risk.forEach(function(r){if(r.d)totalRepair+=Math.round(r.d.c*r.d.p/100);});
   pHTML+='<div class="pkc">';
   pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="togglePkg('+pi+')">';
   if(pk.tag)pHTML+='<div class="tag">'+pk.tag+'</div>';
@@ -279,13 +279,13 @@ pkgs.forEach(function(pk,pi){
   if(pk.risk.length>0){
     pk.risk.forEach(function(r){
       var pct=r.d?r.d.p+"%":"";
-      var repCost=r.d?"$"+r.d.c.toLocaleString():"";
+      var weightedCost=r.d?Math.round(r.d.c*r.d.p/100):0;
       pHTML+='<div style="padding:9px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
       pHTML+='<div style="display:flex;justify-content:space-between;align-items:center">';
       pHTML+='<div><span class="ck" style="margin-right:8px">&#10003;</span><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">'+r.svc+'</span></div>';
-      pHTML+='<span style="font-size:14px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;text-decoration:line-through">'+repCost+'</span>';
+      pHTML+='<span style="font-size:14px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;text-decoration:line-through">$'+weightedCost.toLocaleString()+'</span>';
       pHTML+='</div>';
-      pHTML+='<div style="margin-left:22px;font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:3px">'+r.ben+' \u00b7 <span style="color:'+(pk.dk?"#C9A96E":"#C17A3A")+'">'+pct+' probability</span></div>';
+      pHTML+='<div style="margin-left:22px;font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:3px">'+r.ben+' \u00b7 <span style="color:'+(pk.dk?"#C9A96E":"#C17A3A")+'">'+pct+' probability</span> \u00b7 $'+r.d.c.toLocaleString()+' repair value</div>';
       pHTML+='</div>';
     });
     pHTML+='<div style="margin-top:14px;padding:14px;background:'+(pk.dk?"rgba(201,169,110,0.1)":"rgba(193,122,58,0.06)")+';border-radius:6px">';
