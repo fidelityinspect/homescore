@@ -85,11 +85,17 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .insp .av{width:80px;height:80px;border-radius:50%;background:#161618;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:3px solid #C9A96E;font-size:28px;font-weight:700;color:#C9A96E}
 .insp .badges{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
 .insp .badge{padding:6px 12px;background:#F5F2EB;border-radius:4px;font-size:12px;font-family:ui-monospace,monospace;font-weight:600}
-.insp .yt{margin-top:12px;padding:10px 14px;background:#161618;border-radius:6px;display:flex;align-items:center;gap:10px}
 .faq{padding:20px 24px}
 .faq h3{font-size:14px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:14px}
 .faq .q{font-size:14px;font-weight:600;margin-bottom:4px}
 .faq .a{font-size:13px;color:#666;font-family:Georgia;line-height:1.6;margin-bottom:12px}
+.why{padding:20px 24px;background:#161618}
+.why h3{font-size:14px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:14px}
+.why p{font-size:13px;color:#ccc;font-family:Georgia;line-height:1.6;margin-bottom:12px}
+.why .big{font-size:28px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center;margin:16px 0}
+.why .guar{padding:12px;background:rgba(193,122,58,0.12);border-radius:6px;font-size:13px;color:#C9A96E;text-align:center;font-weight:600;line-height:1.5}
+.sched-btn{display:block;width:calc(100% - 48px);margin:0 24px 20px;padding:16px;background:#C9A96E;color:#fff;font-size:16px;font-weight:700;font-family:ui-monospace,monospace;border:none;border-radius:8px;text-align:center;text-decoration:none;letter-spacing:0.04em;cursor:pointer}
+.slots{text-align:center;padding:0 24px 16px;font-size:12px;color:#A63D2F;font-weight:600;font-family:ui-monospace,monospace}
 .ftr{border-top:1px solid #D8D4CC;padding:14px 24px 28px;text-align:center}
 .ftr .ph{font-size:16px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-bottom:8px}
 .ftr .co{font-size:10px;color:#B0ADA6;font-family:ui-monospace,monospace;line-height:1.8}
@@ -152,17 +158,26 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
     <div><div style="font-size:17px;font-weight:700">Michael Street</div><div style="font-size:13px;color:#C9A96E;font-family:ui-monospace,monospace;margin-top:2px">Professional Real Estate Inspector</div><div style="font-size:12px;color:#888;font-family:ui-monospace,monospace;margin-top:2px">License #22402</div></div>
   </div>
   <div class="badges"><div class="badge">5,000+ inspections</div><div class="badge">San Antonio + Austin</div><div class="badge">5-star Google + Yelp</div></div>
-  <div class="yt"><span style="font-size:16px;color:#C9A96E">&#9654;</span><div><div style="font-size:13px;font-weight:600;color:#fff">Find It, Fix It</div><div style="font-size:11px;color:#888;font-family:ui-monospace,monospace">Watch later on YouTube</div></div></div>
 </div>
+
+<div class="why">
+  <h3>WHY CHOOSE COMPREHENSIVE</h3>
+  <p>A standard inspection tells you what is visible to the eye. The Comprehensive package covers 7 high-risk categories others miss and prices every repair — so you can negotiate the best deal before you close.</p>
+  <div class="big">$18,730</div>
+  <p style="text-align:center;color:#C9A96E;font-weight:600;margin-top:-8px">average in documented savings</p>
+  <p>If the house is in good shape, you have documentation proving it — so you close with confidence instead of uncertainty.</p>
+  <div class="guar">If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.</div>
+</div>
+
+<a href="#" class="sched-btn" id="schedBtn">SCHEDULE NOW</a>
+<div class="slots">2 priority slots available — lock in your spot</div>
 
 <div class="faq">
   <h3>COMMON QUESTIONS</h3>
   <div class="q">My agent said a standard inspection is fine.</div>
   <div class="a">A standard covers 23-35 visible items. No infrared, sewer camera, or foundation plotting. The expensive problems are the ones those tools find.</div>
-  <div class="q">Why is this more than a basic inspection?</div>
-  <div class="a">A basic inspection tells you what is visible. We cover 7 high-risk categories standard inspections miss and price every repair. The average client documents $18,730.</div>
   <div class="q">What if the house is in good shape?</div>
-  <div class="a">Then you have documentation proving it. That is equally valuable. You close with confidence instead of uncertainty.</div>
+  <div class="a">Then you have documentation proving it. You close with confidence instead of uncertainty.</div>
 </div>
 
 <div class="ftr">
@@ -236,23 +251,24 @@ document.getElementById("reviewCards").innerHTML=rHTML;
 // Packages
 document.getElementById("quoteMeta").textContent=sfv.toLocaleString()+" sqft \u00b7 "+age+" years old";
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"Powered by Atlas",p:cp,dk:false,tag:null,items:["Foundation Plotting ($199)","Infrared Thermography ($199)","Sewer Camera ($199)","Ductwork Camera ($199)","Safety Audit ($99)","Termite WDI ($199)","Air Quality ($99)","On-Site Report ($99)","Inspector Consultation ($99)","On-Site Repair Costs ($99)","Home Score ($199)","Repair Quotes ($199)","Repair Request Builder ($149)"],bonuses:["Rush scheduling","24-hour third-party repair quotes","Agent-ready repair request with photos"],guarantee:"Find all major defects or double your refund + reimburse home warranty.",warn:null},
-  {n:"Optimized Assessment",sub:"Most popular",p:op,dk:true,tag:"RECOMMENDED",items:["Home Inspection ($"+bp+")","Foundation Plotting ($199)","Infrared Thermography ($199)","Termite WDI ($199)","On-Site Report ($99)","Inspector Consultation ($99)"],bonuses:["Inspector consultation"],guarantee:null,warn:null},
-  {n:"Standard Inspection",sub:"Visual only",p:bp,dk:false,tag:null,items:["Visual inspection","Negotiation Addendum"],bonuses:[],guarantee:null,warn:"Visual only. 23-35 items. No specialty tools. No pricing. No guarantee."}
+  {n:"Comprehensive Risk Elimination",sub:"Includes rush scheduling",p:cp,dk:true,tag:"RECOMMENDED",rush:true,items:["Foundation Plotting","Infrared Thermography","Sewer Camera","Ductwork Camera","Safety Audit","Termite WDI","Air Quality","On-Site Report","Inspector Consultation","On-Site Repair Costs","Home Score","Repair Quotes","Repair Request Builder"],bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",warn:null},
+  {n:"Optimized Inspection",sub:"Most popular",p:op,dk:false,tag:null,rush:false,items:["Home Inspection","Foundation Plotting","Infrared Thermography","Termite WDI","On-Site Report","Inspector Consultation"],bonuses:["Inspector consultation"],guarantee:null,warn:null},
+  {n:"Standard Inspection",sub:"Visual only",p:bp,dk:false,tag:null,rush:false,items:["Visual inspection","Negotiation Addendum"],bonuses:[],guarantee:null,warn:"Visual only. 23-35 items. No specialty tools. No pricing. No guarantee."}
 ];
 var pHTML="";
 pkgs.forEach(function(pk,pi){
   var bg=pk.dk?"#161618":"#fff";
   var fg=pk.dk?"#fff":"#1A1A1A";
-  var bdr=pi===1?"2px solid #C9A96E":(pk.dk?"1px solid #333":"1px solid #E0DDD6");
+  var bdr=pk.dk?"2px solid #C9A96E":"1px solid #E0DDD6";
   var bodyBg=pk.dk?"#1E1E20":"#FAFAF8";
-  var openClass=pi===1?"open":"";
+  var openClass=pi===0?"open":"";
   pHTML+='<div class="pkc">';
   pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="togglePkg('+pi+')">';
   if(pk.tag)pHTML+='<div class="tag">'+pk.tag+'</div>';
   pHTML+='<div class="row2"><div><div class="nm" style="color:'+fg+'">'+pk.n+'</div><div class="sub" style="color:'+(pk.dk?"#C9A96E":"#999")+'">'+pk.sub+'</div></div><div class="pr" style="color:'+(pk.dk?"#C9A96E":fg)+'">$'+pk.p.toLocaleString()+'</div></div>';
   pHTML+='</div>';
   pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
+  if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-bottom:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
   pk.items.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:'+(pk.dk?"#ccc":"#555")+'">'+it+'</span></div>';});
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
