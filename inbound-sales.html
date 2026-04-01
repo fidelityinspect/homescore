@@ -217,7 +217,7 @@ document.getElementById("stdBar").style.width=Math.round(stdTotal/ourTotal*100)+
 document.getElementById("gapAmt").textContent="$"+gapCost.toLocaleString();
 
 // Nearby
-var nbHTML='<h3>INSPECTIONS NEAR YOU</h3><div class="nbr">';
+var nbHTML='<h3>INSPECTIONS NEAR '+addr.toUpperCase()+'</h3><div class="nbr">';
 NB.forEach(function(p){
   nbHTML+='<a href="'+p.link+'" target="_blank" style="text-decoration:none;color:inherit"><div class="nbc"><img src="'+p.img+'" style="width:100%;height:80px;object-fit:cover;display:block" onerror="this.style.display=\'none\'"><div class="nbc-body"><div class="tp"><div class="gr" style="background:'+p.gc+'">'+p.g+'</div><div><div style="font-size:12px;font-weight:600">'+p.a+'yr old</div><div style="font-size:10px;color:#999;font-family:ui-monospace,monospace">'+p.sq.toLocaleString()+' sqft</div></div></div><div class="it" style="color:'+p.gc+'">'+p.d+' items</div><div style="font-size:10px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-top:4px">View report \u2192</div></div></div></a>';
 });
