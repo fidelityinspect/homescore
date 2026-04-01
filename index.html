@@ -252,10 +252,10 @@ var riskMap=[
 ];
 var compRisk=riskMap;
 var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
-var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos","Negotiation addendum","Inspector consultation"];
+var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos","Negotiation addendum"];
 var pkgs=[
   {n:"Comprehensive Risk Elimination",sub:"All 7 major risk factors covered",desc:"Every repair priced so you don't leave money on the table.",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos","Home Score property grade report"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
-  {n:"Optimized Value Pack",sub:"Top 3/7 major risk factors covered",desc:"Covers the highest-risk categories others miss.",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:[],guarantee:null,std:null},
+  {n:"Optimized Value Pack",sub:"Top 3/7 major risk factors covered",desc:"Covers the highest-risk categories others miss.",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:["Inspector consultation"],guarantee:null,std:null},
   {n:"Standard Inspection",sub:"Professional visual inspection",desc:"A quality inspection covering all major systems and components.",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
 ];
 var pHTML="";
