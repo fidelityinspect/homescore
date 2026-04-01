@@ -263,12 +263,12 @@ var riskMap=[
   {svc:"Air Quality",ben:"Failed window seals",d:findDef("Failed Window Seals")}
 ];
 var compRisk=riskMap;
-var optRisk=riskMap.slice(0,4);
+var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
 var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos","Negotiation addendum"];
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"All 7 major risk factors covered",desc:"Every repair priced so you don't leave money on the table.",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,repairPricing:true,bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
-  {n:"Optimized Value Pack",sub:"Top 4/7 major risk factors covered",desc:"Covers the highest-risk categories others miss.",p:op,dk:false,tag:null,rush:false,risk:optRisk,repairPricing:false,bonuses:["Inspector consultation"],guarantee:null,std:null},
-  {n:"Standard Inspection",sub:"Professional visual inspection",desc:"A quality inspection covering all major systems and components.",p:bp,dk:false,tag:null,rush:false,risk:[],repairPricing:false,bonuses:[],guarantee:null,std:stdItems}
+  {n:"Comprehensive Risk Elimination",sub:"All 7 major risk factors covered",desc:"Every repair priced so you don't leave money on the table.",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,bonuses:["Instant ballpark repair quotes","Agent-ready repair request with photos"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
+  {n:"Optimized Value Pack",sub:"Top 3/7 major risk factors covered",desc:"Covers the highest-risk categories others miss.",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:["Inspector consultation"],guarantee:null,std:null},
+  {n:"Standard Inspection",sub:"Professional visual inspection",desc:"A quality inspection covering all major systems and components.",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
 ];
 var pHTML="";
 pkgs.forEach(function(pk,pi){
@@ -300,12 +300,6 @@ pkgs.forEach(function(pk,pi){
       pHTML+='<div style="margin-left:22px;font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:3px">'+r.ben+' \u00b7 <span style="color:'+(pk.dk?"#C9A96E":"#C17A3A")+'">'+pct+' probability</span></div>';
       pHTML+='</div>';
     });
-    if(pk.repairPricing){
-      pHTML+='<div style="padding:9px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
-      pHTML+='<div><span class="ck" style="margin-right:8px">&#10003;</span><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">On-Site Repair Pricing</span></div>';
-      pHTML+='<div style="margin-left:22px;font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:3px">Every defect priced on-site \u00b7 Negotiation-ready documentation</div>';
-      pHTML+='</div>';
-    }
     pHTML+='<div style="margin-top:14px;padding:14px;background:'+(pk.dk?"rgba(201,169,110,0.1)":"rgba(193,122,58,0.06)")+';border-radius:6px">';
     pHTML+='<div style="display:flex;justify-content:space-between;align-items:center">';
     pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">Total repair value at risk</span>';
@@ -326,7 +320,11 @@ document.getElementById("pkgCards").innerHTML=pHTML;
 function togglePkg(i){
   var el=document.getElementById("pkg-body-"+i);
   if(el.classList.contains("open")){el.classList.remove("open");}
-  else{document.querySelectorAll(".pkc .body").forEach(function(b){b.classList.remove("open");});el.classList.add("open");}
+  else{
+    document.querySelectorAll(".pkc .body").forEach(function(b){b.classList.remove("open");});
+    el.classList.add("open");
+    setTimeout(function(){el.parentElement.scrollIntoView({behavior:"smooth",block:"start"});},100);
+  }
 }
 </script>
 
