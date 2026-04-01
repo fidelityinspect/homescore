@@ -225,10 +225,10 @@ nbHTML+='</div>';
 document.getElementById("nearbySection").innerHTML=nbHTML;
 
 // Reviews
-var reviews=[{i:"JM",a:22050,t:"Seller covered $22,050 in repairs we would have never known about.",c:"#3D6B8B"},{i:"MR",a:10300,t:"Foundation and drain damage caught before closing. Seller paid every dollar.",c:"#C17A3A"},{i:"RG",a:5750,t:"The inspection found what the first inspector missed.",c:"#3D8B5B"},{i:"KW",a:18170,t:"Could not believe what was hiding in that house. Fidelity found it all.",c:"#8B8535"}];
+var reviews=[{i:"JM",a:22050,t:"Seller covered $22,050 in repairs we would have never known about.",c:"#3D6B8B",img:"https://lh3.googleusercontent.com/d/14pdmUEXKnmkTp-Qm5GSRclei26iC098A"},{i:"MR",a:10300,t:"Foundation and drain damage caught before closing. Seller paid every dollar.",c:"#C17A3A",img:"https://lh3.googleusercontent.com/d/1r8VpiWZbAW8-g0Gk7zJA41Z90uFv2qf0"},{i:"RG",a:5750,t:"The inspection found what the first inspector missed.",c:"#3D8B5B",img:"https://lh3.googleusercontent.com/d/1gluUrCdylr_3Lwmw6VJ9lZf1x8iLtk3c"},{i:"KW",a:18170,t:"Could not believe what was hiding in that house. Fidelity found it all.",c:"#8B8535",img:"https://lh3.googleusercontent.com/d/1vpo3HFIKRRjTwrfH_iEKlDxVdY_rq_5C"}];
 var rHTML="";
 reviews.forEach(function(r){
-  rHTML+='<div class="revc"><div class="img" style="background:'+r.c+'30"><div class="circ" style="background:'+r.c+'">'+r.i+'</div><div class="price">$'+r.a.toLocaleString()+'</div></div><div class="txt"><p>'+r.t+'</p><a>See more</a></div></div>';
+  rHTML+='<div class="revc"><div class="img" style="background:'+r.c+'30"><img src="'+r.img+'" alt="'+r.i+'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0"><div class="price">$'+r.a.toLocaleString()+'</div></div><div class="txt"><p>'+r.t+'</p><a>See more</a></div></div>';
 });
 document.getElementById("reviewCards").innerHTML=rHTML;
 
