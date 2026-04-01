@@ -1,178 +1,195 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Atlas Intelligence Report</title>
+<title>Your Home Report — Fidelity</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;color:#1A1A1A}
-.hdr{background:#161618;color:#fff;padding:18px 24px;display:flex;align-items:baseline;gap:10px}
-.hdr h1{font-size:22px;font-weight:700;letter-spacing:0.04em}
-.hdr span{font-size:12px;color:#C9A96E;font-family:Georgia;font-style:italic}
-.info{padding:24px 20px;background:#fff}
-.info h2{font-size:22px;font-weight:700;text-align:center;line-height:1.3}
-.info .addr{font-size:20px;font-weight:700;color:#C9A96E;text-align:center;margin-top:4px}
-.info .meta{font-size:13px;color:#888;font-family:ui-monospace,monospace;text-align:center;margin-top:8px}
-.colhdr{display:flex;padding:16px 0 6px;border-bottom:2px solid #1A1A1A}
-.colhdr span{font-size:10px;font-weight:700;color:#999;font-family:ui-monospace,monospace}
-.seclbl{padding:8px 0 4px;font-size:11px;font-weight:700;font-family:ui-monospace,monospace;letter-spacing:0.08em}
-.seclbl.orange{color:#C17A3A}
-.seclbl.blue{color:#3D6B8B;padding-top:12px;border-top:2px solid #E0DDD6;margin-top:4px}
-.row{display:flex;align-items:center;padding:9px 0;border-bottom:1px solid #F0EDE6}
-.dot{width:16px;flex-shrink:0;display:flex;justify-content:center}
-.dot i{width:8px;height:8px;border-radius:50%;display:block}
-.dot i.o{background:#C17A3A}
-.dot i.b{background:#3D6B8B}
-.row .nm{flex:1;padding-left:4px;font-size:14px}
-.row .nm.o{color:#C17A3A;font-weight:600}
-.row .nm.b{color:#555}
-.row .rk{width:50px;text-align:center;font-size:13px;font-weight:700;font-family:ui-monospace,monospace}
-.row .rk.o{color:#C17A3A}
-.row .rk.b{color:#3D6B8B}
-.row .ct{width:65px;text-align:right;font-size:13px;font-family:ui-monospace,monospace}
-.row .ct.o{color:#C17A3A;font-weight:600}
-.row .ct.b{color:#999}
-.fn{font-size:11px;color:#AAA;font-family:Georgia;text-align:center;margin-top:12px}
-.nb{margin-top:20px}
-.nb h3{font-size:13px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:10px}
-.nbr{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
-.nbc{min-width:140px;background:#F5F2EB;border-radius:8px;padding:0;flex-shrink:0;overflow:hidden}
-.nbc .nbc-body{padding:10px 12px 12px}
-.nbc .tp{display:flex;align-items:center;gap:6px;margin-bottom:8px}
-.nbc .gr{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;font-family:ui-monospace,monospace}
-.nbc .it{font-size:18px;font-weight:700;font-family:ui-monospace,monospace}
-.rf{margin-top:20px;padding:20px;background:#161618;border-radius:8px}
-.rf .lbl{font-size:11px;color:#C17A3A;font-weight:700;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:14px}
-.bar-row{margin-bottom:14px}
-.bar-row .top{display:flex;justify-content:space-between;margin-bottom:6px}
-.bar-row .track{height:20px;background:#333;border-radius:4px;overflow:hidden}
-.bar-row .fill{height:100%;border-radius:4px}
-.gap-box{padding:16px;background:rgba(193,122,58,0.15);border-radius:6px;text-align:center;margin-top:8px}
-.gap-box .amt{font-size:32px;font-weight:700;color:#C17A3A;font-family:ui-monospace,monospace}
-.rev{padding:20px 24px;background:#F5F2EB}
-.rev h3{font-size:13px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:10px}
-.revr{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
-.revc{min-width:160px;width:160px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#161618}
-.revc .img{height:160px;display:flex;align-items:center;justify-content:center;position:relative}
-.revc .circ{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;font-family:ui-monospace,monospace}
-.revc .price{position:absolute;bottom:6px;left:8px;padding:2px 6px;background:rgba(0,0,0,0.6);border-radius:3px;font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
-.revc .txt{padding:10px 10px 12px}
-.revc .txt p{font-size:12px;color:#ccc;font-family:Georgia;line-height:1.4;margin-bottom:6px;font-style:italic}
-.revc .txt a{font-size:10px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600}
-.pkg{padding:24px}
-.pkg .qlbl{font-size:11px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;letter-spacing:0.15em;margin-bottom:4px}
-.pkg .qmeta{font-size:14px;color:#888;font-family:Georgia;margin-bottom:14px}
-.pkc{margin-bottom:8px;border-radius:6px;overflow:hidden}
-.pkc .hd{padding:16px;cursor:pointer}
-.pkc .tag{font-size:10px;padding:3px 8px;background:#C9A96E;color:#fff;font-weight:700;font-family:ui-monospace,monospace;border-radius:2px;display:inline-block;margin-bottom:8px}
-.pkc .row2{display:flex;justify-content:space-between;align-items:baseline}
-.pkc .nm{font-size:16px;font-weight:700}
-.pkc .sub{font-size:12px;margin-top:2px;font-family:ui-monospace,monospace}
-.pkc .pr{font-size:26px;font-weight:300;font-family:ui-monospace,monospace}
-.pkc .body{padding:16px;display:none}
-.pkc .body.open{display:block}
-.pkc .item{display:flex;align-items:center;padding:7px 0}
-.pkc .item .ck{color:#3D8B5B;font-size:14px;margin-right:8px}
-.pkc .bonus{margin-top:12px;padding:12px;background:rgba(61,139,91,0.08);border-radius:4px}
-.pkc .bonus h4{font-size:12px;color:#3D8B5B;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:6px}
-.pkc .bonus p{font-size:13px;color:#3D8B5B;padding:3px 0}
-.pkc .guar{margin-top:12px;padding:12px;background:rgba(61,139,91,0.08);border-radius:4px;font-size:13px;color:#3D8B5B;text-align:center;font-weight:600}
-.pkc .warn{margin-top:10px;padding:10px;background:rgba(166,61,47,0.04);border-radius:4px;font-size:12px;color:#A63D2F;text-align:center}
-.insp{padding:24px;background:#fff}
-.insp .top{display:flex;align-items:center;gap:16px}
-.insp .av{width:80px;height:80px;border-radius:50%;background:#161618;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:3px solid #C9A96E;font-size:28px;font-weight:700;color:#C9A96E}
-.insp .badges{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
-.insp .badge{padding:6px 12px;background:#F5F2EB;border-radius:4px;font-size:12px;font-family:ui-monospace,monospace;font-weight:600}
-.insp .yt{margin-top:12px;padding:10px 14px;background:#161618;border-radius:6px;display:flex;align-items:center;gap:10px}
-.faq{padding:20px 24px}
-.faq h3{font-size:14px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:14px}
-.faq .q{font-size:14px;font-weight:600;margin-bottom:4px}
-.faq .a{font-size:13px;color:#666;font-family:Georgia;line-height:1.6;margin-bottom:12px}
-.ftr{border-top:1px solid #D8D4CC;padding:14px 24px 28px;text-align:center}
-.ftr .ph{font-size:16px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-bottom:8px}
-.ftr .co{font-size:10px;color:#B0ADA6;font-family:ui-monospace,monospace;line-height:1.8}
+body{background:#f9fafb;font-family:-apple-system,system-ui,sans-serif;max-width:440px;margin:0 auto;color:#1f2937}
+
+/* Header */
+.hdr{background:#fff;padding:16px 20px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between}
+.hdr h1{font-size:18px;font-weight:700;color:#1f2937}
+.hdr span{font-size:12px;color:#f59e0b;font-weight:600}
+
+/* Hero */
+.hero{padding:24px 20px;background:#fff;text-align:center;border-bottom:1px solid #e5e7eb}
+.hero .addr{font-size:22px;font-weight:700;color:#1f2937}
+.hero .meta{font-size:13px;color:#6b7280;margin-top:4px}
+.hero .hook{font-size:14px;color:#6b7280;margin-top:12px;line-height:1.5}
+.hero .hook b{color:#dc2626}
+
+/* Section labels */
+.sec{padding:20px}
+.sec-title{font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
+
+/* Defect rows */
+.d-row{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #f3f4f6}
+.d-row:last-child{border-bottom:none}
+.d-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.d-dot.warn{background:#f59e0b}
+.d-dot.info{background:#d1d5db}
+.d-name{flex:1;padding:0 10px;font-size:14px;color:#1f2937}
+.d-name.warn{font-weight:600}
+.d-pct{width:44px;text-align:center;font-size:13px;font-weight:600;color:#1f2937}
+.d-cost{width:60px;text-align:right;font-size:13px;color:#6b7280}
+
+/* Comparison bar */
+.cmp{margin:0 20px 20px;padding:20px;background:#fff;border-radius:12px;border:1px solid #e5e7eb}
+.cmp-label{font-size:13px;color:#6b7280;margin-bottom:4px}
+.cmp-label b{color:#1f2937}
+.cmp-track{height:8px;background:#f3f4f6;border-radius:4px;margin:6px 0 14px;overflow:hidden}
+.cmp-fill{height:100%;border-radius:4px}
+.cmp-gap{text-align:center;padding:16px;background:#fef3c7;border-radius:8px;margin-top:8px}
+.cmp-gap .amt{font-size:28px;font-weight:700;color:#d97706}
+.cmp-gap .sub{font-size:12px;color:#92400e;margin-top:4px}
+
+/* Nearby */
+.nb-scroll{display:flex;gap:10px;overflow-x:auto;padding:0 20px 16px;-webkit-overflow-scrolling:touch}
+.nb-card{min-width:130px;background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;flex-shrink:0}
+.nb-card img{width:100%;height:70px;object-fit:cover;display:block}
+.nb-body{padding:10px}
+.nb-grade{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.nb-items{font-size:16px;font-weight:700;margin-top:4px}
+.nb-detail{font-size:11px;color:#9ca3af}
+.nb-link{font-size:10px;color:#f59e0b;font-weight:600;margin-top:6px;display:block}
+
+/* Reviews */
+.rev-scroll{display:flex;gap:12px;overflow-x:auto;padding:0 20px 16px;-webkit-overflow-scrolling:touch}
+.rev-card{min-width:200px;width:200px;background:#fff;border-radius:12px;border:1px solid #e5e7eb;overflow:hidden;flex-shrink:0}
+.rev-img{height:180px;position:relative}
+.rev-img img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+.rev-amt{position:absolute;bottom:8px;left:8px;background:rgba(0,0,0,0.7);color:#f59e0b;font-size:14px;font-weight:700;padding:3px 8px;border-radius:4px}
+.rev-txt{padding:12px}
+.rev-txt p{font-size:13px;color:#4b5563;line-height:1.5;font-style:italic}
+
+/* Packages */
+.pkg-card{margin:0 20px 10px;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb;background:#fff}
+.pkg-card.featured{border:2px solid #f59e0b}
+.pkg-hd{padding:16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.pkg-tag{font-size:10px;padding:2px 8px;background:#f59e0b;color:#fff;font-weight:700;border-radius:3px;margin-bottom:6px;display:inline-block}
+.pkg-name{font-size:15px;font-weight:700;color:#1f2937}
+.pkg-sub{font-size:12px;color:#9ca3af;margin-top:1px}
+.pkg-price{font-size:24px;font-weight:300;color:#1f2937}
+.pkg-card.featured .pkg-price{color:#d97706}
+.pkg-body{padding:0 16px 16px;display:none}
+.pkg-body.open{display:block}
+.pkg-item{display:flex;align-items:center;padding:6px 0;font-size:13px;color:#4b5563}
+.pkg-item .ck{color:#16a34a;margin-right:8px;font-size:14px}
+.pkg-bonus{margin-top:10px;padding:10px;background:#f0fdf4;border-radius:6px}
+.pkg-bonus h4{font-size:11px;color:#16a34a;font-weight:700;margin-bottom:4px}
+.pkg-bonus p{font-size:12px;color:#16a34a}
+.pkg-guar{margin-top:10px;padding:10px;background:#f0fdf4;border-radius:6px;font-size:12px;color:#16a34a;text-align:center;font-weight:600}
+.pkg-warn{margin-top:10px;padding:10px;background:#fef2f2;border-radius:6px;font-size:12px;color:#dc2626;text-align:center}
+
+/* Inspector */
+.insp{padding:20px;background:#fff;border-top:1px solid #e5e7eb}
+.insp-top{display:flex;align-items:center;gap:14px}
+.insp-av{width:64px;height:64px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid #f59e0b}
+.insp-av img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+.insp-name{font-size:16px;font-weight:700}
+.insp-title{font-size:12px;color:#f59e0b;margin-top:1px}
+.insp-lic{font-size:11px;color:#9ca3af;margin-top:1px}
+.insp-badges{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.insp-badge{padding:5px 10px;background:#f3f4f6;border-radius:6px;font-size:11px;font-weight:600;color:#4b5563}
+
+/* FAQ */
+.faq{padding:20px}
+.faq-q{font-size:14px;font-weight:600;color:#1f2937;margin-bottom:4px}
+.faq-a{font-size:13px;color:#6b7280;line-height:1.6;margin-bottom:14px}
+
+/* Footer */
+.ftr{padding:20px;text-align:center;border-top:1px solid #e5e7eb}
+.ftr-ph{font-size:18px;font-weight:700;color:#f59e0b}
+.ftr-co{font-size:11px;color:#9ca3af;margin-top:6px;line-height:1.6}
 </style>
 </head>
 <body>
-<div class="hdr"><h1>Fidelity</h1><span>Total Clarity. Zero Regret.</span></div>
 
-<div class="info">
-  <h2>Top Hidden Defects</h2>
-  <h2>You Can't Afford to Miss at</h2>
+<div class="hdr">
+  <h1>Fidelity</h1>
+  <span>Home Inspection</span>
+</div>
+
+<div class="hero">
   <div class="addr" id="addrLine">1847 Oak Hollow Dr</div>
   <div class="meta" id="metaLine">23yr old · 2,400 sqft · 78209</div>
+  <div class="hook">Based on <span id="inspCount">3,377</span> inspections, homes like yours average <b id="gapInline"></b> in hidden repairs.</div>
+</div>
 
-  <div class="colhdr"><span style="flex:1"></span><span style="width:50px;text-align:center">RISK</span><span style="width:65px;text-align:right">AVG COST</span></div>
-
-  <div class="seclbl orange">REQUIRES SPECIALTY TOOLS</div>
+<div class="sec">
+  <div class="sec-title">What specialty tools find</div>
   <div id="orangeRows"></div>
+</div>
 
-  <div class="seclbl blue">FOUND BY STANDARD INSPECTION</div>
+<div class="sec" style="padding-top:0">
+  <div class="sec-title">What standard inspections find</div>
   <div id="blueRows"></div>
+  <div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:12px" id="fnote"></div>
+</div>
 
-  <div class="fn" id="fnote"></div>
-
-  <div class="nb" id="nearbySection"></div>
-
-  <div class="rf">
-    <div class="lbl">RISK FACTORS</div>
-    <div class="bar-row">
-      <div class="top"><span style="font-size:13px;font-weight:600;color:#777">Standard Inspection</span><span style="font-size:16px;font-weight:700;color:#777;font-family:ui-monospace,monospace" id="stdCount"></span></div>
-      <div class="track"><div class="fill" id="stdBar" style="background:#666"></div></div>
-    </div>
-    <div class="bar-row">
-      <div class="top"><span style="font-size:13px;font-weight:700;color:#C9A96E">Fidelity Comprehensive</span><span style="font-size:16px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace" id="ourCount"></span></div>
-      <div class="track"><div class="fill" id="ourBar" style="background:#C9A96E;width:100%"></div></div>
-    </div>
-    <div class="gap-box">
-      <div style="font-size:11px;color:#ccc;font-family:ui-monospace,monospace;font-weight:600;letter-spacing:0.05em;margin-bottom:6px">WHAT A STANDARD INSPECTION MISSES</div>
-      <div class="amt" id="gapAmt"></div>
-      <div style="font-size:13px;color:#ccc;font-family:Georgia;margin-top:6px">in hidden repairs across 7 high-risk categories</div>
-    </div>
+<div class="cmp">
+  <div class="cmp-label">Standard Inspection <b id="stdCount"></b></div>
+  <div class="cmp-track"><div class="cmp-fill" id="stdBar" style="background:#d1d5db"></div></div>
+  <div class="cmp-label">Fidelity Comprehensive <b id="ourCount" style="color:#f59e0b"></b></div>
+  <div class="cmp-track"><div class="cmp-fill" id="ourBar" style="background:#f59e0b;width:100%"></div></div>
+  <div class="cmp-gap">
+    <div class="amt" id="gapAmt"></div>
+    <div class="sub">in hidden repairs a standard inspection misses</div>
   </div>
 </div>
 
-
-<div class="rev">
-  <h3>WHAT OUR CLIENTS SAY</h3>
-  <div class="revr" id="reviewCards"></div>
+<div class="sec">
+  <div class="sec-title">Inspections near you</div>
 </div>
+<div class="nb-scroll" id="nearbySection"></div>
 
-<div class="pkg">
-  <div class="qlbl">YOUR QUOTE</div>
-  <div class="qmeta" id="quoteMeta"></div>
-  <div id="pkgCards"></div>
+<div class="sec">
+  <div class="sec-title">What our clients say</div>
 </div>
+<div class="rev-scroll" id="reviewCards"></div>
+
+<div class="sec">
+  <div class="sec-title">Your quote</div>
+  <div style="font-size:13px;color:#9ca3af;margin-bottom:14px" id="quoteMeta"></div>
+</div>
+<div id="pkgCards"></div>
 
 <div class="insp">
-  <div class="top">
-    <div class="av" style="overflow:hidden;padding:0;background:url(https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0) center 10% / 200% no-repeat"></div>
-    <div><div style="font-size:17px;font-weight:700">Michael Street</div><div style="font-size:13px;color:#C9A96E;font-family:ui-monospace,monospace;margin-top:2px">Professional Real Estate Inspector</div><div style="font-size:12px;color:#888;font-family:ui-monospace,monospace;margin-top:2px">License #22402</div></div>
+  <div class="insp-top">
+    <div class="insp-av"><img src="https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0" alt="Michael Street"></div>
+    <div>
+      <div class="insp-name">Michael Street</div>
+      <div class="insp-title">Professional Real Estate Inspector</div>
+      <div class="insp-lic">License #22402</div>
+    </div>
   </div>
-  <div class="badges"><div class="badge">5,000+ inspections</div><div class="badge">San Antonio + Austin</div><div class="badge">5-star Google + Yelp</div></div>
-  <div class="yt"><span style="font-size:16px;color:#C9A96E">&#9654;</span><div><div style="font-size:13px;font-weight:600;color:#fff">Find It, Fix It</div><div style="font-size:11px;color:#888;font-family:ui-monospace,monospace">Watch later on YouTube</div></div></div>
+  <div class="insp-badges">
+    <div class="insp-badge">5,000+ inspections</div>
+    <div class="insp-badge">San Antonio + Austin</div>
+    <div class="insp-badge">5-star Google + Yelp</div>
+  </div>
 </div>
 
 <div class="faq">
-  <h3>COMMON QUESTIONS</h3>
-  <div class="q">My agent said a standard inspection is fine.</div>
-  <div class="a">A standard covers 23-35 visible items. No infrared, sewer camera, or foundation plotting. The expensive problems are the ones those tools find.</div>
-  <div class="q">Why is this more than a basic inspection?</div>
-  <div class="a">A basic inspection tells you what is visible. We cover 7 high-risk categories standard inspections miss and price every repair. The average client documents $18,730.</div>
-  <div class="q">What if the house is in good shape?</div>
-  <div class="a">Then you have documentation proving it. That is equally valuable. You close with confidence instead of uncertainty.</div>
+  <div class="sec-title">Common questions</div>
+  <div class="faq-q">My agent said a standard inspection is fine.</div>
+  <div class="faq-a">A standard covers 23-35 visible items. No infrared, sewer camera, or foundation plotting. The expensive problems are the ones those tools find.</div>
+  <div class="faq-q">Why is this more than a basic inspection?</div>
+  <div class="faq-a">We cover 7 high-risk categories standard inspections miss and price every repair. The average client documents $18,730.</div>
+  <div class="faq-q">What if the house is in good shape?</div>
+  <div class="faq-a">Then you have documentation proving it. You close with confidence instead of uncertainty.</div>
 </div>
 
 <div class="ftr">
-  <div class="ph">(210) 961-5700</div>
-  <div class="co">FIDELITY HOME INSPECTION<br>3,377 inspections in San Antonio and Austin</div>
+  <div class="ftr-ph">(210) 961-5700</div>
+  <div class="ftr-co">FIDELITY HOME INSPECTION<br>3,377 inspections in San Antonio and Austin</div>
 </div>
 
 <script>
 var IG={"0-2":[{n:"Foundation Settlement",p:18,o:1,c:12000},{n:"Moisture Damages",p:41,o:1,c:2303},{n:"Failed Window Seals",p:24,o:1,c:5314},{n:"Roof Decking Damage",p:76,o:1,c:8500},{n:"Main Drain Issues",p:65,o:1,c:2211},{n:"Plumbing Leak Detected",p:13,o:1,c:6696},{n:"Rodent/Pest Access",p:72,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:43,o:1,c:702},{n:"Roofing Repairs Needed",p:57,o:0,c:8500},{n:"HVAC Repairs Needed",p:48,o:0,c:3500}],"21-30":[{n:"Foundation Settlement",p:41,o:1,c:12000},{n:"Moisture Damages",p:83,o:1,c:2303},{n:"Failed Window Seals",p:71,o:1,c:5314},{n:"Roof Decking Damage",p:55,o:1,c:8500},{n:"Main Drain Issues",p:72,o:1,c:2211},{n:"Plumbing Leak Detected",p:34,o:1,c:6696},{n:"Rodent/Pest Access",p:75,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:48,o:1,c:702},{n:"Roofing Repairs Needed",p:74,o:0,c:8500},{n:"HVAC Repairs Needed",p:52,o:0,c:3500}],"31-50":[{n:"Foundation Settlement",p:35,o:1,c:12000},{n:"Moisture Damages",p:76,o:1,c:2303},{n:"Failed Window Seals",p:39,o:1,c:5314},{n:"Roof Decking Damage",p:51,o:1,c:8500},{n:"Main Drain Issues",p:60,o:1,c:2211},{n:"Plumbing Leak Detected",p:24,o:1,c:6696},{n:"Rodent/Pest Access",p:68,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:60,o:1,c:702},{n:"Roofing Repairs Needed",p:65,o:0,c:8500},{n:"HVAC Repairs Needed",p:42,o:0,c:3500}],"51+":[{n:"Foundation Settlement",p:25,o:1,c:12000},{n:"Moisture Damages",p:45,o:1,c:2303},{n:"Failed Window Seals",p:10,o:1,c:5314},{n:"Roof Decking Damage",p:41,o:1,c:8500},{n:"Main Drain Issues",p:36,o:1,c:2211},{n:"Plumbing Leak Detected",p:15,o:1,c:6696},{n:"Rodent/Pest Access",p:47,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:47,o:1,c:702},{n:"Roofing Repairs Needed",p:42,o:0,c:8500},{n:"HVAC Repairs Needed",p:32,o:0,c:3500}]};
-var NB=[{a:32,sq:3423,d:91,g:"D",gc:"#C17A3A",img:"https://cdn.spectora.com/reports/images/07a128ce-21e4-40ed-bf2e-f4d285794827/original/cover.jpg?1629921896",link:"https://app.spectora.com/reports/07a128ce-21e4-40ed-bf2e-f4d285794827?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjAxNTIyOSwiZXhwIjoxNzM4NjQ4Nzk5fQ.DPmyfizZ9o3ffrNVn_eZ2JJ6zZQ_DFWFDHktddKKK6I&ignoreClientComplete=true"},{a:45,sq:4319,d:109,g:"F",gc:"#A63D2F",img:"https://cdn.spectora.com/reports/images/cbc8e254-9e5e-465a-b431-b9f858152301/original/cover.jpg?1645546860",link:"https://app.spectora.com/reports/cbc8e254-9e5e-465a-b431-b9f858152301?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Mjc4OTIyNSwiZXhwIjoxNzM4NjQ4Nzk5fQ.JnYOYW4J0qCopf2X_dRQeB3GOu-Hy1eNHo3vI4Kcdmo&ignoreClientComplete=true"},{a:58,sq:3040,d:69,g:"C",gc:"#8B8535",img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM4NjQ4Nzk5fQ.53L6BTG066ysGG0nRcbt067pjS1jt0oYv01_1UYUyi0&ignoreClientComplete=true"},{a:12,sq:2100,d:44,g:"B",gc:"#3D6B8B",img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM1Nzk3NTk5fQ.EYDWwTS71h5IGS9GQwj5zfH20vL4fGdDOQHKlzlgqDg&ignoreClientComplete=true"}];
+var NB=[{a:32,sq:3423,d:91,g:"D",gc:"#f59e0b",img:"https://cdn.spectora.com/reports/images/07a128ce-21e4-40ed-bf2e-f4d285794827/original/cover.jpg?1629921896",link:"https://app.spectora.com/reports/07a128ce-21e4-40ed-bf2e-f4d285794827?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjAxNTIyOSwiZXhwIjoxNzM4NjQ4Nzk5fQ.DPmyfizZ9o3ffrNVn_eZ2JJ6zZQ_DFWFDHktddKKK6I&ignoreClientComplete=true"},{a:45,sq:4319,d:109,g:"F",gc:"#dc2626",img:"https://cdn.spectora.com/reports/images/cbc8e254-9e5e-465a-b431-b9f858152301/original/cover.jpg?1645546860",link:"https://app.spectora.com/reports/cbc8e254-9e5e-465a-b431-b9f858152301?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Mjc4OTIyNSwiZXhwIjoxNzM4NjQ4Nzk5fQ.JnYOYW4J0qCopf2X_dRQeB3GOu-Hy1eNHo3vI4Kcdmo&ignoreClientComplete=true"},{a:58,sq:3040,d:69,g:"C",gc:"#16a34a",img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM4NjQ4Nzk5fQ.53L6BTG066ysGG0nRcbt067pjS1jt0oYv01_1UYUyi0&ignoreClientComplete=true"},{a:12,sq:2100,d:44,g:"B",gc:"#3b82f6",img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM1Nzk3NTk5fQ.EYDWwTS71h5IGS9GQwj5zfH20vL4fGdDOQHKlzlgqDg&ignoreClientComplete=true"}];
 
 var age=23,sfv=2400,brk="21-30",zp="78209";
 var ig=IG[brk]||IG["21-30"];
@@ -181,8 +198,8 @@ var op=Math.round(bp*1.67);
 var cp=Math.round(bp*2.67);
 
 function makeRow(item){
-  var t=item.o?"o":"b";
-  return '<div class="row"><div class="dot"><i class="'+t+'"></i></div><div class="nm '+t+'">'+item.n+'</div><div class="rk '+t+'">'+item.p+'%</div><div class="ct '+t+'">$'+item.c.toLocaleString()+'</div></div>';
+  var cls=item.o?"warn":"info";
+  return '<div class="d-row"><div class="d-dot '+cls+'"></div><div class="d-name'+(item.o?" warn":"")+'">'+item.n+'</div><div class="d-pct">'+item.p+'%</div><div class="d-cost">$'+item.c.toLocaleString()+'</div></div>';
 }
 
 var oHTML="",bHTML="",gapCost=0;
@@ -192,7 +209,8 @@ ig.forEach(function(item){
 });
 document.getElementById("orangeRows").innerHTML=oHTML;
 document.getElementById("blueRows").innerHTML=bHTML;
-document.getElementById("fnote").textContent="* Based on "+brk+" year old homes across 3,377 South Texas inspections";
+document.getElementById("fnote").textContent="Based on "+brk+" year old homes across 3,377 South Texas inspections";
+document.getElementById("gapInline").textContent="$"+gapCost.toLocaleString();
 
 var stdTotal=21,ourTotal=74;
 document.getElementById("stdCount").textContent=stdTotal+" items";
@@ -201,45 +219,43 @@ document.getElementById("stdBar").style.width=Math.round(stdTotal/ourTotal*100)+
 document.getElementById("gapAmt").textContent="$"+gapCost.toLocaleString();
 
 // Nearby
-var nbHTML='<h3>INSPECTIONS NEAR YOU</h3><div class="nbr">';
+var nbHTML="";
 NB.forEach(function(p){
-  nbHTML+='<a href="'+p.link+'" target="_blank" style="text-decoration:none;color:inherit"><div class="nbc"><img src="'+p.img+'" style="width:100%;height:80px;object-fit:cover;display:block" onerror="this.style.display=\'none\'"><div class="nbc-body"><div class="tp"><div class="gr" style="background:'+p.gc+'">'+p.g+'</div><div><div style="font-size:12px;font-weight:600">'+p.a+'yr old</div><div style="font-size:10px;color:#999;font-family:ui-monospace,monospace">'+p.sq.toLocaleString()+' sqft</div></div></div><div class="it" style="color:'+p.gc+'">'+p.d+' items</div><div style="font-size:10px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-top:4px">View report \u2192</div></div></div></a>';
+  nbHTML+='<a href="'+p.link+'" target="_blank" style="text-decoration:none;color:inherit"><div class="nb-card"><img src="'+p.img+'" onerror="this.style.display=\'none\'"><div class="nb-body"><div style="display:flex;align-items:center;gap:6px"><span class="nb-grade" style="background:'+p.gc+'">'+p.g+'</span><span class="nb-detail">'+p.a+'yr · '+p.sq.toLocaleString()+' sqft</span></div><div class="nb-items" style="color:'+p.gc+'">'+p.d+' items</div><span class="nb-link">View report &rarr;</span></div></div></a>';
 });
-nbHTML+='</div>';
 document.getElementById("nearbySection").innerHTML=nbHTML;
 
 // Reviews
-var reviews=[{i:"JM",a:22050,t:"Seller covered $22,050 in repairs we would have never known about.",c:"#3D6B8B",img:"https://lh3.googleusercontent.com/d/1gluUrCdylr_3Lwmw6VJ9lZf1x8iLtk3c"},{i:"MR",a:10300,t:"Foundation and drain damage caught before closing. Seller paid every dollar.",c:"#C17A3A",img:"https://lh3.googleusercontent.com/d/1r8VpiWZbAW8-g0Gk7zJA41Z90uFv2qf0"},{i:"RG",a:5750,t:"The inspection found what the first inspector missed.",c:"#3D8B5B",img:"https://lh3.googleusercontent.com/d/1vpo3HFIKRRjTwrfH_iEKlDxVdY_rq_5C"},{i:"KW",a:18170,t:"Could not believe what was hiding in that house. Fidelity found it all.",c:"#8B8535",img:"https://lh3.googleusercontent.com/d/14pdmUEXKnmkTp-Qm5GSRclei26iC098A"}];
+var reviews=[{i:"JM",a:22050,t:"Seller covered $22,050 in repairs we would have never known about.",img:"https://lh3.googleusercontent.com/d/1gluUrCdylr_3Lwmw6VJ9lZf1x8iLtk3c"},{i:"MR",a:10300,t:"Foundation and drain damage caught before closing. Seller paid every dollar.",img:"https://lh3.googleusercontent.com/d/1r8VpiWZbAW8-g0Gk7zJA41Z90uFv2qf0"},{i:"RG",a:5750,t:"The inspection found what the first inspector missed.",img:"https://lh3.googleusercontent.com/d/1vpo3HFIKRRjTwrfH_iEKlDxVdY_rq_5C"},{i:"KW",a:18170,t:"Could not believe what was hiding in that house. Fidelity found it all.",img:"https://lh3.googleusercontent.com/d/14pdmUEXKnmkTp-Qm5GSRclei26iC098A"}];
 var rHTML="";
 reviews.forEach(function(r){
-  rHTML+='<div class="revc"><div class="img" style="background:'+r.c+'30"><img src="'+r.img+'" alt="'+r.i+'" style="width:100%;height:100%;object-fit:cover;object-position:center 15%;position:absolute;top:0;left:0"><div class="price">$'+r.a.toLocaleString()+'</div></div><div class="txt"><p>\u201C'+r.t+'\u201D</p><a>See more</a></div></div>';
+  rHTML+='<div class="rev-card"><div class="rev-img"><img src="'+r.img+'" alt="'+r.i+'"><div class="rev-amt">$'+r.a.toLocaleString()+'</div></div><div class="rev-txt"><p>&ldquo;'+r.t+'&rdquo;</p></div></div>';
 });
 document.getElementById("reviewCards").innerHTML=rHTML;
 
 // Packages
-document.getElementById("quoteMeta").textContent=sfv.toLocaleString()+" sqft \u00b7 "+age+" years old";
+document.getElementById("quoteMeta").textContent=sfv.toLocaleString()+" sqft · "+age+" years old";
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"Powered by Atlas",p:cp,dk:false,tag:null,items:["Foundation Plotting ($199)","Infrared Thermography ($199)","Sewer Camera ($199)","Ductwork Camera ($199)","Safety Audit ($99)","Termite WDI ($199)","Air Quality ($99)","On-Site Report ($99)","Inspector Consultation ($99)","On-Site Repair Costs ($99)","Home Score ($199)","Repair Quotes ($199)","Repair Request Builder ($149)"],bonuses:["Rush scheduling","24-hour third-party repair quotes","Agent-ready repair request with photos"],guarantee:"Find all major defects or double your refund + reimburse home warranty.",warn:null},
-  {n:"Optimized Assessment",sub:"Most popular",p:op,dk:true,tag:"RECOMMENDED",items:["Home Inspection ($"+bp+")","Foundation Plotting ($199)","Infrared Thermography ($199)","Termite WDI ($199)","On-Site Report ($99)","Inspector Consultation ($99)"],bonuses:["Inspector consultation"],guarantee:null,warn:null},
-  {n:"Standard Inspection",sub:"Visual only",p:bp,dk:false,tag:null,items:["Visual inspection","Negotiation Addendum"],bonuses:[],guarantee:null,warn:"Visual only. 23-35 items. No specialty tools. No pricing. No guarantee."}
+  {n:"Comprehensive",sub:"Every tool. Every answer.",p:cp,featured:false,tag:null,items:["Foundation Plotting","Infrared Thermography","Sewer Camera","Ductwork Camera","Safety Audit","Termite WDI","Air Quality","On-Site Report","Inspector Consultation","On-Site Repair Costs","Home Score","Repair Quotes","Repair Request Builder"],bonuses:["Rush scheduling","24-hour third-party repair quotes","Agent-ready repair request with photos"],guarantee:"Find all major defects or double your refund + reimburse home warranty.",warn:null},
+  {n:"Optimized",sub:"Most popular",p:op,featured:true,tag:"RECOMMENDED",items:["Home Inspection","Foundation Plotting","Infrared Thermography","Termite WDI","On-Site Report","Inspector Consultation"],bonuses:["Inspector consultation"],guarantee:null,warn:null},
+  {n:"Standard",sub:"Visual only",p:bp,featured:false,tag:null,items:["Visual inspection","Negotiation Addendum"],bonuses:[],guarantee:null,warn:"Visual only. 23-35 items. No specialty tools."}
 ];
 var pHTML="";
 pkgs.forEach(function(pk,pi){
-  var bg=pk.dk?"#161618":"#fff";
-  var fg=pk.dk?"#fff":"#1A1A1A";
-  var bdr=pi===1?"2px solid #C9A96E":(pk.dk?"1px solid #333":"1px solid #E0DDD6");
-  var bodyBg=pk.dk?"#1E1E20":"#FAFAF8";
-  var openClass=pi===1?"open":"";
-  pHTML+='<div class="pkc">';
-  pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="togglePkg('+pi+')">';
-  if(pk.tag)pHTML+='<div class="tag">'+pk.tag+'</div>';
-  pHTML+='<div class="row2"><div><div class="nm" style="color:'+fg+'">'+pk.n+'</div><div class="sub" style="color:'+(pk.dk?"#C9A96E":"#999")+'">'+pk.sub+'</div></div><div class="pr" style="color:'+(pk.dk?"#C9A96E":fg)+'">$'+pk.p.toLocaleString()+'</div></div>';
+  var cls=pk.featured?" featured":"";
+  var openClass=pk.featured?"open":"";
+  pHTML+='<div class="pkg-card'+cls+'">';
+  pHTML+='<div class="pkg-hd" onclick="togglePkg('+pi+')">';
+  pHTML+='<div>';
+  if(pk.tag)pHTML+='<div class="pkg-tag">'+pk.tag+'</div>';
+  pHTML+='<div class="pkg-name">'+pk.n+'</div><div class="pkg-sub">'+pk.sub+'</div></div>';
+  pHTML+='<div class="pkg-price">$'+pk.p.toLocaleString()+'</div>';
   pHTML+='</div>';
-  pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
-  pk.items.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:'+(pk.dk?"#ccc":"#555")+'">'+it+'</span></div>';});
-  if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
-  if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
-  if(pk.warn)pHTML+='<div class="warn">'+pk.warn+'</div>';
+  pHTML+='<div class="pkg-body '+openClass+'" id="pkg-body-'+pi+'">';
+  pk.items.forEach(function(it){pHTML+='<div class="pkg-item"><span class="ck">&#10003;</span>'+it+'</div>';});
+  if(pk.bonuses.length>0){pHTML+='<div class="pkg-bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
+  if(pk.guarantee)pHTML+='<div class="pkg-guar">'+pk.guarantee+'</div>';
+  if(pk.warn)pHTML+='<div class="pkg-warn">'+pk.warn+'</div>';
   pHTML+='</div></div>';
 });
 document.getElementById("pkgCards").innerHTML=pHTML;
@@ -247,9 +263,8 @@ document.getElementById("pkgCards").innerHTML=pHTML;
 function togglePkg(i){
   var el=document.getElementById("pkg-body-"+i);
   if(el.classList.contains("open")){el.classList.remove("open");}
-  else{document.querySelectorAll(".pkc .body").forEach(function(b){b.classList.remove("open");});el.classList.add("open");}
+  else{document.querySelectorAll(".pkg-body").forEach(function(b){b.classList.remove("open");});el.classList.add("open");}
 }
 </script>
-
 </body>
 </html>
