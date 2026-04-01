@@ -250,26 +250,24 @@ document.getElementById("reviewCards").innerHTML=rHTML;
 
 // Packages
 document.getElementById("quoteMeta").textContent=sfv.toLocaleString()+" sqft \u00b7 "+age+" years old";
-var riskFactors=[
-  {n:"Foundation Plotting",v:350},
-  {n:"Infrared Thermography",v:300},
-  {n:"Sewer Camera",v:275},
-  {n:"Ductwork Camera",v:250},
-  {n:"Safety Audit",v:200},
-  {n:"Termite / WDI",v:225},
-  {n:"Air Quality",v:275}
+// Map 7 risk factors to IG defect data for this age bracket
+var defs=IG[brk];
+function findDef(name){for(var i=0;i<defs.length;i++){if(defs[i].n===name)return defs[i];}return null;}
+var riskMap=[
+  {svc:"Foundation Plotting",def:"Foundation Settlement",d:findDef("Foundation Settlement")},
+  {svc:"Infrared Thermography",def:"Moisture & Thermal Damage",d:findDef("Moisture Damages")},
+  {svc:"Sewer Camera",def:"Main Drain Issues",d:findDef("Main Drain Issues")},
+  {svc:"Ductwork Camera",def:"Hidden Plumbing Leaks",d:findDef("Plumbing Leak Detected")},
+  {svc:"Safety Audit",def:"Electrical Deficiencies",d:findDef("Electrical Wiring Deficiencies")},
+  {svc:"Termite / WDI",def:"Rodent & Pest Access",d:findDef("Rodent/Pest Access")},
+  {svc:"Air Quality",def:"Failed Window Seals",d:findDef("Failed Window Seals")}
 ];
-var compExtras=[
-  {n:"Rush Scheduling",v:150},
-  {n:"On-Site Repair Costs",v:200},
-  {n:"Home Score Report",v:150},
-  {n:"24hr Repair Quotes",v:175},
-  {n:"Repair Request Builder",v:125}
-];
+var compRisk=riskMap;
+var optRisk=riskMap.slice(0,4);
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"All 7 major risk factors covered",desc:"Every repair priced so you don't leave money on the table.",p:cp,dk:true,tag:"RECOMMENDED",rush:true,riskItems:riskFactors,extras:compExtras,bonuses:[],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",warn:null},
-  {n:"Optimized Value Pack",sub:"Top 4/7 major risk factors covered",desc:"Covers the highest-risk categories others miss and prices every repair we find.",p:op,dk:false,tag:null,rush:false,riskItems:riskFactors.slice(0,4),extras:[{n:"On-Site Report",v:100},{n:"Inspector Consultation",v:125}],bonuses:[],guarantee:null,warn:null},
-  {n:"Standard Inspection",sub:"Visual only",desc:"A basic visual inspection of accessible areas.",p:bp,dk:false,tag:null,rush:false,riskItems:[],extras:[],bonuses:[],guarantee:null,warn:"Visual only. 23-35 items. No specialty tools. No repair pricing."}
+  {n:"Comprehensive Risk Elimination",sub:"All 7 major risk factors covered",desc:"Every repair priced so you don't leave money on the table.",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,repairPricing:true,bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",warn:null},
+  {n:"Optimized Value Pack",sub:"Top 4/7 major risk factors covered",desc:"Covers the highest-risk categories others miss.",p:op,dk:false,tag:null,rush:false,risk:optRisk,repairPricing:false,bonuses:["Inspector consultation"],guarantee:null,warn:null},
+  {n:"Standard Inspection",sub:"Visual only",desc:"A basic visual inspection of accessible areas.",p:bp,dk:false,tag:null,rush:false,risk:[],repairPricing:false,bonuses:[],guarantee:null,warn:"Visual only \u00b7 No specialty tools \u00b7 No repair pricing"}
 ];
 var pHTML="";
 pkgs.forEach(function(pk,pi){
@@ -278,9 +276,8 @@ pkgs.forEach(function(pk,pi){
   var bdr=pk.dk?"2px solid #C9A96E":"1px solid #E0DDD6";
   var bodyBg=pk.dk?"#1E1E20":"#FAFAF8";
   var openClass=pi===0?"open":"";
-  var totalVal=0;
-  pk.riskItems.forEach(function(r){totalVal+=r.v;});
-  pk.extras.forEach(function(r){totalVal+=r.v;});
+  var totalRepairVal=0;
+  pk.risk.forEach(function(r){if(r.d)totalRepairVal+=r.d.c;});
   pHTML+='<div class="pkc">';
   pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="togglePkg('+pi+')">';
   if(pk.tag)pHTML+='<div class="tag">'+pk.tag+'</div>';
@@ -290,14 +287,32 @@ pkgs.forEach(function(pk,pi){
   pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
   if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-bottom:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
   if(pk.desc)pHTML+='<div style="font-size:13px;color:'+(pk.dk?"#aaa":"#666")+';font-family:Georgia;line-height:1.5;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">'+pk.desc+'</div>';
-  if(pk.riskItems.length>0){
-    pk.riskItems.forEach(function(it){pHTML+='<div class="item" style="justify-content:space-between"><div><span class="ck">&#10003;</span><span style="font-size:14px;color:'+(pk.dk?"#ccc":"#555")+'">'+it.n+'</span></div><span style="font-size:13px;color:'+(pk.dk?"#777":"#aaa")+';font-family:ui-monospace,monospace;text-decoration:line-through">$'+it.v+'</span></div>';});
-    pk.extras.forEach(function(it){pHTML+='<div class="item" style="justify-content:space-between"><div><span class="ck">&#10003;</span><span style="font-size:14px;color:'+(pk.dk?"#ccc":"#555")+'">'+it.n+'</span></div><span style="font-size:13px;color:'+(pk.dk?"#777":"#aaa")+';font-family:ui-monospace,monospace;text-decoration:line-through">$'+it.v+'</span></div>';});
-    pHTML+='<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
-    pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#1A1A1A")+';font-family:ui-monospace,monospace">Total value</span>';
-    pHTML+='<span style="font-size:18px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#1A1A1A")+';font-family:ui-monospace,monospace;text-decoration:line-through">$'+totalVal.toLocaleString()+'</span>';
+  if(pk.risk.length>0){
+    pk.risk.forEach(function(r){
+      var pct=r.d?r.d.p+"% probability":"";
+      var cost=r.d?"$"+r.d.c.toLocaleString():"";
+      pHTML+='<div style="padding:8px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
+      pHTML+='<div style="display:flex;justify-content:space-between;align-items:center">';
+      pHTML+='<div><span class="ck" style="margin-right:8px">&#10003;</span><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">'+r.svc+'</span></div>';
+      pHTML+='<span style="font-size:14px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;text-decoration:line-through">'+cost+'</span>';
+      pHTML+='</div>';
+      pHTML+='<div style="margin-left:22px;font-size:12px;color:'+(pk.dk?"#888":"#999")+';font-family:Georgia;margin-top:2px">'+r.def+' \u00b7 '+pct+'</div>';
+      pHTML+='</div>';
+    });
+    if(pk.repairPricing){
+      pHTML+='<div style="padding:8px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
+      pHTML+='<div style="display:flex;justify-content:space-between;align-items:center">';
+      pHTML+='<div><span class="ck" style="margin-right:8px">&#10003;</span><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">On-Site Repair Pricing</span></div>';
+      pHTML+='<span style="font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-decoration:line-through">$200</span>';
+      pHTML+='</div>';
+      pHTML+='<div style="margin-left:22px;font-size:12px;color:#888;font-family:Georgia;margin-top:2px">Every defect priced \u00b7 Negotiation-ready</div>';
+      pHTML+='</div>';
+    }
+    pHTML+='<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:12px;background:'+(pk.dk?"rgba(201,169,110,0.1)":"rgba(193,122,58,0.08)")+';border-radius:6px">';
+    pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#1A1A1A")+';font-family:ui-monospace,monospace">Total repair value at risk</span>';
+    pHTML+='<span style="font-size:20px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+totalRepairVal.toLocaleString()+'</span>';
     pHTML+='</div>';
-    pHTML+='<div style="text-align:right;font-size:13px;color:'+(pk.dk?"#C9A96E":"#3D8B5B")+';font-family:ui-monospace,monospace;font-weight:700;margin-top:4px">You pay: $'+pk.p.toLocaleString()+'</div>';
+    pHTML+='<div style="text-align:center;font-size:13px;color:'+(pk.dk?"#aaa":"#666")+';font-family:Georgia;margin-top:8px;font-style:italic">You pay <strong style="color:'+(pk.dk?"#C9A96E":"#C17A3A")+'">$'+pk.p.toLocaleString()+'</strong> to protect against <strong>$'+totalRepairVal.toLocaleString()+'</strong> in potential repairs</div>';
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
