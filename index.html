@@ -251,9 +251,9 @@ document.getElementById("reviewCards").innerHTML=rHTML;
 // Packages
 document.getElementById("quoteMeta").textContent=sfv.toLocaleString()+" sqft \u00b7 "+age+" years old";
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"Includes rush scheduling",p:cp,dk:true,tag:"RECOMMENDED",rush:true,items:["Foundation Plotting","Infrared Thermography","Sewer Camera","Ductwork Camera","Safety Audit","Termite WDI","Air Quality","On-Site Report","Inspector Consultation","On-Site Repair Costs","Home Score","Repair Quotes","Repair Request Builder"],bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",warn:null},
-  {n:"Optimized Inspection",sub:"Most popular",p:op,dk:false,tag:null,rush:false,items:["Home Inspection","Foundation Plotting","Infrared Thermography","Termite WDI","On-Site Report","Inspector Consultation"],bonuses:["Inspector consultation"],guarantee:null,warn:null},
-  {n:"Standard Inspection",sub:"Visual only",p:bp,dk:false,tag:null,rush:false,items:["Visual inspection","Negotiation Addendum"],bonuses:[],guarantee:null,warn:"Visual only. 23-35 items. No specialty tools. No pricing. No guarantee."}
+  {n:"Comprehensive Risk Elimination",sub:"Includes rush scheduling",desc:"Covers 7 high-risk categories standard inspections miss. Every repair priced so you don't leave money on the table.",p:cp,dk:true,tag:"RECOMMENDED",rush:true,items:["Foundation Plotting","Infrared Thermography","Sewer Camera","Ductwork Camera","Safety Audit","Termite WDI","Air Quality","On-Site Report","Inspector Consultation","On-Site Repair Costs","Home Score","Repair Quotes","Repair Request Builder"],bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",warn:null},
+  {n:"Optimized Inspection",sub:"Most popular",desc:"Covers the highest-risk categories others miss and prices every repair we find.",p:op,dk:false,tag:null,rush:false,items:["Home Inspection","Foundation Plotting","Infrared Thermography","Termite WDI","On-Site Report","Inspector Consultation"],bonuses:["Inspector consultation"],guarantee:null,warn:null},
+  {n:"Standard Inspection",sub:"Visual only",desc:"A basic visual inspection of accessible areas.",p:bp,dk:false,tag:null,rush:false,items:["Visual inspection","Negotiation Addendum"],bonuses:[],guarantee:null,warn:"Visual only. 23-35 items. No specialty tools. No repair pricing."}
 ];
 var pHTML="";
 pkgs.forEach(function(pk,pi){
@@ -269,6 +269,7 @@ pkgs.forEach(function(pk,pi){
   pHTML+='</div>';
   pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
   if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-bottom:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
+  if(pk.desc)pHTML+='<div style="font-size:13px;color:'+(pk.dk?"#aaa":"#666")+';font-family:Georgia;line-height:1.5;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">'+pk.desc+'</div>';
   pk.items.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:'+(pk.dk?"#ccc":"#555")+'">'+it+'</span></div>';});
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
