@@ -265,8 +265,6 @@ pkgs.forEach(function(pk,pi){
   var bdr=pk.dk?"2px solid #C9A96E":"1px solid #E0DDD6";
   var bodyBg=pk.dk?"#1E1E20":"#FAFAF8";
   var openClass=pi===0?"open":"";
-  var totalRepair=0;
-  pk.risk.forEach(function(r){if(r.d)totalRepair+=Math.round(r.d.c*r.d.p/100);});
   pHTML+='<div class="pkc">';
   pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="togglePkg('+pi+')">';
   if(pk.tag)pHTML+='<div class="tag">'+pk.tag+'</div>';
@@ -278,23 +276,15 @@ pkgs.forEach(function(pk,pi){
   if(pk.desc)pHTML+='<div style="font-size:13px;color:'+(pk.dk?"#aaa":"#666")+';font-family:Georgia;line-height:1.5;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">'+pk.desc+'</div>';
   if(pk.risk.length>0){
     pk.risk.forEach(function(r){
-      var pct=r.d?r.d.p+"%":"";
-      var weightedCost=r.d?Math.round(r.d.c*r.d.p/100):0;
+      var pct=r.d?r.d.p:"0";
       pHTML+='<div style="padding:9px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
       pHTML+='<div style="display:flex;justify-content:space-between;align-items:center">';
-      pHTML+='<div><span class="ck" style="margin-right:8px">&#10003;</span><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">'+r.svc+'</span></div>';
-      pHTML+='<span style="font-size:14px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;text-decoration:line-through">$'+weightedCost.toLocaleString()+'</span>';
+      pHTML+='<div style="flex:1"><span class="ck" style="margin-right:8px">&#10003;</span><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">'+r.svc+'</span></div>';
+      pHTML+='<span style="font-size:14px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;min-width:40px;text-align:right">'+pct+'%</span>';
       pHTML+='</div>';
-      pHTML+='<div style="margin-left:22px;font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:3px">'+r.ben+' \u00b7 <span style="color:'+(pk.dk?"#C9A96E":"#C17A3A")+'">'+pct+' probability</span> \u00b7 $'+r.d.c.toLocaleString()+' repair value</div>';
+      pHTML+='<div style="margin-left:22px;font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:2px">'+r.ben+'</div>';
       pHTML+='</div>';
     });
-    pHTML+='<div style="margin-top:14px;padding:14px;background:'+(pk.dk?"rgba(201,169,110,0.1)":"rgba(193,122,58,0.06)")+';border-radius:6px">';
-    pHTML+='<div style="display:flex;justify-content:space-between;align-items:center">';
-    pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">Total repair value at risk</span>';
-    pHTML+='<span style="font-size:22px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;text-decoration:line-through">$'+totalRepair.toLocaleString()+'</span>';
-    pHTML+='</div>';
-    pHTML+='<div style="text-align:center;font-size:13px;color:'+(pk.dk?"#aaa":"#666")+';font-family:Georgia;margin-top:8px;padding-top:8px;border-top:1px solid '+(pk.dk?"#333":"#ddd")+';font-style:italic">You pay <strong style="color:'+(pk.dk?"#C9A96E":"#C17A3A")+'">$'+pk.p.toLocaleString()+'</strong> to protect against <strong>$'+totalRepair.toLocaleString()+'</strong> in potential repairs</div>';
-    pHTML+='</div>';
   }
   if(pk.std){
     pk.std.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:#555">'+it+'</span></div>';});
