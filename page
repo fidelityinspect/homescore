@@ -225,6 +225,155 @@ Home Score App Version 6 6/18/25  <!DOCTYPE html>
       font-size: 14px;
       text-align: center;
     }
+    .portal-header {
+      text-align: center;
+      margin: 12px 0;
+    }
+    .portal-header h3 {
+      font-size: 18px;
+      color: #1f2937;
+      margin: 0 0 4px;
+    }
+    .portal-header p {
+      font-size: 13px;
+      color: #6b7280;
+      margin: 0;
+    }
+    .portal-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 8px 0;
+      font-size: 13px;
+      color: #6b7280;
+    }
+    .portal-status .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .workspace-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 12px 0;
+    }
+    .workspace-card {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 14px;
+      border-left: 4px solid #3b82f6;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .workspace-card.self {
+      border-left-color: #f59e0b;
+      background: #fffbeb;
+    }
+    .workspace-card.stale {
+      border-left-color: #d1d5db;
+      opacity: 0.6;
+    }
+    .workspace-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .ws-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .ws-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+    .ws-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .ws-badge.active {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .ws-badge.idle {
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+    .ws-badge.you {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .ws-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      font-size: 12px;
+      color: #4b5563;
+    }
+    .ws-details span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .ws-risks {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .ws-risk-tag {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #fef2f2;
+      color: #dc2626;
+    }
+    .portal-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: #9ca3af;
+    }
+    .portal-empty h4 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: #6b7280;
+    }
+    .portal-empty p {
+      margin: 0;
+      font-size: 13px;
+    }
+    .portal-aggregate {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 14px;
+      margin: 12px 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      text-align: center;
+    }
+    .agg-stat h4 {
+      font-size: 20px;
+      color: #1f2937;
+      margin: 0;
+    }
+    .agg-stat p {
+      font-size: 11px;
+      color: #6b7280;
+      margin: 4px 0 0;
+    }
     @media (min-width: 601px) {
       h2 {
         font-size: 24px;
@@ -317,6 +466,36 @@ Home Score App Version 6 6/18/25  <!DOCTYPE html>
         </table>
       </div>
     </div>
+    <div id="portalScreen" class="screen">
+      <div class="portal-header">
+        <h3>Transparency.io Portal</h3>
+        <p>Full visibility across all open workspaces</p>
+      </div>
+      <div class="portal-status">
+        <span class="dot"></span>
+        <span id="portalConnectionStatus">Scanning for workspaces...</span>
+      </div>
+      <div class="portal-aggregate" id="portalAggregate" style="display:none;">
+        <div class="agg-stat">
+          <h4 id="aggWorkspaces">0</h4>
+          <p>Workspaces</p>
+        </div>
+        <div class="agg-stat">
+          <h4 id="aggAvgAge">0</h4>
+          <p>Avg House Age</p>
+        </div>
+        <div class="agg-stat">
+          <h4 id="aggTotalRisks">0</h4>
+          <p>Total Risks</p>
+        </div>
+      </div>
+      <div class="workspace-grid" id="workspaceGrid">
+        <div class="portal-empty" id="portalEmpty">
+          <h4>No other workspaces detected</h4>
+          <p>Open this app in another tab or window to see cross-workspace visibility in action.</p>
+        </div>
+      </div>
+    </div>
     <div id="errorMessage"></div>
   </main>
   <nav class="bottom-nav">
@@ -324,6 +503,7 @@ Home Score App Version 6 6/18/25  <!DOCTYPE html>
     <div class="nav-item" data-tab="lifecycle">Lifecycle</div>
     <div class="nav-item" data-tab="defects">Defects</div>
     <div class="nav-item" data-tab="maintenance">Maintenance</div>
+    <div class="nav-item" data-tab="portal">Portal</div>
   </nav>
   <script>
     const logWithTimestamp = (message) => {
@@ -1104,6 +1284,152 @@ Home Score App Version 6 6/18/25  <!DOCTYPE html>
         updateChart('lifecycle');
       }
     }
+
+    // --- Transparency.io Cross-Workspace Portal ---
+    const portalChannel = new BroadcastChannel('homescore-transparency-portal');
+    const workspaceId = crypto.randomUUID().slice(0, 8);
+    const workspaces = new Map();
+    const STALE_TIMEOUT = 10000;
+
+    const getWorkspaceState = () => {
+      const houseAge = parseInt(document.getElementById('houseAge')?.value || 0);
+      const activeTab = document.querySelector('.nav-item.active')?.getAttribute('data-tab') || 'home';
+      const top10 = getTop10Components(houseAge);
+      const atRisk = top10.filter(c => c.riskScore >= 0.3);
+      return {
+        id: workspaceId,
+        houseAge,
+        activeTab,
+        atRiskCount: atRisk.length,
+        topRisks: atRisk.slice(0, 3).map(c => c.name.split(' ')[0]),
+        timestamp: Date.now()
+      };
+    };
+
+    const broadcastState = () => {
+      try {
+        portalChannel.postMessage({ type: 'state', data: getWorkspaceState() });
+      } catch (e) {
+        logWithTimestamp(`Portal broadcast error: ${e.message}`);
+      }
+    };
+
+    const renderPortal = () => {
+      const grid = document.getElementById('workspaceGrid');
+      const empty = document.getElementById('portalEmpty');
+      const agg = document.getElementById('portalAggregate');
+      const statusEl = document.getElementById('portalConnectionStatus');
+      if (!grid) return;
+
+      const now = Date.now();
+      // Clean stale workspaces
+      for (const [id, ws] of workspaces) {
+        if (now - ws.timestamp > STALE_TIMEOUT) workspaces.delete(id);
+      }
+
+      // Build cards: self first, then others
+      const selfState = getWorkspaceState();
+      const allStates = [selfState, ...Array.from(workspaces.values())];
+      const otherCount = workspaces.size;
+
+      if (statusEl) {
+        statusEl.textContent = otherCount > 0
+          ? `${otherCount + 1} workspace${otherCount > 0 ? 's' : ''} connected`
+          : 'Broadcasting — open another tab to connect';
+      }
+
+      if (agg) {
+        agg.style.display = allStates.length > 1 ? 'grid' : 'none';
+        const avgAge = Math.round(allStates.reduce((s, w) => s + w.houseAge, 0) / allStates.length);
+        const totalRisks = allStates.reduce((s, w) => s + w.atRiskCount, 0);
+        document.getElementById('aggWorkspaces').textContent = allStates.length;
+        document.getElementById('aggAvgAge').textContent = avgAge;
+        document.getElementById('aggTotalRisks').textContent = totalRisks;
+      }
+
+      if (empty) empty.style.display = otherCount === 0 ? 'block' : 'none';
+
+      const tabLabels = { home: 'Home', lifecycle: 'Lifecycle', defects: 'Defects', maintenance: 'Maintenance', portal: 'Portal' };
+
+      const cardsHtml = allStates.map(ws => {
+        const isSelf = ws.id === workspaceId;
+        const isStale = !isSelf && (now - ws.timestamp > STALE_TIMEOUT / 2);
+        const cardClass = isSelf ? 'workspace-card self' : isStale ? 'workspace-card stale' : 'workspace-card';
+        const badgeClass = isSelf ? 'ws-badge you' : isStale ? 'ws-badge idle' : 'ws-badge active';
+        const badgeText = isSelf ? 'You' : isStale ? 'Idle' : 'Active';
+        const risksHtml = ws.topRisks.length > 0
+          ? `<div class="ws-risks">${ws.topRisks.map(r => `<span class="ws-risk-tag">${r}</span>`).join('')}</div>`
+          : '';
+        return `
+          <div class="${cardClass}">
+            <div class="ws-top">
+              <span class="ws-name">Workspace ${ws.id}</span>
+              <span class="${badgeClass}">${badgeText}</span>
+            </div>
+            <div class="ws-details">
+              <span>House Age: ${ws.houseAge} yrs</span>
+              <span>View: ${tabLabels[ws.activeTab] || ws.activeTab}</span>
+              <span>Risks: ${ws.atRiskCount}</span>
+              <span>${isSelf ? 'This session' : timeAgo(ws.timestamp)}</span>
+            </div>
+            ${risksHtml}
+          </div>`;
+      }).join('');
+
+      // Only replace card content, not the empty placeholder
+      const existingCards = grid.querySelectorAll('.workspace-card');
+      existingCards.forEach(c => c.remove());
+      grid.insertAdjacentHTML('beforeend', cardsHtml);
+    };
+
+    const timeAgo = (ts) => {
+      const diff = Math.floor((Date.now() - ts) / 1000);
+      if (diff < 5) return 'Just now';
+      if (diff < 60) return `${diff}s ago`;
+      return `${Math.floor(diff / 60)}m ago`;
+    };
+
+    portalChannel.onmessage = (event) => {
+      const { type, data } = event.data;
+      if (type === 'state' && data.id !== workspaceId) {
+        workspaces.set(data.id, data);
+        renderPortal();
+      } else if (type === 'ping') {
+        broadcastState();
+      } else if (type === 'disconnect' && data.id) {
+        workspaces.delete(data.id);
+        renderPortal();
+      }
+    };
+
+    // Broadcast state periodically and on changes
+    setInterval(() => {
+      broadcastState();
+      renderPortal();
+    }, 3000);
+
+    // Announce presence
+    portalChannel.postMessage({ type: 'ping', data: { id: workspaceId } });
+    broadcastState();
+
+    // Broadcast on tab switch and slider change
+    const origSwitchTab = switchTab;
+    switchTab = (tab) => {
+      origSwitchTab(tab);
+      broadcastState();
+      if (tab === 'portal') renderPortal();
+    };
+
+    if (slider) {
+      slider.addEventListener('change', () => broadcastState());
+    }
+
+    // Announce disconnect on unload
+    window.addEventListener('beforeunload', () => {
+      portalChannel.postMessage({ type: 'disconnect', data: { id: workspaceId } });
+    });
+
+    logWithTimestamp(`Transparency.io Portal initialized. Workspace ID: ${workspaceId}`);
   </script>
 </body>
 </html>
