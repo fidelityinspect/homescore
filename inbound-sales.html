@@ -252,11 +252,13 @@ var riskMap=[
 ];
 var compRisk=riskMap;
 var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
+var optGap=0;
+optRisk.forEach(function(r){if(r.d)optGap+=Math.round(r.d.c*r.d.p/100);});
 var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos","Negotiation addendum"];
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"All 7 major risk factors covered",desc:"Every repair priced so you don't leave money on the table.",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos","Property grade report with inspector consultation"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
-  {n:"Optimized Value Pack",sub:"Top 3/7 major risk factors covered",desc:"Covers the highest-risk categories others miss.",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:["Inspector consultation"],guarantee:null,std:null},
-  {n:"Standard Inspection",sub:"Professional visual inspection",desc:"A quality inspection covering all major systems and components.",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
+  {n:"Comprehensive Risk Elimination",sub:"All 7 major risk factors covered",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,avgFound:gapCost,bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos","Property grade report with inspector consultation"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
+  {n:"Optimized Value Pack",sub:"Top 3/7 major risk factors covered",p:op,dk:false,tag:null,rush:false,risk:optRisk,avgFound:optGap,bonuses:["Inspector consultation"],guarantee:null,std:null},
+  {n:"Standard Inspection",sub:"Professional visual inspection",p:bp,dk:false,tag:null,rush:false,risk:[],avgFound:0,bonuses:[],guarantee:null,std:stdItems}
 ];
 var pHTML="";
 pkgs.forEach(function(pk,pi){
@@ -273,8 +275,11 @@ pkgs.forEach(function(pk,pi){
   pHTML+='</div>';
   pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
   if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-bottom:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
-  if(pk.desc)pHTML+='<div style="font-size:13px;color:'+(pk.dk?"#aaa":"#666")+';font-family:Georgia;line-height:1.5;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">'+pk.desc+'</div>';
   if(pk.risk.length>0){
+    pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">INCLUDED</span>';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">RISK</span>';
+    pHTML+='</div>';
     pk.risk.forEach(function(r){
       var pct=r.d?r.d.p:"0";
       pHTML+='<div style="padding:9px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
@@ -285,6 +290,11 @@ pkgs.forEach(function(pk,pi){
       pHTML+='<div style="margin-left:22px;font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:2px">'+r.ben+'</div>';
       pHTML+='</div>';
     });
+    pHTML+='<div style="margin-top:14px;padding:14px;background:'+(pk.dk?"rgba(201,169,110,0.1)":"rgba(193,122,58,0.06)")+';border-radius:6px;text-align:center">';
+    pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#888":"#999")+';font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:6px">AVG. REPAIRS DOCUMENTED</div>';
+    pHTML+='<div style="font-size:28px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+pk.avgFound.toLocaleString()+'</div>';
+    pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;margin-top:4px">Based on 3,377 inspections</div>';
+    pHTML+='</div>';
   }
   if(pk.std){
     pk.std.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:#555">'+it+'</span></div>';});
