@@ -456,12 +456,14 @@ function getSelectedPkgPrice(){
 function updateClientTotal(){
   if(activePkg<0){
     document.getElementById("clientTotal").textContent="Select a package";
+    document.getElementById("clientTotal").style.fontSize="14px";
     return;
   }
   var base=getSelectedPkgPrice();
   var addTotal=0;
   ADDONS.forEach(function(a){if(clientAddons[a.id])addTotal+=a.price;});
   clientStructures.forEach(function(s){addTotal+=calcStructurePrice(s);});
+  document.getElementById("clientTotal").style.fontSize="28px";
   document.getElementById("clientTotal").textContent="$"+(base+addTotal).toLocaleString();
 }
 
