@@ -236,8 +236,16 @@ function generateReport() {
       maintenance: maintenance.length
     }));
 
-    // Open the sales page (it will read from sessionStorage)
-    window.open("inbound-sales.html", "_blank");
+    // Build URL with compact data params
+    var data = encodeURIComponent(JSON.stringify({
+      name:name,addr:addr,sqft:sqft,zip:zip,age:age,brk:defectBrk,
+      grade:grade,predicted:predictedDefects,gapCost:gapCost
+    }));
+
+    // Detect if we're on GitHub Pages or local
+    var base = window.location.href.replace(/atlas-entry\.html.*/,"");
+    var target = base + "inbound-sales.html?d=" + data;
+    window.open(target, "_blank");
   }, 600);
 }
 
