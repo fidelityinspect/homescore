@@ -353,9 +353,26 @@ pkgs.forEach(function(pk,pi){
       pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;white-space:nowrap">$'+repairCost.toLocaleString()+'</span>';
       pHTML+='</div>';
     });
-    pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;margin-top:2px">';
-    pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#333")+';font-family:ui-monospace,monospace">AVG SELLER-PAID REPAIRS</span>';
-    pHTML+='<span style="font-size:18px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+protectedTotal.toLocaleString()+'</span>';
+    pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;margin-top:2px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace">Specialty services</span>';
+    pHTML+='<span style="font-size:16px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+protectedTotal.toLocaleString()+'</span>';
+    pHTML+='</div>';
+    pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace">Standard inspection</span>';
+    pHTML+='<span style="font-size:16px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+stdRepairs.toLocaleString()+'</span>';
+    pHTML+='</div>';
+    // Comprehensive finds ~17 more maintenance items than Value Pack (~$682 avg each)
+    var thoroughBonus=0;
+    if(pi===0){thoroughBonus=Math.round(17*682);
+      pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
+      pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace">Additional items from thorough inspection</span>';
+      pHTML+='<span style="font-size:16px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+thoroughBonus.toLocaleString()+'</span>';
+      pHTML+='</div>';
+    }
+    var pkgTotal=protectedTotal+stdRepairs+thoroughBonus;
+    pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0">';
+    pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#333")+';font-family:ui-monospace,monospace">TOTAL SELLER-PAID REPAIRS</span>';
+    pHTML+='<span style="font-size:22px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+pkgTotal.toLocaleString()+'</span>';
     pHTML+='</div>';
     if(pi===1){
       pHTML+='<div style="display:flex;justify-content:center;gap:4px;margin-top:4px">';
