@@ -80,11 +80,9 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .pkc .bonus p{font-size:13px;color:#3D8B5B;padding:3px 0}
 .pkc .guar{margin-top:12px;padding:12px;background:rgba(61,139,91,0.08);border-radius:4px;font-size:13px;color:#3D8B5B;text-align:center;font-weight:600}
 .pkc .warn{margin-top:10px;padding:10px;background:rgba(166,61,47,0.04);border-radius:4px;font-size:12px;color:#A63D2F;text-align:center}
-.insp{padding:24px;background:#fff}
-.insp .top{display:flex;align-items:center;gap:16px}
-.insp .av{width:80px;height:80px;border-radius:50%;background:#161618;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:3px solid #C9A96E;font-size:28px;font-weight:700;color:#C9A96E}
-.insp .badges{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
-.insp .badge{padding:6px 12px;background:#F5F2EB;border-radius:4px;font-size:12px;font-family:ui-monospace,monospace;font-weight:600}
+.insp-bar{display:flex;align-items:center;gap:14px;padding:16px 24px;background:#161618}
+.insp-bar .av{width:52px;height:52px;border-radius:50%;flex-shrink:0;border:2px solid #C9A96E}
+.insp-bar .insp-info{flex:1}
 .faq{padding:20px 24px}
 .faq h3{font-size:14px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:14px}
 .faq .q{font-size:14px;font-weight:600;margin-bottom:4px}
@@ -135,6 +133,14 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
   </div>
 </div>
 
+<div class="insp-bar">
+  <div class="av" style="overflow:hidden;padding:0;background:url(https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0) center 10% / 200% no-repeat"></div>
+  <div class="insp-info">
+    <div style="font-size:15px;font-weight:700">Michael Street</div>
+    <div style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace">License #22402 · 5,000+ inspections</div>
+    <div style="font-size:11px;color:#888;font-family:ui-monospace,monospace;margin-top:1px">San Antonio + Austin · 5-star Google & Yelp</div>
+  </div>
+</div>
 
 <div class="rev">
   <h3>WHAT OUR CLIENTS SAY</h3>
@@ -145,14 +151,6 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
   <div class="qlbl">YOUR QUOTE</div>
   <div class="qmeta" id="quoteMeta"></div>
   <div id="pkgCards"></div>
-</div>
-
-<div class="insp">
-  <div class="top">
-    <div class="av" style="overflow:hidden;padding:0;background:url(https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0) center 10% / 200% no-repeat"></div>
-    <div><div style="font-size:17px;font-weight:700">Michael Street</div><div style="font-size:13px;color:#C9A96E;font-family:ui-monospace,monospace;margin-top:2px">Professional Real Estate Inspector</div><div style="font-size:12px;color:#888;font-family:ui-monospace,monospace;margin-top:2px">License #22402</div></div>
-  </div>
-  <div class="badges"><div class="badge">5,000+ inspections</div><div class="badge">San Antonio + Austin</div><div class="badge">5-star Google + Yelp</div></div>
 </div>
 
 <a href="#" class="sched-btn" id="schedBtn">SCHEDULE NOW</a>
@@ -168,8 +166,9 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
   <div class="a">A standard inspection tells you what's visible to the eye. Comprehensive covers 7 high-risk categories others miss and prices the repairs — so you can negotiate the best deal before you close. Our clients save an average of $18,730 in documented repairs. If we don't find repairs exceeding the cost of the inspection we will credit you the difference.</div>
 </div>
 
+<a href="#" class="sched-btn" style="background:#161618;color:#C9A96E;border:2px solid #C9A96E">CALL (210) 961-5700</a>
+
 <div class="ftr">
-  <div class="ph">(210) 961-5700</div>
   <div class="co">FIDELITY HOME INSPECTION<br>3,377 inspections in San Antonio and Austin</div>
 </div>
 
