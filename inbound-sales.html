@@ -337,16 +337,27 @@ pkgs.forEach(function(pk,pi){
   pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
   if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-bottom:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
   if(pk.risk.length>0){
-    pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">SPECIALTY SERVICES INCLUDED</div>';
+    var protectedTotal=0;
+    pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">PROTECTED AGAINST</span>';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">AVG REPAIR</span>';
+    pHTML+='</div>';
     pk.risk.forEach(function(r){
+      var repairCost=r.d?Math.round(r.d.c*r.d.p/100):0;
+      protectedTotal+=repairCost;
       pHTML+='<div style="display:flex;align-items:center;padding:8px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
       pHTML+='<span class="ck" style="margin-right:8px">&#10003;</span>';
       pHTML+='<div style="flex:1"><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">'+r.svc+'</span>';
       pHTML+='<div style="font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:1px">'+r.ben+'</div></div>';
+      pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;white-space:nowrap">$'+repairCost.toLocaleString()+'</span>';
       pHTML+='</div>';
     });
+    pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;margin-top:2px">';
+    pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#333")+';font-family:ui-monospace,monospace">TOTAL PROTECTED</span>';
+    pHTML+='<span style="font-size:18px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+protectedTotal.toLocaleString()+'</span>';
+    pHTML+='</div>';
     if(pi===1){
-      pHTML+='<div style="display:flex;justify-content:center;gap:4px;margin-top:12px">';
+      pHTML+='<div style="display:flex;justify-content:center;gap:4px;margin-top:4px">';
       for(var s=0;s<7;s++){pHTML+='<div style="width:28px;height:6px;border-radius:3px;background:'+(s<3?"#C9A96E":"#444")+'"></div>';}
       pHTML+='</div>';
       pHTML+='<div style="font-size:11px;color:#999;font-family:ui-monospace,monospace;text-align:center;margin-top:6px">3 of 7 risk categories covered</div>';
@@ -355,30 +366,36 @@ pkgs.forEach(function(pk,pi){
   if(pk.std){
     pk.std.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:#555">'+it+'</span></div>';});
     pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(166,61,47,0.08);border:1px solid rgba(166,61,47,0.2);border-radius:6px;text-align:center">';
-    pHTML+='<div style="font-size:13px;color:#A63D2F;font-weight:700;margin-bottom:4px">Does not include specialty tools</div>';
-    pHTML+='<div style="font-size:12px;color:#A63D2F;font-family:Georgia;font-style:italic">No foundation plotting, infrared, sewer camera, ductwork camera, safety audit, termite, or air quality testing</div>';
+    pHTML+='<div style="font-size:13px;color:#A63D2F;font-weight:700;margin-bottom:6px">Does not include specialty tools</div>';
+    pHTML+='<div style="font-size:28px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace;margin-bottom:4px">$'+gapCost.toLocaleString()+'</div>';
+    pHTML+='<div style="font-size:12px;color:#A63D2F;font-family:Georgia;font-style:italic">in hidden repairs left undetected</div>';
     pHTML+='</div>';
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
-  // Upsell warnings for Optimized
+  // Upsell warnings for Optimized — show missing risk categories with repair costs
   if(pi===1){
-    var upsells=[
-      {risk:"Damages in drain under house",fix:"Sewer Line Scope",price:199},
-      {risk:"Rodent intrusion in ductwork",fix:"Ductwork Camera Inspection",price:199},
-      {risk:"Weak negotiation position",fix:"Repair Request Builder",price:149},
-      {risk:"Unknown true repair costs",fix:"Itemized Repair Quotes",price:199}
-    ];
+    var missingRisks=[riskMap[2],riskMap[3],riskMap[4],riskMap[6]]; // Sewer, Ductwork, Safety, Air Quality
+    var unprotectedTotal=0;
     pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(166,61,47,0.06);border:1px solid rgba(166,61,47,0.15);border-radius:6px">';
-    pHTML+='<div style="font-size:12px;font-weight:700;color:#A63D2F;margin-bottom:8px">You are unprotected from:</div>';
-    upsells.forEach(function(u){
-      pHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(166,61,47,0.1)">';
-      pHTML+='<div style="font-size:12px;color:#A63D2F">'+u.risk+'</div>';
-      pHTML+='<div style="font-size:11px;color:#888;font-family:ui-monospace,monospace;white-space:nowrap">+$'+u.price+'</div>';
+    pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid rgba(166,61,47,0.15)">';
+    pHTML+='<span style="font-size:11px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace;letter-spacing:0.08em">NOT PROTECTED</span>';
+    pHTML+='<span style="font-size:11px;color:#A63D2F;font-family:ui-monospace,monospace;letter-spacing:0.08em">AT RISK</span>';
+    pHTML+='</div>';
+    missingRisks.forEach(function(r){
+      var repairCost=r.d?Math.round(r.d.c*r.d.p/100):0;
+      unprotectedTotal+=repairCost;
+      pHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(166,61,47,0.08)">';
+      pHTML+='<div style="font-size:13px;color:#A63D2F">'+r.ben+'</div>';
+      pHTML+='<div style="font-size:13px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace;white-space:nowrap">$'+repairCost.toLocaleString()+'</div>';
       pHTML+='</div>';
     });
-    pHTML+='<div style="margin-top:10px;text-align:center"><div style="font-size:12px;color:#888;margin-bottom:6px">Get all these and more with Comprehensive</div>';
-    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(0)">Upgrade to Comprehensive +$'+(cp-op)+'</button></div>';
+    pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:8px 0">';
+    pHTML+='<span style="font-size:12px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace">TOTAL AT RISK</span>';
+    pHTML+='<span style="font-size:18px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace">$'+unprotectedTotal.toLocaleString()+'</span>';
+    pHTML+='</div>';
+    pHTML+='<div style="text-align:center;margin-top:6px"><div style="font-size:12px;color:#888;margin-bottom:6px">Cover everything for just +$'+(cp-op).toLocaleString()+' more</div>';
+    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(0)">Upgrade to Comprehensive</button></div>';
     pHTML+='</div>';
   }
   // Select button
