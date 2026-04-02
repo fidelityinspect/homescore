@@ -146,7 +146,8 @@ var ADDONS=[
   {id:"well",name:"Well Water Lab Testing",desc:"Water quality and flow testing",price:399},
   {id:"radon",name:"Radon Testing",desc:"48-hour continuous monitoring",price:399},
   {id:"crawl",name:"Crawlspace Inspection",desc:"Moisture, pests, and structural issues",price:199},
-  {id:"sprinkler",name:"Sprinkler Inspection",desc:"Sprinkler system zones and components",price:99}
+  {id:"sprinkler",name:"Sprinkler Inspection",desc:"Sprinkler system zones and components",price:99},
+  {id:"drain",name:"Drain Line Inspection",desc:"Sewer camera scope of main drain line",price:199}
 ];
 
 // Additional structure pricing: base $79 + sqft*0.267 + casita $350 + kitchen $100 + bath $75
@@ -179,6 +180,11 @@ function renderAddons(){
     html+='</div></div>';
   });
   html+='<div class="addon-item" style="justify-content:center;color:#888;font-size:13px" onclick="addStructure()">+ Add Structure (from $79)</div>';
+  // Military / First Responder discount
+  var milCk=milDiscount?"checked":"";
+  html+='<div class="addon-item '+milCk+'" style="background:linear-gradient(135deg,#1a2744 0%,#2a3a5c 50%,#1a2744 100%);border:2px solid #C9A96E" onclick="toggleMilDiscount()" id="mil-toggle">';
+  html+='<div class="left"><div class="chk">&#10003;</div><div><span class="aname" style="color:#fff;font-weight:700">Military / First Responder</span><div style="font-size:11px;color:#C9A96E;margin-top:2px">Thank you for your service</div></div></div>';
+  html+='<span class="aprice" style="color:#3D8B5B">-$25</span></div>';
   document.getElementById("addOnList").innerHTML=html;
 }
 
@@ -209,6 +215,14 @@ function toggleStructOpt(i,opt,val){
   updateTotal();
 }
 
+var milDiscount=false;
+function toggleMilDiscount(){
+  milDiscount=!milDiscount;
+  var el=document.getElementById("mil-toggle");
+  if(milDiscount)el.classList.add("checked");else el.classList.remove("checked");
+  updateTotal();
+}
+
 function toggleAddon(id){
   selectedAddons[id]=!selectedAddons[id];
   var el=document.getElementById("addon-"+id);
@@ -229,8 +243,8 @@ function calcPrices(){
   var yearBuilt=parseInt(document.getElementById("yearBuilt").value)||2000;
   var age=new Date().getFullYear()-yearBuilt;
   var bp=Math.max(499,Math.round((499+sqft*0.07)*(1+age*0.002)));
-  var op=Math.max(899,Math.round(bp*1.67));
-  var cp=Math.max(1299,Math.round(bp*2.67));
+  var op=Math.max(799,Math.round(bp*1.67)-100);
+  var cp=Math.max(1099,Math.round(bp*2.67)-200);
   return {std:bp,opt:op,comp:cp};
 }
 
@@ -241,6 +255,7 @@ function updateTotal(){
   ADDONS.forEach(function(a){if(selectedAddons[a.id])addTotal+=a.price;});
   structures.forEach(function(s){addTotal+=calcStructurePrice(s);});
   var total=base+addTotal;
+  if(milDiscount)total-=25;
   document.getElementById("pkgPrice").textContent="$"+base.toLocaleString();
   document.getElementById("totalPrice").textContent="$"+total.toLocaleString();
 }
@@ -391,7 +406,8 @@ function generateReport() {
       addons: addons,
       structures: structs,
       prices: prices,
-      propType: propType
+      propType: propType,
+      milDiscount: milDiscount
     }));
 
     // Build URL with compact data params
@@ -399,7 +415,7 @@ function generateReport() {
       name:name,addr:addr,sqft:sqft,zip:zip,age:age,brk:defectBrk,
       grade:grade,predicted:predictedDefects,gapCost:gapCost,
       pkg:selectedPkg,addons:addons,structures:structs,prices:prices,
-      propType:propType
+      propType:propType,milDiscount:milDiscount
     }));
 
     // Detect if we're on GitHub Pages or local

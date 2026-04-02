@@ -32,10 +32,10 @@ The long-term vision expands this into a full client lifecycle ecosystem: pre-in
 ## Dynamic Pricing Formula
 ```javascript
 bp = max(499, round((499 + sqft * 0.07) * (1 + age * 0.002)))  // Standard
-op = max(899, round(bp * 1.67))                                  // Optimized
-cp = max(1299, round(bp * 2.67))                                 // Comprehensive
+op = max(799, round(bp * 1.67) - 100)                            // Optimized
+cp = max(1099, round(bp * 2.67) - 200)                           // Comprehensive
 ```
-Price floors: $499 / $899 / $1,299
+Price floors: $499 / $799 / $1,099
 
 ## Gap Cost Formula
 ```javascript
@@ -81,6 +81,7 @@ base = max(79, round(sqft * 0.375 - 51))  // $249@800sqft, $399@1200sqft
 - Radon Testing: $399 — 48-hour continuous monitoring
 - Crawlspace Inspection: $199 — Moisture, pests, and structural issues
 - Sprinkler Inspection: $99 — Sprinkler system zones and components
+- Drain Line Inspection: $199 — Sewer camera scope of main drain line
 - Additional Structure: from $79 — Detached buildings, casitas, workshops (sqft + options)
 
 ## Package Bonuses
