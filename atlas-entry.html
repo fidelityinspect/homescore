@@ -141,13 +141,17 @@ body{background:#161618;font-family:system-ui,-apple-system,sans-serif;color:#ff
 <script>
 // Add-on services available
 var ADDONS=[
-  {id:"pool",name:"Pool / Spa Inspection",price:199},
-  {id:"septic",name:"Septic System",price:350},
-  {id:"radon",name:"Radon Testing",price:149},
-  {id:"well",name:"Well Water Testing",price:199},
-  {id:"sprinkler",name:"Sprinkler System",price:99},
-  {id:"detached",name:"Detached Structure",price:99}
+  {id:"pool",name:"Pool & Spa Inspection",desc:"Complete pool equipment evaluation",price:199},
+  {id:"septic",name:"Septic System Evaluation",desc:"Tank and drain field analysis",price:350},
+  {id:"well",name:"Well Water Lab Testing",desc:"Water quality and flow testing",price:399},
+  {id:"radon",name:"Radon Testing",desc:"48-hour continuous monitoring",price:399},
+  {id:"crawl",name:"Crawlspace Inspection",desc:"Moisture, pests, and structural issues",price:199},
+  {id:"sprinkler",name:"Sprinkler Inspection",desc:"Sprinkler system zones and components",price:99}
 ];
+
+// Additional structure pricing: base $79 + sqft*0.267 + casita $350 + kitchen $100 + bath $75
+var structureCount=0;
+var structures=[];
 
 var selectedPkg="comp";
 var selectedAddons={};
@@ -158,11 +162,38 @@ function renderAddons(){
   ADDONS.forEach(function(a){
     var ck=selectedAddons[a.id]?"checked":"";
     html+='<div class="addon-item '+ck+'" onclick="toggleAddon(\''+a.id+'\')" id="addon-'+a.id+'">';
-    html+='<div class="left"><div class="chk">&#10003;</div><span class="aname">'+a.name+'</span></div>';
+    html+='<div class="left"><div class="chk">&#10003;</div><div><span class="aname">'+a.name+'</span><div style="font-size:11px;color:#666;margin-top:2px">'+a.desc+'</div></div></div>';
     html+='<span class="aprice">+$'+a.price+'</span></div>';
   });
+  // Additional structures section
+  html+='<div style="margin-top:12px;font-size:11px;font-weight:700;color:#C9A96E;letter-spacing:0.08em;font-family:ui-monospace,monospace;margin-bottom:6px">ADDITIONAL STRUCTURES</div>';
+  html+='<div style="font-size:11px;color:#666;margin-bottom:8px">Detached buildings, casitas, workshops</div>';
+  structures.forEach(function(s,i){
+    var sp=calcStructurePrice(s);
+    html+='<div class="addon-item checked" style="flex-wrap:wrap;gap:8px" id="struct-'+i+'">';
+    html+='<div style="width:100%;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;color:#ccc">Structure '+(i+1)+'</span><div style="display:flex;align-items:center;gap:8px"><span class="aprice">+$'+sp+'</span><span style="cursor:pointer;color:#666;font-size:16px" onclick="event.stopPropagation();removeStructure('+i+')">&times;</span></div></div>';
+    html+='<div style="width:100%;display:flex;gap:8px;align-items:center"><input type="number" placeholder="Sq ft" value="'+(s.sqft||"")+'" style="flex:1;padding:8px;background:#2a2a2e;border:1px solid #444;border-radius:6px;color:#fff;font-size:13px" oninput="event.stopPropagation();updateStructSqft('+i+',this.value)">';
+    html+='<label style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" '+(s.casita?"checked":"")+' onchange="event.stopPropagation();toggleStructOpt('+i+',\'casita\',this.checked)"> Casita</label>';
+    html+='<label style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" '+(s.kitchen?"checked":"")+' onchange="event.stopPropagation();toggleStructOpt('+i+',\'kitchen\',this.checked)"> Kitchen</label>';
+    html+='<label style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" '+(s.bath?"checked":"")+' onchange="event.stopPropagation();toggleStructOpt('+i+',\'bath\',this.checked)"> Bath</label>';
+    html+='</div></div>';
+  });
+  html+='<div class="addon-item" style="justify-content:center;color:#888;font-size:13px" onclick="addStructure()">+ Add Structure (from $79)</div>';
   document.getElementById("addOnList").innerHTML=html;
 }
+
+function calcStructurePrice(s){
+  var p=79;
+  if(s.sqft&&s.sqft>0)p=Math.max(79,Math.round(s.sqft*0.375-51));
+  if(s.casita)p+=350;
+  if(s.kitchen)p+=100;
+  if(s.bath)p+=75;
+  return p;
+}
+function addStructure(){structures.push({sqft:0,casita:false,kitchen:false,bath:false});renderAddons();updateTotal();}
+function removeStructure(i){structures.splice(i,1);renderAddons();updateTotal();}
+function updateStructSqft(i,v){structures[i].sqft=parseInt(v)||0;renderAddons();updateTotal();}
+function toggleStructOpt(i,opt,val){structures[i][opt]=val;renderAddons();updateTotal();}
 
 function toggleAddon(id){
   selectedAddons[id]=!selectedAddons[id];
@@ -194,6 +225,7 @@ function updateTotal(){
   var base=prices[selectedPkg];
   var addTotal=0;
   ADDONS.forEach(function(a){if(selectedAddons[a.id])addTotal+=a.price;});
+  structures.forEach(function(s){addTotal+=calcStructurePrice(s);});
   var total=base+addTotal;
   document.getElementById("pkgPrice").textContent="$"+base.toLocaleString();
   document.getElementById("totalPrice").textContent="$"+total.toLocaleString();
@@ -322,7 +354,8 @@ function generateReport() {
 
     // Collect add-ons
     var addons=[];
-    ADDONS.forEach(function(a){if(selectedAddons[a.id])addons.push({id:a.id,name:a.name,price:a.price});});
+    ADDONS.forEach(function(a){if(selectedAddons[a.id])addons.push({id:a.id,name:a.name,desc:a.desc,price:a.price});});
+    var structs=structures.map(function(s){return{sqft:s.sqft,casita:s.casita,kitchen:s.kitchen,bath:s.bath,price:calcStructurePrice(s)};});
     var prices=calcPrices();
 
     // Store report data in sessionStorage for the sales page to read
@@ -342,6 +375,7 @@ function generateReport() {
       maintenance: maintenance.length,
       pkg: selectedPkg,
       addons: addons,
+      structures: structs,
       prices: prices
     }));
 
@@ -349,7 +383,7 @@ function generateReport() {
     var data = encodeURIComponent(JSON.stringify({
       name:name,addr:addr,sqft:sqft,zip:zip,age:age,brk:defectBrk,
       grade:grade,predicted:predictedDefects,gapCost:gapCost,
-      pkg:selectedPkg,addons:addons,prices:prices
+      pkg:selectedPkg,addons:addons,structures:structs,prices:prices
     }));
 
     // Detect if we're on GitHub Pages or local
