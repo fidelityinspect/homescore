@@ -38,6 +38,20 @@ body{background:#161618;font-family:system-ui,-apple-system,sans-serif;color:#ff
 .stat .val{font-size:20px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
 .stat .lbl{font-size:10px;color:#666;font-family:ui-monospace,monospace;margin-top:2px}
 
+/* Package tabs */
+.pkg-tab{flex:1;padding:10px 8px;background:#1E1E22;border:1px solid #333;border-radius:8px;color:#888;font-size:13px;font-weight:600;font-family:system-ui;cursor:pointer;transition:all 0.2s}
+.pkg-tab.active{background:#C9A96E;color:#161618;border-color:#C9A96E}
+.pkg-tab:hover:not(.active){border-color:#C9A96E;color:#C9A96E}
+
+/* Add-on items */
+.addon-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#1E1E22;border:1px solid #333;border-radius:8px;margin-bottom:6px;cursor:pointer;transition:border-color 0.2s}
+.addon-item.checked{border-color:#C9A96E}
+.addon-item .left{display:flex;align-items:center;gap:10px}
+.addon-item .chk{width:20px;height:20px;border:2px solid #555;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;transition:all 0.2s}
+.addon-item.checked .chk{background:#C9A96E;border-color:#C9A96E;color:#161618}
+.addon-item .aname{font-size:14px;color:#ccc}
+.addon-item .aprice{font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
+
 /* Generated report container */
 #reportFrame{display:none;margin-top:24px;border-radius:8px;overflow:hidden}
 #reportFrame iframe{width:100%;border:none;border-radius:8px}
@@ -88,6 +102,29 @@ body{background:#161618;font-family:system-ui,-apple-system,sans-serif;color:#ff
     </div>
   </div>
 
+  <!-- Package Selector -->
+  <div style="margin-top:20px;margin-bottom:4px">
+    <label style="display:block;font-size:11px;font-weight:700;color:#C9A96E;letter-spacing:0.08em;font-family:ui-monospace,monospace;margin-bottom:8px">SELECT PACKAGE</label>
+    <div id="pkgTabs" style="display:flex;gap:6px">
+      <button class="pkg-tab active" data-pkg="comp" onclick="selectPkg('comp')">Comprehensive</button>
+      <button class="pkg-tab" data-pkg="opt" onclick="selectPkg('opt')">Optimized</button>
+      <button class="pkg-tab" data-pkg="std" onclick="selectPkg('std')">Standard</button>
+    </div>
+  </div>
+  <div id="pkgPrice" style="font-size:24px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center;padding:10px 0"></div>
+
+  <!-- Add-On Services -->
+  <div style="margin-bottom:16px">
+    <label style="display:block;font-size:11px;font-weight:700;color:#C9A96E;letter-spacing:0.08em;font-family:ui-monospace,monospace;margin-bottom:8px">ADD-ON SERVICES</label>
+    <div id="addOnList"></div>
+  </div>
+
+  <!-- Total -->
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 14px;background:#1E1E22;border:1px solid #C9A96E;border-radius:8px;margin-bottom:12px">
+    <span style="font-size:13px;font-weight:700;color:#888;font-family:ui-monospace,monospace">QUOTED TOTAL</span>
+    <span id="totalPrice" style="font-size:28px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace"></span>
+  </div>
+
   <button class="gen-btn" onclick="generateReport()">Generate Atlas™ Report</button>
 
   <div class="status" id="status"></div>
@@ -102,6 +139,70 @@ body{background:#161618;font-family:system-ui,-apple-system,sans-serif;color:#ff
 </div>
 
 <script>
+// Add-on services available
+var ADDONS=[
+  {id:"pool",name:"Pool / Spa Inspection",price:199},
+  {id:"septic",name:"Septic System",price:350},
+  {id:"radon",name:"Radon Testing",price:149},
+  {id:"well",name:"Well Water Testing",price:199},
+  {id:"sprinkler",name:"Sprinkler System",price:99},
+  {id:"detached",name:"Detached Structure",price:99}
+];
+
+var selectedPkg="comp";
+var selectedAddons={};
+
+// Render add-on checkboxes
+function renderAddons(){
+  var html="";
+  ADDONS.forEach(function(a){
+    var ck=selectedAddons[a.id]?"checked":"";
+    html+='<div class="addon-item '+ck+'" onclick="toggleAddon(\''+a.id+'\')" id="addon-'+a.id+'">';
+    html+='<div class="left"><div class="chk">&#10003;</div><span class="aname">'+a.name+'</span></div>';
+    html+='<span class="aprice">+$'+a.price+'</span></div>';
+  });
+  document.getElementById("addOnList").innerHTML=html;
+}
+
+function toggleAddon(id){
+  selectedAddons[id]=!selectedAddons[id];
+  var el=document.getElementById("addon-"+id);
+  if(selectedAddons[id])el.classList.add("checked");
+  else el.classList.remove("checked");
+  updateTotal();
+}
+
+function selectPkg(pkg){
+  selectedPkg=pkg;
+  document.querySelectorAll(".pkg-tab").forEach(function(t){t.classList.remove("active");});
+  document.querySelector('[data-pkg="'+pkg+'"]').classList.add("active");
+  updateTotal();
+}
+
+function calcPrices(){
+  var sqft=parseInt(document.getElementById("sqft").value)||2400;
+  var yearBuilt=parseInt(document.getElementById("yearBuilt").value)||2000;
+  var age=new Date().getFullYear()-yearBuilt;
+  var bp=Math.max(499,Math.round((499+sqft*0.07)*(1+age*0.002)));
+  var op=Math.max(899,Math.round(bp*1.67));
+  var cp=Math.max(1299,Math.round(bp*2.67));
+  return {std:bp,opt:op,comp:cp};
+}
+
+function updateTotal(){
+  var prices=calcPrices();
+  var base=prices[selectedPkg];
+  var addTotal=0;
+  ADDONS.forEach(function(a){if(selectedAddons[a.id])addTotal+=a.price;});
+  var total=base+addTotal;
+  document.getElementById("pkgPrice").textContent="$"+base.toLocaleString();
+  document.getElementById("totalPrice").textContent="$"+total.toLocaleString();
+}
+
+// Update prices when sqft or year changes
+document.getElementById("sqft").addEventListener("input",updateTotal);
+document.getElementById("yearBuilt").addEventListener("input",updateTotal);
+
 // Peer distribution data from database (3,377 inspections)
 var PEERS = {
   "0-2":   {p10:29,p25:38,p50:49,p75:70,p90:86,n:2399},
@@ -219,6 +320,11 @@ function generateReport() {
   setTimeout(function() {
     showStatus("Report ready. Opening...", false);
 
+    // Collect add-ons
+    var addons=[];
+    ADDONS.forEach(function(a){if(selectedAddons[a.id])addons.push({id:a.id,name:a.name,price:a.price});});
+    var prices=calcPrices();
+
     // Store report data in sessionStorage for the sales page to read
     sessionStorage.setItem("atlas_report", JSON.stringify({
       name: name,
@@ -233,13 +339,17 @@ function generateReport() {
       peer: peer,
       defects: defects,
       sellerPaid: sellerPaid.length,
-      maintenance: maintenance.length
+      maintenance: maintenance.length,
+      pkg: selectedPkg,
+      addons: addons,
+      prices: prices
     }));
 
     // Build URL with compact data params
     var data = encodeURIComponent(JSON.stringify({
       name:name,addr:addr,sqft:sqft,zip:zip,age:age,brk:defectBrk,
-      grade:grade,predicted:predictedDefects,gapCost:gapCost
+      grade:grade,predicted:predictedDefects,gapCost:gapCost,
+      pkg:selectedPkg,addons:addons,prices:prices
     }));
 
     // Detect if we're on GitHub Pages or local
@@ -248,6 +358,10 @@ function generateReport() {
     window.open(target, "_blank");
   }, 600);
 }
+
+// Init add-ons and pricing
+renderAddons();
+updateTotal();
 
 // Auto-detect new construction based on year built
 document.getElementById("yearBuilt").addEventListener("input", function() {

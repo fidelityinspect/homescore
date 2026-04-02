@@ -83,6 +83,13 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .insp-bar{display:flex;align-items:center;gap:14px;padding:0 24px 14px}
 .insp-bar .av{width:60px;height:60px;border-radius:50%;flex-shrink:0;border:2px solid #C9A96E}
 .insp-bar .insp-info{flex:1}
+.cao{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#fff;border:1px solid #E0DDD6;border-radius:8px;margin-bottom:6px;cursor:pointer;transition:all 0.2s}
+.cao.on{border-color:#C9A96E;background:#FDFCF7}
+.cao .cchk{width:20px;height:20px;border:2px solid #ccc;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;transition:all 0.2s;margin-right:10px;flex-shrink:0}
+.cao.on .cchk{background:#C9A96E;border-color:#C9A96E;color:#fff}
+.cao .cleft{display:flex;align-items:center;flex:1}
+.cao .cn{font-size:14px;color:#333}
+.cao .cp{font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;flex-shrink:0}
 .faq{padding:20px 24px}
 .faq h3{font-size:14px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:14px}
 .faq .q{font-size:14px;font-weight:600;margin-bottom:4px}
@@ -144,6 +151,16 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
   <div id="pkgCards"></div>
 </div>
 
+<!-- Client Add-On Selector -->
+<div id="addonSection" style="padding:0 24px 16px">
+  <div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:8px">ADD OPTIONAL SERVICES</div>
+  <div id="clientAddons"></div>
+  <div id="addonTotal" style="display:flex;justify-content:space-between;align-items:baseline;padding:14px;background:#161618;border:2px solid #C9A96E;border-radius:8px;margin-top:10px">
+    <span style="font-size:13px;font-weight:700;color:#888;font-family:ui-monospace,monospace">YOUR TOTAL</span>
+    <span id="clientTotal" style="font-size:28px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace"></span>
+  </div>
+</div>
+
 <a href="#" class="sched-btn" id="schedBtn">SCHEDULE NOW</a>
 <div class="slots">2 priority slots available — lock in your spot</div>
 
@@ -178,6 +195,7 @@ var NB=[{a:32,sq:3423,d:91,g:"D",gc:"#C17A3A",cost:14200,img:"https://cdn.specto
 
 var age=23,sfv=2400,brk="21-30",zp="78209",clientName="",addr="1847 Oak Hollow Dr";
 var gradeObj=null,predictedDefects=0,entryGapCost=0;
+var selectedPkg="comp",entryAddons=[],entryPrices=null;
 
 // Read from Atlas entry form (sessionStorage or URL params)
 var atlas=null;
@@ -198,6 +216,9 @@ if(atlas){
   if(atlas.grade)gradeObj=atlas.grade;
   if(atlas.predicted)predictedDefects=atlas.predicted;
   if(atlas.gapCost)entryGapCost=atlas.gapCost;
+  if(atlas.pkg)selectedPkg=atlas.pkg;
+  if(atlas.addons)entryAddons=atlas.addons;
+  if(atlas.prices)entryPrices=atlas.prices;
 }
 
 // Personalize hero with client name
@@ -210,9 +231,24 @@ document.getElementById("addrLine").textContent=addr;
 document.getElementById("metaLine").textContent=age+"yr old · "+sfv.toLocaleString()+" sqft · "+zp;
 
 var ig=IG[brk]||IG["21-30"];
-var bp=Math.round((499+sfv*0.07)*(1+age*0.002));
-var op=Math.round(bp*1.67);
-var cp=Math.round(bp*2.67);
+var bp=Math.max(499,Math.round((499+sfv*0.07)*(1+age*0.002)));
+var op=Math.max(899,Math.round(bp*1.67));
+var cp=Math.max(1299,Math.round(bp*2.67));
+// Use entry form prices if passed (keeps numbers congruent)
+if(entryPrices){bp=entryPrices.std;op=entryPrices.opt;cp=entryPrices.comp;}
+
+// Add-on services available for client toggle
+var ADDONS=[
+  {id:"pool",name:"Pool / Spa Inspection",price:199},
+  {id:"septic",name:"Septic System",price:350},
+  {id:"radon",name:"Radon Testing",price:149},
+  {id:"well",name:"Well Water Testing",price:199},
+  {id:"sprinkler",name:"Sprinkler System",price:99},
+  {id:"detached",name:"Detached Structure",price:99}
+];
+// Track which add-ons are selected (pre-populate from entry form)
+var clientAddons={};
+entryAddons.forEach(function(a){clientAddons[a.id]=true;});
 
 function makeRow(item){
   var t=item.o?"o":"b";
@@ -284,7 +320,8 @@ pkgs.forEach(function(pk,pi){
   var fg=pk.dk?"#fff":"#1A1A1A";
   var bdr=pk.dk?"2px solid #C9A96E":"1px solid #E0DDD6";
   var bodyBg=pk.dk?"#1E1E20":"#FAFAF8";
-  var openClass=pi===0?"open":"";
+  var pkgKeys=["comp","opt","std"];
+  var openClass=pkgKeys[pi]===selectedPkg?"open":(pi===0&&selectedPkg==="comp"?"open":"");
   pHTML+='<div class="pkc">';
   pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="togglePkg('+pi+')">';
   if(pk.tag)pHTML+='<div class="tag">'+pk.tag+'</div>';
@@ -341,6 +378,49 @@ pkgs.forEach(function(pk,pi){
 });
 document.getElementById("pkgCards").innerHTML=pHTML;
 
+// Client-facing add-on selector
+function renderClientAddons(){
+  var html="";
+  ADDONS.forEach(function(a){
+    var on=clientAddons[a.id]?"on":"";
+    html+='<div class="cao '+on+'" id="cao-'+a.id+'" onclick="toggleClientAddon(\''+a.id+'\')">';
+    html+='<div class="cleft"><div class="cchk">&#10003;</div><span class="cn">'+a.name+'</span></div>';
+    html+='<span class="cp">+$'+a.price+'</span></div>';
+  });
+  document.getElementById("clientAddons").innerHTML=html;
+  updateClientTotal();
+}
+
+function toggleClientAddon(id){
+  clientAddons[id]=!clientAddons[id];
+  var el=document.getElementById("cao-"+id);
+  if(clientAddons[id])el.classList.add("on");else el.classList.remove("on");
+  updateClientTotal();
+}
+
+function getSelectedPkgPrice(){
+  // Find which package card is open
+  for(var i=0;i<3;i++){
+    var el=document.getElementById("pkg-body-"+i);
+    if(el&&el.classList.contains("open")){
+      return [cp,op,bp][i];
+    }
+  }
+  // Default to selected package from entry
+  if(selectedPkg==="comp")return cp;
+  if(selectedPkg==="opt")return op;
+  return bp;
+}
+
+function updateClientTotal(){
+  var base=getSelectedPkgPrice();
+  var addTotal=0;
+  ADDONS.forEach(function(a){if(clientAddons[a.id])addTotal+=a.price;});
+  document.getElementById("clientTotal").textContent="$"+(base+addTotal).toLocaleString();
+}
+
+renderClientAddons();
+
 function togglePkg(i){
   var el=document.getElementById("pkg-body-"+i);
   if(el.classList.contains("open")){el.classList.remove("open");}
@@ -349,6 +429,7 @@ function togglePkg(i){
     el.classList.add("open");
     setTimeout(function(){el.parentElement.scrollIntoView({behavior:"smooth",block:"start"});},100);
   }
+  updateClientTotal();
 }
 </script>
 
