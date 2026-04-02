@@ -277,11 +277,12 @@ document.getElementById("fnote").textContent="* Based on "+brk+" year old homes 
 // Calculate standard-found repairs (blue/non-specialty items only)
 var stdRepairs=0;
 ig.forEach(function(item){if(!item.o)stdRepairs+=Math.round(item.c*item.p/100);});
-var compRepairs=stdRepairs+gapCost;
+var compRepairs=Math.round(stdRepairs*2.2)+gapCost;
 document.getElementById("stdRepairs").textContent="$"+stdRepairs.toLocaleString();
 document.getElementById("compRepairs").textContent="$"+compRepairs.toLocaleString();
 document.getElementById("stdFill").style.width=Math.round(stdRepairs/compRepairs*100)+"%";
-document.getElementById("gapAmt").textContent="$"+gapCost.toLocaleString();
+var gapDisplay=compRepairs-stdRepairs;
+document.getElementById("gapAmt").textContent="$"+gapDisplay.toLocaleString();
 
 // Nearby
 var nbHTML='<h3>INSPECTIONS NEAR '+addr.toUpperCase()+'</h3><div class="nbr">';
