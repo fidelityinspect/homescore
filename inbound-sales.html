@@ -126,20 +126,20 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 
   <div class="nb" id="nearbySection"></div>
 
-  <div class="rf">
-    <div class="lbl">RISK FACTORS</div>
-    <div class="bar-row">
-      <div class="top"><span style="font-size:13px;font-weight:600;color:#777">Standard Inspection</span><span style="font-size:16px;font-weight:700;color:#777;font-family:ui-monospace,monospace" id="stdCount"></span></div>
-      <div class="track"><div class="fill" id="stdBar" style="background:#666"></div></div>
+  <div class="rf" id="contrastBox">
+    <div class="lbl">WHAT YOUR INSPECTION FINDS</div>
+    <div style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:13px;font-weight:600;color:#777">Standard Inspection</span><span style="font-size:20px;font-weight:700;color:#777;font-family:ui-monospace,monospace" id="stdRepairs"></span></div>
+      <div style="height:10px;background:#333;border-radius:5px;overflow:hidden"><div id="stdFill" style="height:100%;background:#666;border-radius:5px"></div></div>
     </div>
-    <div class="bar-row">
-      <div class="top"><span style="font-size:13px;font-weight:700;color:#C9A96E">Fidelity Comprehensive</span><span style="font-size:16px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace" id="ourCount"></span></div>
-      <div class="track"><div class="fill" id="ourBar" style="background:#C9A96E;width:100%"></div></div>
+    <div style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:13px;font-weight:700;color:#C9A96E">Fidelity Comprehensive</span><span style="font-size:20px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace" id="compRepairs"></span></div>
+      <div style="height:10px;background:#333;border-radius:5px;overflow:hidden"><div style="height:100%;background:#C9A96E;border-radius:5px;width:100%"></div></div>
     </div>
-    <div class="gap-box">
-      <div style="font-size:11px;color:#ccc;font-family:ui-monospace,monospace;font-weight:600;letter-spacing:0.05em;margin-bottom:6px">WHAT A STANDARD INSPECTION MISSES</div>
-      <div class="amt" id="gapAmt"></div>
-      <div style="font-size:13px;color:#ccc;font-family:Georgia;margin-top:6px">in hidden repairs across 7 high-risk categories</div>
+    <div style="text-align:center;padding:14px;background:rgba(193,122,58,0.12);border-radius:6px">
+      <div style="font-size:13px;color:#ccc;font-family:Georgia;margin-bottom:4px">A standard inspection misses</div>
+      <div style="font-size:32px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace" id="gapAmt"></div>
+      <div style="font-size:13px;color:#ccc;font-family:Georgia;margin-top:4px">in hidden repairs only specialty tools find</div>
     </div>
   </div>
 </div>
@@ -273,11 +273,13 @@ document.getElementById("orangeRows").innerHTML=oHTML;
 document.getElementById("blueRows").innerHTML=bHTML;
 document.getElementById("fnote").textContent="* Based on "+brk+" year old homes across 3,377 South Texas inspections";
 
-var stdTotal=predictedDefects>0?Math.round(predictedDefects*0.4):21;
-var ourTotal=predictedDefects>0?predictedDefects:74;
-document.getElementById("stdCount").textContent=stdTotal+" items";
-document.getElementById("ourCount").textContent=ourTotal+" items";
-document.getElementById("stdBar").style.width=Math.round(stdTotal/ourTotal*100)+"%";
+// Calculate standard-found repairs (blue/non-specialty items only)
+var stdRepairs=0;
+ig.forEach(function(item){if(!item.o)stdRepairs+=Math.round(item.c*item.p/100);});
+var compRepairs=stdRepairs+gapCost;
+document.getElementById("stdRepairs").textContent="$"+stdRepairs.toLocaleString();
+document.getElementById("compRepairs").textContent="$"+compRepairs.toLocaleString();
+document.getElementById("stdFill").style.width=Math.round(stdRepairs/compRepairs*100)+"%";
 document.getElementById("gapAmt").textContent="$"+gapCost.toLocaleString();
 
 // Nearby
@@ -313,13 +315,11 @@ var riskMap=[
 ];
 var compRisk=riskMap;
 var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
-var optGap=0;
-optRisk.forEach(function(r){if(r.d)optGap+=Math.round(r.d.c*r.d.p/100);});
 var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos","Negotiation addendum"];
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"All 7 major risk factors covered",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,avgFound:gapCost,bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos","Property grade report with inspector consultation"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
-  {n:"Optimized Value Pack",sub:"Top 3/7 major risk factors covered",p:op,dk:false,tag:null,rush:false,risk:optRisk,avgFound:optGap,bonuses:["Inspector consultation"],guarantee:null,std:null},
-  {n:"Standard Inspection",sub:"Professional visual inspection",p:bp,dk:false,tag:null,rush:false,risk:[],avgFound:0,bonuses:[],guarantee:null,std:stdItems}
+  {n:"Comprehensive Risk Elimination",sub:"All 7 specialty services included",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos","Property grade report with inspector consultation"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
+  {n:"Optimized Value Pack",sub:"3 of 7 specialty services",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:["Inspector consultation"],guarantee:null,std:null},
+  {n:"Standard Inspection",sub:"Professional visual inspection",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
 ];
 var pHTML="";
 pkgs.forEach(function(pk,pi){
@@ -337,45 +337,26 @@ pkgs.forEach(function(pk,pi){
   pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
   if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-bottom:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
   if(pk.risk.length>0){
-    pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
-    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">INCLUDED</span>';
-    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">RISK</span>';
-    pHTML+='</div>';
+    pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">SPECIALTY SERVICES INCLUDED</div>';
     pk.risk.forEach(function(r){
-      var pct=r.d?r.d.p:"0";
-      pHTML+='<div style="padding:9px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
-      pHTML+='<div style="display:flex;justify-content:space-between;align-items:center">';
-      pHTML+='<div style="flex:1"><span class="ck" style="margin-right:8px">&#10003;</span><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">'+r.svc+'</span></div>';
-      pHTML+='<span style="font-size:14px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;min-width:40px;text-align:right">'+pct+'%</span>';
-      pHTML+='</div>';
-      pHTML+='<div style="margin-left:22px;font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:2px">'+r.ben+'</div>';
+      pHTML+='<div style="display:flex;align-items:center;padding:8px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
+      pHTML+='<span class="ck" style="margin-right:8px">&#10003;</span>';
+      pHTML+='<div style="flex:1"><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">'+r.svc+'</span>';
+      pHTML+='<div style="font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:1px">'+r.ben+'</div></div>';
       pHTML+='</div>';
     });
-    pHTML+='<div style="margin-top:14px;padding:14px;background:'+(pk.dk?"rgba(201,169,110,0.1)":"rgba(193,122,58,0.06)")+';border-radius:6px;text-align:center">';
-    pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#888":"#999")+';font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:6px">AVG. REPAIRS DOCUMENTED</div>';
-    pHTML+='<div style="font-size:28px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+pk.avgFound.toLocaleString()+'</div>';
-    if(pi===0){
-      pHTML+='<div style="font-size:12px;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-weight:600;margin-top:6px">across all 7 high-risk categories</div>';
-    }else if(pi===1){
-      pHTML+='<div style="font-size:12px;color:#C17A3A;font-weight:600;margin-top:6px">across 3 of 7 categories</div>';
-      pHTML+='<div style="display:flex;justify-content:center;gap:4px;margin-top:8px">';
-      for(var s=0;s<7;s++){
-        var filled=s<3;
-        pHTML+='<div style="width:28px;height:6px;border-radius:3px;background:'+(filled?"#C9A96E":"#333")+'"></div>';
-      }
+    if(pi===1){
+      pHTML+='<div style="display:flex;justify-content:center;gap:4px;margin-top:12px">';
+      for(var s=0;s<7;s++){pHTML+='<div style="width:28px;height:6px;border-radius:3px;background:'+(s<3?"#C9A96E":"#444")+'"></div>';}
       pHTML+='</div>';
-      var uncoveredGap=gapCost-optGap;
-      if(uncoveredGap>0)pHTML+='<div style="font-size:11px;color:#999;font-family:Georgia;font-style:italic;margin-top:6px">$'+uncoveredGap.toLocaleString()+' in remaining risk categories not covered</div>';
+      pHTML+='<div style="font-size:11px;color:#999;font-family:ui-monospace,monospace;text-align:center;margin-top:6px">3 of 7 risk categories covered</div>';
     }
-    pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;margin-top:4px">Based on 3,377 inspections</div>';
-    pHTML+='</div>';
   }
   if(pk.std){
     pk.std.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:#555">'+it+'</span></div>';});
     pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(166,61,47,0.08);border:1px solid rgba(166,61,47,0.2);border-radius:6px;text-align:center">';
-    pHTML+='<div style="font-size:13px;color:#A63D2F;font-weight:700;margin-bottom:4px">What standard inspections miss</div>';
-    pHTML+='<div style="font-size:24px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace">$'+gapCost.toLocaleString()+'</div>';
-    pHTML+='<div style="font-size:11px;color:#A63D2F;opacity:0.7;font-family:Georgia;font-style:italic;margin-top:4px">in hidden repairs across 7 risk categories</div>';
+    pHTML+='<div style="font-size:13px;color:#A63D2F;font-weight:700;margin-bottom:4px">Does not include specialty tools</div>';
+    pHTML+='<div style="font-size:12px;color:#A63D2F;font-family:Georgia;font-style:italic">No foundation plotting, infrared, sewer camera, ductwork camera, safety audit, termite, or air quality testing</div>';
     pHTML+='</div>';
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
