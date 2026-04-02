@@ -250,7 +250,7 @@ var reviews=[{i:"JM",a:22050,t:"Seller covered $22,050 in repairs we would have 
 var rHTML="";
 reviews.forEach(function(r){
   var pos=r.i==="RG"?"center 40%":"center 15%";
-  rHTML+='<div class="revc"><div class="img" style="background:'+r.c+'30"><img src="'+r.img+'" alt="'+r.i+'" style="width:100%;height:100%;object-fit:cover;object-position:'+pos+';position:absolute;top:0;left:0"><div class="price">$'+r.a.toLocaleString()+'</div></div><div class="txt"><p>\u201C'+r.t+'\u201D</p><a>See more</a></div></div>';
+  rHTML+='<div class="revc"><div class="img" style="background:'+r.c+'30"><img src="'+r.img+'" alt="'+r.i+'" style="width:100%;height:100%;object-fit:cover;object-position:'+pos+';position:absolute;top:0;left:0"><div class="price">$'+r.a.toLocaleString()+'</div></div><div class="txt"><p>\u201C'+r.t+'\u201D</p></div></div>';
 });
 document.getElementById("reviewCards").innerHTML=rHTML;
 
