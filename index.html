@@ -80,8 +80,8 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .pkc .bonus p{font-size:13px;color:#3D8B5B;padding:3px 0}
 .pkc .guar{margin-top:12px;padding:12px;background:rgba(61,139,91,0.08);border-radius:4px;font-size:13px;color:#3D8B5B;text-align:center;font-weight:600}
 .pkc .warn{margin-top:10px;padding:10px;background:rgba(166,61,47,0.04);border-radius:4px;font-size:12px;color:#A63D2F;text-align:center}
-.insp-bar{display:flex;align-items:center;gap:14px;padding:16px;margin:0 24px;background:#161618;border-radius:8px}
-.insp-bar .av{width:52px;height:52px;border-radius:50%;flex-shrink:0;border:2px solid #C9A96E}
+.insp-bar{display:flex;align-items:center;gap:14px;padding:0 24px 14px}
+.insp-bar .av{width:48px;height:48px;border-radius:50%;flex-shrink:0;border:2px solid #C9A96E}
 .insp-bar .insp-info{flex:1}
 .faq{padding:20px 24px}
 .faq h3{font-size:14px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:14px}
@@ -133,16 +133,15 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
   </div>
 </div>
 
-<div class="insp-bar">
-  <div class="av" style="overflow:hidden;padding:0;background:url(https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0) center 10% / 200% no-repeat"></div>
-  <div class="insp-info">
-    <div style="font-size:15px;font-weight:700">Inspector Michael Street</div>
-    <div style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace">License #22402 · 5,000+ inspections</div>
-    <div style="font-size:11px;color:#888;font-family:ui-monospace,monospace;margin-top:1px">San Antonio + Austin · 5-star Google & Yelp</div>
-  </div>
-</div>
-
 <div class="rev">
+  <div class="insp-bar">
+    <div class="av" style="overflow:hidden;padding:0;background:url(https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0) center 10% / 200% no-repeat"></div>
+    <div class="insp-info">
+      <div style="font-size:15px;font-weight:700;color:#1A1A1A">Inspector Michael Street</div>
+      <div style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace">License #22402 · 5,000+ inspections</div>
+      <div style="font-size:11px;color:#888;font-family:ui-monospace,monospace;margin-top:1px">San Antonio + Austin · 5-star Google & Yelp</div>
+    </div>
+  </div>
   <h3>WHAT OUR CLIENTS SAY</h3>
   <div class="revr" id="reviewCards"></div>
 </div>
