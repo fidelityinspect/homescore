@@ -127,7 +127,7 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
   <div class="nb" id="nearbySection"></div>
 
   <div class="rf" id="contrastBox">
-    <div class="lbl">WHAT YOUR INSPECTION FINDS</div>
+    <div class="lbl">AVG SELLER-PAID REPAIRS FOUND</div>
     <div style="margin-bottom:16px">
       <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:13px;font-weight:600;color:#777">Standard Inspection</span><span style="font-size:20px;font-weight:700;color:#777;font-family:ui-monospace,monospace" id="stdRepairs"></span></div>
       <div style="height:10px;background:#333;border-radius:5px;overflow:hidden"><div id="stdFill" style="height:100%;background:#666;border-radius:5px"></div></div>
@@ -139,7 +139,7 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
     <div style="text-align:center;padding:14px;background:rgba(193,122,58,0.12);border-radius:6px">
       <div style="font-size:13px;color:#ccc;font-family:Georgia;margin-bottom:4px">A standard inspection misses</div>
       <div style="font-size:32px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace" id="gapAmt"></div>
-      <div style="font-size:13px;color:#ccc;font-family:Georgia;margin-top:4px">in hidden repairs only specialty tools find</div>
+      <div style="font-size:13px;color:#ccc;font-family:Georgia;margin-top:4px">in seller-paid repairs only specialty tools find</div>
     </div>
   </div>
 </div>
@@ -309,7 +309,7 @@ var riskMap=[
   {svc:"Infrared Thermography",ben:"Moisture & thermal damage",d:findDef("Moisture Damages")},
   {svc:"Sewer Camera",ben:"Main drain failures",d:findDef("Main Drain Issues")},
   {svc:"Ductwork Camera",ben:"Hidden plumbing leaks",d:findDef("Plumbing Leak Detected")},
-  {svc:"Safety Audit",ben:"Electrical deficiencies",d:findDef("Electrical Wiring Deficiencies")},
+  {svc:"Advanced Circuit Diagnostic",ben:"Hidden wiring malfunctions",d:findDef("Electrical Wiring Deficiencies")},
   {svc:"Termite / WDI",ben:"Pest & rodent access",d:findDef("Rodent/Pest Access")},
   {svc:"Air Quality",ben:"Failed window seals",d:findDef("Failed Window Seals")}
 ];
@@ -339,8 +339,8 @@ pkgs.forEach(function(pk,pi){
   if(pk.risk.length>0){
     var protectedTotal=0;
     pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
-    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">PROTECTED AGAINST</span>';
-    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">AVG REPAIR</span>';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">SPECIALTY SERVICES</span>';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">SELLER REPAIRS</span>';
     pHTML+='</div>';
     pk.risk.forEach(function(r){
       var repairCost=r.d?Math.round(r.d.c*r.d.p/100):0;
@@ -353,7 +353,7 @@ pkgs.forEach(function(pk,pi){
       pHTML+='</div>';
     });
     pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;margin-top:2px">';
-    pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#333")+';font-family:ui-monospace,monospace">TOTAL PROTECTED</span>';
+    pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#333")+';font-family:ui-monospace,monospace">AVG SELLER-PAID REPAIRS</span>';
     pHTML+='<span style="font-size:18px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+protectedTotal.toLocaleString()+'</span>';
     pHTML+='</div>';
     if(pi===1){
@@ -368,7 +368,7 @@ pkgs.forEach(function(pk,pi){
     pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(166,61,47,0.08);border:1px solid rgba(166,61,47,0.2);border-radius:6px;text-align:center">';
     pHTML+='<div style="font-size:13px;color:#A63D2F;font-weight:700;margin-bottom:6px">Does not include specialty tools</div>';
     pHTML+='<div style="font-size:28px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace;margin-bottom:4px">$'+gapCost.toLocaleString()+'</div>';
-    pHTML+='<div style="font-size:12px;color:#A63D2F;font-family:Georgia;font-style:italic">in hidden repairs left undetected</div>';
+    pHTML+='<div style="font-size:12px;color:#A63D2F;font-family:Georgia;font-style:italic">in seller-paid repairs left on the table</div>';
     pHTML+='</div>';
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
@@ -380,7 +380,7 @@ pkgs.forEach(function(pk,pi){
     pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.25);border-radius:6px">';
     pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid rgba(201,169,110,0.2)">';
     pHTML+='<span style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em">UPGRADE FOR +$'+(cp-op).toLocaleString()+'</span>';
-    pHTML+='<span style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em">ADDED PROTECTION</span>';
+    pHTML+='<span style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em">SELLER REPAIRS</span>';
     pHTML+='</div>';
     extraRisks.forEach(function(r){
       var repairCost=r.d?Math.round(r.d.c*r.d.p/100):0;
@@ -391,7 +391,7 @@ pkgs.forEach(function(pk,pi){
       pHTML+='</div>';
     });
     pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:8px 0">';
-    pHTML+='<span style="font-size:12px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace">ADDITIONAL PROTECTION</span>';
+    pHTML+='<span style="font-size:12px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace">ADDITIONAL SELLER REPAIRS</span>';
     pHTML+='<span style="font-size:18px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace">$'+extraProtection.toLocaleString()+'</span>';
     pHTML+='</div>';
     pHTML+='<div style="text-align:center;margin-top:4px">';
