@@ -1,0 +1,21 @@
+id,category_id,title,description,base_price,discounted_price,is_deleted,sort_order,created_at,updated_at
+1,1,Foundation Settlement Plotting,Detailed elevation measurements to detect active settlement,199.0,,0,0,2026-03-20 05:30:29,2026-03-20 05:30:29
+2,1,Infrared Thermography (Leak/Insulation Audit),Reveals hidden moisture & insulation gaps,199.0,,0,0,2026-03-20 05:30:29,2026-03-20 05:30:29
+3,1,Termite Investigation Report (WDI),WDI inspection for wood-destroying insects,199.0,,0,0,2026-03-20 05:30:29,2026-03-20 05:30:29
+4,1,Ductwork Camera Inspection,Visual inspection of HVAC ductwork for leaks and debris,199.0,,0,0,2026-03-20 05:30:29,2026-03-20 05:30:29
+5,1,"Safety Audit (CO2/Gas, Fire, Fall, Break-in)","Complete safety evaluation for gas leaks, fire hazards, fall risks, and security",99.0,,0,0,2026-03-20 05:30:29,2026-03-20 05:30:29
+6,1,Sewer Line Scope,Visual inspection of main drain,199.0,,0,0,2026-03-20 05:30:29,2026-03-20 05:30:29
+7,1,Indoor Air Quality Test,Density count of allergens and air pollutants,99.0,,0,0,2026-03-20 05:30:29,2026-03-20 05:30:29
+8,1,Drinking Water Filtration Needs Assessment,Tests for contaminants and water quality,49.0,,0,0,2026-03-20 05:30:29,2026-03-20 05:30:29
+9,2,On-Site Report Delivery,Report delivered on-site immediately after inspection,99.0,,0,0,2026-03-20 05:32:59,2026-03-20 05:32:59
+10,2,Inspector Consultation On-Site/Phone,Direct consultation with inspector to review findings,99.0,,0,0,2026-03-20 05:32:59,2026-03-20 05:32:59
+11,3,Home Score Letter Grade (Buy/Deal/Walk),Clear letter grade with actionable recommendation,199.0,,0,0,2026-03-20 05:34:52,2026-03-20 05:34:52
+12,3,Immediate Repair Cost Averages,Average repair cost estimates for identified issues,99.0,,0,0,2026-03-20 05:34:52,2026-03-20 05:34:52
+13,4,Itemized Repair Quotes,3rd-party confirmation of repair costs in 48hrs or less,199.0,,0,0,2026-03-20 05:37:45,2026-03-20 05:37:45
+14,4,Repair Request Builder,Agent Proof your negotiations with ultimate transparency and accuracy to your final offer,149.0,,0,0,2026-03-20 05:37:45,2026-03-20 05:37:45
+15,5,Pool & Spa Inspection,Complete pool equipment evaluation,199.0,,0,0,2026-03-20 05:45:25,2026-03-20 05:45:25
+16,5,Septic System Evaluation,Tank and drain field analysis,350.0,,0,0,2026-03-20 05:45:25,2026-03-20 05:45:25
+17,5,Well Water Lab Testing,Water quality and flow testing,399.0,,0,0,2026-03-20 05:45:25,2026-03-20 05:45:25
+18,5,Radon Testing,48-hour continuous monitoring,399.0,,0,0,2026-03-20 05:45:25,2026-03-20 05:45:25
+19,5,Crawlspace Inspection,"Detailed inspection of crawlspace for moisture, pests, and structural issues",199.0,,0,0,2026-03-20 05:45:25,2026-03-20 05:45:25
+20,5,Sprinkler Inspection (8 zones),Comprehensive testing of sprinkler system zones and components,99.0,,0,0,2026-03-20 05:45:25,2026-03-20 05:45:25
