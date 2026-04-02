@@ -373,29 +373,29 @@ pkgs.forEach(function(pk,pi){
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
-  // Upsell warnings for Optimized — show missing risk categories with repair costs
+  // Upgrade pitch for Optimized — positive framing
   if(pi===1){
-    var missingRisks=[riskMap[2],riskMap[3],riskMap[4],riskMap[6]]; // Sewer, Ductwork, Safety, Air Quality
-    var unprotectedTotal=0;
-    pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(166,61,47,0.06);border:1px solid rgba(166,61,47,0.15);border-radius:6px">';
-    pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid rgba(166,61,47,0.15)">';
-    pHTML+='<span style="font-size:11px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace;letter-spacing:0.08em">NOT PROTECTED</span>';
-    pHTML+='<span style="font-size:11px;color:#A63D2F;font-family:ui-monospace,monospace;letter-spacing:0.08em">AT RISK</span>';
+    var extraRisks=[riskMap[2],riskMap[3],riskMap[4],riskMap[6]]; // Sewer, Ductwork, Safety, Air Quality
+    var extraProtection=0;
+    pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.25);border-radius:6px">';
+    pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid rgba(201,169,110,0.2)">';
+    pHTML+='<span style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em">UPGRADE FOR +$'+(cp-op).toLocaleString()+'</span>';
+    pHTML+='<span style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em">ADDED PROTECTION</span>';
     pHTML+='</div>';
-    missingRisks.forEach(function(r){
+    extraRisks.forEach(function(r){
       var repairCost=r.d?Math.round(r.d.c*r.d.p/100):0;
-      unprotectedTotal+=repairCost;
-      pHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(166,61,47,0.08)">';
-      pHTML+='<div style="font-size:13px;color:#A63D2F">'+r.ben+'</div>';
-      pHTML+='<div style="font-size:13px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace;white-space:nowrap">$'+repairCost.toLocaleString()+'</div>';
+      extraProtection+=repairCost;
+      pHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(201,169,110,0.1)">';
+      pHTML+='<div style="font-size:13px;color:#333">+ '+r.svc+'</div>';
+      pHTML+='<div style="font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;white-space:nowrap">$'+repairCost.toLocaleString()+'</div>';
       pHTML+='</div>';
     });
     pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:8px 0">';
-    pHTML+='<span style="font-size:12px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace">TOTAL AT RISK</span>';
-    pHTML+='<span style="font-size:18px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace">$'+unprotectedTotal.toLocaleString()+'</span>';
+    pHTML+='<span style="font-size:12px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace">ADDITIONAL PROTECTION</span>';
+    pHTML+='<span style="font-size:18px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace">$'+extraProtection.toLocaleString()+'</span>';
     pHTML+='</div>';
-    pHTML+='<div style="text-align:center;margin-top:6px"><div style="font-size:12px;color:#888;margin-bottom:6px">Cover everything for just +$'+(cp-op).toLocaleString()+' more</div>';
-    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(0)">Upgrade to Comprehensive</button></div>';
+    pHTML+='<div style="text-align:center;margin-top:4px">';
+    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(0)">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button></div>';
     pHTML+='</div>';
   }
   // Select button
