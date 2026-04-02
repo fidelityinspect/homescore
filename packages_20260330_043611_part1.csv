@@ -1,0 +1,4 @@
+id,inspection_type_id,package_code,title,subtitle,price_usd,sort_order,is_active,created_at,updated_at
+1,1,comprehensive,Comprehensive,Risk Elimination Powered by Atlas™,1299.0,1,1,2026-03-20 04:48:54,2026-03-20 06:51:57
+2,1,optimized,Optimized,Upgraded Assessment,899.0,2,1,2026-03-20 04:48:54,2026-03-20 06:51:57
+3,1,budget,Budget,Standard Inspection,499.0,3,1,2026-03-20 04:48:54,2026-03-20 06:51:57
