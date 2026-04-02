@@ -171,7 +171,7 @@ function renderAddons(){
   structures.forEach(function(s,i){
     var sp=calcStructurePrice(s);
     html+='<div class="addon-item checked" style="flex-wrap:wrap;gap:8px" id="struct-'+i+'">';
-    html+='<div style="width:100%;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;color:#ccc">Structure '+(i+1)+'</span><div style="display:flex;align-items:center;gap:8px"><span class="aprice">+$'+sp+'</span><span style="cursor:pointer;color:#666;font-size:16px" onclick="event.stopPropagation();removeStructure('+i+')">&times;</span></div></div>';
+    html+='<div style="width:100%;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;color:#ccc">Structure '+(i+1)+'</span><div style="display:flex;align-items:center;gap:8px"><span class="aprice" id="struct-price-'+i+'">+$'+sp+'</span><span style="cursor:pointer;color:#666;font-size:16px" onclick="event.stopPropagation();removeStructure('+i+')">&times;</span></div></div>';
     html+='<div style="width:100%;display:flex;gap:8px;align-items:center"><input type="number" placeholder="Sq ft" value="'+(s.sqft||"")+'" style="flex:1;padding:8px;background:#2a2a2e;border:1px solid #444;border-radius:6px;color:#fff;font-size:13px" oninput="event.stopPropagation();updateStructSqft('+i+',this.value)">';
     html+='<label style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" '+(s.casita?"checked":"")+' onchange="event.stopPropagation();toggleStructOpt('+i+',\'casita\',this.checked)"> Casita</label>';
     html+='<label style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" '+(s.kitchen?"checked":"")+' onchange="event.stopPropagation();toggleStructOpt('+i+',\'kitchen\',this.checked)"> Kitchen</label>';
@@ -192,8 +192,22 @@ function calcStructurePrice(s){
 }
 function addStructure(){structures.push({sqft:0,casita:false,kitchen:false,bath:false});renderAddons();updateTotal();}
 function removeStructure(i){structures.splice(i,1);renderAddons();updateTotal();}
-function updateStructSqft(i,v){structures[i].sqft=parseInt(v)||0;renderAddons();updateTotal();}
-function toggleStructOpt(i,opt,val){structures[i][opt]=val;renderAddons();updateTotal();}
+function updateStructSqft(i,v){
+  structures[i].sqft=parseInt(v)||0;
+  // Update price display without re-rendering (keeps input focus)
+  var sp=calcStructurePrice(structures[i]);
+  var priceEl=document.getElementById("struct-price-"+i);
+  if(priceEl)priceEl.textContent="+$"+sp;
+  updateTotal();
+}
+function toggleStructOpt(i,opt,val){
+  structures[i][opt]=val;
+  // Update price display without re-rendering
+  var sp=calcStructurePrice(structures[i]);
+  var priceEl=document.getElementById("struct-price-"+i);
+  if(priceEl)priceEl.textContent="+$"+sp;
+  updateTotal();
+}
 
 function toggleAddon(id){
   selectedAddons[id]=!selectedAddons[id];
