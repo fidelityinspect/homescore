@@ -140,6 +140,7 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
       <div style="font-size:13px;color:#ccc;font-family:Georgia;margin-bottom:4px">A standard inspection misses</div>
       <div style="font-size:32px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace" id="gapAmt"></div>
       <div style="font-size:13px;color:#ccc;font-family:Georgia;margin-top:4px">in seller-paid repairs only specialty tools find</div>
+      <div style="font-size:13px;color:#C9A96E;font-family:Georgia;font-weight:600;margin-top:10px;line-height:1.5">Before you close, the seller is responsible for these repairs. After you close, they're yours.</div>
     </div>
   </div>
 </div>
@@ -365,10 +366,13 @@ pkgs.forEach(function(pk,pi){
   }
   if(pk.std){
     pk.std.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:#555">'+it+'</span></div>';});
-    pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(166,61,47,0.08);border:1px solid rgba(166,61,47,0.2);border-radius:6px;text-align:center">';
-    pHTML+='<div style="font-size:13px;color:#A63D2F;font-weight:700;margin-bottom:6px">Does not include specialty tools</div>';
-    pHTML+='<div style="font-size:28px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace;margin-bottom:4px">$'+gapCost.toLocaleString()+'</div>';
-    pHTML+='<div style="font-size:12px;color:#A63D2F;font-family:Georgia;font-style:italic">in seller-paid repairs left on the table</div>';
+    pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:6px;text-align:center">';
+    pHTML+='<div style="font-size:11px;color:#999;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:6px">AVG SELLER-PAID REPAIRS FOUND</div>';
+    pHTML+='<div style="font-size:28px;font-weight:700;color:#333;font-family:ui-monospace,monospace">$'+stdRepairs.toLocaleString()+'</div>';
+    pHTML+='</div>';
+    pHTML+='<div style="margin-top:10px;padding:14px;background:rgba(166,61,47,0.08);border:1px solid rgba(166,61,47,0.2);border-radius:6px;text-align:center">';
+    pHTML+='<div style="font-size:13px;color:#A63D2F;font-weight:700;margin-bottom:4px">Does not include specialty tools</div>';
+    pHTML+='<div style="font-size:12px;color:#A63D2F;font-family:Georgia;font-style:italic">$'+gapCost.toLocaleString()+' in seller-paid repairs left on the table</div>';
     pHTML+='</div>';
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
