@@ -342,7 +342,7 @@ pkgs.forEach(function(pk,pi){
     // Comprehensive inspection base includes thorough inspection bonus
     var inspBase=stdRepairs;
     var inspLabel="Standard inspection";
-    if(pi===0){inspBase=stdRepairs+Math.round(17*682);inspLabel="Comprehensive inspection";}
+    if(pi===0){inspBase=Math.round(stdRepairs*2.2);inspLabel="Comprehensive inspection";}
     pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
     pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">INCLUDED</span>';
     pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">SELLER REPAIRS</span>';
