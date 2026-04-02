@@ -83,6 +83,10 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .insp-bar{display:flex;align-items:center;gap:14px;padding:0 24px 14px}
 .insp-bar .av{width:60px;height:60px;border-radius:50%;flex-shrink:0;border:2px solid #C9A96E}
 .insp-bar .insp-info{flex:1}
+.pkc .sel-btn{display:block;width:100%;padding:12px;margin-top:12px;border:none;border-radius:6px;font-size:14px;font-weight:700;font-family:ui-monospace,monospace;cursor:pointer;text-align:center;transition:all 0.2s}
+.pkc .sel-btn.gold{background:#C9A96E;color:#fff}
+.pkc .sel-btn.outline{background:transparent;border:2px solid #C9A96E;color:#C9A96E}
+.pkc .sel-btn.selected{background:#3D8B5B;color:#fff;border-color:#3D8B5B}
 .cao{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#fff;border:1px solid #E0DDD6;border-radius:8px;margin-bottom:6px;cursor:pointer;transition:all 0.2s}
 .cao.on{border-color:#C9A96E;background:#FDFCF7}
 .cao .cchk{width:20px;height:20px;border:2px solid #ccc;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;transition:all 0.2s;margin-right:10px;flex-shrink:0}
@@ -323,13 +327,12 @@ pkgs.forEach(function(pk,pi){
   var fg=pk.dk?"#fff":"#1A1A1A";
   var bdr=pk.dk?"2px solid #C9A96E":"1px solid #E0DDD6";
   var bodyBg=pk.dk?"#1E1E20":"#FAFAF8";
-  var pkgKeys=["comp","opt","std"];
-  var openClass=pkgKeys[pi]===selectedPkg?"open":(pi===0&&selectedPkg==="comp"?"open":"");
+  var openClass="";
   pHTML+='<div class="pkc">';
   pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="togglePkg('+pi+')">';
   if(pk.tag)pHTML+='<div class="tag">'+pk.tag+'</div>';
   pHTML+='<div class="row2"><div><div class="nm" style="color:'+fg+'">'+pk.n+'</div><div class="sub" style="color:'+(pk.dk?"#C9A96E":"#999")+'">'+pk.sub+'</div></div><div class="pr" style="color:'+(pk.dk?"#C9A96E":fg)+'">$'+pk.p.toLocaleString()+'</div></div>';
-  if(pi!==0)pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;margin-top:6px">Tap to see what\'s included \u25BE</div>';
+  pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;margin-top:6px">Tap to see what\'s included \u25BE</div>';
   pHTML+='</div>';
   pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
   if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-bottom:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
@@ -377,6 +380,32 @@ pkgs.forEach(function(pk,pi){
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
+  // Upsell warnings for Optimized
+  if(pi===1){
+    var upsells=[
+      {risk:"Damages in drain under house",fix:"Sewer Line Scope",price:199},
+      {risk:"Rodent intrusion in ductwork",fix:"Ductwork Camera Inspection",price:199},
+      {risk:"Weak negotiation position",fix:"Repair Request Builder",price:149},
+      {risk:"Unknown true repair costs",fix:"Itemized Repair Quotes",price:199}
+    ];
+    pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(166,61,47,0.06);border:1px solid rgba(166,61,47,0.15);border-radius:6px">';
+    pHTML+='<div style="font-size:12px;font-weight:700;color:#A63D2F;margin-bottom:8px">You are unprotected from:</div>';
+    upsells.forEach(function(u){
+      pHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(166,61,47,0.1)">';
+      pHTML+='<div style="font-size:12px;color:#A63D2F">'+u.risk+'</div>';
+      pHTML+='<div style="font-size:11px;color:#888;font-family:ui-monospace,monospace;white-space:nowrap">+$'+u.price+'</div>';
+      pHTML+='</div>';
+    });
+    pHTML+='<div style="margin-top:10px;text-align:center"><div style="font-size:12px;color:#888;margin-bottom:6px">Get all these and more with Comprehensive</div>';
+    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(0)">Upgrade to Comprehensive +$'+(cp-op)+'</button></div>';
+    pHTML+='</div>';
+  }
+  // Select button
+  var pkgKeys=["comp","opt","std"];
+  var isSelected=pkgKeys[pi]===selectedPkg;
+  var btnClass=isSelected?"sel-btn selected":(pi===0?"sel-btn gold":"sel-btn outline");
+  var btnText=isSelected?"SELECTED ✓":(pi===0?"SELECT COMPREHENSIVE":"SELECT THIS PACKAGE");
+  pHTML+='<button class="'+btnClass+'" id="sel-btn-'+pi+'" onclick="event.stopPropagation();selectPackage('+pi+')">'+btnText+'</button>';
   pHTML+='</div></div>';
 });
 document.getElementById("pkgCards").innerHTML=pHTML;
@@ -390,20 +419,21 @@ function renderClientAddons(){
     html+='<div class="cleft"><div class="cchk">&#10003;</div><div><span class="cn">'+a.name+'</span><div style="font-size:11px;color:#999;margin-top:1px">'+a.desc+'</div></div></div>';
     html+='<span class="cp">+$'+a.price+'</span></div>';
   });
-  // Show structures if passed from entry form
-  if(entryStructures.length>0){
-    html+='<div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin:10px 0 6px">STRUCTURES</div>';
-    entryStructures.forEach(function(s,i){
-      var opts=[];
-      if(s.casita)opts.push("Casita");
-      if(s.kitchen)opts.push("Kitchen");
-      if(s.bath)opts.push("Bath");
-      var label="Structure "+(i+1);
-      if(s.sqft)label+=" · "+s.sqft+" sqft";
-      if(opts.length)label+=" · "+opts.join(", ");
-      html+='<div class="cao on" style="cursor:default"><div class="cleft"><div class="cchk">&#10003;</div><span class="cn">'+label+'</span></div><span class="cp">+$'+s.price+'</span></div>';
-    });
-  }
+  // Structure builder
+  html+='<div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin:12px 0 4px">ADDITIONAL STRUCTURES</div>';
+  html+='<div style="font-size:11px;color:#999;margin-bottom:6px">Detached buildings, casitas, workshops</div>';
+  clientStructures.forEach(function(s,i){
+    var sp=calcStructurePrice(s);
+    html+='<div class="cao on" style="flex-wrap:wrap;gap:6px;cursor:default">';
+    html+='<div style="width:100%;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;color:#333">Structure '+(i+1)+'</span><div style="display:flex;align-items:center;gap:8px"><span class="cp" id="cs-price-'+i+'">+$'+sp+'</span><span style="cursor:pointer;color:#999;font-size:16px" onclick="removeClientStruct('+i+')">&times;</span></div></div>';
+    html+='<div style="width:100%;display:flex;gap:8px;align-items:center;flex-wrap:wrap">';
+    html+='<input type="number" placeholder="Sq ft" value="'+(s.sqft||"")+'" style="flex:1;min-width:80px;padding:8px;background:#F5F2EB;border:1px solid #E0DDD6;border-radius:6px;color:#333;font-size:13px" oninput="updateClientStructSqft('+i+',this.value)">';
+    html+='<label style="font-size:12px;color:#888;display:flex;align-items:center;gap:3px;cursor:pointer"><input type="checkbox" '+(s.casita?"checked":"")+' onchange="toggleClientStructOpt('+i+',\'casita\',this.checked)"> Casita</label>';
+    html+='<label style="font-size:12px;color:#888;display:flex;align-items:center;gap:3px;cursor:pointer"><input type="checkbox" '+(s.kitchen?"checked":"")+' onchange="toggleClientStructOpt('+i+',\'kitchen\',this.checked)"> Kitchen</label>';
+    html+='<label style="font-size:12px;color:#888;display:flex;align-items:center;gap:3px;cursor:pointer"><input type="checkbox" '+(s.bath?"checked":"")+' onchange="toggleClientStructOpt('+i+',\'bath\',this.checked)"> Bath</label>';
+    html+='</div></div>';
+  });
+  html+='<div class="cao" style="justify-content:center;color:#999;font-size:13px" onclick="addClientStruct()">+ Add Structure (from $79)</div>';
   document.getElementById("clientAddons").innerHTML=html;
   updateClientTotal();
 }
@@ -416,28 +446,75 @@ function toggleClientAddon(id){
 }
 
 function getSelectedPkgPrice(){
-  // Find which package card is open
-  for(var i=0;i<3;i++){
-    var el=document.getElementById("pkg-body-"+i);
-    if(el&&el.classList.contains("open")){
-      return [cp,op,bp][i];
-    }
-  }
-  // Default to selected package from entry
-  if(selectedPkg==="comp")return cp;
-  if(selectedPkg==="opt")return op;
-  return bp;
+  return [cp,op,bp][activePkg];
 }
 
 function updateClientTotal(){
   var base=getSelectedPkgPrice();
   var addTotal=0;
   ADDONS.forEach(function(a){if(clientAddons[a.id])addTotal+=a.price;});
-  entryStructures.forEach(function(s){addTotal+=s.price;});
+  clientStructures.forEach(function(s){addTotal+=calcStructurePrice(s);});
   document.getElementById("clientTotal").textContent="$"+(base+addTotal).toLocaleString();
 }
 
+function addClientStruct(){clientStructures.push({sqft:0,casita:false,kitchen:false,bath:false});renderClientAddons();}
+function removeClientStruct(i){clientStructures.splice(i,1);renderClientAddons();}
+function updateClientStructSqft(i,v){
+  clientStructures[i].sqft=parseInt(v)||0;
+  var sp=calcStructurePrice(clientStructures[i]);
+  var el=document.getElementById("cs-price-"+i);
+  if(el)el.textContent="+$"+sp;
+  updateClientTotal();
+}
+function toggleClientStructOpt(i,opt,val){
+  clientStructures[i][opt]=val;
+  var sp=calcStructurePrice(clientStructures[i]);
+  var el=document.getElementById("cs-price-"+i);
+  if(el)el.textContent="+$"+sp;
+  updateClientTotal();
+}
+
+// Client-side structures (can be added by client too)
+var clientStructures=entryStructures.slice();
+
+function calcStructurePrice(s){
+  var p=79;
+  if(s.sqft&&s.sqft>0)p=Math.max(79,Math.round(s.sqft*0.375-51));
+  if(s.casita)p+=350;
+  if(s.kitchen)p+=100;
+  if(s.bath)p+=75;
+  return p;
+}
+
 renderClientAddons();
+
+// Package selection
+var activePkg=selectedPkg==="comp"?0:(selectedPkg==="opt"?1:2);
+
+function selectPackage(i){
+  activePkg=i;
+  // Open the selected card
+  document.querySelectorAll(".pkc .body").forEach(function(b){b.classList.remove("open");});
+  document.getElementById("pkg-body-"+i).classList.add("open");
+  // Update all select buttons
+  for(var j=0;j<3;j++){
+    var btn=document.getElementById("sel-btn-"+j);
+    if(!btn)continue;
+    if(j===i){
+      btn.className="sel-btn selected";
+      btn.textContent="SELECTED \u2713";
+    }else if(j===0){
+      btn.className="sel-btn gold";
+      btn.textContent="SELECT COMPREHENSIVE";
+    }else{
+      btn.className="sel-btn outline";
+      btn.textContent="SELECT THIS PACKAGE";
+    }
+  }
+  updateClientTotal();
+  // Scroll add-on section into view
+  setTimeout(function(){document.getElementById("addonSection").scrollIntoView({behavior:"smooth",block:"start"});},200);
+}
 
 function togglePkg(i){
   var el=document.getElementById("pkg-body-"+i);
@@ -447,7 +524,6 @@ function togglePkg(i){
     el.classList.add("open");
     setTimeout(function(){el.parentElement.scrollIntoView({behavior:"smooth",block:"start"});},100);
   }
-  updateClientTotal();
 }
 </script>
 
