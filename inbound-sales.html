@@ -38,7 +38,8 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .nb{margin-top:20px}
 .nb h3{font-size:13px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:10px}
 .nbr{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
-.nbc{min-width:140px;background:#F5F2EB;border-radius:8px;padding:12px;flex-shrink:0}
+.nbc{min-width:140px;background:#F5F2EB;border-radius:8px;padding:0;flex-shrink:0;overflow:hidden}
+.nbc .nbc-body{padding:10px 12px 12px}
 .nbc .tp{display:flex;align-items:center;gap:6px;margin-bottom:8px}
 .nbc .gr{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;font-family:ui-monospace,monospace}
 .nbc .it{font-size:18px;font-weight:700;font-family:ui-monospace,monospace}
@@ -50,21 +51,11 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .bar-row .fill{height:100%;border-radius:4px}
 .gap-box{padding:16px;background:rgba(193,122,58,0.15);border-radius:6px;text-align:center;margin-top:8px}
 .gap-box .amt{font-size:32px;font-weight:700;color:#C17A3A;font-family:ui-monospace,monospace}
-.sys{padding:24px}
-.sys .lbl{font-size:11px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;letter-spacing:0.15em;margin-bottom:6px}
-.sys h2{font-size:22px;font-weight:300;font-family:Georgia;margin-bottom:20px}
-.step{padding:16px;border-radius:8px;margin-bottom:12px}
-.step.dk{background:#161618}
-.step.lt{background:#fff;border:1px solid #E0DDD6}
-.step .hd{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.step .num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;font-family:ui-monospace,monospace}
-.step .desc{font-size:13px;font-family:Georgia;line-height:1.6;margin-bottom:10px}
-.step .st{font-size:18px;font-weight:700;font-family:ui-monospace,monospace}
 .rev{padding:20px 24px;background:#F5F2EB}
 .rev h3{font-size:13px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:10px}
 .revr{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
 .revc{min-width:160px;width:160px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#161618}
-.revc .img{height:100px;display:flex;align-items:center;justify-content:center;position:relative}
+.revc .img{height:160px;display:flex;align-items:center;justify-content:center;position:relative}
 .revc .circ{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;font-family:ui-monospace,monospace}
 .revc .price{position:absolute;bottom:6px;left:8px;padding:2px 6px;background:rgba(0,0,0,0.6);border-radius:3px;font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
 .revc .txt{padding:10px 10px 12px}
@@ -94,11 +85,12 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .insp .av{width:80px;height:80px;border-radius:50%;background:#161618;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:3px solid #C9A96E;font-size:28px;font-weight:700;color:#C9A96E}
 .insp .badges{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
 .insp .badge{padding:6px 12px;background:#F5F2EB;border-radius:4px;font-size:12px;font-family:ui-monospace,monospace;font-weight:600}
-.insp .yt{margin-top:12px;padding:10px 14px;background:#161618;border-radius:6px;display:flex;align-items:center;gap:10px}
 .faq{padding:20px 24px}
 .faq h3{font-size:14px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:14px}
 .faq .q{font-size:14px;font-weight:600;margin-bottom:4px}
 .faq .a{font-size:13px;color:#666;font-family:Georgia;line-height:1.6;margin-bottom:12px}
+.sched-btn{display:block;width:calc(100% - 48px);margin:0 24px 20px;padding:16px;background:#C9A96E;color:#fff;font-size:16px;font-weight:700;font-family:ui-monospace,monospace;border:none;border-radius:8px;text-align:center;text-decoration:none;letter-spacing:0.04em;cursor:pointer}
+.slots{text-align:center;padding:0 24px 16px;font-size:12px;color:#A63D2F;font-weight:600;font-family:ui-monospace,monospace}
 .ftr{border-top:1px solid #D8D4CC;padding:14px 24px 28px;text-align:center}
 .ftr .ph{font-size:16px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-bottom:8px}
 .ftr .co{font-size:10px;color:#B0ADA6;font-family:ui-monospace,monospace;line-height:1.8}
@@ -143,13 +135,6 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
   </div>
 </div>
 
-<div class="sys">
-  <div class="lbl">OUR PROCESS</div>
-  <h2>Total Clarity. Zero Regret.</h2>
-  <div class="step dk"><div class="hd"><div class="num" style="background:#C9A96E">1</div><div><div style="font-size:16px;font-weight:700;color:#fff">FIND IT</div><div style="font-size:12px;color:#C9A96E;font-family:ui-monospace,monospace">7 specialty tools. Same day.</div></div></div><div class="desc" style="color:#ccc">Infrared, foundation plotting, sewer camera, ductwork camera, safety audit, termite, and air quality. Every high-risk category in one visit.</div><div><span class="st" style="color:#C9A96E">7</span> <span style="font-size:11px;color:#888;font-family:ui-monospace,monospace">tools</span></div></div>
-  <div class="step lt"><div class="hd"><div class="num" style="background:#161618">2</div><div><div style="font-size:16px;font-weight:700;color:#1A1A1A">PRICE IT</div><div style="font-size:12px;color:#888;font-family:ui-monospace,monospace">Real costs. 24 hours.</div></div></div><div class="desc" style="color:#666">Same-day cost summary on site. Within 24 hours, third-party contractor quotes you can hand to the seller.</div><div><span class="st" style="color:#1A1A1A">24hr</span> <span style="font-size:11px;color:#999;font-family:ui-monospace,monospace">quotes</span></div></div>
-  <div class="step dk"><div class="hd"><div class="num" style="background:#C9A96E">3</div><div><div style="font-size:16px;font-weight:700;color:#fff">BUILD IT</div><div style="font-size:12px;color:#C9A96E;font-family:ui-monospace,monospace">Your repair addendum.</div></div></div><div class="desc" style="color:#ccc">Photo-documented repair request with real costs. Designed to maximize what the seller covers before you close.</div><div><span class="st" style="color:#C9A96E">$18,730</span> <span style="font-size:11px;color:#888;font-family:ui-monospace,monospace">avg documented</span></div></div>
-</div>
 
 <div class="rev">
   <h3>WHAT OUR CLIENTS SAY</h3>
@@ -164,21 +149,23 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 
 <div class="insp">
   <div class="top">
-    <div class="av" style="overflow:hidden;padding:0"><img src="https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0" alt="Michael Street" style="width:200%;height:200%;object-fit:cover;object-position:center 10%"></div>
+    <div class="av" style="overflow:hidden;padding:0;background:url(https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0) center 10% / 200% no-repeat"></div>
     <div><div style="font-size:17px;font-weight:700">Michael Street</div><div style="font-size:13px;color:#C9A96E;font-family:ui-monospace,monospace;margin-top:2px">Professional Real Estate Inspector</div><div style="font-size:12px;color:#888;font-family:ui-monospace,monospace;margin-top:2px">License #22402</div></div>
   </div>
   <div class="badges"><div class="badge">5,000+ inspections</div><div class="badge">San Antonio + Austin</div><div class="badge">5-star Google + Yelp</div></div>
-  <div class="yt"><span style="font-size:16px;color:#C9A96E">&#9654;</span><div><div style="font-size:13px;font-weight:600;color:#fff">Find It, Fix It</div><div style="font-size:11px;color:#888;font-family:ui-monospace,monospace">Watch later on YouTube</div></div></div>
 </div>
+
+<a href="#" class="sched-btn" id="schedBtn">SCHEDULE NOW</a>
+<div class="slots">2 priority slots available — lock in your spot</div>
 
 <div class="faq">
   <h3>COMMON QUESTIONS</h3>
   <div class="q">My agent said a standard inspection is fine.</div>
   <div class="a">A standard covers 23-35 visible items. No infrared, sewer camera, or foundation plotting. The expensive problems are the ones those tools find.</div>
-  <div class="q">Why is this more than a basic inspection?</div>
-  <div class="a">A basic inspection tells you what is visible. We cover 7 high-risk categories standard inspections miss and price every repair. The average client documents $18,730.</div>
   <div class="q">What if the house is in good shape?</div>
-  <div class="a">Then you have documentation proving it. That is equally valuable. You close with confidence instead of uncertainty.</div>
+  <div class="a">Even though a house may be in good condition and ready to buy, there are likely many maintenance and a few hidden defects that you'll want to know about before the house becomes yours.</div>
+  <div class="q">Why choose Comprehensive over Standard?</div>
+  <div class="a">A standard inspection tells you what's visible to the eye. Comprehensive covers 7 high-risk categories others miss and prices the repairs — so you can negotiate the best deal before you close. Our clients save an average of $18,730 in documented repairs. If we don't find repairs exceeding the cost of the inspection we will credit you the difference.</div>
 </div>
 
 <div class="ftr">
@@ -188,9 +175,41 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 
 <script>
 var IG={"0-2":[{n:"Foundation Settlement",p:18,o:1,c:12000},{n:"Moisture Damages",p:41,o:1,c:2303},{n:"Failed Window Seals",p:24,o:1,c:5314},{n:"Roof Decking Damage",p:76,o:1,c:8500},{n:"Main Drain Issues",p:65,o:1,c:2211},{n:"Plumbing Leak Detected",p:13,o:1,c:6696},{n:"Rodent/Pest Access",p:72,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:43,o:1,c:702},{n:"Roofing Repairs Needed",p:57,o:0,c:8500},{n:"HVAC Repairs Needed",p:48,o:0,c:3500}],"21-30":[{n:"Foundation Settlement",p:41,o:1,c:12000},{n:"Moisture Damages",p:83,o:1,c:2303},{n:"Failed Window Seals",p:71,o:1,c:5314},{n:"Roof Decking Damage",p:55,o:1,c:8500},{n:"Main Drain Issues",p:72,o:1,c:2211},{n:"Plumbing Leak Detected",p:34,o:1,c:6696},{n:"Rodent/Pest Access",p:75,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:48,o:1,c:702},{n:"Roofing Repairs Needed",p:74,o:0,c:8500},{n:"HVAC Repairs Needed",p:52,o:0,c:3500}],"31-50":[{n:"Foundation Settlement",p:35,o:1,c:12000},{n:"Moisture Damages",p:76,o:1,c:2303},{n:"Failed Window Seals",p:39,o:1,c:5314},{n:"Roof Decking Damage",p:51,o:1,c:8500},{n:"Main Drain Issues",p:60,o:1,c:2211},{n:"Plumbing Leak Detected",p:24,o:1,c:6696},{n:"Rodent/Pest Access",p:68,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:60,o:1,c:702},{n:"Roofing Repairs Needed",p:65,o:0,c:8500},{n:"HVAC Repairs Needed",p:42,o:0,c:3500}],"51+":[{n:"Foundation Settlement",p:25,o:1,c:12000},{n:"Moisture Damages",p:45,o:1,c:2303},{n:"Failed Window Seals",p:10,o:1,c:5314},{n:"Roof Decking Damage",p:41,o:1,c:8500},{n:"Main Drain Issues",p:36,o:1,c:2211},{n:"Plumbing Leak Detected",p:15,o:1,c:6696},{n:"Rodent/Pest Access",p:47,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:47,o:1,c:702},{n:"Roofing Repairs Needed",p:42,o:0,c:8500},{n:"HVAC Repairs Needed",p:32,o:0,c:3500}]};
-var NB=[{a:32,sq:3423,d:91,g:"D",gc:"#C17A3A",img:"https://cdn.spectora.com/reports/images/07a128ce-21e4-40ed-bf2e-f4d285794827/original/cover.jpg?1629921896",link:"https://app.spectora.com/reports/07a128ce-21e4-40ed-bf2e-f4d285794827?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjAxNTIyOSwiZXhwIjoxNzM4NjQ4Nzk5fQ.DPmyfizZ9o3ffrNVn_eZ2JJ6zZQ_DFWFDHktddKKK6I&ignoreClientComplete=true"},{a:45,sq:4319,d:109,g:"F",gc:"#A63D2F",img:"https://cdn.spectora.com/reports/images/cbc8e254-9e5e-465a-b431-b9f858152301/original/cover.jpg?1645546860",link:"https://app.spectora.com/reports/cbc8e254-9e5e-465a-b431-b9f858152301?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Mjc4OTIyNSwiZXhwIjoxNzM4NjQ4Nzk5fQ.JnYOYW4J0qCopf2X_dRQeB3GOu-Hy1eNHo3vI4Kcdmo&ignoreClientComplete=true"},{a:58,sq:3040,d:69,g:"C",gc:"#8B8535",img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM4NjQ4Nzk5fQ.53L6BTG066ysGG0nRcbt067pjS1jt0oYv01_1UYUyi0&ignoreClientComplete=true"},{a:12,sq:2100,d:44,g:"B",gc:"#3D6B8B",img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM1Nzk3NTk5fQ.EYDWwTS71h5IGS9GQwj5zfH20vL4fGdDOQHKlzlgqDg&ignoreClientComplete=true"}];
+var NB=[{a:32,sq:3423,d:91,g:"D",gc:"#C17A3A",cost:14200,img:"https://cdn.spectora.com/reports/images/07a128ce-21e4-40ed-bf2e-f4d285794827/original/cover.jpg?1629921896",link:"https://app.spectora.com/reports/07a128ce-21e4-40ed-bf2e-f4d285794827?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjAxNTIyOSwiZXhwIjoxNzM4NjQ4Nzk5fQ.DPmyfizZ9o3ffrNVn_eZ2JJ6zZQ_DFWFDHktddKKK6I&ignoreClientComplete=true"},{a:45,sq:4319,d:109,g:"F",gc:"#A63D2F",cost:22050,img:"https://cdn.spectora.com/reports/images/cbc8e254-9e5e-465a-b431-b9f858152301/original/cover.jpg?1645546860",link:"https://app.spectora.com/reports/cbc8e254-9e5e-465a-b431-b9f858152301?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Mjc4OTIyNSwiZXhwIjoxNzM4NjQ4Nzk5fQ.JnYOYW4J0qCopf2X_dRQeB3GOu-Hy1eNHo3vI4Kcdmo&ignoreClientComplete=true"},{a:58,sq:3040,d:69,g:"C",gc:"#8B8535",cost:10300,img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM4NjQ4Nzk5fQ.53L6BTG066ysGG0nRcbt067pjS1jt0oYv01_1UYUyi0&ignoreClientComplete=true"},{a:12,sq:2100,d:44,g:"B",gc:"#3D6B8B",cost:5750,img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM1Nzk3NTk5fQ.EYDWwTS71h5IGS9GQwj5zfH20vL4fGdDOQHKlzlgqDg&ignoreClientComplete=true"}];
 
-var age=23,sfv=2400,brk="21-30",zp="78209";
+var age=23,sfv=2400,brk="21-30",zp="78209",clientName="",addr="1847 Oak Hollow Dr";
+var gradeObj=null,predictedDefects=0,entryGapCost=0;
+
+// Read from Atlas entry form (sessionStorage or URL params)
+var atlas=null;
+try { atlas=JSON.parse(sessionStorage.getItem("atlas_report")); } catch(e){}
+if(!atlas){
+  try{
+    var ps=new URLSearchParams(window.location.search);
+    if(ps.get("d"))atlas=JSON.parse(decodeURIComponent(ps.get("d")));
+  }catch(e){}
+}
+if(atlas){
+  age=atlas.age;
+  sfv=atlas.sqft;
+  brk=atlas.brk;
+  zp=atlas.zip;
+  clientName=atlas.name;
+  addr=atlas.addr;
+  if(atlas.grade)gradeObj=atlas.grade;
+  if(atlas.predicted)predictedDefects=atlas.predicted;
+  if(atlas.gapCost)entryGapCost=atlas.gapCost;
+}
+
+// Personalize hero with client name
+if(clientName){
+  document.querySelector(".info h2").textContent=clientName+",";
+  document.querySelectorAll(".info h2")[1].textContent="Here Are the Top Hidden Defects at";
+}
+
+document.getElementById("addrLine").textContent=addr;
+document.getElementById("metaLine").textContent=age+"yr old · "+sfv.toLocaleString()+" sqft · "+zp;
+
 var ig=IG[brk]||IG["21-30"];
 var bp=Math.round((499+sfv*0.07)*(1+age*0.002));
 var op=Math.round(bp*1.67);
@@ -206,20 +225,23 @@ ig.forEach(function(item){
   if(item.o){oHTML+=makeRow(item);gapCost+=Math.round(item.c*item.p/100);}
   else{bHTML+=makeRow(item);}
 });
+// Use entry form's gap cost if available (keeps numbers congruent)
+if(entryGapCost>0)gapCost=entryGapCost;
 document.getElementById("orangeRows").innerHTML=oHTML;
 document.getElementById("blueRows").innerHTML=bHTML;
 document.getElementById("fnote").textContent="* Based on "+brk+" year old homes across 3,377 South Texas inspections";
 
-var stdTotal=21,ourTotal=74;
+var stdTotal=predictedDefects>0?Math.round(predictedDefects*0.4):21;
+var ourTotal=predictedDefects>0?predictedDefects:74;
 document.getElementById("stdCount").textContent=stdTotal+" items";
 document.getElementById("ourCount").textContent=ourTotal+" items";
 document.getElementById("stdBar").style.width=Math.round(stdTotal/ourTotal*100)+"%";
 document.getElementById("gapAmt").textContent="$"+gapCost.toLocaleString();
 
 // Nearby
-var nbHTML='<h3>INSPECTIONS NEAR YOU</h3><div class="nbr">';
+var nbHTML='<h3>INSPECTIONS NEAR '+addr.toUpperCase()+'</h3><div class="nbr">';
 NB.forEach(function(p){
-  nbHTML+='<a href="'+p.link+'" target="_blank" style="text-decoration:none;color:inherit"><div class="nbc" style="position:relative;overflow:hidden"><img src="'+p.img+'" style="width:100%;height:80px;object-fit:cover;border-radius:6px 6px 0 0;margin-bottom:8px"><div class="tp"><div class="gr" style="background:'+p.gc+'">'+p.g+'</div><div><div style="font-size:12px;font-weight:600">'+p.a+'yr old</div><div style="font-size:10px;color:#999;font-family:ui-monospace,monospace">'+p.sq.toLocaleString()+' sqft</div></div></div><div class="it" style="color:'+p.gc+'">'+p.d+' items</div><div style="font-size:10px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-top:4px">View report</div></div></a>';
+  nbHTML+='<a href="'+p.link+'" target="_blank" style="text-decoration:none;color:inherit"><div class="nbc"><img src="'+p.img+'" style="width:100%;height:80px;object-fit:cover;display:block" onerror="this.style.display=\'none\'"><div class="nbc-body"><div class="tp"><div class="gr" style="background:'+p.gc+'">'+p.g+'</div><div><div style="font-size:12px;font-weight:600">'+p.a+'yr old</div><div style="font-size:10px;color:#999;font-family:ui-monospace,monospace">'+p.sq.toLocaleString()+' sqft</div></div></div><div class="it" style="color:'+p.gc+'">'+p.d+' items</div><div style="font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;margin-top:2px">$'+p.cost.toLocaleString()+' found</div><div style="font-size:10px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-top:4px">View report \u2192</div></div></div></a>';
 });
 nbHTML+='</div>';
 document.getElementById("nearbySection").innerHTML=nbHTML;
@@ -228,34 +250,76 @@ document.getElementById("nearbySection").innerHTML=nbHTML;
 var reviews=[{i:"JM",a:22050,t:"Seller covered $22,050 in repairs we would have never known about.",c:"#3D6B8B",img:"https://lh3.googleusercontent.com/d/1gluUrCdylr_3Lwmw6VJ9lZf1x8iLtk3c"},{i:"MR",a:10300,t:"Foundation and drain damage caught before closing. Seller paid every dollar.",c:"#C17A3A",img:"https://lh3.googleusercontent.com/d/1r8VpiWZbAW8-g0Gk7zJA41Z90uFv2qf0"},{i:"RG",a:5750,t:"The inspection found what the first inspector missed.",c:"#3D8B5B",img:"https://lh3.googleusercontent.com/d/1vpo3HFIKRRjTwrfH_iEKlDxVdY_rq_5C"},{i:"KW",a:18170,t:"Could not believe what was hiding in that house. Fidelity found it all.",c:"#8B8535",img:"https://lh3.googleusercontent.com/d/14pdmUEXKnmkTp-Qm5GSRclei26iC098A"}];
 var rHTML="";
 reviews.forEach(function(r){
-  rHTML+='<div class="revc"><div class="img" style="background:'+r.c+'30"><img src="'+r.img+'" alt="'+r.i+'" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0"><div class="price">$'+r.a.toLocaleString()+'</div></div><div class="txt"><p>\u201C'+r.t+'\u201D</p><a>See more</a></div></div>';
+  var pos=r.i==="RG"?"center 40%":"center 15%";
+  rHTML+='<div class="revc"><div class="img" style="background:'+r.c+'30"><img src="'+r.img+'" alt="'+r.i+'" style="width:100%;height:100%;object-fit:cover;object-position:'+pos+';position:absolute;top:0;left:0"><div class="price">$'+r.a.toLocaleString()+'</div></div><div class="txt"><p>\u201C'+r.t+'\u201D</p><a>See more</a></div></div>';
 });
 document.getElementById("reviewCards").innerHTML=rHTML;
 
 // Packages
 document.getElementById("quoteMeta").textContent=sfv.toLocaleString()+" sqft \u00b7 "+age+" years old";
+// Map 7 risk factors to IG defect data for this age bracket
+var defs=IG[brk];
+function findDef(name){for(var i=0;i<defs.length;i++){if(defs[i].n===name)return defs[i];}return null;}
+var riskMap=[
+  {svc:"Foundation Plotting",ben:"Damaged foundations",d:findDef("Foundation Settlement")},
+  {svc:"Infrared Thermography",ben:"Moisture & thermal damage",d:findDef("Moisture Damages")},
+  {svc:"Sewer Camera",ben:"Main drain failures",d:findDef("Main Drain Issues")},
+  {svc:"Ductwork Camera",ben:"Hidden plumbing leaks",d:findDef("Plumbing Leak Detected")},
+  {svc:"Safety Audit",ben:"Electrical deficiencies",d:findDef("Electrical Wiring Deficiencies")},
+  {svc:"Termite / WDI",ben:"Pest & rodent access",d:findDef("Rodent/Pest Access")},
+  {svc:"Air Quality",ben:"Failed window seals",d:findDef("Failed Window Seals")}
+];
+var compRisk=riskMap;
+var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
+var optGap=0;
+optRisk.forEach(function(r){if(r.d)optGap+=Math.round(r.d.c*r.d.p/100);});
+var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos","Negotiation addendum"];
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"Powered by Atlas",p:cp,dk:false,tag:null,items:["Foundation Plotting ($199)","Infrared Thermography ($199)","Sewer Camera ($199)","Ductwork Camera ($199)","Safety Audit ($99)","Termite WDI ($199)","Air Quality ($99)","On-Site Report ($99)","Inspector Consultation ($99)","On-Site Repair Costs ($99)","Home Score ($199)","Repair Quotes ($199)","Repair Request Builder ($149)"],bonuses:["Rush scheduling","24-hour third-party repair quotes","Agent-ready repair request with photos"],guarantee:"Find all major defects or double your refund + reimburse home warranty.",warn:null},
-  {n:"Optimized Assessment",sub:"Most popular",p:op,dk:true,tag:"RECOMMENDED",items:["Home Inspection ($"+bp+")","Foundation Plotting ($199)","Infrared Thermography ($199)","Termite WDI ($199)","On-Site Report ($99)","Inspector Consultation ($99)"],bonuses:["Inspector consultation"],guarantee:null,warn:null},
-  {n:"Standard Inspection",sub:"Visual only",p:bp,dk:false,tag:null,items:["Visual inspection","Negotiation Addendum"],bonuses:[],guarantee:null,warn:"Visual only. 23-35 items. No specialty tools. No pricing. No guarantee."}
+  {n:"Comprehensive Risk Elimination",sub:"All 7 major risk factors covered",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,avgFound:gapCost,bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos","Property grade report with inspector consultation"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
+  {n:"Optimized Value Pack",sub:"Top 3/7 major risk factors covered",p:op,dk:false,tag:null,rush:false,risk:optRisk,avgFound:optGap,bonuses:["Inspector consultation"],guarantee:null,std:null},
+  {n:"Standard Inspection",sub:"Professional visual inspection",p:bp,dk:false,tag:null,rush:false,risk:[],avgFound:0,bonuses:[],guarantee:null,std:stdItems}
 ];
 var pHTML="";
 pkgs.forEach(function(pk,pi){
   var bg=pk.dk?"#161618":"#fff";
   var fg=pk.dk?"#fff":"#1A1A1A";
-  var bdr=pi===1?"2px solid #C9A96E":(pk.dk?"1px solid #333":"1px solid #E0DDD6");
+  var bdr=pk.dk?"2px solid #C9A96E":"1px solid #E0DDD6";
   var bodyBg=pk.dk?"#1E1E20":"#FAFAF8";
-  var openClass=pi===1?"open":"";
+  var openClass=pi===0?"open":"";
   pHTML+='<div class="pkc">';
   pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="togglePkg('+pi+')">';
   if(pk.tag)pHTML+='<div class="tag">'+pk.tag+'</div>';
   pHTML+='<div class="row2"><div><div class="nm" style="color:'+fg+'">'+pk.n+'</div><div class="sub" style="color:'+(pk.dk?"#C9A96E":"#999")+'">'+pk.sub+'</div></div><div class="pr" style="color:'+(pk.dk?"#C9A96E":fg)+'">$'+pk.p.toLocaleString()+'</div></div>';
+  if(pi!==0)pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;margin-top:6px">Tap to see what\'s included \u25BE</div>';
   pHTML+='</div>';
   pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
-  pk.items.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:'+(pk.dk?"#ccc":"#555")+'">'+it+'</span></div>';});
+  if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-bottom:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
+  if(pk.risk.length>0){
+    pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">INCLUDED</span>';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">RISK</span>';
+    pHTML+='</div>';
+    pk.risk.forEach(function(r){
+      var pct=r.d?r.d.p:"0";
+      pHTML+='<div style="padding:9px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
+      pHTML+='<div style="display:flex;justify-content:space-between;align-items:center">';
+      pHTML+='<div style="flex:1"><span class="ck" style="margin-right:8px">&#10003;</span><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">'+r.svc+'</span></div>';
+      pHTML+='<span style="font-size:14px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;min-width:40px;text-align:right">'+pct+'%</span>';
+      pHTML+='</div>';
+      pHTML+='<div style="margin-left:22px;font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:2px">'+r.ben+'</div>';
+      pHTML+='</div>';
+    });
+    pHTML+='<div style="margin-top:14px;padding:14px;background:'+(pk.dk?"rgba(201,169,110,0.1)":"rgba(193,122,58,0.06)")+';border-radius:6px;text-align:center">';
+    pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#888":"#999")+';font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:6px">AVG. REPAIRS DOCUMENTED</div>';
+    pHTML+='<div style="font-size:28px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+pk.avgFound.toLocaleString()+'</div>';
+    pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;margin-top:4px">Based on 3,377 inspections</div>';
+    pHTML+='</div>';
+  }
+  if(pk.std){
+    pk.std.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:#555">'+it+'</span></div>';});
+  }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
-  if(pk.warn)pHTML+='<div class="warn">'+pk.warn+'</div>';
   pHTML+='</div></div>';
 });
 document.getElementById("pkgCards").innerHTML=pHTML;
@@ -263,7 +327,11 @@ document.getElementById("pkgCards").innerHTML=pHTML;
 function togglePkg(i){
   var el=document.getElementById("pkg-body-"+i);
   if(el.classList.contains("open")){el.classList.remove("open");}
-  else{document.querySelectorAll(".pkc .body").forEach(function(b){b.classList.remove("open");});el.classList.add("open");}
+  else{
+    document.querySelectorAll(".pkc .body").forEach(function(b){b.classList.remove("open");});
+    el.classList.add("open");
+    setTimeout(function(){el.parentElement.scrollIntoView({behavior:"smooth",block:"start"});},100);
+  }
 }
 </script>
 
