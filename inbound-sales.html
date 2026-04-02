@@ -31,7 +31,7 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .row .rk{width:50px;text-align:center;font-size:13px;font-weight:700;font-family:ui-monospace,monospace}
 .row .rk.o{color:#C17A3A}
 .row .rk.b{color:#3D6B8B}
-.row .ct{width:65px;text-align:right;font-size:13px;font-family:ui-monospace,monospace}
+.row .ct{width:75px;text-align:right;font-size:13px;font-family:ui-monospace,monospace}
 .row .ct.o{color:#C17A3A;font-weight:600}
 .row .ct.b{color:#999}
 .fn{font-size:11px;color:#AAA;font-family:Georgia;text-align:center;margin-top:12px}
@@ -114,7 +114,7 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
   <div class="addr" id="addrLine">1847 Oak Hollow Dr</div>
   <div class="meta" id="metaLine">23yr old · 2,400 sqft · 78209</div>
 
-  <div class="colhdr"><span style="flex:1"></span><span style="width:50px;text-align:center">RISK</span><span style="width:65px;text-align:right">AVG COST</span></div>
+  <div class="colhdr"><span style="flex:1"></span><span style="width:50px;text-align:center">RISK</span><span style="width:75px;text-align:right">SELLER COST</span></div>
 
   <div class="seclbl orange">REQUIRES SPECIALTY TOOLS</div>
   <div id="orangeRows"></div>
@@ -195,7 +195,8 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 </div>
 
 <script>
-var IG={"0-2":[{n:"Foundation Settlement",p:18,o:1,c:12000},{n:"Moisture Damages",p:41,o:1,c:2303},{n:"Failed Window Seals",p:24,o:1,c:5314},{n:"Roof Decking Damage",p:76,o:1,c:8500},{n:"Main Drain Issues",p:65,o:1,c:2211},{n:"Plumbing Leak Detected",p:13,o:1,c:6696},{n:"Rodent/Pest Access",p:72,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:43,o:1,c:702},{n:"Roofing Repairs Needed",p:57,o:0,c:8500},{n:"HVAC Repairs Needed",p:48,o:0,c:3500}],"21-30":[{n:"Foundation Settlement",p:41,o:1,c:12000},{n:"Moisture Damages",p:83,o:1,c:2303},{n:"Failed Window Seals",p:71,o:1,c:5314},{n:"Roof Decking Damage",p:55,o:1,c:8500},{n:"Main Drain Issues",p:72,o:1,c:2211},{n:"Plumbing Leak Detected",p:34,o:1,c:6696},{n:"Rodent/Pest Access",p:75,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:48,o:1,c:702},{n:"Roofing Repairs Needed",p:74,o:0,c:8500},{n:"HVAC Repairs Needed",p:52,o:0,c:3500}],"31-50":[{n:"Foundation Settlement",p:35,o:1,c:12000},{n:"Moisture Damages",p:76,o:1,c:2303},{n:"Failed Window Seals",p:39,o:1,c:5314},{n:"Roof Decking Damage",p:51,o:1,c:8500},{n:"Main Drain Issues",p:60,o:1,c:2211},{n:"Plumbing Leak Detected",p:24,o:1,c:6696},{n:"Rodent/Pest Access",p:68,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:60,o:1,c:702},{n:"Roofing Repairs Needed",p:65,o:0,c:8500},{n:"HVAC Repairs Needed",p:42,o:0,c:3500}],"51+":[{n:"Foundation Settlement",p:25,o:1,c:12000},{n:"Moisture Damages",p:45,o:1,c:2303},{n:"Failed Window Seals",p:10,o:1,c:5314},{n:"Roof Decking Damage",p:41,o:1,c:8500},{n:"Main Drain Issues",p:36,o:1,c:2211},{n:"Plumbing Leak Detected",p:15,o:1,c:6696},{n:"Rodent/Pest Access",p:47,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:47,o:1,c:702},{n:"Roofing Repairs Needed",p:42,o:0,c:8500},{n:"HVAC Repairs Needed",p:32,o:0,c:3500}]};
+// Seller-paid repair data from 2,935 inspections. p=flag rate, c=avg seller repair cost when found, o=1 specialty tool required
+var IG={"0-2":[{n:"Foundation Settlement",p:21,o:1,c:7652},{n:"Moisture Damages",p:82,o:1,c:4607},{n:"Failed Window Seals",p:55,o:1,c:4071},{n:"Main Drain Issues",p:45,o:1,c:2653},{n:"HVAC Ductwork Defects",p:58,o:1,c:5913},{n:"Rodent/Pest Access",p:62,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:65,o:1,c:1060},{n:"Roofing Repairs Needed",p:57,o:0,c:3200},{n:"HVAC Repairs Needed",p:48,o:0,c:2800}],"21-30":[{n:"Foundation Settlement",p:42,o:1,c:7652},{n:"Moisture Damages",p:95,o:1,c:4607},{n:"Failed Window Seals",p:88,o:1,c:4071},{n:"Main Drain Issues",p:72,o:1,c:2653},{n:"HVAC Ductwork Defects",p:82,o:1,c:5913},{n:"Rodent/Pest Access",p:78,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:80,o:1,c:1060},{n:"Roofing Repairs Needed",p:74,o:0,c:3200},{n:"HVAC Repairs Needed",p:52,o:0,c:2800}],"31-50":[{n:"Foundation Settlement",p:38,o:1,c:7652},{n:"Moisture Damages",p:91,o:1,c:4607},{n:"Failed Window Seals",p:85,o:1,c:4071},{n:"Main Drain Issues",p:68,o:1,c:2653},{n:"HVAC Ductwork Defects",p:78,o:1,c:5913},{n:"Rodent/Pest Access",p:75,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:82,o:1,c:1060},{n:"Roofing Repairs Needed",p:65,o:0,c:3200},{n:"HVAC Repairs Needed",p:42,o:0,c:2800}],"51+":[{n:"Foundation Settlement",p:30,o:1,c:7652},{n:"Moisture Damages",p:85,o:1,c:4607},{n:"Failed Window Seals",p:72,o:1,c:4071},{n:"Main Drain Issues",p:55,o:1,c:2653},{n:"HVAC Ductwork Defects",p:68,o:1,c:5913},{n:"Rodent/Pest Access",p:65,o:1,c:1500},{n:"Electrical Wiring Deficiencies",p:78,o:1,c:1060},{n:"Roofing Repairs Needed",p:42,o:0,c:3200},{n:"HVAC Repairs Needed",p:32,o:0,c:2800}]};
 var NB=[{a:32,sq:3423,d:91,g:"D",gc:"#C17A3A",cost:14200,img:"https://cdn.spectora.com/reports/images/07a128ce-21e4-40ed-bf2e-f4d285794827/original/cover.jpg?1629921896",link:"https://app.spectora.com/reports/07a128ce-21e4-40ed-bf2e-f4d285794827?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjAxNTIyOSwiZXhwIjoxNzM4NjQ4Nzk5fQ.DPmyfizZ9o3ffrNVn_eZ2JJ6zZQ_DFWFDHktddKKK6I&ignoreClientComplete=true"},{a:45,sq:4319,d:109,g:"F",gc:"#A63D2F",cost:22050,img:"https://cdn.spectora.com/reports/images/cbc8e254-9e5e-465a-b431-b9f858152301/original/cover.jpg?1645546860",link:"https://app.spectora.com/reports/cbc8e254-9e5e-465a-b431-b9f858152301?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Mjc4OTIyNSwiZXhwIjoxNzM4NjQ4Nzk5fQ.JnYOYW4J0qCopf2X_dRQeB3GOu-Hy1eNHo3vI4Kcdmo&ignoreClientComplete=true"},{a:58,sq:3040,d:69,g:"C",gc:"#8B8535",cost:10300,img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM4NjQ4Nzk5fQ.53L6BTG066ysGG0nRcbt067pjS1jt0oYv01_1UYUyi0&ignoreClientComplete=true"},{a:12,sq:2100,d:44,g:"B",gc:"#3D6B8B",cost:5750,img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM1Nzk3NTk5fQ.EYDWwTS71h5IGS9GQwj5zfH20vL4fGdDOQHKlzlgqDg&ignoreClientComplete=true"}];
 
 var age=23,sfv=2400,brk="21-30",zp="78209",clientName="",addr="1847 Oak Hollow Dr";
@@ -306,13 +307,13 @@ document.getElementById("quoteMeta").textContent=sfv.toLocaleString()+" sqft \u0
 var defs=IG[brk];
 function findDef(name){for(var i=0;i<defs.length;i++){if(defs[i].n===name)return defs[i];}return null;}
 var riskMap=[
-  {svc:"Foundation Plotting",ben:"Damaged foundations",d:findDef("Foundation Settlement")},
-  {svc:"Infrared Thermography",ben:"Moisture & thermal damage",d:findDef("Moisture Damages")},
-  {svc:"Sewer Camera",ben:"Main drain failures",d:findDef("Main Drain Issues")},
-  {svc:"Ductwork Camera",ben:"Hidden plumbing leaks",d:findDef("Plumbing Leak Detected")},
+  {svc:"Foundation Plotting",ben:"Settlement & structural movement",d:findDef("Foundation Settlement")},
+  {svc:"Infrared Thermography",ben:"Moisture, leaks & insulation gaps",d:findDef("Moisture Damages")},
+  {svc:"Sewer Camera",ben:"Drain line damage & blockages",d:findDef("Main Drain Issues")},
+  {svc:"Ductwork Camera",ben:"HVAC ductwork & hidden damage",d:findDef("HVAC Ductwork Defects")},
   {svc:"Advanced Circuit Diagnostic",ben:"Hidden wiring malfunctions",d:findDef("Electrical Wiring Deficiencies")},
-  {svc:"Termite / WDI",ben:"Pest & rodent access",d:findDef("Rodent/Pest Access")},
-  {svc:"Air Quality",ben:"Failed window seals",d:findDef("Failed Window Seals")}
+  {svc:"Termite / WDI",ben:"Pest & rodent intrusion",d:findDef("Rodent/Pest Access")},
+  {svc:"Air Quality",ben:"Failed seals & air infiltration",d:findDef("Failed Window Seals")}
 ];
 var compRisk=riskMap;
 var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
