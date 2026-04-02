@@ -180,9 +180,15 @@ var NB=[{a:32,sq:3423,d:91,g:"D",gc:"#C17A3A",cost:14200,img:"https://cdn.specto
 var age=23,sfv=2400,brk="21-30",zp="78209",clientName="",addr="1847 Oak Hollow Dr";
 var gradeObj=null,predictedDefects=0,entryGapCost=0;
 
-// Read from Atlas entry form if available
+// Read from Atlas entry form (sessionStorage or URL params)
 var atlas=null;
 try { atlas=JSON.parse(sessionStorage.getItem("atlas_report")); } catch(e){}
+if(!atlas){
+  try{
+    var ps=new URLSearchParams(window.location.search);
+    if(ps.get("d"))atlas=JSON.parse(decodeURIComponent(ps.get("d")));
+  }catch(e){}
+}
 if(atlas){
   age=atlas.age;
   sfv=atlas.sqft;
