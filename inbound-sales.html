@@ -339,10 +339,22 @@ pkgs.forEach(function(pk,pi){
   if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-bottom:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
   if(pk.risk.length>0){
     var protectedTotal=0;
+    // Comprehensive inspection base includes thorough inspection bonus
+    var inspBase=stdRepairs;
+    var inspLabel="Standard inspection";
+    if(pi===0){inspBase=stdRepairs+Math.round(17*682);inspLabel="Comprehensive inspection";}
     pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
-    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">SPECIALTY SERVICES</span>';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">INCLUDED</span>';
     pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">SELLER REPAIRS</span>';
     pHTML+='</div>';
+    // Base inspection line first
+    pHTML+='<div style="display:flex;align-items:center;padding:8px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
+    pHTML+='<span class="ck" style="margin-right:8px">&#10003;</span>';
+    pHTML+='<div style="flex:1"><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">'+inspLabel+'</span></div>';
+    pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;white-space:nowrap">$'+inspBase.toLocaleString()+'</span>';
+    pHTML+='</div>';
+    protectedTotal+=inspBase;
+    // Specialty services
     pk.risk.forEach(function(r){
       var repairCost=r.d?Math.round(r.d.c*r.d.p/100):0;
       protectedTotal+=repairCost;
@@ -353,26 +365,9 @@ pkgs.forEach(function(pk,pi){
       pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;white-space:nowrap">$'+repairCost.toLocaleString()+'</span>';
       pHTML+='</div>';
     });
-    pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;margin-top:2px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
-    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace">Specialty services</span>';
-    pHTML+='<span style="font-size:16px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+protectedTotal.toLocaleString()+'</span>';
-    pHTML+='</div>';
-    pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
-    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace">Standard inspection</span>';
-    pHTML+='<span style="font-size:16px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+stdRepairs.toLocaleString()+'</span>';
-    pHTML+='</div>';
-    // Comprehensive finds ~17 more maintenance items than Value Pack (~$682 avg each)
-    var thoroughBonus=0;
-    if(pi===0){thoroughBonus=Math.round(17*682);
-      pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
-      pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace">Additional items from thorough inspection</span>';
-      pHTML+='<span style="font-size:16px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+thoroughBonus.toLocaleString()+'</span>';
-      pHTML+='</div>';
-    }
-    var pkgTotal=protectedTotal+stdRepairs+thoroughBonus;
     pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0">';
     pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#333")+';font-family:ui-monospace,monospace">TOTAL SELLER-PAID REPAIRS</span>';
-    pHTML+='<span style="font-size:22px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+pkgTotal.toLocaleString()+'</span>';
+    pHTML+='<span style="font-size:22px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+protectedTotal.toLocaleString()+'</span>';
     pHTML+='</div>';
     if(pi===1){
       pHTML+='<div style="display:flex;justify-content:center;gap:4px;margin-top:4px">';
