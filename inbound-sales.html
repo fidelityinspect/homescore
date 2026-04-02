@@ -311,11 +311,29 @@ pkgs.forEach(function(pk,pi){
     pHTML+='<div style="margin-top:14px;padding:14px;background:'+(pk.dk?"rgba(201,169,110,0.1)":"rgba(193,122,58,0.06)")+';border-radius:6px;text-align:center">';
     pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#888":"#999")+';font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:6px">AVG. REPAIRS DOCUMENTED</div>';
     pHTML+='<div style="font-size:28px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+pk.avgFound.toLocaleString()+'</div>';
+    if(pi===0){
+      pHTML+='<div style="font-size:12px;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-weight:600;margin-top:6px">across all 7 high-risk categories</div>';
+    }else if(pi===1){
+      pHTML+='<div style="font-size:12px;color:#C17A3A;font-weight:600;margin-top:6px">across 3 of 7 categories</div>';
+      pHTML+='<div style="display:flex;justify-content:center;gap:4px;margin-top:8px">';
+      for(var s=0;s<7;s++){
+        var filled=s<3;
+        pHTML+='<div style="width:28px;height:6px;border-radius:3px;background:'+(filled?"#C9A96E":"#333")+'"></div>';
+      }
+      pHTML+='</div>';
+      var uncoveredGap=gapCost-optGap;
+      if(uncoveredGap>0)pHTML+='<div style="font-size:11px;color:#999;font-family:Georgia;font-style:italic;margin-top:6px">$'+uncoveredGap.toLocaleString()+' in remaining risk categories not covered</div>';
+    }
     pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;margin-top:4px">Based on 3,377 inspections</div>';
     pHTML+='</div>';
   }
   if(pk.std){
     pk.std.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:#555">'+it+'</span></div>';});
+    pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(166,61,47,0.08);border:1px solid rgba(166,61,47,0.2);border-radius:6px;text-align:center">';
+    pHTML+='<div style="font-size:13px;color:#A63D2F;font-weight:700;margin-bottom:4px">What standard inspections miss</div>';
+    pHTML+='<div style="font-size:24px;font-weight:700;color:#A63D2F;font-family:ui-monospace,monospace">$'+gapCost.toLocaleString()+'</div>';
+    pHTML+='<div style="font-size:11px;color:#A63D2F;opacity:0.7;font-family:Georgia;font-style:italic;margin-top:4px">in hidden repairs across 7 risk categories</div>';
+    pHTML+='</div>';
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
