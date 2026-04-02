@@ -1,0 +1,808 @@
+id,section_name,deficiency_category,inspected_item_name,risk_percentage,cost_in_usd,is_delete,created_at,updated_at
+1,I. Structural Systems,Immediate Maintenance,Wallboard Damages/Voids,50.87,901.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+2,I. Structural Systems,Immediate Maintenance,Roof Flashings Damaged,49.13,345.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+3,IV. Plumbing Systems,High Cost/Hidden Defects,Belly in Main Drain Pipe,4.7,2211.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+4,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Evaluate/Balance HVAC Zones,4.4,640.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+5,IV. Plumbing Systems,High Cost/Hidden Defects,Install/Repair Clean Out Riser/Cap,4.07,1433.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+6,IV. Plumbing Systems,High Cost/Hidden Defects,Cast Iron Drainpipes Present,3.97,12023.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+7,II. Electrical Systems,High Cost/Hidden Defects,Circuit Wiring Deficiencies,3.68,887.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+8,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,HVAC Operational Service Life Reached,3.44,10466.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+9,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Thermostat Has No Power,2.71,7186.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+10,V. Appliances,High Cost/Hidden Defects,Inoperable Mechanical Vent,2.57,800.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+11,II. Electrical Systems,High Cost/Hidden Defects,Damaged Breaker,2.57,887.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+12,I. Structural Systems,High Cost/Hidden Defects,Metal Roofing Repairs/Replacement,2.37,12783.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+13,VI. Optional Systems,High Cost/Hidden Defects,Irrigation System Leak,2.32,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+14,IV. Plumbing Systems,High Cost/Hidden Defects,Galvanized Plumbing Supply,2.32,6602.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+15,I. Structural Systems,High Cost/Hidden Defects,Water Damaged Flooring,2.23,806.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+16,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Missing/Insufficient Return Air System,2.13,599.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+17,I. Structural Systems,Immediate Maintenance,Door - Out of Square,45.06,564.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+18,II. Electrical Systems,Immediate Maintenance,Access Panels/Covers Damaged,43.76,462.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+19,I. Structural Systems,Immediate Maintenance,Grading - Improper Drainage,40.71,768.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+20,I. Structural Systems,Immediate Maintenance,Concrete/Asphalt - Damages Present,39.21,873.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+21,I. Structural Systems,Immediate Maintenance,Interior Wallboard Repairs,36.59,1315.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+22,I. Structural Systems,High Cost/Hidden Defects,Insufficient/Missing Insulation,33.01,1137.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+23,I. Structural Systems,Immediate Maintenance,Facia/Trim Damages,31.99,921.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+24,IV. Plumbing Systems,Immediate Maintenance,Plumbing Fixtures Damaged,31.41,462.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+25,IV. Plumbing Systems,Immediate Maintenance,Water Meter/Shutoff Covered by Soil or Water,30.98,290.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+26,I. Structural Systems,Immediate Maintenance,Ceiling Minor Damage,29.91,806.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+27,I. Structural Systems,Immediate Maintenance,Damaged Fencing,28.61,711.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+28,"III. Heating, Ventilation and Air Conditioning Systems",Immediate Maintenance,Water/Debris in HVAC Pan,27.78,151.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+29,I. Structural Systems,Immediate Maintenance,Cabinets Damaged,27.59,357.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+30,I. Structural Systems,Immediate Maintenance,Windows Difficult To Open/Close,20.28,518.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+31,I. Structural Systems,Maintenance,Damaged/Missing Parging,27.25,658.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+32,I. Structural Systems,Maintenance,Unlevel Flooring,27.11,831.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+33,I. Structural Systems,High Cost/Hidden Defects,Wavy Exterior Wallboard,25.75,2303.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+34,I. Structural Systems,Maintenance,Damaged/Out of Square Cabinet Doors,25.61,186.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+35,I. Structural Systems,Maintenance,Out of Square Bi-Fold Doors,25.36,577.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+36,V. Appliances,Maintenance,Improper Dishwasher Installation,25.36,331.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+37,I. Structural Systems,High Cost/Hidden Defects,Wavy Interior Wallboard,25.27,2303.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+38,I. Structural Systems,Maintenance,Damaged Roof Coverings,25.12,840.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+39,I. Structural Systems,Maintenance,Sagging Roof Decking,23.09,690.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+40,I. Structural Systems,Maintenance,Improper Door Installation,21.93,561.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+41,I. Structural Systems,Maintenance,Damaged Sidewalk/Driveway Joints,21.78,220.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+42,II. Electrical Systems,Maintenance,Missing/Damaged GFCI Receptacles,21.49,702.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+43,I. Structural Systems,Maintenance,Damaged/Missing Window Screens,21.39,908.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+44,II. Electrical Systems,Maintenance,Damaged/Missing Receptacle Covers,20.38,641.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+45,II. Electrical Systems,Maintenance,Wobbly/Damaged Fixture Fan,20.23,268.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+46,IV. Plumbing Systems,High Cost/Hidden Defects,Main Drain - Standing Water/Debris,19.36,1437.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+47,I. Structural Systems,Maintenance,Damaged Doors,19.22,561.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+48,IV. Plumbing Systems,Maintenance,Loose Fixture in Wall,19.17,462.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+49,II. Electrical Systems,Maintenance,Inoperable Light Fixtures,19.07,354.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+50,I. Structural Systems,Maintenance,Door Hardware Not Latching,18.78,278.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+51,I. Structural Systems,Maintenance,Damaged Flooring,18.64,772.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+52,I. Structural Systems,Maintenance,Squeaking Flooring Decking,18.64,378.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+53,I. Structural Systems,Maintenance,Sagging Decking (Pre-Owned Home),17.96,690.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+54,I. Structural Systems,Maintenance,Damaged/Missing Door Hardware,17.81,561.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+55,I. Structural Systems,Maintenance,Improper Roof Clearance,17.67,509.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+56,II. Electrical Systems,Maintenance,Loose Receptacles,17.33,539.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+57,I. Structural Systems,Maintenance,Minor Interior Wall Cracks,17.28,966.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+58,I. Structural Systems,Maintenance,Minor Exterior Mortar Cracking,17.23,758.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+59,I. Structural Systems,Maintenance,Noisy Flooring,16.99,511.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+60,I. Structural Systems,Maintenance,Damaged Windows,16.26,788.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+61,I. Structural Systems,Maintenance,Soil Erosion Grading,16.26,746.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+62,I. Structural Systems,Maintenance,Minor Exterior Wall Cracks,16.17,966.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+63,IV. Plumbing Systems,Maintenance,Low Supply Pressure,15.73,794.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+64,II. Electrical Systems,Maintenance,Damaged Electrical Panel,15.44,886.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+65,I. Structural Systems,Maintenance,Caulking Sealant Improvements,15.44,419.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+66,I. Structural Systems,Maintenance,Improper Grading Clearance,15.2,590.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+67,VI. Optional Systems,Maintenance,Improper Sprinkler Head Placement,15.2,251.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+68,I. Structural Systems,Maintenance,Damaged Wall Grout,14.96,347.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+69,V. Appliances,Maintenance,Unfastened Range,14.67,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+70,IV. Plumbing Systems,Maintenance,Missing Water Heater Drain Pan/Line,14.57,553.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+71,I. Structural Systems,High Cost/Hidden Defects,Foliage/Tree Limb Removal,13.99,2556.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+72,I. Structural Systems,Maintenance,Pest-Damaged Insulation,13.99,884.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+73,I. Structural Systems,Maintenance,Gaps at Door Casings,13.75,577.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+74,IV. Plumbing Systems,Maintenance,Rusted Gas Supply,13.31,513.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+75,I. Structural Systems,Maintenance,Damaged Window Springs,13.26,519.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+76,I. Structural Systems,High Cost/Hidden Defects,Failed Window Seals,12.97,5314.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+77,I. Structural Systems,Maintenance,Wood to Ground Contact,12.92,988.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+78,II. Electrical Systems,Maintenance,Damaged Fixtures/Receptacles,12.73,281.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+79,IV. Plumbing Systems,Maintenance,High Supply Pressure,12.44,804.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+80,I. Structural Systems,Maintenance,Cracked/Loose Flooring Tiles,12.44,471.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+81,I. Structural Systems,Maintenance,Rusted Lintels,12.0,346.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+82,I. Structural Systems,High Cost/Hidden Defects,Missing/Damaged Handrail,11.81,1408.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+83,II. Electrical Systems,Maintenance,Missing/Damaged Fixture Globe,11.52,353.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+84,I. Structural Systems,Maintenance,Negative Slope Grading,11.47,828.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+85,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Over-performing HVAC System,11.37,381.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+86,I. Structural Systems,Maintenance,Damaged Door Trim,11.28,573.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+87,IV. Plumbing Systems,High Cost/Hidden Defects,Improperly Installed Toilet,10.99,194.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+88,II. Electrical Systems,Immediate Maintenance,No Exterior GFCI Protection,10.99,658.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+89,I. Structural Systems,Maintenance,Insufficient Attic Ventilation,10.89,590.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+90,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Improper Condensate Drain Location,10.55,222.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+91,I. Structural Systems,Maintenance,Gutter Diverters/Splash Blocks,10.36,206.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+92,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Damaged Ductwork,10.31,808.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+93,V. Appliances,Maintenance,Damaged/Noisy Exhaust Vent,10.31,284.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+94,IV. Plumbing Systems,Maintenance,Insulate Exterior Plumbing,10.31,164.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+95,I. Structural Systems,Maintenance,Missing/Damaged Window Flashings,10.21,848.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+96,V. Appliances,Maintenance,Repair Fan/Vent Covers,9.92,790.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+97,I. Structural Systems,Maintenance,Ceiling Previous Repairs,9.92,800.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+98,I. Structural Systems,Maintenance,Gaps at Window/Casing,9.83,478.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+99,II. Electrical Systems,Maintenance,Undetermined Switch Purpose,9.83,356.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+100,I. Structural Systems,Maintenance,Dirty Chimney Flue/Brick/Liner,9.58,670.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+101,I. Structural Systems,Maintenance,Damaged Attic Ladder,9.58,287.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+102,V. Appliances,Maintenance,Improper Range Installation,9.49,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+103,I. Structural Systems,Maintenance,Cut Back Foliage,9.39,274.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+104,I. Structural Systems,High Cost/Hidden Defects,Exterior Door Hinges Installed,9.24,1250.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+105,I. Structural Systems,Maintenance,Missing Cabinet Components,9.24,280.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+106,I. Structural Systems,Maintenance,Damaged Deck Wood/Materials,9.2,1740.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+107,IV. Plumbing Systems,Maintenance,Poor/Slow Drainage,9.15,1423.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+108,V. Appliances,Maintenance,Excessive Garbage Disposal Noise,9.0,254.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+109,IV. Plumbing Systems,Maintenance,Damaged Drain Materials,8.86,631.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+110,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Missing Emergency Float Switch,8.57,245.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+111,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Under-performing HVAC System,8.42,381.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+112,V. Appliances,Maintenance,Damaged Door/Gaskets,8.42,287.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+113,V. Appliances,Maintenance,Missing Mechanical Vent/Extensions,8.23,805.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+114,I. Structural Systems,Maintenance,Flashing Advisement,8.23,494.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+115,IV. Plumbing Systems,Maintenance,Damaged Fixture Diverter,8.23,155.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+116,I. Structural Systems,Maintenance,Water Damage/Rust at Chimney,8.13,774.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+117,IV. Plumbing Systems,Maintenance,Low Fixture Water Pressure,8.08,740.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+118,I. Structural Systems,Maintenance,Insufficient Weatherstripping,8.08,182.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+119,I. Structural Systems,Maintenance,Missing/Damaged Flooring Caulking,8.03,139.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+120,IV. Plumbing Systems,Maintenance,Damaged Diverter/Drain Stopper,7.94,206.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+121,I. Structural Systems,Maintenance,Loose/Noisy Window Casing,7.79,416.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+122,I. Structural Systems,Maintenance,Gutter Repairs Needed,7.79,340.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+123,V. Appliances,Maintenance,Clean Dryer Exhaust System,7.74,164.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+124,IV. Plumbing Systems,Maintenance,Missing Expansion Tank,7.7,490.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+125,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Rust in Secondary Pan,7.7,190.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+126,I. Structural Systems,Maintenance,Noisy Stair Treads,7.6,775.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+127,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Damaged Vent,7.5,808.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+128,V. Appliances,Maintenance,Oven Overperforming,7.45,521.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+129,I. Structural Systems,Maintenance,Damaged Flooring Grout,7.41,247.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+130,V. Appliances,Maintenance,Oven Underperforming,7.36,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+131,I. Structural Systems,Maintenance,Damaged/Repaired Roof Decking,7.36,421.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+132,II. Electrical Systems,Maintenance,Install Dedicated Circuit,7.26,617.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+133,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Missing/Damaged Condensate Line,7.16,150.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+134,I. Structural Systems,Maintenance,Gutter Standing Water/Debris,7.12,735.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+135,V. Appliances,Maintenance,Damaged Dryer Vent,7.07,279.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+136,I. Structural Systems,High Cost/Hidden Defects,Moisture Intrusion in Walls,7.02,1325.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+137,I. Structural Systems,Maintenance,Possibly Inadequate Wall Insulation,7.02,1104.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+138,I. Structural Systems,Maintenance,Standing Water Grading,7.02,1004.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+139,I. Structural Systems,Maintenance,Heaving/Settling Slab Soils,6.97,492.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+140,I. Structural Systems,Maintenance,Water Damaged Ceiling/Repairs,6.82,806.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+141,II. Electrical Systems,Maintenance,Improperly Installed Switches,6.82,356.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+142,I. Structural Systems,Maintenance,Water Damaged Roof Decking,6.68,515.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+143,IV. Plumbing Systems,High Cost/Hidden Defects,Plumbing Leak Detected,6.49,198.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+144,V. Appliances,Maintenance,Exhaust to Interior Not Connected,6.44,466.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+145,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Damaged HVAC Cabinet,6.39,2554.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+146,I. Structural Systems,Maintenance,Windows Not Latching,6.39,181.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+147,VI. Optional Systems,High Cost/Hidden Defects,Broken Sprinkler/Line,6.24,334.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+148,II. Electrical Systems,Maintenance,Unpowered/Missing Receptacles,6.24,641.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+149,II. Electrical Systems,Maintenance,Loose/Not Flush Fixtures,6.24,354.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+150,I. Structural Systems,Maintenance,Corner Pop/Wedge Cracks,6.2,544.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+151,I. Structural Systems,Maintenance,Damaged Countertop,6.2,421.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+152,V. Appliances,Maintenance,Balance Garage Doors,6.2,182.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+153,I. Structural Systems,Maintenance,Damaged Flatwork,6.1,988.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+154,IV. Plumbing Systems,Maintenance,Missing Gas Drip Leg,6.0,227.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+155,I. Structural Systems,Maintenance,Dirty Window Casings/Sills,5.86,372.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+156,I. Structural Systems,Maintenance,Loose Rail/Balusters,5.81,1097.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+157,V. Appliances,Maintenance,Loud Garage Door Noises,5.76,293.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+158,II. Electrical Systems,Maintenance,Damaged/Missing Doorbell,5.76,268.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+159,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Clean Ductwork,5.57,1383.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+160,II. Electrical Systems,Maintenance,Exposed Wiring Ends/Splices,5.57,208.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+161,V. Appliances,Maintenance,Non-Working Auto Reverse Sensors,5.57,184.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+162,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Damaged HVAC Component,5.52,7077.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+163,IV. Plumbing Systems,Maintenance,Corrugated Drains Present,5.42,1965.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+164,V. Appliances,Maintenance,Disable Mechanical Locking,5.37,273.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+165,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Under-performing Heating System,5.32,381.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+166,I. Structural Systems,Maintenance,Improper Patio Clearance,5.32,903.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+167,I. Structural Systems,Maintenance,Missing Flashing Over Walkways,5.32,514.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+168,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Inoperable Heating System,5.28,369.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+169,I. Structural Systems,High Cost/Hidden Defects,Window Seals Damaged,5.23,5314.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+170,I. Structural Systems,Maintenance,Damaged/Missing Threshold/Sweep,5.18,561.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+171,I. Structural Systems,High Cost/Hidden Defects,Broken Windows,5.08,2231.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+172,I. Structural Systems,Maintenance,Damaged Roof Vents,5.08,370.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+173,V. Appliances,High Cost/Hidden Defects,Missing Exhaust System,5.03,1565.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+174,I. Structural Systems,Maintenance,Damaged/Repaired Stucco,4.99,1572.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+175,I. Structural Systems,Maintenance,Difficult Cabinet Drawers,4.89,162.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+176,I. Structural Systems,Maintenance,Settling Patio,4.79,2557.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+177,I. Structural Systems,Maintenance,Water Sealant Needed for Exterior Wood,4.79,579.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+178,I. Structural Systems,Maintenance,Damaged Patio Ceiling,4.7,988.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+179,I. Structural Systems,Maintenance,Missing Window Screens,4.7,914.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+180,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Secondary Pan Issues,4.7,184.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+181,I. Structural Systems,Maintenance,Door Not Installed,4.65,561.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+182,II. Electrical Systems,Maintenance,Missing/Damaged Smoke/CO Detectors,4.5,206.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+183,I. Structural Systems,Maintenance,Damaged/Missing Transition Strip,4.45,566.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+184,I. Structural Systems,Maintenance,Damaged Vents/Flashings,4.45,361.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+185,I. Structural Systems,Maintenance,Damaged Firebox,4.4,916.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+186,IV. Plumbing Systems,High Cost/Hidden Defects,Damaged Water Heater Vent Flue,4.31,314.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+187,I. Structural Systems,Maintenance,Damaged/Missing Chimney Cap,4.26,905.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+188,I. Structural Systems,Maintenance,Clogged Stucco Weep Holes,4.21,2100.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+189,I. Structural Systems,Maintenance,Damaged Window Sill,4.07,884.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+190,II. Electrical Systems,Maintenance,Multiple Wires in One Slot,4.07,439.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+191,VI. Optional Systems,Maintenance,Burnout Sprinkler Zone,4.07,359.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+192,VI. Optional Systems,Maintenance,Damaged Outbuilding Wood/Materials,4.02,1713.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+193,II. Electrical Systems,Maintenance,Neutrals/Grounds on Same Bus Bar,4.02,308.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+194,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Missing Gas Drip Leg,4.02,263.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+195,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Insufficient Flue Clearance,3.92,155.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+196,I. Structural Systems,Maintenance,Damaged Mirror,3.87,399.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+197,I. Structural Systems,Maintenance,Cracked/Loose Shower Tiles,3.82,347.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+198,IV. Plumbing Systems,Maintenance,Missing Electrical Shut Off,3.82,339.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+199,I. Structural Systems,Maintenance,Damaged Blinds,3.73,914.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+200,I. Structural Systems,Maintenance,Waterproofing/Repairs for Chimney Flashings,3.73,594.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+201,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Damaged/Missing Vent/Register,3.68,1005.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+202,II. Electrical Systems,Maintenance,Improper/Handyman Wiring,3.68,356.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+203,I. Structural Systems,Maintenance,Damaged Window Trim,3.68,269.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+204,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Unusually Noisy HVAC,3.63,277.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+205,I. Structural Systems,Maintenance,Damaged Patio Pillars,3.63,1750.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+206,II. Electrical Systems,Maintenance,Missing Receptacles Near Vanities,3.48,434.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+207,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Sagging/Improperly Secured Ductwork,3.48,323.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+208,VI. Optional Systems,Maintenance,Improperly Buried Sprinkler Head/Line,3.48,262.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+209,IV. Plumbing Systems,Maintenance,Insulate Plumbing Supply,3.48,164.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+210,I. Structural Systems,Maintenance,Improper Riser Heights,3.39,642.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+211,I. Structural Systems,Maintenance,Damaged/Missing Door Stopper,3.34,294.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+212,II. Electrical Systems,Maintenance,No Lighting Present,3.29,597.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+213,II. Electrical Systems,Maintenance,Repair Damaged Conduit,3.29,529.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+214,VI. Optional Systems,Maintenance,Inoperable Sprinkler Zone,3.24,359.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+215,IV. Plumbing Systems,Maintenance,Deficient TPR Valve,3.24,211.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+216,I. Structural Systems,Maintenance,Improperly Secured Cabinet,3.24,157.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+217,IV. Plumbing Systems,Maintenance,Hot/Cold Swapped Fixture,3.19,460.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+218,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Inspect Vents/Registers/Plenum,3.15,160.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+219,VI. Optional Systems,Maintenance,Adjust Sprinkler Heads,3.15,494.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+220,V. Appliances,Maintenance,Deficient Photovoltaic Sensors,3.1,135.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+221,V. Appliances,Maintenance,Inoperable Range Hood Lighting,3.05,1564.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+222,V. Appliances,Maintenance,Worn/Damaged Cooktop,3.05,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+223,IV. Plumbing Systems,Maintenance,Insufficient Water Heater Ventilation,3.05,497.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+224,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Unlevel HVAC Unit,3.05,121.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+225,V. Appliances,High Cost/Hidden Defects,Inoperable Garbage Disposal,3.0,251.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+226,I. Structural Systems,Maintenance,Exposed Slab Rebar/Nails,3.0,218.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+227,I. Structural Systems,Maintenance,Install Chimney Cricket,2.95,826.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+228,V. Appliances,Maintenance,Damaged Microwave,2.95,192.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+229,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Dirty/Missing Air Filter/Register,2.95,143.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+230,V. Appliances,Maintenance,Inoperable Burners,2.95,127.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+231,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Insufficient Makeup/Combustion Air,2.9,221.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+232,I. Structural Systems,Maintenance,Missing Deck Ribbon/Lag Bolts,2.9,979.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+233,I. Structural Systems,Maintenance,Water Damage Near Window,2.9,371.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+234,IV. Plumbing Systems,Maintenance,Missing Anti-Siphon Devices,2.9,187.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+235,IV. Plumbing Systems,Maintenance,Air Admittance Valve Present,2.86,354.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+236,IV. Plumbing Systems,Maintenance,Rusted Water Heater Components,2.86,297.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+237,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Under-performing Emergency Heating,2.81,381.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+238,VI. Optional Systems,Maintenance,Damaged Pool Concrete,2.81,4447.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+239,I. Structural Systems,Maintenance,Loose Door Hinges,2.81,164.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+240,I. Structural Systems,High Cost/Hidden Defects,Missing/Damaged Flooring Caulking,2.76,371.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+241,II. Electrical Systems,Maintenance,Undersized Wiring,2.76,611.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+242,I. Structural Systems,Maintenance,Cut Decking for Ventilation,2.76,718.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+243,IV. Plumbing Systems,Maintenance,Insufficient Flue Clearance,2.76,245.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+244,V. Appliances,Maintenance,Damaged Range Hood,2.71,1564.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+245,I. Structural Systems,Maintenance,Previous Slab Repairs,2.71,779.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+246,IV. Plumbing Systems,Maintenance,CSST Bonding to Electrical System,2.61,347.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+247,II. Electrical Systems,Maintenance,Inoperable Fixture Fan,2.52,370.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+248,I. Structural Systems,High Cost/Hidden Defects,Inadequate Fire Separation Door,2.47,277.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+249,I. Structural Systems,Maintenance,Damaged Expansion Joints,2.47,185.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+250,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Over-performing Heating System,2.42,385.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+251,V. Appliances,High Cost/Hidden Defects,Inoperable Dishwasher,2.42,119.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+252,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Install Condensate Lines,2.42,260.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+253,IV. Plumbing Systems,High Cost/Hidden Defects,No Hot Water at Fixture,2.37,462.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+254,VI. Optional Systems,High Cost/Hidden Defects,Pool Pump Drawing Air,2.32,315.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+255,II. Electrical Systems,Maintenance,Missing Panel Labels,2.32,370.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+256,I. Structural Systems,Maintenance,Remove Attic Construction Debris,2.32,239.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+257,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Install/Repair Secondary Pan,2.32,185.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+258,V. Appliances,Maintenance,Loose Microwave Installation,2.27,726.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+259,I. Structural Systems,Maintenance,Missing Stucco Weep Screed,2.27,2100.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+260,I. Structural Systems,Maintenance,Install Crawlspace Vapor Barrier,2.27,618.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+261,II. Electrical Systems,Maintenance,Missing Light Switch,2.27,356.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+262,VI. Optional Systems,Maintenance,Low Sprinkler Water Pressure,2.27,330.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+263,I. Structural Systems,Maintenance,Wide Baluster Gap,2.23,384.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+264,II. Electrical Systems,Maintenance,Insufficient Kitchen Circuits,2.23,374.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+265,I. Structural Systems,Maintenance,Improper Mechanical Access,2.23,318.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+266,I. Structural Systems,Maintenance,Damaged Crawlspace Skirting,2.18,1024.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+267,I. Structural Systems,Maintenance,Missing/Damaged Fireplace Access Door,2.18,869.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+268,IV. Plumbing Systems,High Cost/Hidden Defects,No Water at Fixture,2.13,462.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+269,IV. Plumbing Systems,Maintenance,Improper Ventilation,2.13,1403.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+270,V. Appliances,Maintenance,Damaged Garage Door Opener,2.13,295.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+271,I. Structural Systems,Maintenance,Interior Keyed Locks,2.08,182.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+272,I. Structural Systems,Maintenance,Wall Extends Below Grade,2.03,1382.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+273,IV. Plumbing Systems,High Cost/Hidden Defects,Damaged Cast Iron Drainpipes,1.98,8234.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+274,VI. Optional Systems,High Cost/Hidden Defects,Inoperable Irrigation System,1.98,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+275,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,HVAC Failed to Produce Cold Air,1.98,413.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+276,IV. Plumbing Systems,Maintenance,Damaged Water Heater,1.98,537.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+277,I. Structural Systems,Maintenance,Wood in Contact with Soil,1.98,696.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+278,I. Structural Systems,Maintenance,Rusted Fireplace Lintel,1.98,388.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+279,I. Structural Systems,Maintenance,Missing Deck Support Hangars,1.94,1740.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+280,I. Structural Systems,Maintenance,Insufficient Fireplace Hearth,1.94,387.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+281,I. Structural Systems,Maintenance,Improper Batt Insulation,1.94,173.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+282,V. Appliances,Maintenance,No Refrigerator Water/Ice,1.94,110.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+283,I. Structural Systems,High Cost/Hidden Defects,Foundation Crack,1.89,592.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+284,V. Appliances,High Cost/Hidden Defects,No Water to Dishwasher,1.89,166.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+285,I. Structural Systems,Maintenance,Damaged Retention Walls,1.89,906.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+286,I. Structural Systems,Maintenance,Gaps at Flooring End Joints,1.89,655.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+287,I. Structural Systems,Maintenance,Improper Truss Bracing,1.89,490.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+288,I. Structural Systems,Maintenance,Missing Metal Roof Vent Flashings,1.89,285.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+289,I. Structural Systems,Maintenance,Missing Stucco Control Joints,1.84,1749.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+290,I. Structural Systems,Maintenance,Improper Deck Board Gapping,1.84,1101.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+291,I. Structural Systems,Maintenance,Settling Crawlspace Piers/Beams,1.84,1088.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+292,VI. Optional Systems,Maintenance,Install Pool Security Gate,1.84,177.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+293,VI. Optional Systems,Maintenance,Damaged Pool Components,1.79,4447.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+294,I. Structural Systems,Maintenance,Missing Pier Flashings,1.79,910.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+295,I. Structural Systems,Maintenance,Missing Joist Flashings,1.74,988.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+296,IV. Plumbing Systems,Maintenance,Corrosion in Water Heater,1.74,282.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+297,V. Appliances,Maintenance,Inoperable Microwave Light,1.74,84.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+298,V. Appliances,High Cost/Hidden Defects,Inoperable Garage Door Opener,1.69,295.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+299,I. Structural Systems,Maintenance,Missing Weep Holes,1.69,2100.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+300,VI. Optional Systems,Maintenance,Damaged/Missing Sprinkler Housing,1.69,334.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+301,IV. Plumbing Systems,High Cost/Hidden Defects,Drain Obstruction/Blockage,1.65,2193.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+302,II. Electrical Systems,High Cost/Hidden Defects,Intermittent Switches/Circuits,1.65,356.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+303,IV. Plumbing Systems,High Cost/Hidden Defects,Insufficient Clearance to Floor,1.65,250.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+304,VI. Optional Systems,Maintenance,Damaged Pool Plaster,1.65,5377.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+305,I. Structural Systems,Maintenance,Roof-Mounted Dish Antennas,1.65,761.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+306,I. Structural Systems,Maintenance,Previous Truss/Decking Repairs,1.65,393.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+307,I. Structural Systems,High Cost/Hidden Defects,Missing Deck/Patio Railing,1.6,1740.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+308,I. Structural Systems,High Cost/Hidden Defects,Out of Square Window,1.6,853.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+309,VI. Optional Systems,Maintenance,Inoperable Pool Lighting,1.6,4447.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+310,VI. Optional Systems,High Cost/Hidden Defects,Septage at Clean Out Riser,1.55,875.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+311,I. Structural Systems,High Cost/Hidden Defects,Previous Truss Repairs,1.55,374.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+312,I. Structural Systems,Maintenance,Ponding/Damaged Roll Roofing,1.55,1846.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+313,I. Structural Systems,Maintenance,Loose Patio Railing,1.55,1816.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+314,I. Structural Systems,Maintenance,Clogged Drain Tiles,1.55,246.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+315,I. Structural Systems,High Cost/Hidden Defects,Improper Insulation Levels,1.5,1644.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+316,V. Appliances,High Cost/Hidden Defects,Damaged Dishwasher Door,1.5,388.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+317,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Damaged Thermostat,1.5,350.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+318,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Clogged HVAC Condensate Lines,1.5,302.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+319,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Damaged Air Handler Cabinet,1.5,249.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+320,V. Appliances,High Cost/Hidden Defects,Improper Garage Door Installation,1.5,165.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+321,IV. Plumbing Systems,Maintenance,Septage on Clean Out Riser,1.5,509.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+322,I. Structural Systems,Maintenance,Unstable Deck/Patio Support,1.5,1046.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+323,I. Structural Systems,Maintenance,Exposed Slab Footings,1.5,490.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+324,IV. Plumbing Systems,High Cost/Hidden Defects,Drain Pipe Offset,1.45,4049.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+325,IV. Plumbing Systems,High Cost/Hidden Defects,Root Intrusion in Drain,1.45,2360.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+326,II. Electrical Systems,Maintenance,Missing Grounding Wires,1.45,615.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+327,I. Structural Systems,Maintenance,Damaged Exterior Wallboard/Repairs,1.45,1309.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+328,I. Structural Systems,Maintenance,Damaged/Missing Carpet,1.45,389.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+329,I. Structural Systems,Maintenance,Missing Shelving Components,1.45,119.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+330,I. Structural Systems,High Cost/Hidden Defects,Foundation Condition Assessment,1.4,779.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+331,I. Structural Systems,Maintenance,Damaged Crawlspace Wood/Repairs,1.4,1758.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+332,I. Structural Systems,Maintenance,Loose Flooring Tiles,1.4,471.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+333,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Missing Electric Breaker,1.4,263.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+334,II. Electrical Systems,Maintenance,Disconnected Ground Wire,1.4,218.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+335,I. Structural Systems,Maintenance,Sagging Shelving,1.4,129.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+336,IV. Plumbing Systems,High Cost/Hidden Defects,Drain Leak Present,1.36,6696.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+337,I. Structural Systems,Maintenance,Heaving Grading Line,1.36,507.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+338,I. Structural Systems,Maintenance,Cutback Tree Limbs,1.36,267.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+339,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Inoperable HVAC System,1.31,7184.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+340,I. Structural Systems,High Cost/Hidden Defects,Improper Crawlspace Ventilation,1.31,689.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+341,IV. Plumbing Systems,High Cost/Hidden Defects,Inoperative Water Heater,1.31,180.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+342,I. Structural Systems,Maintenance,Missing Kick Out Flashing,1.31,494.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+343,VI. Optional Systems,Maintenance,Damaged Septic Tank Lids,1.31,165.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+344,I. Structural Systems,Maintenance,Exposed Attic Nails,1.31,130.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+345,V. Appliances,Maintenance,Loud Vent Hood Noises,1.26,532.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+346,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Old Sheet Metal Ductwork,1.26,808.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+347,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Old Plastic Ductwork,1.26,808.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+348,I. Structural Systems,Maintenance,Missing Attic Ladder Baffles,1.26,1137.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+349,I. Structural Systems,Maintenance,Repair Crawlspace Insulation Support,1.26,977.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+350,I. Structural Systems,Maintenance,Carpet Stretching Needed,1.26,587.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+351,I. Structural Systems,Maintenance,Remove Slab Form Boards,1.26,515.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+352,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Moisture in HVAC Closet Flooring,1.26,276.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+353,IV. Plumbing Systems,Maintenance,Missing Water Heater Access Panel,1.26,262.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+354,II. Electrical Systems,High Cost/Hidden Defects,Recalled Electrical Panel,1.21,3727.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+355,VI. Optional Systems,Maintenance,Damaged Pool Coping,1.21,4591.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+356,VI. Optional Systems,Maintenance,Pool Pumps Issues,1.21,911.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+357,I. Structural Systems,Maintenance,Improper Stair Installation,1.21,780.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+358,V. Appliances,Maintenance,Missing Dishwasher Gaskets/Trim,1.21,139.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+359,VI. Optional Systems,High Cost/Hidden Defects,Pump Septic Tank,1.16,931.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+360,V. Appliances,High Cost/Hidden Defects,No Power to Oven,1.16,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+361,IV. Plumbing Systems,High Cost/Hidden Defects,Toilet Not Draining,1.16,462.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+362,I. Structural Systems,High Cost/Hidden Defects,Damaged/Missing Damper,1.16,310.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+363,II. Electrical Systems,Maintenance,Missing Wall Plugs,1.16,541.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+364,I. Structural Systems,Maintenance,Damaged Stairs,1.16,745.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+365,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Clean and Service HVAC System,1.16,481.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+366,I. Structural Systems,High Cost/Hidden Defects,Damaged Truss Bracing,1.11,510.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+367,I. Structural Systems,Maintenance,Safety Glass Required,1.11,1276.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+368,V. Appliances,Maintenance,Manual Disconnect Needs Repair,1.11,296.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+369,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Rust Around Register,1.11,188.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+370,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Oversized/Undersized HVAC Breaker,1.06,264.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+371,V. Appliances,Maintenance,Damaged Range Display,1.06,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+372,VI. Optional Systems,Maintenance,Damaged Outbuilding Electrical,1.06,463.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+373,V. Appliances,Maintenance,Remove Dryer Vent Screen,1.06,280.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+374,II. Electrical Systems,Maintenance,Double Switched Receptacles,1.06,202.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+375,VI. Optional Systems,High Cost/Hidden Defects,Clogged Irrigation Nozzle,1.02,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+376,I. Structural Systems,High Cost/Hidden Defects,Voids in Ground Grading,1.02,413.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+377,V. Appliances,High Cost/Hidden Defects,Garage Door Not Closing,1.02,295.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+378,V. Appliances,High Cost/Hidden Defects,Noisy Dishwasher Operation,1.02,110.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+379,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Damaged/Missing HVAC Filters,1.02,2554.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+380,VI. Optional Systems,Maintenance,Damaged Sprinkler Valve/Box,1.02,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+381,VI. Optional Systems,Maintenance,Disconnected Sprinkler Wires,1.02,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+382,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Missing Emergency Heat Function,1.02,476.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+383,I. Structural Systems,Maintenance,Damaged Window Balance,1.02,349.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+384,I. Structural Systems,Maintenance,Damaged Attic Access Cover,1.02,318.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+385,IV. Plumbing Systems,High Cost/Hidden Defects,Sewer Smell Present,0.97,1975.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+386,I. Structural Systems,High Cost/Hidden Defects,Water Damage on Deck,0.97,988.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+387,I. Structural Systems,High Cost/Hidden Defects,Flooring Gives Underfoot,0.97,702.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+388,II. Electrical Systems,High Cost/Hidden Defects,Open Grounds in Receptacles,0.97,588.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+389,I. Structural Systems,High Cost/Hidden Defects,Damaged Garage Door,0.97,561.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+390,I. Structural Systems,High Cost/Hidden Defects,Improper Clearance to Flammables,0.97,438.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+391,IV. Plumbing Systems,Maintenance,Rust in Water,0.97,1209.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+392,I. Structural Systems,Maintenance,Paint/Stain Exterior Wallboard,0.97,564.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+393,I. Structural Systems,Maintenance,Damaged Chimney Chase,0.97,457.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+394,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Damaged/Noisy HVAC Condenser Fan,0.92,263.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+395,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Noisy Vent Registers,0.92,773.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+396,VI. Optional Systems,Maintenance,Unbonded Pool Pumps,0.92,658.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+397,I. Structural Systems,Maintenance,Wavy Slab,0.92,2248.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+398,I. Structural Systems,Maintenance,Remove Unnecessary Truss Blocking,0.92,652.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+399,VI. Optional Systems,Maintenance,Damaged Septic Fixtures,0.92,250.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+400,I. Structural Systems,Maintenance,Exposed Wall Nails,0.92,76.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+401,VI. Optional Systems,High Cost/Hidden Defects,Root Ball in Septic System,0.87,957.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+402,I. Structural Systems,High Cost/Hidden Defects,Improper Metal Roofing Screws,0.87,497.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+403,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Damaged Vent Flue,0.87,314.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+404,V. Appliances,Maintenance,Improper Exhaust System Installation,0.87,1565.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+405,VI. Optional Systems,Maintenance,Damaged Well Components,0.87,1804.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+406,I. Structural Systems,Maintenance,Damaged Stair Nosings,0.87,780.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+407,I. Structural Systems,Maintenance,Stain/Seal Exterior Doors,0.87,577.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+408,VI. Optional Systems,Maintenance,Add Sprinkler Zones,0.87,495.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+409,I. Structural Systems,Maintenance,Damaged Tub,0.87,451.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+410,I. Structural Systems,Maintenance,Exposed Roof Nails,0.87,345.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+411,I. Structural Systems,Maintenance,Damaged Attic Pulldown Ladder,0.87,249.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+412,VI. Optional Systems,Maintenance,Damaged Septic Controller,0.87,245.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+413,I. Structural Systems,High Cost/Hidden Defects,Unstable/Damaged Chimney Structure,0.82,905.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+414,IV. Plumbing Systems,High Cost/Hidden Defects,Water Heater Not Operating,0.82,279.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+415,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Excessive Noise from Blower,0.82,233.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+416,IV. Plumbing Systems,High Cost/Hidden Defects,Inoperable Jacuzzi Tub,0.82,186.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+417,V. Appliances,Maintenance,Damaged Range,0.82,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+418,VI. Optional Systems,Maintenance,Rusted Pool Panels/Equipment,0.82,4447.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+419,I. Structural Systems,Maintenance,Exterior Mortar Openings,0.82,791.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+420,IV. Plumbing Systems,Maintenance,Non-Functioning Drain Stopper,0.82,440.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+421,I. Structural Systems,Maintenance,Missing Drip Edge Flashing,0.82,230.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+422,V. Appliances,High Cost/Hidden Defects,Inoperable Exhaust Fan,0.77,1569.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+423,I. Structural Systems,High Cost/Hidden Defects,Improper Window Installation,0.77,915.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+424,I. Structural Systems,High Cost/Hidden Defects,Damaged Attic Ventilation,0.77,367.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+425,VI. Optional Systems,Maintenance,Damaged Pool Gauge,0.77,4447.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+426,IV. Plumbing Systems,Maintenance,Rust on Water Heater,0.77,1121.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+427,I. Structural Systems,Maintenance,Missing Patio/Entry Door Cover,0.77,988.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+428,I. Structural Systems,Maintenance,Damaged Fireplace Hearth,0.77,889.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+429,I. Structural Systems,Maintenance,Insulation in Baffles,0.77,554.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+430,VI. Optional Systems,High Cost/Hidden Defects,Inoperable Pool/Spa Heater,0.73,3193.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+431,VI. Optional Systems,High Cost/Hidden Defects,Duplicate Irrigation Zones,0.73,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+432,IV. Plumbing Systems,High Cost/Hidden Defects,Water Hammer Arrestors Needed,0.73,330.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+433,II. Electrical Systems,High Cost/Hidden Defects,Non-IC Cans Touching Insulation,0.73,243.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+434,VI. Optional Systems,High Cost/Hidden Defects,Missing GFCI in Outbuilding,0.73,188.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+435,V. Appliances,Maintenance,Exhaust to Exterior Not Connected,0.73,1564.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+436,V. Appliances,Maintenance,Attic-Terminating Exhaust Vents,0.73,926.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+437,II. Electrical Systems,Maintenance,Frayed Wiring Sheathing,0.73,742.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+438,IV. Plumbing Systems,Maintenance,Lime Deposits in Water Heater,0.73,155.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+439,VI. Optional Systems,High Cost/Hidden Defects,Pump Effluent and Main Septic Tanks,0.68,1049.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+440,V. Appliances,High Cost/Hidden Defects,Gas Smell from Range/Oven,0.68,521.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+441,II. Electrical Systems,High Cost/Hidden Defects,Oversized Breaker,0.68,248.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+442,V. Appliances,High Cost/Hidden Defects,Dishwasher Not Draining,0.68,166.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+443,V. Appliances,Maintenance,Out of Square Garage Door,0.68,575.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+444,V. Appliances,Maintenance,Inoperable Oven Light,0.68,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+445,VI. Optional Systems,Maintenance,Rusted Well Components,0.68,1804.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+446,VI. Optional Systems,Maintenance,Loose Sprinkler Controller,0.68,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+447,I. Structural Systems,Maintenance,Voids in Tyvek/Thermo Ply,0.68,1427.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+448,I. Structural Systems,Maintenance,Damaged Retention Walls,0.68,1341.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+449,V. Appliances,Maintenance,Improper Dryer Venting,0.68,404.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+450,I. Structural Systems,Maintenance,Incorrect Baffle Installation,0.68,374.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+451,II. Electrical Systems,Maintenance,Panel Not Latching,0.68,347.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+452,IV. Plumbing Systems,Maintenance,Unbonded Gas Line at Meter,0.68,138.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+453,I. Structural Systems,High Cost/Hidden Defects,Cracked/Broken Roof Tiles,0.63,840.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+454,I. Structural Systems,High Cost/Hidden Defects,Incomplete Flooring Installation,0.63,743.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+455,V. Appliances,High Cost/Hidden Defects,High Loop Needed for Dishwasher,0.63,130.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+456,I. Structural Systems,Maintenance,Nails Popping in Interior,0.63,2303.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+457,I. Structural Systems,Maintenance,Wobbly Patio Structures,0.63,551.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+458,VI. Optional Systems,Maintenance,Water Damaged Well House,0.63,443.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+459,I. Structural Systems,Maintenance,Damaged Flashing/Cricket,0.63,377.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+460,I. Structural Systems,Maintenance,Difficult Cabinet Drawers,0.63,162.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+461,IV. Plumbing Systems,Maintenance,Unlevel Water Heater,0.63,138.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+462,V. Appliances,Maintenance,Damaged Dishwasher Display,0.63,111.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+463,I. Structural Systems,High Cost/Hidden Defects,Truss Repairs Needed,0.58,1153.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+464,I. Structural Systems,High Cost/Hidden Defects,Inoperable Fireplace,0.58,1031.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+465,I. Structural Systems,High Cost/Hidden Defects,Deteriorated Stair Materials,0.58,841.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+466,IV. Plumbing Systems,High Cost/Hidden Defects,Further Septic System Evaluation,0.58,641.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+467,I. Structural Systems,High Cost/Hidden Defects,Damaged Support Hanger/Gusset,0.58,604.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+468,II. Electrical Systems,High Cost/Hidden Defects,Insufficient Electrical Circuits,0.58,597.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+469,I. Structural Systems,High Cost/Hidden Defects,Solar Panels Present,0.58,536.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+470,I. Structural Systems,High Cost/Hidden Defects,Windows Painted Shut,0.58,447.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+471,I. Structural Systems,High Cost/Hidden Defects,Out of Level Tiles and Settling Grout,0.58,267.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+472,V. Appliances,High Cost/Hidden Defects,Leaking Dishwasher,0.58,166.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+473,II. Electrical Systems,Maintenance,Obstructed Receptacle,0.58,643.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+474,I. Structural Systems,Maintenance,Improper Window Egress,0.58,1203.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+475,I. Structural Systems,Maintenance,Damaged Fireplace Vent,0.58,889.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+476,II. Electrical Systems,Maintenance,Insufficient Panel Clearance,0.58,346.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+477,V. Appliances,Maintenance,Damaged Refrigerator,0.58,281.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+478,VI. Optional Systems,Maintenance,Low Pressure Pool Filter,0.58,234.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+479,IV. Plumbing Systems,High Cost/Hidden Defects,Old Drain/Supply Materials,0.53,6706.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+480,II. Electrical Systems,High Cost/Hidden Defects,Flickering/Inoperative Light Fixture,0.53,356.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+481,VI. Optional Systems,High Cost/Hidden Defects,Adjust Sprayer Heads,0.53,251.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+482,II. Electrical Systems,High Cost/Hidden Defects,Breaker On with No Wires,0.53,248.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+483,II. Electrical Systems,High Cost/Hidden Defects,Open Junction Box,0.53,215.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+484,V. Appliances,Maintenance,Damaged Range Knob,0.53,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+485,II. Electrical Systems,Maintenance,Fuzed Panels Present,0.53,887.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+486,I. Structural Systems,Maintenance,Bunching/Wavy Roll Roofing,0.53,1866.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+487,I. Structural Systems,Maintenance,Ceiling Nail Pop,0.53,657.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+488,V. Appliances,Maintenance,Damaged Range Hood Knobs/Controls,0.53,451.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+489,II. Electrical Systems,Maintenance,Reversed Hot/Neutral Wiring,0.53,354.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+490,VI. Optional Systems,Maintenance,Improper Sprinkler Installation,0.53,320.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+491,IV. Plumbing Systems,Maintenance,Noisy Water Heater Operation,0.53,136.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+492,V. Appliances,Maintenance,Inoperable Ice Maker,0.53,104.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+493,IV. Plumbing Systems,High Cost/Hidden Defects,Damaged Drain Line,0.48,6714.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+494,V. Appliances,High Cost/Hidden Defects,Oven Not Heating,0.48,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+495,IV. Plumbing Systems,High Cost/Hidden Defects,Low Water Heater Temperature,0.48,241.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+496,VI. Optional Systems,High Cost/Hidden Defects,Broken Well Pressure Gauge,0.48,167.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+497,V. Appliances,High Cost/Hidden Defects,Inoperable Microwave,0.48,100.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+498,VI. Optional Systems,Maintenance,Clogged Pool Skimmers,0.48,911.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+499,VI. Optional Systems,Maintenance,Pool Wall Stains,0.48,688.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+500,I. Structural Systems,Maintenance,Damaged Shower Flooring,0.48,807.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+501,I. Structural Systems,Maintenance,Unprotected Wiring Near Attic,0.48,736.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+502,VI. Optional Systems,Maintenance,Insulate Well Exterior Plumbing,0.48,443.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+503,I. Structural Systems,Maintenance,Slab Wall Efflorescence,0.48,418.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+504,II. Electrical Systems,Maintenance,Missing Panel Knockouts,0.48,347.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+505,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Missing Condensate Drain,0.48,279.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+506,I. Structural Systems,Maintenance,Missing/Damaged Fireplace Air Vent,0.48,273.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+507,V. Appliances,Maintenance,Damaged Dishwasher Racks,0.48,129.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+508,II. Electrical Systems,High Cost/Hidden Defects,Main Breaker Required,0.44,1860.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+509,IV. Plumbing Systems,High Cost/Hidden Defects,Rust Buildup on Water Heater,0.44,1208.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+510,VI. Optional Systems,High Cost/Hidden Defects,Settling Pool,0.44,802.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+511,VI. Optional Systems,High Cost/Hidden Defects,Noisy Pool Pump,0.44,614.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+512,V. Appliances,High Cost/Hidden Defects,Improper Vent Clearance,0.44,487.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+513,VI. Optional Systems,High Cost/Hidden Defects,Cloudy Pool Water,0.44,425.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+514,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Improper HVAC Heating,0.44,369.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+515,V. Appliances,Maintenance,Missing/Damaged Range Control Knobs,0.44,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+516,VI. Optional Systems,Maintenance,Damaged Pool Tile Work,0.44,4447.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+517,IV. Plumbing Systems,Maintenance,Improper Gas Meter Distance,0.44,650.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+518,II. Electrical Systems,Maintenance,Missing Panel Dead Front,0.44,347.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+519,IV. Plumbing Systems,High Cost/Hidden Defects,Improper Drain Slope,0.39,1965.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+520,I. Structural Systems,High Cost/Hidden Defects,Severe Ceiling Damage,0.39,626.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+521,IV. Plumbing Systems,High Cost/Hidden Defects,Damaged Water Heater Housing,0.39,537.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+522,I. Structural Systems,High Cost/Hidden Defects,Inadequate Chimney Clearance,0.39,417.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+523,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,CSST Gas Line Present,0.39,392.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+524,VI. Optional Systems,High Cost/Hidden Defects,Decommissioned Irrigation Zones,0.39,369.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+525,V. Appliances,High Cost/Hidden Defects,Improper Garbage Disposal Installation,0.39,245.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+526,VI. Optional Systems,High Cost/Hidden Defects,Short Cycling Bladder Tank,0.39,213.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+527,IV. Plumbing Systems,High Cost/Hidden Defects,Water Heater Leak,0.39,179.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+528,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Missing Vent Cap,0.39,808.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+529,IV. Plumbing Systems,Maintenance,Rust at Water Heater/Pan,0.39,1210.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+530,II. Electrical Systems,Maintenance,Trees Contacting Primary Feeder,0.39,448.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+531,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Damaged Condensate Line,0.39,201.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+532,I. Structural Systems,Maintenance,Damaged/Improper Shutter,0.39,191.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+533,I. Structural Systems,Maintenance,Loose/Damaged Towel Rack,0.39,129.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+534,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Thermostat Has No Power,0.34,7186.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+535,VI. Optional Systems,High Cost/Hidden Defects,Damaged Pool Cover,0.34,4591.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+536,II. Electrical Systems,High Cost/Hidden Defects,Aluminum Wiring Present,0.34,3497.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+537,VI. Optional Systems,High Cost/Hidden Defects,Inoperable Pool Jets,0.34,3193.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+538,I. Structural Systems,High Cost/Hidden Defects,Damaged Chimney Flue,0.34,916.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+539,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Missing/Insufficient Supply Air System,0.34,806.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+540,VI. Optional Systems,High Cost/Hidden Defects,Leaking Pool Filter Housing,0.34,802.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+541,V. Appliances,High Cost/Hidden Defects,Damaged Range,0.34,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+542,IV. Plumbing Systems,High Cost/Hidden Defects,Noisy Drain,0.34,225.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+543,I. Structural Systems,High Cost/Hidden Defects,Improper Window Bar Locks,0.34,172.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+544,VI. Optional Systems,Maintenance,Observed Pool Leak,0.34,4591.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+545,VI. Optional Systems,Maintenance,Weak Pool Jets,0.34,802.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+546,I. Structural Systems,Maintenance,Damaged/Loose Baluster,0.34,988.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+547,I. Structural Systems,Maintenance,Inoperable Fireplace Gas Line,0.34,889.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+548,I. Structural Systems,Maintenance,Insufficient Stair Support,0.34,780.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+549,I. Structural Systems,Maintenance,Missing Attic Access Cover,0.34,318.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+550,V. Appliances,Maintenance,Damaged Locking Mechanism,0.34,301.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+551,V. Appliances,Maintenance,Inoperable Garage Door Light,0.34,292.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+552,IV. Plumbing Systems,Maintenance,Missing/Damaged Vent Cap,0.34,256.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+553,VI. Optional Systems,Maintenance,Inoperable Septic Alarm,0.34,216.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+554,I. Structural Systems,Maintenance,Remove Grading Wood/Debris,0.34,154.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+555,VI. Optional Systems,High Cost/Hidden Defects,Inoperable Pool Pump,0.29,3193.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+556,IV. Plumbing Systems,High Cost/Hidden Defects,Install Backwater Valve,0.29,1975.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+557,VI. Optional Systems,High Cost/Hidden Defects,Underperforming Submersible Pump,0.29,1804.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+558,II. Electrical Systems,High Cost/Hidden Defects,Electrical Panel Upgrade Needed,0.29,1662.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+559,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Kinked Ductwork,0.29,806.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+560,I. Structural Systems,High Cost/Hidden Defects,Improve Bowed Wall Supports,0.29,532.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+561,VI. Optional Systems,High Cost/Hidden Defects,Damaged Outbuilding Roof,0.29,445.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+562,IV. Plumbing Systems,High Cost/Hidden Defects,Gas Leak Identified,0.29,428.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+563,V. Appliances,High Cost/Hidden Defects,No Dryer Vent Installed,0.29,393.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+564,V. Appliances,High Cost/Hidden Defects,Missing Garage Door Safety Disconnect,0.29,296.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+565,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Loose Gas Line,0.29,247.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+566,VI. Optional Systems,High Cost/Hidden Defects,Inoperable Septic Float Switch,0.29,245.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+567,IV. Plumbing Systems,High Cost/Hidden Defects,Pilot Light Not Lighting,0.29,180.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+568,VI. Optional Systems,Maintenance,Insufficient Septic Grading,0.29,1854.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+569,VI. Optional Systems,Maintenance,Unlevel Outbuilding Flooring,0.29,680.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+570,VI. Optional Systems,Maintenance,Soil/Water-Covered Sprinkler Fixture,0.29,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+571,I. Structural Systems,Maintenance,Rusted Patio Components,0.29,789.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+572,I. Structural Systems,Maintenance,Sagging Exterior Stairs,0.29,780.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+573,VI. Optional Systems,Maintenance,Damaged/Missing Outbuilding Fixtures,0.29,472.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+574,I. Structural Systems,Maintenance,Missing Flooring Caulking,0.29,371.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+575,IV. Plumbing Systems,Maintenance,Crooked Gas Installation,0.29,363.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+576,I. Structural Systems,Maintenance,Foggy Fireplace Window,0.29,319.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+577,V. Appliances,Maintenance,Damaged Dishwasher Soap Dish,0.29,119.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+578,VI. Optional Systems,High Cost/Hidden Defects,Inoperable Pool Cleaner,0.24,3193.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+579,VI. Optional Systems,High Cost/Hidden Defects,Damaged/Missing Skimmer Basket,0.24,3193.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+580,I. Structural Systems,High Cost/Hidden Defects,Improve Wall Blocking,0.24,2347.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+581,IV. Plumbing Systems,High Cost/Hidden Defects,Missing Drain Trap,0.24,1965.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+582,VI. Optional Systems,High Cost/Hidden Defects,Damaged Pool Electrical,0.24,1031.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+583,VI. Optional Systems,High Cost/Hidden Defects,Pump Traditional Septic Tank,0.24,931.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+584,II. Electrical Systems,High Cost/Hidden Defects,Obsolete Panel - Upgrade Recommended,0.24,887.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+585,VI. Optional Systems,High Cost/Hidden Defects,Low Pool Water Level,0.24,633.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+586,I. Structural Systems,High Cost/Hidden Defects,Sliding Door Screen Off Track,0.24,577.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+587,I. Structural Systems,High Cost/Hidden Defects,Improper Roof Decking Gapping,0.24,558.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+588,VI. Optional Systems,High Cost/Hidden Defects,Missing Backflow Valve,0.24,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+589,VI. Optional Systems,High Cost/Hidden Defects,Inoperable Irrigation Head,0.24,495.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+590,I. Structural Systems,High Cost/Hidden Defects,Missing/Inoperable Fireplace Switch,0.24,395.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+591,V. Appliances,High Cost/Hidden Defects,No Dryer Vent Installed,0.24,280.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+592,I. Structural Systems,High Cost/Hidden Defects,Improper Attic Ladder Installation,0.24,270.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+593,VI. Optional Systems,High Cost/Hidden Defects,Damaged Septic Sprayer System,0.24,251.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+594,V. Appliances,High Cost/Hidden Defects,Garbage Disposal Leak,0.24,245.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+595,I. Structural Systems,High Cost/Hidden Defects,Missing Wire Protection Plates,0.24,216.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+596,IV. Plumbing Systems,High Cost/Hidden Defects,No Access Panel for Jacuzzi,0.24,186.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+597,VI. Optional Systems,Maintenance,Pooling Sprinkler Water,0.24,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+598,VI. Optional Systems,Maintenance,Damaged Sprinkler PVC,0.24,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+599,IV. Plumbing Systems,Maintenance,Missing Gas Meter,0.24,650.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+600,I. Structural Systems,Maintenance,Inoperable Electric Fireplace,0.24,869.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+601,I. Structural Systems,Maintenance,Cracked/Damaged Sink,0.24,758.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+602,I. Structural Systems,Maintenance,Out of Square Exterior Walls,0.24,752.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+603,I. Structural Systems,Maintenance,Caulked Skylights,0.24,462.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+604,V. Appliances,Maintenance,Improper Dryer Vent Clearance,0.24,446.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+605,I. Structural Systems,Maintenance,Missing Fireplace Key,0.24,387.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+606,II. Electrical Systems,Maintenance,Missing AFCI Breakers,0.24,381.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+607,I. Structural Systems,Maintenance,Missing Fireplace Doors,0.24,343.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+608,I. Structural Systems,Maintenance,Fireplace Pilot Not Lighting,0.24,291.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+609,I. Structural Systems,Maintenance,No Attic Ladder Installed,0.24,270.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+610,V. Appliances,Maintenance,Sticking Garage Door,0.24,159.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+611,I. Structural Systems,High Cost/Hidden Defects,Missing/Damaged Wall Bracing,0.19,2224.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+612,IV. Plumbing Systems,High Cost/Hidden Defects,Narrowing Drain Pipe,0.19,2203.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+613,I. Structural Systems,High Cost/Hidden Defects,Damaged/Broken Skylight,0.19,1334.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+614,VI. Optional Systems,High Cost/Hidden Defects,Booster Pump Suggested,0.19,1218.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+615,V. Appliances,High Cost/Hidden Defects,Exhaust Duct Terminates into Attic,0.19,1083.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+616,IV. Plumbing Systems,High Cost/Hidden Defects,Insufficient Hot Water Supply,0.19,962.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+617,I. Structural Systems,High Cost/Hidden Defects,Missing Patio Flashing,0.19,661.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+618,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Consider Electronic Diverter System,0.19,640.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+619,I. Structural Systems,High Cost/Hidden Defects,Seal Moisture Barrier,0.19,618.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+620,I. Structural Systems,High Cost/Hidden Defects,Bowed/Warped Truss,0.19,510.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+621,VI. Optional Systems,High Cost/Hidden Defects,Damaged Drinker Line,0.19,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+622,I. Structural Systems,High Cost/Hidden Defects,Improper Flashing Nailing,0.19,444.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+623,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Inoperable Mini Split HVAC,0.19,350.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+624,VI. Optional Systems,High Cost/Hidden Defects,Exposed Irrigation Control Wires,0.19,262.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+625,I. Structural Systems,High Cost/Hidden Defects,Grout Pitting in Flooring,0.19,227.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+626,VI. Optional Systems,High Cost/Hidden Defects,Water Hammer Arrester Needed,0.19,209.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+627,IV. Plumbing Systems,High Cost/Hidden Defects,Damaged Jacuzzi Jet,0.19,180.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+628,IV. Plumbing Systems,High Cost/Hidden Defects,Damaged Relief Valve,0.19,142.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+629,IV. Plumbing Systems,High Cost/Hidden Defects,Improper On Demand Heater Installation,0.19,140.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+630,V. Appliances,Maintenance,Damaged Range Drawer,0.19,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+631,V. Appliances,Maintenance,Damaged Range Handle,0.19,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+632,II. Electrical Systems,Maintenance,Exposed Ground Rod,0.19,597.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+633,VI. Optional Systems,Maintenance,Pool Component Issues,0.19,911.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+634,VI. Optional Systems,Maintenance,Missing Sprinkler Insulation/Cover,0.19,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+635,VI. Optional Systems,Maintenance,Out of Square Outbuilding Door,0.19,504.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+636,I. Structural Systems,Maintenance,Insulation Retainer/Barrier,0.19,1658.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+637,I. Structural Systems,Maintenance,Missing/Damaged Kick-Out Flashing,0.19,329.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+638,V. Appliances,Maintenance,Inoperable Attic Fan,0.19,282.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+639,V. Appliances,Maintenance,Corrugated Dryer Vent,0.19,280.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+640,IV. Plumbing Systems,Maintenance,Missing Dielectric Union,0.19,252.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+641,VI. Optional Systems,Maintenance,Missing/Damaged Septic Baffles,0.19,251.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+642,V. Appliances,Maintenance,Missing/Damaged Disposal Component,0.19,248.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+643,I. Structural Systems,Maintenance,Damaged Drain Tiles,0.19,246.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+644,I. Structural Systems,Maintenance,Damaged Mailbox,0.19,210.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+645,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Condensate Line Moisture/Sweating,0.19,207.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+646,VI. Optional Systems,High Cost/Hidden Defects,Damaged Pool Drain Tiles,0.15,4454.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+647,I. Structural Systems,High Cost/Hidden Defects,Friable Flooring Grout,0.15,1453.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+648,IV. Plumbing Systems,High Cost/Hidden Defects,Improper Drain,0.15,1423.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+649,I. Structural Systems,High Cost/Hidden Defects,Missing Firewall,0.15,1137.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+650,VI. Optional Systems,High Cost/Hidden Defects,Install Entrapment Proof Drain Cover,0.15,802.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+651,VI. Optional Systems,High Cost/Hidden Defects,Inoperable Pool Timer,0.15,718.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+652,I. Structural Systems,High Cost/Hidden Defects,Failed Seal on Sliding Glass Door,0.15,539.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+653,VI. Optional Systems,High Cost/Hidden Defects,Inoperable Rain Sensor,0.15,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+654,VI. Optional Systems,High Cost/Hidden Defects,Low Water Pressure from Well,0.15,443.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+655,VI. Optional Systems,High Cost/Hidden Defects,Damaged Concrete Reservoir,0.15,443.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+656,I. Structural Systems,High Cost/Hidden Defects,Install Joist Hangers on Truss,0.15,426.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+657,I. Structural Systems,High Cost/Hidden Defects,Improve Pocket Former Connection,0.15,418.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+658,I. Structural Systems,High Cost/Hidden Defects,Repair Foundation Forms,0.15,418.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+659,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Unusual Vibration in Air Handler,0.15,326.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+660,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Damaged Exhaust Ventilation,0.15,325.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+661,II. Electrical Systems,High Cost/Hidden Defects,Loose/Disconnected Breaker,0.15,321.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+662,I. Structural Systems,High Cost/Hidden Defects,Missing Separation Wall at Garage/House,0.15,245.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+663,V. Appliances,High Cost/Hidden Defects,Missing Garbage Disposal Switch,0.15,242.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+664,V. Appliances,High Cost/Hidden Defects,No Gas Shut-off Valve,0.15,237.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+665,VI. Optional Systems,High Cost/Hidden Defects,Improper Wire Splicing in Well System,0.15,213.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+666,II. Electrical Systems,High Cost/Hidden Defects,Insufficient Wiring Clearance,0.15,193.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+667,II. Electrical Systems,High Cost/Hidden Defects,Unmarked Electrical Conductors,0.15,177.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+668,V. Appliances,Maintenance,Dirty Exhaust System,0.15,1115.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+669,II. Electrical Systems,Maintenance,Damaged Wiring,0.15,597.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+670,VI. Optional Systems,Maintenance,Damaged Pool Pump Housings,0.15,4447.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+671,IV. Plumbing Systems,Maintenance,Missing/Lloose Drain Straps,0.15,1975.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+672,I. Structural Systems,Maintenance,Parking Lot/Flatwork Condition,0.15,1001.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+673,I. Structural Systems,Maintenance,Unlevel Lintel,0.15,849.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+674,I. Structural Systems,Maintenance,Missing/Damaged Garage Ventilation,0.15,821.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+675,I. Structural Systems,Maintenance,Clear Slab Construction Materials,0.15,821.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+676,I. Structural Systems,Maintenance,Clearance Wallboard/Shingles,0.15,496.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+677,IV. Plumbing Systems,Maintenance,Unbonded Gas Line at Meter,0.15,455.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+678,VI. Optional Systems,Maintenance,Missing Septic Dosing Bleach,0.15,251.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+679,VI. Optional Systems,Maintenance,Rusted/Damaged Outbuilding Components,0.15,213.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+680,VI. Optional Systems,Maintenance,Out of Square Outbuilding Door,0.15,187.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+681,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Improper Flame Retardant Cladding,0.15,155.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+682,I. Structural Systems,High Cost/Hidden Defects,Wood Flooring - Improper Finishing,0.1,4525.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+683,VI. Optional Systems,High Cost/Hidden Defects,Remove Foliage/Tree Limbs,0.1,2593.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+684,I. Structural Systems,High Cost/Hidden Defects,Brick Separation from Wall,0.1,2213.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+685,IV. Plumbing Systems,High Cost/Hidden Defects,Improper Drain Cleanout Configuration,0.1,1989.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+686,IV. Plumbing Systems,High Cost/Hidden Defects,Unburied Drain Lines,0.1,1965.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+687,V. Appliances,High Cost/Hidden Defects,Unpowered Vent Hood,0.1,1565.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+688,I. Structural Systems,High Cost/Hidden Defects,Dual Layer Insulation Issue,0.1,1129.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+689,I. Structural Systems,High Cost/Hidden Defects,Multi Lot Drainage Issue,0.1,1126.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+690,I. Structural Systems,High Cost/Hidden Defects,Missing Lintel,0.1,849.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+691,I. Structural Systems,High Cost/Hidden Defects,Missing Garage Wall Vents,0.1,821.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+692,I. Structural Systems,High Cost/Hidden Defects,Not Square Garage Entry,0.1,821.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+693,I. Structural Systems,High Cost/Hidden Defects,Improve Foundation Chairs,0.1,809.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+694,I. Structural Systems,High Cost/Hidden Defects,Structural Damage in Ceiling,0.1,806.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+695,VI. Optional Systems,High Cost/Hidden Defects,Inoperable Septic Irrigation,0.1,736.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+696,I. Structural Systems,High Cost/Hidden Defects,Crooked Attic Stair Door,0.1,680.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+697,V. Appliances,High Cost/Hidden Defects,Missing Range Knobs,0.1,516.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+698,VI. Optional Systems,High Cost/Hidden Defects,Water Leak in Outbuilding,0.1,463.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+699,VI. Optional Systems,High Cost/Hidden Defects,Debris in Well Reservoir,0.1,443.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+700,VI. Optional Systems,High Cost/Hidden Defects,Missing GFCI for Well System,0.1,443.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+701,I. Structural Systems,High Cost/Hidden Defects,Unsecured Sill Plate Anchors,0.1,418.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+702,I. Structural Systems,High Cost/Hidden Defects,Break Wood/Ground Contact,0.1,381.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+703,I. Structural Systems,High Cost/Hidden Defects,Improper Fireplace Installation,0.1,355.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+704,II. Electrical Systems,High Cost/Hidden Defects,GFCI Breaker Not Operational,0.1,347.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+705,V. Appliances,High Cost/Hidden Defects,Damaged Garage Door Springs,0.1,297.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+706,IV. Plumbing Systems,High Cost/Hidden Defects,Improper Gas Line Extension Length,0.1,268.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+707,VI. Optional Systems,High Cost/Hidden Defects,Improper Septic Irrigation Installation,0.1,262.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+708,I. Structural Systems,High Cost/Hidden Defects,Missing Rebar End Caps,0.1,218.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+709,VI. Optional Systems,High Cost/Hidden Defects,High Pressure Pool Filter,0.1,211.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+710,VI. Optional Systems,High Cost/Hidden Defects,Improperly Installed Outbuilding Toilet,0.1,194.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+711,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Missing Secondary Pan,0.1,184.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+712,I. Structural Systems,High Cost/Hidden Defects,Missing Chimney Flue,0.1,177.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+713,I. Structural Systems,High Cost/Hidden Defects,Plumbing Too Close to Forms,0.1,166.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+714,V. Appliances,High Cost/Hidden Defects,Missing Microwave Plate,0.1,151.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+715,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,HVAC Needs Servicing/Cleaning,0.1,144.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+716,IV. Plumbing Systems,High Cost/Hidden Defects,Undersized On Demand Heater,0.1,140.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+717,V. Appliances,Maintenance,Overlong Dryer Vent,0.1,656.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+718,VI. Optional Systems,Maintenance,Add Backflow Device Support,0.1,506.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+719,I. Structural Systems,Maintenance,Damaged Patio Screen,0.1,1740.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+720,I. Structural Systems,Maintenance,Sagging Chimney,0.1,1510.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+721,I. Structural Systems,Maintenance,Missing Garage/House Firewall,0.1,821.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+722,I. Structural Systems,Maintenance,Missing Stairs,0.1,780.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+723,I. Structural Systems,Maintenance,Rusted Metal Bars/Fencing,0.1,620.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+724,I. Structural Systems,Maintenance,Obstructed Attic Ladder,0.1,517.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+725,VI. Optional Systems,Maintenance,Improper Outbuilding Clearance,0.1,498.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+726,VI. Optional Systems,Maintenance,Damaged Outbuilding Window Spring,0.1,481.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+727,VI. Optional Systems,Maintenance,Damaged Well Wiring Connections,0.1,450.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+728,I. Structural Systems,Maintenance,Damaged/Stained Countertop,0.1,449.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+729,VI. Optional Systems,Maintenance,Outbuilding Soil Erosion,0.1,395.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+730,VI. Optional Systems,Maintenance,Relocate Septic Sprayers,0.1,350.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+731,I. Structural Systems,Maintenance,Dual Insulation Layers,0.1,296.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+732,VI. Optional Systems,Maintenance,Exposed Outbuilding Rebar,0.1,286.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+733,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Improper Gas Line Installation,0.1,247.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+734,VI. Optional Systems,Maintenance,Rusted Outbuilding Door,0.1,213.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+735,IV. Plumbing Systems,Maintenance,Water Taking Too Long to Fixtures,0.1,197.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+736,VI. Optional Systems,Maintenance,Damaged Outbuilding Door Trim,0.1,146.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+737,V. Appliances,Maintenance,Damaged Refrigerator Installation,0.1,110.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+738,IV. Plumbing Systems,Maintenance,Loose Jacuzzi Panel,0.1,109.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+739,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,HVAC Short Cycling,0.05,7223.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+740,VI. Optional Systems,High Cost/Hidden Defects,Deficient Secondary Well Pump,0.05,3394.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+741,VI. Optional Systems,High Cost/Hidden Defects,Damaged Pool Controller,0.05,3193.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+742,I. Structural Systems,High Cost/Hidden Defects,Wall Stud Bulge,0.05,2897.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+743,VI. Optional Systems,High Cost/Hidden Defects,Well System Leak Detected,0.05,1804.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+744,V. Appliances,High Cost/Hidden Defects,Missing Range Exhaust System,0.05,1588.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+745,I. Structural Systems,High Cost/Hidden Defects,Damaged Deck Joists,0.05,988.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+746,I. Structural Systems,High Cost/Hidden Defects,Damaged Fireplace Gas Line,0.05,946.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+747,VI. Optional Systems,High Cost/Hidden Defects,Unsecured Pool Pump,0.05,911.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+748,I. Structural Systems,High Cost/Hidden Defects,Improper Foam Insulation Ventilation,0.05,866.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+749,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Unusually High Humidity,0.05,773.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+750,I. Structural Systems,High Cost/Hidden Defects,Thin/Soft Roof Decking,0.05,694.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+751,I. Structural Systems,High Cost/Hidden Defects,Safety Glass Required,0.05,603.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+752,I. Structural Systems,High Cost/Hidden Defects,Stair Platform Required,0.05,578.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+753,VI. Optional Systems,High Cost/Hidden Defects,Insufficient Power Line Clearance,0.05,567.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+754,V. Appliances,High Cost/Hidden Defects,Connect Washer Pan to Drain,0.05,553.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+755,VI. Optional Systems,High Cost/Hidden Defects,Closed/Seized Back Flow Valve,0.05,551.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+756,V. Appliances,High Cost/Hidden Defects,Cracked Glasstop Range,0.05,521.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+757,V. Appliances,High Cost/Hidden Defects,Inoperable Range Exhaust Fan,0.05,521.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+758,I. Structural Systems,High Cost/Hidden Defects,Pest Infestation in Crawlspace,0.05,496.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+759,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Temperature Not Changing with HVAC,0.05,457.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+760,VI. Optional Systems,High Cost/Hidden Defects,Inoperable Well Valve,0.05,443.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+761,I. Structural Systems,High Cost/Hidden Defects,Clear Beam of Soil/Debris,0.05,418.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+762,I. Structural Systems,High Cost/Hidden Defects,Secure Wall Stud to Floor,0.05,412.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+763,II. Electrical Systems,High Cost/Hidden Defects,Excessive Heat in Wiring,0.05,356.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+764,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Closed Duct Baffle,0.05,323.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+765,IV. Plumbing Systems,High Cost/Hidden Defects,Insufficient Water Heater Bracing,0.05,317.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+766,VI. Optional Systems,High Cost/Hidden Defects,Open Junction Box at Septic Tank,0.05,245.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+767,"III. Heating, Ventilation and Air Conditioning Systems",High Cost/Hidden Defects,Reduce Make-Up Air Ventilation,0.05,244.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+768,VI. Optional Systems,High Cost/Hidden Defects,Install Conduit for Well Wiring,0.05,213.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+769,I. Structural Systems,High Cost/Hidden Defects,Grout Efflorescence on Flooring,0.05,186.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+770,VI. Optional Systems,High Cost/Hidden Defects,Aerator Air Leak,0.05,172.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+771,I. Structural Systems,High Cost/Hidden Defects,Wall Stud Needs Repair,0.05,160.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+772,V. Appliances,High Cost/Hidden Defects,Non-Dedicated Oven Circuit,0.05,152.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+773,VI. Optional Systems,High Cost/Hidden Defects,Water Heater Not Operational,0.05,140.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+774,V. Appliances,High Cost/Hidden Defects,Inoperable Trash Compactor,0.05,122.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+775,I. Structural Systems,High Cost/Hidden Defects,Improve Taping at Anchor Sleeves,0.05,112.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+776,I. Structural Systems,High Cost/Hidden Defects,Additional Blocking Needed for Studs,0.05,76.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+777,II. Electrical Systems,Maintenance,Unconnected Bonding,0.05,597.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+778,VI. Optional Systems,Maintenance,Overfilled Pool,0.05,4447.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+779,VI. Optional Systems,Maintenance,Uninsulated Pool Plumbing,0.05,3133.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+780,VI. Optional Systems,Maintenance,Uninsulated Backflow,0.05,839.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+781,VI. Optional Systems,Maintenance,Pool Electrical Issues,0.05,721.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+782,VI. Optional Systems,Maintenance,Undetermined Pool Switch Purpose,0.05,658.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+783,VI. Optional Systems,Maintenance,Damaged Outbuilding Insulation,0.05,593.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+784,VI. Optional Systems,Maintenance,Missing Outbuilding Hanger Nails,0.05,536.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+785,I. Structural Systems,Maintenance,Parking Lot Paint,0.05,1001.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+786,I. Structural Systems,Maintenance,Unsquare Chimney,0.05,949.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+787,I. Structural Systems,Maintenance,Undersized Garage Header,0.05,821.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+788,I. Structural Systems,Maintenance,Previous Flooring Repairs,0.05,807.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+789,I. Structural Systems,Maintenance,Unlined Chimney Chase,0.05,670.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+790,I. Structural Systems,Maintenance,Cosmetic Slab Skim Coat,0.05,662.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+791,I. Structural Systems,Maintenance,Add Fire Blocking,0.05,662.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+792,I. Structural Systems,Maintenance,Damaged/Missing Curb Stops,0.05,447.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+793,VI. Optional Systems,Maintenance,Outbuilding Gutter Water/Debris,0.05,394.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+794,VI. Optional Systems,Maintenance,Missing/Damaged Outbuilding Garage Door,0.05,371.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+795,I. Structural Systems,Maintenance,Damaged/Missing Drip Edge,0.05,370.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+796,VI. Optional Systems,Maintenance,Insulate Outbuilding Plumbing,0.05,350.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+797,I. Structural Systems,Maintenance,Rodent Control Needed,0.05,345.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+798,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Insufficient Vent Clearance,0.05,323.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+799,VI. Optional Systems,Maintenance,No Water at Outbuilding,0.05,312.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+800,VI. Optional Systems,Maintenance,Missing Well Panel Labels,0.05,213.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+801,I. Structural Systems,Maintenance,Exposed Joint Nails,0.05,204.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+802,IV. Plumbing Systems,Maintenance,Damaged Gas Valve,0.05,187.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+803,IV. Plumbing Systems,Maintenance,Unbonded Jacuzzi Tub Motor,0.05,180.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+804,"III. Heating, Ventilation and Air Conditioning Systems",Maintenance,Flue Near Walkway,0.05,160.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+805,II. Electrical Systems,Maintenance,Switch Issues,0.05,142.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+806,V. Appliances,Maintenance,Insufficient Dishwasher Insulation,0.05,119.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42
+807,V. Appliances,Maintenance,Microwave Not Heating,0.05,89.0,0,2026-02-20 14:44:42,2026-02-20 14:44:42

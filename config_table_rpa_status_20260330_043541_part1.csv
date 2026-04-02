@@ -1,0 +1,14 @@
+id,status_code,description,is_delete,created_at,updated_at
+1,ST001,Initiating data scraping from Spectora.,0,2025-03-01 12:41:14,2025-03-01 12:41:37
+2,ST002,Spectora scraper is currently in progress.,0,2025-03-01 12:43:19,2025-03-01 12:52:31
+3,ST003,Spectora scraping completed; data ready for categorization.,0,2025-03-01 12:44:27,2025-03-01 12:56:33
+4,ST004,Spectora scraping failed due to an error.,0,2025-03-01 12:45:01,2025-03-01 12:45:01
+5,ST005,Data categorization process is ongoing.,0,2025-03-01 12:46:04,2025-03-01 12:46:04
+6,ST006,Data categorization completed; ready for repair pricing scraping.,0,2025-03-01 12:46:37,2025-03-01 12:57:51
+7,ST007,Data categorization failed due to an error.,0,2025-03-01 12:47:25,2025-03-01 12:47:25
+8,ST008,Repair pricing scraping is in progress.,0,2025-03-01 12:48:40,2025-03-01 12:53:56
+9,ST009,Repair pricing scraping completed; ready for pricing categorization.,0,2025-03-01 12:48:49,2025-03-01 12:58:30
+10,ST010,Repair pricing scraping failed due to an error.,0,2025-03-01 12:49:48,2025-03-01 12:49:48
+11,ST011,Repair pricing categorization is in progress.,0,2025-03-01 12:51:18,2025-03-01 12:54:33
+12,ST012,Repair pricing categorization completed successfully.,0,2025-03-01 12:54:56,2025-03-01 12:54:56
+13,ST013,Repair pricing categorization failed due to an error.,0,2025-03-01 12:55:35,2025-03-01 12:55:35
