@@ -510,18 +510,29 @@ function addOptService(mi){
   var prEl=document.querySelector("#pkg-body-1").parentElement.querySelector(".pr");
   if(prEl)prEl.textContent="$"+(op+optAddedCost).toLocaleString();
   // Update upgrade button price and gap cost
-  var upgradePrice=cp-op-optAddedCost;
+  var vpTotal=op+optAddedCost;
+  var savings=vpTotal-cp;
   var upgradeBtn=document.getElementById("opt-upgrade-btn");
-  if(upgradeBtn){
-    if(upgradePrice<=0){upgradeBtn.textContent="You\u2019ve added all 7 services";upgradeBtn.disabled=true;upgradeBtn.style.opacity="0.5";}
-    else{upgradeBtn.textContent="Upgrade to Comprehensive +$"+upgradePrice.toLocaleString();upgradeBtn.disabled=false;upgradeBtn.style.opacity="1";}
-  }
-  var remainingGap=vpGapCost;
-  for(var g=0;g<4;g++){if(optSvcAdded[g])remainingGap-=optSvcRepairs[g];}
   var gapEl=document.getElementById("opt-gap-cost");
-  if(gapEl){
-    if(remainingGap<=0){gapEl.textContent="All specialty risks covered";}
-    else{gapEl.textContent="$"+remainingGap.toLocaleString()+" in seller-paid repairs left on the table";}
+  if(upgradeBtn){
+    if(savings>0){
+      upgradeBtn.textContent="Save $"+savings.toLocaleString()+" \u2014 Upgrade to Comprehensive";
+      upgradeBtn.style.opacity="1";
+      if(gapEl)gapEl.textContent="You\u2019re paying $"+savings.toLocaleString()+" more than Comprehensive";
+    }else if(savings===0){
+      upgradeBtn.textContent="Upgrade to Comprehensive \u2014 same price + bonuses";
+      upgradeBtn.style.opacity="1";
+      if(gapEl)gapEl.textContent="Same price as Comprehensive \u2014 but without rush, quotes & guarantee";
+    }else{
+      upgradeBtn.textContent="Upgrade to Comprehensive +$"+Math.abs(savings).toLocaleString();
+      upgradeBtn.style.opacity="1";
+      var remainingGap=vpGapCost;
+      for(var g=0;g<4;g++){if(optSvcAdded[g])remainingGap-=optSvcRepairs[g];}
+      if(gapEl){
+        if(remainingGap<=0){gapEl.textContent="All specialty risks covered";}
+        else{gapEl.textContent="$"+remainingGap.toLocaleString()+" in seller-paid repairs left on the table";}
+      }
+    }
   }
   if(activePkg===1){renderClientAddons();}
 }
