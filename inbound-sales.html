@@ -245,10 +245,11 @@ document.getElementById("metaLine").textContent=age+"yr old · "+sfv.toLocaleStr
 
 var ig=IG[brk]||IG["21-30"];
 var bp=Math.max(499,Math.round((499+sfv*0.07)*(1+age*0.002)));
-var op=Math.max(799,Math.round(bp*1.67)-100);
-var cpRaw=Math.max(1099,Math.round(bp*2.67)-200);
 function vanityPrice(p){var v99=Math.floor(p/100)*100+99,v49=Math.floor(p/100)*100+49;return v99<=p?v99:(v49<=p?v49:v99-100);}
-var cp=vanityPrice(cpRaw);
+var cp=Math.max(1099,Math.round(bp*2.67)-200);
+var opRaw=Math.max(799,Math.round(bp*1.67)-100);
+var compUpgrade=vanityPrice(cp-opRaw);
+var op=cp-compUpgrade;
 // Use entry form prices if passed (keeps numbers congruent)
 if(entryPrices){bp=entryPrices.std;op=entryPrices.opt;cp=entryPrices.comp;}
 
