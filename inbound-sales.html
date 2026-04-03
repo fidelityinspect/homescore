@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atlas Intelligence Report</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;color:#1A1A1A}
+.hdr{background:#161618;color:#fff;padding:18px 24px;display:flex;align-items:baseline;gap:10px}
+.hdr h1{font-size:22px;font-weight:700;letter-spacing:0.04em}
+.hdr span{font-size:14px;color:#C9A96E;font-family:Georgia;font-style:italic}
+.info{padding:24px 20px;background:#fff}
+.info h2{font-size:22px;font-weight:700;text-align:center;line-height:1.3}
+.info .addr{font-size:20px;font-weight:700;color:#C9A96E;text-align:center;margin-top:4px}
+.info .meta{font-size:13px;color:#888;font-family:ui-monospace,monospace;text-align:center;margin-top:8px}
+.colhdr{display:flex;padding:16px 0 6px;border-bottom:2px solid #1A1A1A}
+.colhdr span{font-size:10px;font-weight:700;color:#999;font-family:ui-monospace,monospace}
+.seclbl{padding:8px 0 4px;font-size:11px;font-weight:700;font-family:ui-monospace,monospace;letter-spacing:0.08em}
+.seclbl.orange{color:#C17A3A}
+.seclbl.blue{color:#3D6B8B;padding-top:12px;border-top:2px solid #E0DDD6;margin-top:4px}
+.row{display:flex;align-items:center;padding:9px 0;border-bottom:1px solid #F0EDE6}
+.dot{width:16px;flex-shrink:0;display:flex;justify-content:center}
+.dot i{width:8px;height:8px;border-radius:50%;display:block}
+.dot i.o{background:#C17A3A}
+.dot i.b{background:#3D6B8B}
+.row .nm{flex:1;padding-left:4px;font-size:14px}
+.row .nm.o{color:#C17A3A;font-weight:600}
+.row .nm.b{color:#555}
+.row .rk{width:50px;text-align:center;font-size:13px;font-weight:700;font-family:ui-monospace,monospace}
+.row .rk.o{color:#C17A3A}
+.row .rk.b{color:#3D6B8B}
+.row .ct{width:75px;text-align:right;font-size:13px;font-family:ui-monospace,monospace}
+.row .ct.o{color:#C17A3A;font-weight:600}
+.row .ct.b{color:#999}
+.fn{font-size:11px;color:#AAA;font-family:Georgia;text-align:center;margin-top:12px}
+.nb{margin-top:20px}
+.nb h3{font-size:13px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:10px}
+.nbr{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
+.nbc{min-width:140px;background:#F5F2EB;border-radius:8px;padding:0;flex-shrink:0;overflow:hidden}
+.nbc .nbc-body{padding:10px 12px 12px}
+.nbc .tp{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.nbc .gr{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;font-family:ui-monospace,monospace}
+.nbc .it{font-size:18px;font-weight:700;font-family:ui-monospace,monospace}
+.rf{margin-top:20px;padding:20px;background:#161618;border-radius:8px}
+.rf .lbl{font-size:11px;color:#C17A3A;font-weight:700;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:14px}
+.bar-row{margin-bottom:14px}
+.bar-row .top{display:flex;justify-content:space-between;margin-bottom:6px}
+.bar-row .track{height:20px;background:#333;border-radius:4px;overflow:hidden}
+.bar-row .fill{height:100%;border-radius:4px}
+.gap-box{padding:16px;background:rgba(193,122,58,0.15);border-radius:6px;text-align:center;margin-top:8px}
+.gap-box .amt{font-size:32px;font-weight:700;color:#C17A3A;font-family:ui-monospace,monospace}
+.rev{padding:20px 24px;background:#F5F2EB}
+.rev h3{font-size:13px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:10px}
+.revr{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
+.revc{min-width:160px;width:160px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#161618}
+.revc .img{height:160px;display:flex;align-items:center;justify-content:center;position:relative}
+.revc .circ{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;font-family:ui-monospace,monospace}
+.revc .price{position:absolute;bottom:6px;left:8px;padding:2px 6px;background:rgba(0,0,0,0.6);border-radius:3px;font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
+.revc .txt{padding:10px 10px 12px}
+.revc .txt p{font-size:12px;color:#ccc;font-family:Georgia;line-height:1.4;margin-bottom:6px;font-style:italic}
+.revc .txt a{font-size:10px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600}
+.pkg{padding:24px}
+.pkg .qlbl{font-size:11px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;letter-spacing:0.15em;margin-bottom:4px}
+.pkg .qmeta{font-size:14px;color:#888;font-family:Georgia;margin-bottom:14px}
+.pkc{margin-bottom:8px;border-radius:6px;overflow:hidden}
+.pkc .hd{padding:16px;cursor:pointer}
+.pkc .tag{font-size:10px;padding:3px 8px;background:#C9A96E;color:#fff;font-weight:700;font-family:ui-monospace,monospace;border-radius:2px;display:inline-block;margin-bottom:8px}
+.pkc .row2{display:flex;justify-content:space-between;align-items:baseline}
+.pkc .nm{font-size:16px;font-weight:700}
+.pkc .sub{font-size:12px;margin-top:2px;font-family:ui-monospace,monospace}
+.pkc .pr{font-size:26px;font-weight:300;font-family:ui-monospace,monospace}
+.pkc .body{padding:16px;display:none}
+.pkc .body.open{display:block}
+.pkc .item{display:flex;align-items:center;padding:7px 0}
+.pkc .item .ck{color:#3D8B5B;font-size:14px;margin-right:8px}
+.pkc .bonus{margin-top:12px;padding:12px;background:rgba(61,139,91,0.08);border-radius:4px}
+.pkc .bonus h4{font-size:12px;color:#3D8B5B;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:6px}
+.pkc .bonus p{font-size:13px;color:#3D8B5B;padding:3px 0}
+.pkc .guar{margin-top:12px;padding:12px;background:rgba(61,139,91,0.08);border-radius:4px;font-size:13px;color:#3D8B5B;text-align:center;font-weight:600}
+.pkc .warn{margin-top:10px;padding:10px;background:rgba(166,61,47,0.04);border-radius:4px;font-size:12px;color:#A63D2F;text-align:center}
+.insp-bar{display:flex;align-items:center;gap:14px;padding:0 24px 14px}
+.insp-bar .av{width:60px;height:60px;border-radius:50%;flex-shrink:0;border:2px solid #C9A96E}
+.insp-bar .insp-info{flex:1}
+.pkc .sel-btn{display:block;width:100%;padding:12px;margin-top:12px;border:none;border-radius:6px;font-size:12px;font-weight:700;font-family:ui-monospace,monospace;cursor:pointer;text-align:center;transition:all 0.2s}
+.pkc .sel-btn.gold{background:#C9A96E;color:#fff}
+.pkc .sel-btn.outline{background:transparent;border:2px solid #C9A96E;color:#C9A96E}
+.pkc .sel-btn.selected{background:#3D8B5B;color:#fff;border-color:#3D8B5B}
+.cao{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#fff;border:1px solid #E0DDD6;border-radius:8px;margin-bottom:6px;cursor:pointer;transition:all 0.2s}
+.cao.on{border-color:#C9A96E;background:#FDFCF7}
+.cao .cchk{width:20px;height:20px;border:2px solid #ccc;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;transition:all 0.2s;margin-right:10px;flex-shrink:0}
+.cao.on .cchk{background:#C9A96E;border-color:#C9A96E;color:#fff}
+.cao .cleft{display:flex;align-items:center;flex:1}
+.cao .cn{font-size:14px;color:#333}
+.cao .cp{font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;flex-shrink:0}
+.mil-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:linear-gradient(135deg,#1a2744 0%,#2a3a5c 50%,#1a2744 100%);border:2px solid #C9A96E;border-radius:8px;margin-top:8px;cursor:pointer;transition:all 0.2s}
+.mil-row.on{background:linear-gradient(135deg,#1a3320 0%,#2a4a30 50%,#1a3320 100%);border-color:#3D8B5B}
+.mil-row .mchk{width:20px;height:20px;border:2px solid #C9A96E;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;transition:all 0.2s;margin-right:10px;flex-shrink:0}
+.mil-row.on .mchk{background:#3D8B5B;border-color:#3D8B5B;color:#fff}
+.faq{padding:20px 24px}
+.faq h3{font-size:14px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;margin-bottom:14px}
+.faq .q{font-size:14px;font-weight:600;margin-bottom:4px}
+.faq .a{font-size:13px;color:#666;font-family:Georgia;line-height:1.6;margin-bottom:12px}
+.sched-btn{display:block;width:calc(100% - 48px);margin:0 24px 20px;padding:16px;background:#C9A96E;color:#fff;font-size:16px;font-weight:700;font-family:ui-monospace,monospace;border:none;border-radius:8px;text-align:center;text-decoration:none;letter-spacing:0.04em;cursor:pointer}
+.slots{text-align:center;padding:0 24px 16px;font-size:12px;color:#A63D2F;font-weight:600;font-family:ui-monospace,monospace}
+.sticky-bar{position:fixed;bottom:0;left:0;right:0;background:#161618;border-top:2px solid #C9A96E;padding:10px 24px;display:flex;justify-content:space-between;align-items:center;max-width:440px;margin:0 auto;z-index:100;transform:translateY(100%);transition:transform 0.3s ease;box-sizing:border-box}
+.sticky-bar.show{transform:translateY(0)}
+.sticky-bar .sb-pkg{font-size:13px;color:#fff;font-weight:600}
+.sticky-bar .sb-total{font-size:20px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
+.ftr{border-top:1px solid #D8D4CC;padding:14px 24px 28px;text-align:center}
+.ftr .ph{font-size:16px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-bottom:8px}
+.ftr .co{font-size:10px;color:#B0ADA6;font-family:ui-monospace,monospace;line-height:1.8}
+
+/* NC Flow Styles */
+.nc-hidden{display:none!important}
+.nc-phase-card{margin-bottom:10px}
+.nc-phase-card .pc-items{list-style:none;padding:0;margin:0}
+.nc-phase-card .pc-items li{font-size:13px;color:#555;padding:4px 0;padding-left:18px;position:relative}
+.nc-phase-card .pc-items li::before{content:"\2713";position:absolute;left:0;color:#3D8B5B;font-weight:700;font-size:12px}
+.nc-phase-card .pc-why{font-size:12px;color:#C17A3A;font-family:Georgia;font-style:italic;margin-top:8px;padding:8px;background:rgba(193,122,58,0.08);border-radius:4px}
+.dnv-step{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start}
+.dnv-step .dnv-num{width:32px;height:32px;background:#C9A96E;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#161618;font-family:ui-monospace,monospace;flex-shrink:0}
+.dnv-step .dnv-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.dnv-step .dnv-desc{font-size:12px;color:#999;font-family:Georgia;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="hdr"><h1>Fidelity</h1><span>Total Clarity. Zero Regret.</span></div>
+
+<div class="info">
+  <h2>Top Seller-Paid Repairs</h2>
+  <h2>You Don't Want to Miss at</h2>
+  <div class="addr" id="addrLine">1847 Oak Hollow Dr</div>
+  <div class="meta" id="metaLine">23yr old · 2,400 sqft · 78209</div>
+
+  <div class="colhdr"><span style="flex:1"></span><span style="width:50px;text-align:center">RISK</span><span style="width:75px;text-align:right">SELLER COST</span></div>
+
+  <div class="seclbl orange">REQUIRES SPECIALTY TOOLS</div>
+  <div id="orangeRows"></div>
+
+  <div class="seclbl blue">FOUND BY STANDARD INSPECTION</div>
+  <div id="blueRows"></div>
+
+  <div class="fn" id="fnote"></div>
+
+  <div class="nb" id="nearbySection"></div>
+
+  <div class="rf" id="contrastBox">
+    <div class="lbl">AVG SELLER-PAID REPAIRS FOUND</div>
+    <div style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:13px;font-weight:600;color:#777">Standard Inspection</span><span style="font-size:20px;font-weight:700;color:#777;font-family:ui-monospace,monospace" id="stdRepairs"></span></div>
+      <div style="height:10px;background:#333;border-radius:5px;overflow:hidden"><div id="stdFill" style="height:100%;background:#666;border-radius:5px"></div></div>
+    </div>
+    <div style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:13px;font-weight:700;color:#C9A96E">Fidelity Comprehensive</span><span style="font-size:20px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace" id="compRepairs"></span></div>
+      <div style="height:10px;background:#333;border-radius:5px;overflow:hidden"><div style="height:100%;background:#C9A96E;border-radius:5px;width:100%"></div></div>
+    </div>
+    <div style="text-align:center;padding:14px;background:rgba(193,122,58,0.12);border-radius:6px">
+      <div style="font-size:13px;color:#ccc;font-family:Georgia;margin-bottom:4px">A standard inspection misses</div>
+      <div style="font-size:32px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace" id="gapAmt"></div>
+      <div style="font-size:13px;color:#ccc;font-family:Georgia;margin-top:4px">in seller-paid repairs only specialty tools find</div>
+      <div style="font-size:13px;color:#C9A96E;font-family:Georgia;font-weight:600;margin-top:10px;line-height:1.5">Before you close, the seller is responsible for these repairs. After you close, they're yours.</div>
+    </div>
+  </div>
+</div>
+
+<!-- NC-ONLY SECTIONS (injected between existing sections via JS) -->
+<div id="nc-phase-selector" class="nc-hidden" style="padding:20px 24px;background:#F5F2EB">
+  <div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:4px">CHOOSE YOUR COVERAGE</div>
+  <div style="font-size:12px;color:#999;font-family:Georgia;font-style:italic;margin-bottom:14px">Tap to compare</div>
+  <div style="display:flex;gap:10px" id="ncPhaseTabs"></div>
+  <div id="ncPhaseCards" style="margin-top:14px"></div>
+</div>
+
+<div id="nc-dnv" class="nc-hidden" style="padding:20px 24px;background:#161618">
+  <div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:4px">BUILDER ACCOUNTABILITY PROCESS</div>
+  <div style="font-size:12px;color:#999;font-family:Georgia;margin-bottom:16px">Every defect gets resolved — not just documented</div>
+  <div class="dnv-step">
+    <div class="dnv-num">1</div>
+    <div><div class="dnv-title">DOCUMENT</div><div class="dnv-desc">Every defect photographed, location-mapped, severity-classified, and code-referenced. An indisputable evidence package.</div></div>
+  </div>
+  <div class="dnv-step">
+    <div class="dnv-num">2</div>
+    <div><div class="dnv-title">NOTIFY</div><div class="dnv-desc">Formal written repair request to the builder with photo evidence, code references, and repair timeline. A paper trail they can't ignore.</div></div>
+  </div>
+  <div class="dnv-step" style="margin-bottom:0">
+    <div class="dnv-num">3</div>
+    <div><div class="dnv-title">VERIFY</div><div class="dnv-desc">Re-inspection after builder claims repairs are complete. Before/after documentation. If not fixed properly, the cycle repeats with escalation.</div></div>
+  </div>
+</div>
+
+<div class="rev">
+  <h3>WHAT OUR CLIENTS SAY</h3>
+  <div class="revr" id="reviewCards"></div>
+</div>
+
+<div class="pkg">
+  <div class="qlbl">YOUR QUOTE FOR <span id="quoteAddr"></span></div>
+  <div class="qmeta" id="quoteMeta"></div>
+  <div style="font-size:12px;color:#999;font-family:Georgia;font-style:italic;margin-top:-8px;margin-bottom:14px">Tap to compare</div>
+  <div id="pkgCards"></div>
+</div>
+
+<!-- Client Add-On Selector -->
+<div id="addonSection" style="padding:0 24px 16px">
+  <div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:8px">ADD OPTIONAL SERVICES</div>
+  <div id="clientAddons"></div>
+  <div id="addonTotal" style="display:flex;justify-content:space-between;align-items:baseline;padding:14px;background:#161618;border:2px solid #C9A96E;border-radius:8px;margin-top:10px">
+    <span style="font-size:13px;font-weight:700;color:#888;font-family:ui-monospace,monospace">YOUR TOTAL</span>
+    <span id="clientTotal" style="font-size:28px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace"></span>
+  </div>
+</div>
+
+<a href="#" class="sched-btn" id="schedBtn">SCHEDULE NOW</a>
+<div class="slots">2 priority slots available — lock in your spot</div>
+
+<div class="insp-bar" style="padding:16px 24px;margin-top:12px">
+  <div style="position:relative;flex-shrink:0"><div class="av" style="overflow:hidden;padding:0;background:url(https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0) center 10% / 200% no-repeat"></div><div style="position:absolute;bottom:-4px;right:-4px;width:28px;height:28px;border-radius:50%;background:url(https://assets.cdn.filesafe.space/oNNJgl9ZvNFmWqqwJmHb/media/69ce4051fe4f1c0b67b87daf.png) center/cover no-repeat"></div></div>
+  <div class="insp-info">
+    <div style="font-size:15px;font-weight:700;color:#1A1A1A">Inspector Michael Street</div>
+    <div style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace">License #22402 · 5,000+ inspections</div>
+    <div style="font-size:11px;color:#888;font-family:ui-monospace,monospace;margin-top:1px">San Antonio + Austin · 5-star Google & Yelp</div>
+  </div>
+</div>
+
+<div class="faq">
+  <h3>COMMON QUESTIONS</h3>
+  <div class="q">My agent said a standard inspection is fine.</div>
+  <div class="a">Standard covers what's visible — but foundation movement, drain damage, moisture behind walls, and pest entry points require specialty tools to detect. These are the repairs that cost thousands after closing and the ones sellers will pay for before closing.</div>
+  <div class="q">What if the house looks great?</div>
+  <div class="a">The better a house shows, the more important it is to verify what's behind the walls. In our database of 3,377 inspections, the average home has over $12,000 in seller-paid repair items — most of them invisible without specialty tools.</div>
+  <div class="q">How do seller-paid repairs work?</div>
+  <div class="a">Before closing, the seller is responsible for repairs found during inspection. We document every defect with photos and repair costs, then build a concession request your agent submits directly to the seller. Comprehensive clients average 10x their inspection fee in seller-paid repairs.</div>
+  <div class="q">What if you don't find much?</div>
+  <div class="a">With our Comprehensive package, if we don't find seller-paid repairs of 10x more than your inspection fee, we double your refund.</div>
+  <div class="q">How fast can you get me scheduled?</div>
+  <div class="a">Call or text us at (210) 961-5700 to ask about same-day and rush availability.</div>
+</div>
+
+
+<div class="sticky-bar" id="stickyBar">
+  <div class="sb-pkg" id="sbPkg"></div>
+  <div class="sb-total" id="sbTotal"></div>
+</div>
+
+<div class="ftr">
+  <div class="co">FIDELITY HOME INSPECTION<br>3,377 inspections in San Antonio and Austin</div>
+</div>
+
+<script>
+// Seller-paid repair data from 2,935 inspections. p=flag rate, c=avg seller repair cost when found, o=1 specialty tool required
+var IG={"0-2":[{n:"Foundation Settlement",p:21,o:1,c:7652},{n:"Moisture Damages",p:82,o:1,c:4607},{n:"Air Quality & Water Contamination",p:55,o:1,c:4071},{n:"Main Drain Issues",p:45,o:1,c:2653},{n:"HVAC Ductwork Defects",p:58,o:1,c:5913},{n:"Rodent/Pest Access",p:62,o:1,c:1500},{n:"Fire, Fall & Safety Hazards",p:65,o:1,c:1800},{n:"Roofing Repairs Needed",p:57,o:0,c:3200},{n:"HVAC Repairs Needed",p:48,o:0,c:2800}],"21-30":[{n:"Foundation Settlement",p:42,o:1,c:7652},{n:"Moisture Damages",p:95,o:1,c:4607},{n:"Air Quality & Water Contamination",p:88,o:1,c:4071},{n:"Main Drain Issues",p:72,o:1,c:2653},{n:"HVAC Ductwork Defects",p:82,o:1,c:5913},{n:"Rodent/Pest Access",p:78,o:1,c:1500},{n:"Fire, Fall & Safety Hazards",p:80,o:1,c:1800},{n:"Roofing Repairs Needed",p:74,o:0,c:3200},{n:"HVAC Repairs Needed",p:52,o:0,c:2800}],"31-50":[{n:"Foundation Settlement",p:38,o:1,c:7652},{n:"Moisture Damages",p:91,o:1,c:4607},{n:"Air Quality & Water Contamination",p:85,o:1,c:4071},{n:"Main Drain Issues",p:68,o:1,c:2653},{n:"HVAC Ductwork Defects",p:78,o:1,c:5913},{n:"Rodent/Pest Access",p:75,o:1,c:1500},{n:"Fire, Fall & Safety Hazards",p:82,o:1,c:1800},{n:"Roofing Repairs Needed",p:65,o:0,c:3200},{n:"HVAC Repairs Needed",p:42,o:0,c:2800}],"51+":[{n:"Foundation Settlement",p:30,o:1,c:7652},{n:"Moisture Damages",p:85,o:1,c:4607},{n:"Air Quality & Water Contamination",p:72,o:1,c:4071},{n:"Main Drain Issues",p:55,o:1,c:2653},{n:"HVAC Ductwork Defects",p:68,o:1,c:5913},{n:"Rodent/Pest Access",p:65,o:1,c:1500},{n:"Fire, Fall & Safety Hazards",p:78,o:1,c:1800},{n:"Roofing Repairs Needed",p:42,o:0,c:3200},{n:"HVAC Repairs Needed",p:32,o:0,c:2800}]};
+var NB=[{a:32,sq:3423,d:91,g:"D",gc:"#C17A3A",cost:14200,img:"https://cdn.spectora.com/reports/images/07a128ce-21e4-40ed-bf2e-f4d285794827/original/cover.jpg?1629921896",link:"https://app.spectora.com/reports/07a128ce-21e4-40ed-bf2e-f4d285794827?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjAxNTIyOSwiZXhwIjoxNzM4NjQ4Nzk5fQ.DPmyfizZ9o3ffrNVn_eZ2JJ6zZQ_DFWFDHktddKKK6I&ignoreClientComplete=true"},{a:45,sq:4319,d:109,g:"F",gc:"#A63D2F",cost:22050,img:"https://cdn.spectora.com/reports/images/cbc8e254-9e5e-465a-b431-b9f858152301/original/cover.jpg?1645546860",link:"https://app.spectora.com/reports/cbc8e254-9e5e-465a-b431-b9f858152301?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6Mjc4OTIyNSwiZXhwIjoxNzM4NjQ4Nzk5fQ.JnYOYW4J0qCopf2X_dRQeB3GOu-Hy1eNHo3vI4Kcdmo&ignoreClientComplete=true"},{a:58,sq:3040,d:69,g:"C",gc:"#8B8535",cost:10300,img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM4NjQ4Nzk5fQ.53L6BTG066ysGG0nRcbt067pjS1jt0oYv01_1UYUyi0&ignoreClientComplete=true"},{a:12,sq:2100,d:44,g:"B",gc:"#3D6B8B",cost:5750,img:"https://cdn.spectora.com/reports/images/32dcc2d8-a34b-4295-b811-56140e12e25f/original/cover.jpg?1712679494",link:"https://app.spectora.com/reports/32dcc2d8-a34b-4295-b811-56140e12e25f?access=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NjQxNzA3NiwiZXhwIjoxNzM1Nzk3NTk5fQ.EYDWwTS71h5IGS9GQwj5zfH20vL4fGdDOQHKlzlgqDg&ignoreClientComplete=true"}];
+
+var age=23,sfv=2400,brk="21-30",zp="78209",clientName="",addr="1847 Oak Hollow Dr";
+var gradeObj=null,predictedDefects=0,entryGapCost=0;
+var selectedPkg="comp",entryAddons=[],entryPrices=null,milDiscount=false;
+
+// Read from Atlas entry form (sessionStorage or URL params)
+var atlas=null;
+try { atlas=JSON.parse(sessionStorage.getItem("atlas_report")); } catch(e){}
+if(!atlas){
+  try{
+    var ps=new URLSearchParams(window.location.search);
+    if(ps.get("d"))atlas=JSON.parse(decodeURIComponent(ps.get("d")));
+    if(!atlas&&ps.get("nc")){var ncAge=parseInt(ps.get("age"))||1;atlas={name:"James & Sarah Martinez",addr:"14203 Ridgewood Trail",sqft:3200,zip:"78258",age:ncAge,brk:"0-2",grade:{letter:"B",color:"#3D6B8B",label:"Good"},predicted:44,gapCost:0,pkg:"comp",addons:[],structures:[],prices:null,propType:"newcon",milDiscount:false};}
+  }catch(e){}
+}
+if(atlas){
+  age=atlas.age;
+  sfv=atlas.sqft;
+  brk=atlas.brk;
+  zp=atlas.zip;
+  clientName=atlas.name;
+  addr=atlas.addr;
+  if(atlas.grade)gradeObj=atlas.grade;
+  if(atlas.predicted)predictedDefects=atlas.predicted;
+  if(atlas.gapCost)entryGapCost=atlas.gapCost;
+  if(atlas.pkg)selectedPkg=atlas.pkg;
+  if(atlas.addons)entryAddons=atlas.addons;
+  if(atlas.prices)entryPrices=atlas.prices;
+  if(atlas.milDiscount)milDiscount=true;
+}
+
+// Personalize hero with client name
+if(clientName){
+  document.querySelector(".info h2").textContent=clientName+",";
+  document.querySelectorAll(".info h2")[1].textContent="Here Are the Top Seller-Paid Repairs at";
+}
+
+document.getElementById("addrLine").textContent=addr;
+document.getElementById("metaLine").textContent=age+"yr old · "+sfv.toLocaleString()+" sqft · "+zp;
+
+var ig=IG[brk]||IG["21-30"];
+var bp=Math.max(499,Math.round((499+sfv*0.07)*(1+age*0.002)));
+function vanityPrice(p){var v99=Math.floor(p/100)*100+99,v49=Math.floor(p/100)*100+49;return v99<=p?v99:(v49<=p?v49:v99-100);}
+var cp=Math.max(1099,Math.round(bp*2.67)-200);
+var opRaw=Math.max(799,Math.round(bp*1.67)-100);
+var compUpgrade=vanityPrice(cp-opRaw);
+var op=cp-compUpgrade;
+// Use entry form prices if passed (keeps numbers congruent)
+if(entryPrices){bp=entryPrices.std;op=entryPrices.opt;cp=entryPrices.comp;}
+
+// Add-on services available for client toggle
+var ADDONS=[
+  {id:"pool",name:"Pool & Spa Inspection",desc:"Complete pool equipment evaluation",price:199},
+  {id:"septic",name:"Septic System Evaluation",desc:"Tank and drain field analysis",price:350},
+  {id:"well",name:"Well Water Lab Testing",desc:"Water quality and flow testing",price:399},
+  {id:"radon",name:"Radon Testing",desc:"48-hour continuous monitoring",price:399},
+  {id:"crawl",name:"Crawlspace Inspection",desc:"Moisture, pests, and structural issues",price:199},
+  {id:"sprinkler",name:"Sprinkler Inspection",desc:"Sprinkler system zones and components",price:99},
+  {id:"drain",name:"Drain Line Inspection",desc:"Sewer camera scope of main drain line",price:199}
+];
+// Track which add-ons are selected (pre-populate from entry form)
+var clientAddons={};
+entryAddons.forEach(function(a){clientAddons[a.id]=true;});
+// Structures passed from entry form
+var entryStructures=[];
+if(atlas&&atlas.structures)entryStructures=atlas.structures;
+
+function makeRow(item){
+  var t=item.o?"o":"b";
+  return '<div class="row"><div class="dot"><i class="'+t+'"></i></div><div class="nm '+t+'">'+item.n+'</div><div class="rk '+t+'">'+item.p+'%</div><div class="ct '+t+'">$'+item.c.toLocaleString()+'</div></div>';
+}
+
+var oHTML="",bHTML="",gapCost=0;
+ig.forEach(function(item){
+  if(item.o){oHTML+=makeRow(item);gapCost+=Math.round(item.c*item.p/100);}
+  else{bHTML+=makeRow(item);}
+});
+// Use entry form's gap cost if available (keeps numbers congruent)
+if(entryGapCost>0)gapCost=entryGapCost;
+document.getElementById("orangeRows").innerHTML=oHTML;
+document.getElementById("blueRows").innerHTML=bHTML;
+document.getElementById("fnote").textContent="* Based on "+brk+" year old homes across 3,377 South Texas inspections";
+
+// Calculate standard-found repairs (blue/non-specialty items only)
+var stdRepairs=0;
+ig.forEach(function(item){if(!item.o)stdRepairs+=Math.round(item.c*item.p/100);});
+var compRepairs=Math.round(stdRepairs*2.2)+gapCost;
+document.getElementById("stdRepairs").textContent="$"+stdRepairs.toLocaleString();
+document.getElementById("compRepairs").textContent="$"+compRepairs.toLocaleString();
+document.getElementById("stdFill").style.width=Math.round(stdRepairs/compRepairs*100)+"%";
+var gapDisplay=compRepairs-stdRepairs;
+document.getElementById("gapAmt").textContent="$"+gapDisplay.toLocaleString();
+
+// Nearby
+var nbHTML='<h3>INSPECTIONS NEAR '+addr.toUpperCase()+'</h3><div class="nbr">';
+NB.forEach(function(p){
+  nbHTML+='<a href="'+p.link+'" target="_blank" style="text-decoration:none;color:inherit"><div class="nbc"><img src="'+p.img+'" style="width:100%;height:80px;object-fit:cover;display:block" onerror="this.style.display=\'none\'"><div class="nbc-body"><div class="tp"><div class="gr" style="background:'+p.gc+'">'+p.g+'</div><div><div style="font-size:12px;font-weight:600">'+p.a+'yr old</div><div style="font-size:10px;color:#999;font-family:ui-monospace,monospace">'+p.sq.toLocaleString()+' sqft</div></div></div><div class="it" style="color:'+p.gc+'">'+p.d+' items</div><div style="font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;margin-top:2px">$'+p.cost.toLocaleString()+' found</div><div style="font-size:10px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-top:4px">View report \u2192</div></div></div></a>';
+});
+nbHTML+='</div>';
+document.getElementById("nearbySection").innerHTML=nbHTML;
+
+// Reviews
+var reviews=[{i:"JM",a:22050,t:"Seller covered $22,050 in repairs we would have never known about.",c:"#3D6B8B",img:"https://lh3.googleusercontent.com/d/1gluUrCdylr_3Lwmw6VJ9lZf1x8iLtk3c"},{i:"MR",a:10300,t:"Foundation and drain damage caught before closing. Seller paid every dollar.",c:"#C17A3A",img:"https://lh3.googleusercontent.com/d/1r8VpiWZbAW8-g0Gk7zJA41Z90uFv2qf0"},{i:"RG",a:5750,t:"The inspection found what the first inspector missed.",c:"#3D8B5B",img:"https://lh3.googleusercontent.com/d/1vpo3HFIKRRjTwrfH_iEKlDxVdY_rq_5C"},{i:"KW",a:18170,t:"Could not believe what was hiding in that house. Fidelity found it all.",c:"#8B8535",img:"https://lh3.googleusercontent.com/d/14pdmUEXKnmkTp-Qm5GSRclei26iC098A"}];
+var rHTML="";
+reviews.forEach(function(r){
+  var pos=r.i==="RG"?"center 40%":"center 15%";
+  rHTML+='<div class="revc"><div class="img" style="background:'+r.c+'30"><img src="'+r.img+'" alt="'+r.i+'" style="width:100%;height:100%;object-fit:cover;object-position:'+pos+';position:absolute;top:0;left:0"><div class="price">$'+r.a.toLocaleString()+'</div></div><div class="txt"><p>\u201C'+r.t+'\u201D</p></div></div>';
+});
+document.getElementById("reviewCards").innerHTML=rHTML;
+
+// Packages
+document.getElementById("quoteAddr").textContent=addr.toUpperCase();
+document.getElementById("quoteMeta").textContent=age+"yr \u00b7 "+sfv.toLocaleString()+" sqft";
+// Map 7 risk factors to IG defect data for this age bracket
+var defs=IG[brk];
+function findDef(name){for(var i=0;i<defs.length;i++){if(defs[i].n===name)return defs[i];}return null;}
+var riskMap=[
+  {svc:"Foundation Plotting",ben:"Settlement & structural movement",d:findDef("Foundation Settlement")},
+  {svc:"Infrared Thermography",ben:"Moisture, leaks & insulation gaps",d:findDef("Moisture Damages")},
+  {svc:"Sewer Camera",ben:"Drain line damage & blockages",d:findDef("Main Drain Issues")},
+  {svc:"Ductwork Camera",ben:"HVAC ductwork & hidden damage",d:findDef("HVAC Ductwork Defects")},
+  {svc:"Safety Audit",ben:"CO2/Gas, fire, fall & break-in risks",d:findDef("Fire, Fall & Safety Hazards")},
+  {svc:"Termite / WDI",ben:"Pest & rodent intrusion",d:findDef("Rodent/Pest Access")},
+  {svc:"Environmental Audit",ben:"Indoor air quality & water filtration",d:findDef("Air Quality & Water Contamination")}
+];
+var compRisk=riskMap;
+var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
+// Gap cost for VP→Comp: repair value of the 4 missing services
+var vpGapCost=0;
+[2,3,4,6].forEach(function(i){var d=riskMap[i].d;if(d)vpGapCost+=Math.round(d.c*d.p/100);});
+var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos"];
+var pkgs=[
+  {n:"Comprehensive Risk Elimination",sub:"",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,instantBonuses:[{name:"Inspection report",tag:"INSTANT"},{name:"Concessions request",tag:"INSTANT"},{name:"Major defect pricing",tag:"INSTANT"}],delayedBonus:{name:"3rd party itemized repair quotes",tag:"24 HRS"},bonuses:[],guarantee:"We will find seller-paid repairs of 10x more than your inspection fee or we will double your refund.",std:null},
+  {n:"Optimized Value Pack",sub:"",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:[],guarantee:null,std:null},
+  {n:"Standard Inspection",sub:"Professional visual inspection",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
+];
+var pHTML="";
+pkgs.forEach(function(pk,pi){
+  var bg=pk.dk?"#161618":"#fff";
+  var fg=pk.dk?"#fff":"#1A1A1A";
+  var bdr=pk.dk?"2px solid #C9A96E":"1px solid #E0DDD6";
+  var bodyBg=pk.dk?"#1E1E20":"#FAFAF8";
+  var openClass="";
+  pHTML+='<div class="pkc">';
+  pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="togglePkg('+pi+')">';
+  if(pk.tag)pHTML+='<div class="tag">'+pk.tag+'</div>';
+  pHTML+='<div class="row2"><div><div class="nm" style="color:'+fg+'">'+pk.n+'</div>';
+  if(pk.sub)pHTML+='<div class="sub" style="color:'+(pk.dk?"#C9A96E":"#999")+'">'+pk.sub+'</div>';
+  pHTML+='</div><div class="pr" style="color:'+(pk.dk?"#C9A96E":fg)+'">$'+pk.p.toLocaleString()+'</div></div>';
+  if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-top:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
+  // chevron removed — tap to compare instruction in section header
+  pHTML+='</div>';
+  pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
+  // Rush scheduling now shown in bonuses section
+  if(pk.risk.length>0){
+    var protectedTotal=0;
+    // Comprehensive inspection base includes thorough inspection bonus
+    var inspBase=stdRepairs;
+    var inspLabel="Standard inspection";
+    if(pi===0){inspBase=Math.round(stdRepairs*2.2);inspLabel="Comprehensive inspection";}
+    pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid '+(pk.dk?"#333":"#E0DDD6")+'">';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">INCLUDED</span>';
+    pHTML+='<span style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;letter-spacing:0.08em">SELLER REPAIRS</span>';
+    pHTML+='</div>';
+    // Base inspection line first
+    pHTML+='<div style="display:flex;align-items:center;padding:8px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
+    pHTML+='<span class="ck" style="margin-right:8px">&#10003;</span>';
+    pHTML+='<div style="flex:1"><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">'+inspLabel+'</span></div>';
+    pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;white-space:nowrap">$'+inspBase.toLocaleString()+'</span>';
+    pHTML+='</div>';
+    protectedTotal+=inspBase;
+    // Specialty services
+    pk.risk.forEach(function(r){
+      var repairCost=r.d?Math.round(r.d.c*r.d.p/100):0;
+      protectedTotal+=repairCost;
+      pHTML+='<div style="display:flex;align-items:center;padding:8px 0;border-bottom:1px solid '+(pk.dk?"#2a2a2a":"#eee")+'">';
+      pHTML+='<span class="ck" style="margin-right:8px">&#10003;</span>';
+      pHTML+='<div style="flex:1"><span style="font-size:14px;font-weight:600;color:'+(pk.dk?"#fff":"#333")+'">'+r.svc+'</span>';
+      pHTML+='<div style="font-size:12px;color:'+(pk.dk?"#999":"#888")+';font-family:Georgia;margin-top:1px">'+r.ben+'</div></div>';
+      pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace;white-space:nowrap">$'+repairCost.toLocaleString()+'</span>';
+      pHTML+='</div>';
+    });
+    pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0">';
+    pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#333")+';font-family:ui-monospace,monospace">TOTAL SELLER-PAID REPAIRS</span>';
+    pHTML+='<span style="font-size:22px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+protectedTotal.toLocaleString()+'</span>';
+    pHTML+='</div>';
+    // 7-segment bar moved into upgrade section below
+  }
+  if(pk.std){
+    pk.std.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:#555">'+it+'</span></div>';});
+    pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:6px;text-align:center">';
+    pHTML+='<div style="font-size:11px;color:#999;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:6px">AVG SELLER-PAID REPAIRS FOUND</div>';
+    pHTML+='<div style="font-size:28px;font-weight:700;color:#333;font-family:ui-monospace,monospace">$'+stdRepairs.toLocaleString()+'</div>';
+    pHTML+='</div>';
+    pHTML+='<div style="margin-top:10px;padding:14px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.25);border-radius:6px;text-align:center">';
+    pHTML+='<div style="font-size:13px;color:#333;font-weight:700;margin-bottom:4px">$'+gapCost.toLocaleString()+' in seller-paid repairs left on the table</div>';
+    pHTML+='<div style="font-size:12px;color:#888;font-family:Georgia;margin-bottom:10px">Upgrade to cover 3 of 7 specialty risk categories</div>';
+    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(1,\'pkg\')">Upgrade to Value Pack +$'+(op-bp).toLocaleString()+'</button>';
+    pHTML+='</div>';
+  }
+  if(pk.instantBonuses&&pk.instantBonuses.length>0){
+    pHTML+='<div class="bonus"><h4>INSTANT ON-SITE DELIVERY</h4>';
+    pk.instantBonuses.forEach(function(b){pHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0"><span style="color:#3D8B5B;font-size:13px">&#9733; '+b.name+'</span><span style="font-size:11px;color:#3D8B5B;font-family:ui-monospace,monospace;font-weight:600">'+b.tag+'</span></div>';});
+    pHTML+='</div>';
+  }
+  if(pk.delayedBonus){
+    pHTML+='<div class="bonus" style="margin-top:8px;background:rgba(201,169,110,0.08)"><div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0"><span style="color:#C9A96E;font-size:13px">&#9733; '+pk.delayedBonus.name+'</span><span style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600">'+pk.delayedBonus.tag+'</span></div></div>';
+  }
+  if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
+  if(pk.guarantee){
+    pHTML+='<div style="margin-top:12px;padding:14px;background:#161618;border:2px solid #C9A96E;border-radius:6px">';
+    pHTML+='<div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px">';
+    pHTML+='<div style="width:28px;height:28px;background:#C9A96E;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#161618;font-family:Georgia;flex-shrink:0">F</div>';
+    pHTML+='<div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em">FIDELITY COMPREHENSIVE GUARANTEE</div>';
+    pHTML+='</div>';
+    pHTML+='<div style="font-size:13px;color:#fff;line-height:1.5;text-align:center">'+pk.guarantee+'</div>';
+    pHTML+='</div>';
+  }
+  // Upgrade pitch for Optimized — integrated coverage bar + add buttons
+  if(pi===1){
+    var missingIdx=[2,3,4,6];
+    var missingServices=missingIdx.map(function(i){
+      var r=riskMap[i];
+      var repairCost=r.d?Math.round(r.d.c*r.d.p/100):0;
+      var svcPrice=(i===4||i===6)?99:199;
+      return {idx:i,name:r.d?r.d.n:r.svc,repair:repairCost,price:svcPrice};
+    });
+    // Dot bar inline after included services
+    pHTML+='<div style="display:flex;justify-content:center;gap:6px;margin-top:16px" id="opt-dots">';
+    for(var d=0;d<7;d++){
+      pHTML+='<div id="opt-dot-'+d+'" style="width:32px;height:8px;border-radius:4px;background:'+(d<3?"#C9A96E":"#ddd")+';transition:background 0.3s,transform 0.3s"></div>';
+    }
+    pHTML+='</div>';
+    pHTML+='<div id="opt-dot-label" style="font-size:11px;color:#999;font-family:ui-monospace,monospace;text-align:center;margin:6px 0 4px">3 of 7 risk categories covered</div>';
+    // Section label
+    pHTML+='<div style="font-size:10px;font-weight:700;color:#999;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin:12px 0 6px">NOT COVERED — ADD INDIVIDUALLY</div>';
+    // Missing service rows — same visual rhythm as included items
+    missingServices.forEach(function(ms,mi){
+      pHTML+='<div id="opt-add-row-'+mi+'" style="display:flex;align-items:center;padding:8px 0;border-bottom:1px solid #e8e4dc">';
+      pHTML+='<div style="flex:1;font-size:13px;color:#888">'+ms.name+'</div>';
+      pHTML+='<div style="font-size:13px;font-weight:700;color:#C17A3A;font-family:ui-monospace,monospace;margin-right:8px;white-space:nowrap">$'+ms.repair.toLocaleString()+'</div>';
+      pHTML+='<button id="opt-add-btn-'+mi+'" style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;white-space:nowrap;border:1px solid #C9A96E;border-radius:4px;padding:4px 8px;background:transparent;cursor:pointer" onclick="event.stopPropagation();addOptService('+mi+')">+$'+ms.price+'</button>';
+      pHTML+='</div>';
+    });
+    // Upgrade to Comprehensive — gap cost + button
+    pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.25);border-radius:6px;text-align:center">';
+    pHTML+='<div id="opt-gap-cost" style="font-size:13px;color:#333;font-weight:700;margin-bottom:4px">$'+vpGapCost.toLocaleString()+' in seller-paid repairs left on the table</div>';
+    pHTML+='<div style="font-size:12px;color:#888;font-family:Georgia;margin-bottom:10px">Add all 7 specialty services, rush scheduling & guarantee</div>';
+    pHTML+='<button id="opt-upgrade-btn" class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button>';
+    pHTML+='</div>';
+  }
+  // No select button — opening card = selecting package
+  pHTML+='</div></div>';
+});
+document.getElementById("pkgCards").innerHTML=pHTML;
+
+// Optimized add-on service interaction
+var optAddedCount=0;
+var optAddedCost=0;
+var optSvcPrices=[199,199,99,99]; // Sewer, Ductwork, Safety, Environmental
+var optSvcRepairs=[]; // repair costs for each missing service
+[2,3,4,6].forEach(function(i){var d=riskMap[i].d;optSvcRepairs.push(d?Math.round(d.c*d.p/100):0);});
+var optSvcAdded=[false,false,false,false];
+var optMissingDotIdx=[3,4,5,6];
+function addOptService(mi){
+  var btn=document.getElementById("opt-add-btn-"+mi);
+  if(!btn)return;
+  optSvcAdded[mi]=!optSvcAdded[mi];
+  var dotIdx=optMissingDotIdx[mi];
+  var dot=document.getElementById("opt-dot-"+dotIdx);
+  if(optSvcAdded[mi]){
+    btn.style.background="#3D8B5B";
+    btn.style.borderColor="#3D8B5B";
+    btn.style.color="#fff";
+    btn.textContent="\u2713 Added";
+    if(dot){
+      dot.style.background="#C9A96E";
+      dot.style.transform="scaleY(1.5)";
+      setTimeout(function(){dot.style.transform="scaleY(1)";},300);
+    }
+    optAddedCount++;
+    optAddedCost+=optSvcPrices[mi];
+  }else{
+    btn.style.background="transparent";
+    btn.style.borderColor="#C9A96E";
+    btn.style.color="#C9A96E";
+    btn.textContent="+$"+optSvcPrices[mi];
+    if(dot)dot.style.background="#ddd";
+    optAddedCount--;
+    optAddedCost-=optSvcPrices[mi];
+  }
+  var label=document.getElementById("opt-dot-label");
+  if(label)label.textContent=(3+optAddedCount)+" of 7 risk categories covered";
+  var prEl=document.querySelector("#pkg-body-1").parentElement.querySelector(".pr");
+  if(prEl)prEl.textContent="$"+(op+optAddedCost).toLocaleString();
+  // Update upgrade button price and gap cost
+  var vpTotal=op+optAddedCost;
+  var savings=vpTotal-cp;
+  var upgradeBtn=document.getElementById("opt-upgrade-btn");
+  var gapEl=document.getElementById("opt-gap-cost");
+  if(upgradeBtn){
+    if(savings>0){
+      upgradeBtn.textContent="Save $"+savings.toLocaleString()+" \u2014 Upgrade to Comprehensive";
+      upgradeBtn.style.opacity="1";
+      if(gapEl)gapEl.textContent="You\u2019re paying $"+savings.toLocaleString()+" more than Comprehensive";
+    }else if(savings===0){
+      upgradeBtn.textContent="Upgrade to Comprehensive \u2014 same price + bonuses";
+      upgradeBtn.style.opacity="1";
+      if(gapEl)gapEl.textContent="Same price as Comprehensive \u2014 but without rush, quotes & guarantee";
+    }else{
+      upgradeBtn.textContent="Upgrade to Comprehensive +$"+Math.abs(savings).toLocaleString();
+      upgradeBtn.style.opacity="1";
+      var remainingGap=vpGapCost;
+      for(var g=0;g<4;g++){if(optSvcAdded[g])remainingGap-=optSvcRepairs[g];}
+      if(gapEl){
+        if(remainingGap<=0){gapEl.textContent="All specialty risks covered";}
+        else{gapEl.textContent="$"+remainingGap.toLocaleString()+" in seller-paid repairs left on the table";}
+      }
+    }
+  }
+  if(activePkg===1){renderClientAddons();}
+}
+// Override VP price when add-ons are active
+var origGetSelectedPkgPrice;
+(function(){
+  var origFn=getSelectedPkgPrice;
+  getSelectedPkgPrice=function(){
+    var base=origFn();
+    if(activePkg===1)base+=optAddedCost;
+    return base;
+  };
+})();
+
+// Client-facing add-on selector
+function renderClientAddons(){
+  var html="";
+  // Hide add-ons that are already included in the selected package
+  // Comp includes all 7 specialty services (drain = sewer camera)
+  // VP includes 3 base + any added via interactive buttons (sewer=idx 0)
+  var hideDrain=activePkg===0||(activePkg===1&&optSvcAdded[0]);
+  ADDONS.forEach(function(a){
+    if(a.id==="drain"&&hideDrain){clientAddons[a.id]=false;return;}
+    var on=clientAddons[a.id]?"on":"";
+    html+='<div class="cao '+on+'" id="cao-'+a.id+'" onclick="toggleClientAddon(\''+a.id+'\')">';
+    html+='<div class="cleft"><div class="cchk">&#10003;</div><div><span class="cn">'+a.name+'</span><div style="font-size:11px;color:#999;margin-top:1px">'+a.desc+'</div></div></div>';
+    html+='<span class="cp">+$'+a.price+'</span></div>';
+  });
+  // Structure builder
+  html+='<div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin:12px 0 4px">ADDITIONAL STRUCTURES</div>';
+  html+='<div style="font-size:11px;color:#999;margin-bottom:6px">Detached buildings, casitas, workshops</div>';
+  clientStructures.forEach(function(s,i){
+    var sp=calcStructurePrice(s);
+    html+='<div class="cao on" style="flex-wrap:wrap;gap:6px;cursor:default">';
+    html+='<div style="width:100%;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;color:#333">Structure '+(i+1)+'</span><div style="display:flex;align-items:center;gap:8px"><span class="cp" id="cs-price-'+i+'">+$'+sp+'</span><span style="cursor:pointer;color:#999;font-size:16px" onclick="removeClientStruct('+i+')">&times;</span></div></div>';
+    html+='<div style="width:100%;display:flex;gap:8px;align-items:center;flex-wrap:wrap">';
+    html+='<input type="number" placeholder="Sq ft" value="'+(s.sqft||"")+'" style="flex:1;min-width:80px;padding:8px;background:#F5F2EB;border:1px solid #E0DDD6;border-radius:6px;color:#333;font-size:13px" oninput="updateClientStructSqft('+i+',this.value)">';
+    html+='<label style="font-size:12px;color:#888;display:flex;align-items:center;gap:3px;cursor:pointer"><input type="checkbox" '+(s.casita?"checked":"")+' onchange="toggleClientStructOpt('+i+',\'casita\',this.checked)"> Casita</label>';
+    html+='<label style="font-size:12px;color:#888;display:flex;align-items:center;gap:3px;cursor:pointer"><input type="checkbox" '+(s.kitchen?"checked":"")+' onchange="toggleClientStructOpt('+i+',\'kitchen\',this.checked)"> Kitchen</label>';
+    html+='<label style="font-size:12px;color:#888;display:flex;align-items:center;gap:3px;cursor:pointer"><input type="checkbox" '+(s.bath?"checked":"")+' onchange="toggleClientStructOpt('+i+',\'bath\',this.checked)"> Bath</label>';
+    html+='</div></div>';
+  });
+  html+='<div class="cao" style="justify-content:center;color:#999;font-size:13px" onclick="addClientStruct()">+ Add Structure (from $79)</div>';
+  // Military / First Responder discount (display only — toggled on entry form)
+  if(milDiscount){
+    html+='<div class="mil-row on" style="cursor:default">';
+    html+='<div style="display:flex;align-items:center"><div class="mchk">&#10003;</div><div><span style="font-size:14px;font-weight:700;color:#fff">Military / First Responder</span><div style="font-size:11px;color:#C9A96E;margin-top:1px">Thank you for your service</div></div></div>';
+    html+='<span style="font-size:14px;font-weight:700;color:#3D8B5B;font-family:ui-monospace,monospace">-$25</span></div>';
+  }
+  document.getElementById("clientAddons").innerHTML=html;
+  updateClientTotal();
+}
+
+function toggleClientAddon(id){
+  clientAddons[id]=!clientAddons[id];
+  var el=document.getElementById("cao-"+id);
+  if(clientAddons[id])el.classList.add("on");else el.classList.remove("on");
+  updateClientTotal();
+}
+
+function getSelectedPkgPrice(){
+  if(activePkg<0)return 0;
+  return [cp,op,bp][activePkg];
+}
+
+var pkgNames=["Comprehensive","Value Pack","Standard"];
+function updateClientTotal(){
+  if(activePkg<0){
+    document.getElementById("clientTotal").textContent="Select a package";
+    document.getElementById("clientTotal").style.fontSize="14px";
+    updateStickyBar();
+    return;
+  }
+  var base=getSelectedPkgPrice();
+  var addTotal=0;
+  ADDONS.forEach(function(a){if(clientAddons[a.id])addTotal+=a.price;});
+  clientStructures.forEach(function(s){addTotal+=calcStructurePrice(s);});
+  var total=base+addTotal;
+  if(milDiscount)total-=25;
+  document.getElementById("clientTotal").style.fontSize="28px";
+  document.getElementById("clientTotal").textContent="$"+total.toLocaleString();
+  updateStickyBar();
+}
+function updateStickyBar(){
+  var bar=document.getElementById("stickyBar");
+  if(activePkg<0){bar.classList.remove("show");return;}
+  document.getElementById("sbPkg").textContent=pkgNames[activePkg];
+  var base=getSelectedPkgPrice();
+  var addTotal=0;
+  ADDONS.forEach(function(a){if(clientAddons[a.id])addTotal+=a.price;});
+  clientStructures.forEach(function(s){addTotal+=calcStructurePrice(s);});
+  var total=base+addTotal;
+  if(milDiscount)total-=25;
+  document.getElementById("sbTotal").textContent="$"+total.toLocaleString();
+  if(stickyVisible)bar.classList.add("show");
+}
+var stickyVisible=false;
+var pkgSection=document.getElementById("pkgCards");
+if(pkgSection&&window.IntersectionObserver){
+  new IntersectionObserver(function(entries){
+    stickyVisible=entries[0].isIntersecting||entries[0].boundingClientRect.top<0;
+    var bar=document.getElementById("stickyBar");
+    if(stickyVisible&&activePkg>=0)bar.classList.add("show");else bar.classList.remove("show");
+  },{threshold:0}).observe(pkgSection);
+  window.addEventListener("scroll",function(){
+    var rect=pkgSection.getBoundingClientRect();
+    var vis=rect.top<window.innerHeight&&rect.bottom>0;
+    if(vis!==stickyVisible){
+      stickyVisible=vis;
+      var bar=document.getElementById("stickyBar");
+      if(stickyVisible&&activePkg>=0)bar.classList.add("show");else bar.classList.remove("show");
+    }
+  },{passive:true});
+}
+
+function addClientStruct(){clientStructures.push({sqft:0,casita:false,kitchen:false,bath:false});renderClientAddons();}
+function removeClientStruct(i){clientStructures.splice(i,1);renderClientAddons();}
+function updateClientStructSqft(i,v){
+  clientStructures[i].sqft=parseInt(v)||0;
+  var sp=calcStructurePrice(clientStructures[i]);
+  var el=document.getElementById("cs-price-"+i);
+  if(el)el.textContent="+$"+sp;
+  updateClientTotal();
+}
+function toggleClientStructOpt(i,opt,val){
+  clientStructures[i][opt]=val;
+  var sp=calcStructurePrice(clientStructures[i]);
+  var el=document.getElementById("cs-price-"+i);
+  if(el)el.textContent="+$"+sp;
+  updateClientTotal();
+}
+
+// Client-side structures (can be added by client too)
+var clientStructures=entryStructures.slice();
+
+function calcStructurePrice(s){
+  var p=79;
+  if(s.sqft&&s.sqft>0)p=Math.max(79,Math.round(s.sqft*0.375-51));
+  if(s.casita)p+=350;
+  if(s.kitchen)p+=100;
+  if(s.bath)p+=75;
+  return p;
+}
+
+// Package selection
+var activePkg=-1; // -1 = no package selected yet
+
+renderClientAddons();
+
+function selectPackage(i,scrollTo){
+  activePkg=i;
+  document.querySelectorAll(".pkc .body").forEach(function(b){b.classList.remove("open");});
+  document.getElementById("pkg-body-"+i).classList.add("open");
+  updateClientTotal();
+  if(scrollTo==="pkg"){
+    setTimeout(function(){document.getElementById("pkg-body-"+i).parentElement.scrollIntoView({behavior:"smooth",block:"start"});},100);
+  }
+}
+
+function togglePkg(i){
+  var el=document.getElementById("pkg-body-"+i);
+  if(el.classList.contains("open")){
+    el.classList.remove("open");
+  }else{
+    document.querySelectorAll(".pkc .body").forEach(function(b){b.classList.remove("open");});
+    el.classList.add("open");
+    activePkg=i;
+    renderClientAddons();
+    setTimeout(function(){el.parentElement.scrollIntoView({behavior:"smooth",block:"start"});},100);
+  }
+}
+
+// ========== NEW CONSTRUCTION FLOW ==========
+var propType=(atlas&&atlas.propType)||"preowned";
+var isNC=propType==="newcon";
+
+if(isNC){
+  // Move NC-only sections into position
+  var revSection=document.querySelector(".rev");
+  var pkgSection2=document.querySelector(".pkg");
+  document.getElementById("nc-phase-selector").classList.remove("nc-hidden");
+  document.getElementById("nc-dnv").classList.remove("nc-hidden");
+  revSection.parentNode.insertBefore(document.getElementById("nc-dnv"),revSection);
+  pkgSection2.parentNode.insertBefore(document.getElementById("nc-phase-selector"),pkgSection2);
+
+  // NC Phase pricing (add-on cost per phase level)
+  var ncPreDrywall=349;
+  var ncPreConcrete=299;
+  var ncPhaseCost={1:0, 2:ncPreDrywall, 3:ncPreDrywall+ncPreConcrete};
+  var ncSelectedPhase=1; // 1=Final only, 2=Pre-Drywall+Final, 3=Pre-Concrete+Pre-Drywall+Final
+
+  // Phase descriptions for cards
+  var ncPhaseDetails={
+    1:{
+      label:"Final Phase",
+      phases:[
+        {num:1,title:"Final Inspection",items:["Full systems \u2014 electrical, plumbing, HVAC, appliances","Foundation levelness & performance","Exterior envelope \u2014 roof, siding, grading, drainage","Interior finishes \u2014 cosmetic & functional","Garage, attic, crawlspace","Safety \u2014 smoke detectors, GFCI, AFCI, railings"],why:"This is the last checkpoint before you own every problem."}
+      ]
+    },
+    2:{
+      label:"2-Phase",
+      bonus:{title:"INCLUDED: GET IT IN WRITING",desc:"Step-by-step guide to builder repairs. Ensures the builder fixes every documented defect before closing \u2014 with escalation templates if they push back."},
+      phases:[
+        {num:1,title:"Pre-Drywall Inspection",items:["Framing structural integrity & proper nailing","Electrical rough-in \u2014 wire gauge, junction boxes, panel prep","Plumbing rough-in \u2014 supply lines, drain lines, fixture placement","HVAC rough-in \u2014 ductwork routing, returns, unit placement","Insulation verification","Window & door flashing / weather barrier","Fire blocking"],why:"Once drywall goes up, all of this is hidden behind walls. Builders know inspectors rarely check at this stage."},
+        {num:2,title:"Final Inspection",items:["Full systems \u2014 electrical, plumbing, HVAC, appliances","Foundation levelness & performance","Exterior envelope \u2014 roof, siding, grading, drainage","Interior finishes \u2014 cosmetic & functional","Garage, attic, crawlspace","Safety \u2014 smoke detectors, GFCI, AFCI, railings"],why:"This is the last checkpoint before you own every problem."}
+      ]
+    },
+    3:{
+      label:"3-Phase",
+      bonus:{title:"INCLUDED: PRE-CONSTRUCTION QUALITY STANDARDS",desc:"We establish quality standards BEFORE construction begins, so every phase inspection measures against documented expectations \u2014 not guesswork."},
+      phases:[
+        {num:1,title:"Pre-Concrete Pour",items:["Plumbing rough-in inspection","Rebar and post-tension cable layout","Moisture barrier / vapor barrier integrity","Soil and grading conditions","Foundation form dimensions & alignment"],why:"Once concrete is poured, everything underneath is buried forever. This is the ONE chance to verify it\u2019s right."},
+        {num:2,title:"Pre-Drywall Inspection",items:["Framing structural integrity & proper nailing","Electrical rough-in \u2014 wire gauge, junction boxes, panel prep","Plumbing rough-in \u2014 supply lines, drain lines, fixture placement","HVAC rough-in \u2014 ductwork routing, returns, unit placement","Insulation verification","Window & door flashing / weather barrier","Fire blocking"],why:"Once drywall goes up, all of this is hidden behind walls."},
+        {num:3,title:"Final Inspection",items:["Full systems \u2014 electrical, plumbing, HVAC, appliances","Foundation levelness & performance","Exterior envelope \u2014 roof, siding, grading, drainage","Interior finishes \u2014 cosmetic & functional","Garage, attic, crawlspace","Safety \u2014 smoke detectors, GFCI, AFCI, railings"],why:"This is the last checkpoint before you own every problem."}
+      ]
+    }
+  };
+
+  function renderNCPhaseTabs(){
+    var html="";
+    [1,2,3].forEach(function(p){
+      var act=ncSelectedPhase===p;
+      var labels={1:"Final Only",2:"2-Phase",3:"3-Phase"};
+      var prices={1:"Included",2:"+$"+ncPreDrywall,3:"+$"+(ncPreDrywall+ncPreConcrete)};
+      html+='<div style="flex:1;padding:10px 6px;background:'+(act?"#C9A96E":"#fff")+';border:2px solid '+(act?"#C9A96E":"#E0DDD6")+';border-radius:8px;text-align:center;cursor:pointer;transition:all 0.2s" onclick="selectNCPhase('+p+')">';
+      html+='<div style="font-size:13px;font-weight:700;color:'+(act?"#161618":"#888")+'">'+labels[p]+'</div>';
+      if(p===3)html+='<div style="font-size:9px;font-weight:700;color:'+(act?"#161618":"#C9A96E")+';font-family:ui-monospace,monospace;margin-top:2px">RECOMMENDED</div>';
+      html+='<div style="font-size:11px;font-weight:700;color:'+(act?"#161618":"#C9A96E")+';font-family:ui-monospace,monospace;margin-top:2px">'+prices[p]+'</div>';
+      html+='</div>';
+    });
+    document.getElementById("ncPhaseTabs").innerHTML=html;
+  }
+
+  function renderNCPhaseCards(){
+    var pd=ncPhaseDetails[ncSelectedPhase];
+    var html="";
+    pd.phases.forEach(function(p){
+      html+='<div class="nc-phase-card" style="padding:14px;background:#fff;border:1px solid #E0DDD6;border-radius:8px">';
+      html+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">';
+      html+='<div style="width:28px;height:28px;background:#C9A96E;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#161618;font-family:ui-monospace,monospace;flex-shrink:0">'+p.num+'</div>';
+      html+='<div style="font-size:15px;font-weight:700;color:#1A1A1A">'+p.title+'</div></div>';
+      html+='<ul class="pc-items">';
+      p.items.forEach(function(it){html+='<li>'+it+'</li>';});
+      html+='</ul>';
+      html+='<div class="pc-why">'+p.why+'</div>';
+      html+='</div>';
+    });
+    document.getElementById("ncPhaseCards").innerHTML=html;
+  }
+
+  // Re-render existing package cards with NC phase cost added to prices
+  function updateNCPackagePrices(){
+    var phaseAdd=ncPhaseCost[ncSelectedPhase];
+    // Update price display on each package card header
+    var cards=document.querySelectorAll(".pkc");
+    var basePrices=[cp,op,bp];
+    cards.forEach(function(card,i){
+      var pr=card.querySelector(".pr");
+      if(pr)pr.textContent="$"+(basePrices[i]+phaseAdd).toLocaleString();
+    });
+    // Add phase bonus to Comp card if 2-phase or 3-phase
+    var pd=ncPhaseDetails[ncSelectedPhase];
+    var existingPhaseBonus=document.getElementById("nc-phase-bonus");
+    if(existingPhaseBonus)existingPhaseBonus.remove();
+    if(pd.bonus){
+      var compBody=document.getElementById("pkg-body-0");
+      if(compBody){
+        var bonusDiv=document.createElement("div");
+        bonusDiv.id="nc-phase-bonus";
+        bonusDiv.className="bonus";
+        bonusDiv.style.marginTop="8px";
+        bonusDiv.style.background="rgba(201,169,110,0.08)";
+        bonusDiv.innerHTML='<h4 style="color:#C9A96E">'+pd.bonus.title+'</h4><p style="color:#C9A96E">'+pd.bonus.desc+'</p>';
+        compBody.appendChild(bonusDiv);
+      }
+    }
+    updateClientTotal();
+  }
+
+  // Override getSelectedPkgPrice to include phase cost
+  var origGetPkgPrice2=getSelectedPkgPrice;
+  getSelectedPkgPrice=function(){
+    return origGetPkgPrice2()+ncPhaseCost[ncSelectedPhase];
+  };
+
+  window.selectNCPhase=function(p){
+    ncSelectedPhase=p;
+    renderNCPhaseTabs();
+    renderNCPhaseCards();
+    updateNCPackagePrices();
+  };
+
+  // Initial render
+  renderNCPhaseTabs();
+  renderNCPhaseCards();
+  // Update package prices after a tick so the DOM is ready
+  setTimeout(function(){updateNCPackagePrices();},0);
+
+  // Update hero for NC context
+  document.querySelector(".info h2").textContent="What We Find in";
+  document.querySelectorAll(".info h2")[1].textContent="Brand-New Homes Like Yours";
+
+  // Update FAQ for NC
+  document.querySelector(".faq").innerHTML='<h3>COMMON QUESTIONS</h3>'
+    +'<div class="q">It\'s brand new \u2014 why does it need an inspection?</div>'
+    +'<div class="a">The median new home in our database has 49 defects. New doesn\'t mean perfect \u2014 it means untested. Framing, plumbing, electrical, and HVAC are installed by dozens of subcontractors. City inspections check code minimums, not quality.</div>'
+    +'<div class="q">What\'s the difference between 2-phase and 3-phase?</div>'
+    +'<div class="a">2-phase covers pre-drywall and final. 3-phase adds a pre-concrete pour inspection \u2014 your only chance to verify what\'s under the slab before it\'s buried forever. We recommend 3-phase for slab-on-grade foundations.</div>'
+    +'<div class="q">Will this slow down my build?</div>'
+    +'<div class="a">No. We coordinate with your builder\'s timeline. Inspections take 2-3 hours and we provide the report same-day so repairs can be scheduled immediately.</div>'
+    +'<div class="q">What if the builder pushes back on repairs?</div>'
+    +'<div class="a">Our Document \u2192 Notify \u2192 Verify process creates a paper trail the builder can\'t ignore. Formal repair requests with photo evidence and code references, then re-inspection to verify completion.</div>'
+    +'<div class="q">How fast can you get me scheduled?</div>'
+    +'<div class="a">Call or text us at (210) 961-5700 to ask about same-day and rush availability.</div>';
+}
+</script>
+
+</body>
+</html>

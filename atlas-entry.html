@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Atlas™ — Generate Report</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#161618;font-family:system-ui,-apple-system,sans-serif;color:#fff;min-height:100vh}
+.wrap{max-width:440px;margin:0 auto;padding:20px}
+
+/* Header */
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.logo .f{width:36px;height:36px;background:#C9A96E;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#161618;font-family:Georgia}
+.logo h1{font-size:18px;font-weight:700;letter-spacing:0.02em}
+.logo h1 span{color:#C9A96E}
+.subtitle{font-size:12px;color:#888;font-family:Georgia;font-style:italic;margin-bottom:32px}
+
+/* Form */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;font-weight:700;color:#C9A96E;letter-spacing:0.08em;font-family:ui-monospace,monospace;margin-bottom:6px}
+.field input,.field select{width:100%;padding:12px 14px;background:#1E1E22;border:1px solid #333;border-radius:8px;color:#fff;font-size:15px;font-family:system-ui;outline:none;transition:border-color 0.2s}
+.field input:focus,.field select:focus{border-color:#C9A96E}
+.field input::placeholder{color:#555}
+.field select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.field select option{background:#1E1E22;color:#fff}
+.row2{display:flex;gap:12px}
+.row2 .field{flex:1}
+
+/* Generate button */
+.gen-btn{width:100%;padding:14px;background:#C9A96E;color:#161618;font-size:16px;font-weight:700;border:none;border-radius:8px;cursor:pointer;margin-top:8px;transition:background 0.2s;font-family:system-ui}
+.gen-btn:hover{background:#D4B47E}
+.gen-btn:active{background:#B89A5E}
+
+/* Stats bar */
+.stats{display:flex;justify-content:space-between;margin-top:24px;padding:16px;background:#1E1E22;border-radius:8px}
+.stat{text-align:center}
+.stat .val{font-size:20px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
+.stat .lbl{font-size:10px;color:#666;font-family:ui-monospace,monospace;margin-top:2px}
+
+/* Package tabs */
+.pkg-tab{flex:1;padding:10px 8px;background:#1E1E22;border:1px solid #333;border-radius:8px;color:#888;font-size:13px;font-weight:600;font-family:system-ui;cursor:pointer;transition:all 0.2s}
+.pkg-tab.active{background:#C9A96E;color:#161618;border-color:#C9A96E}
+.pkg-tab:hover:not(.active){border-color:#C9A96E;color:#C9A96E}
+
+/* Add-on items */
+.addon-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#1E1E22;border:1px solid #333;border-radius:8px;margin-bottom:6px;cursor:pointer;transition:border-color 0.2s}
+.addon-item.checked{border-color:#C9A96E}
+.addon-item .left{display:flex;align-items:center;gap:10px}
+.addon-item .chk{width:20px;height:20px;border:2px solid #555;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;transition:all 0.2s}
+.addon-item.checked .chk{background:#C9A96E;border-color:#C9A96E;color:#161618}
+.addon-item .aname{font-size:14px;color:#ccc}
+.addon-item .aprice{font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
+
+/* Generated report container */
+#reportFrame{display:none;margin-top:24px;border-radius:8px;overflow:hidden}
+#reportFrame iframe{width:100%;border:none;border-radius:8px}
+
+/* Status */
+.status{margin-top:16px;text-align:center;font-size:13px;color:#888;font-family:Georgia;font-style:italic;display:none}
+.status.show{display:block}
+.status.error{color:#A63D2F}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo"><div class="f">F</div><h1>Fidelity <span>Atlas™</span></h1></div>
+  <div class="subtitle">Generate Intelligence Report</div>
+
+  <div class="field">
+    <label>CLIENT NAME</label>
+    <input type="text" id="clientName" placeholder="First Last" autocomplete="off" value="Sarah Martinez">
+  </div>
+
+  <div class="field">
+    <label>PROPERTY ADDRESS</label>
+    <input type="text" id="address" placeholder="1847 Oak Hollow Dr" autocomplete="off" value="4210 Briarhaven Dr">
+  </div>
+
+  <div class="row2">
+    <div class="field">
+      <label>SQ FT</label>
+      <input type="number" id="sqft" placeholder="2,400" inputmode="numeric" value="3100">
+    </div>
+    <div class="field">
+      <label>ZIP CODE</label>
+      <input type="text" id="zip" placeholder="78209" inputmode="numeric" maxlength="5" value="78216">
+    </div>
+  </div>
+
+  <div class="row2">
+    <div class="field">
+      <label>YEAR BUILT</label>
+      <input type="number" id="yearBuilt" placeholder="2003" inputmode="numeric" value="1998">
+    </div>
+    <div class="field">
+      <label>PROPERTY TYPE</label>
+      <select id="propType">
+        <option value="preowned">Pre-Owned</option>
+        <option value="newcon">New Construction</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Package Selector -->
+  <div style="margin-top:20px;margin-bottom:4px">
+    <label style="display:block;font-size:11px;font-weight:700;color:#C9A96E;letter-spacing:0.08em;font-family:ui-monospace,monospace;margin-bottom:8px">SELECT PACKAGE</label>
+    <div id="pkgTabs" style="display:flex;gap:6px">
+      <button class="pkg-tab active" data-pkg="comp" onclick="selectPkg('comp')">Comprehensive</button>
+      <button class="pkg-tab" data-pkg="opt" onclick="selectPkg('opt')">Optimized</button>
+      <button class="pkg-tab" data-pkg="std" onclick="selectPkg('std')">Standard</button>
+    </div>
+  </div>
+  <div id="pkgPrice" style="font-size:24px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center;padding:10px 0"></div>
+
+  <!-- Add-On Services -->
+  <div style="margin-bottom:16px">
+    <label style="display:block;font-size:11px;font-weight:700;color:#C9A96E;letter-spacing:0.08em;font-family:ui-monospace,monospace;margin-bottom:8px">ADD-ON SERVICES</label>
+    <div id="addOnList"></div>
+  </div>
+
+  <!-- Total -->
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 14px;background:#1E1E22;border:1px solid #C9A96E;border-radius:8px;margin-bottom:12px">
+    <span style="font-size:13px;font-weight:700;color:#888;font-family:ui-monospace,monospace">QUOTED TOTAL</span>
+    <span id="totalPrice" style="font-size:28px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace"></span>
+  </div>
+
+  <button class="gen-btn" onclick="generateReport()">Generate Atlas™ Report</button>
+
+  <div class="status" id="status"></div>
+
+  <div class="stats">
+    <div class="stat"><div class="val">3,377</div><div class="lbl">INSPECTIONS</div></div>
+    <div class="stat"><div class="val">$18,730</div><div class="lbl">AVG DOCUMENTED</div></div>
+    <div class="stat"><div class="val">~90%</div><div class="lbl">CONVERSION</div></div>
+  </div>
+
+  <div id="reportFrame"></div>
+</div>
+
+<script>
+// Add-on services available
+var ADDONS=[
+  {id:"pool",name:"Pool & Spa Inspection",desc:"Complete pool equipment evaluation",price:199},
+  {id:"septic",name:"Septic System Evaluation",desc:"Tank and drain field analysis",price:350},
+  {id:"well",name:"Well Water Lab Testing",desc:"Water quality and flow testing",price:399},
+  {id:"radon",name:"Radon Testing",desc:"48-hour continuous monitoring",price:399},
+  {id:"crawl",name:"Crawlspace Inspection",desc:"Moisture, pests, and structural issues",price:199},
+  {id:"sprinkler",name:"Sprinkler Inspection",desc:"Sprinkler system zones and components",price:99},
+  {id:"drain",name:"Drain Line Inspection",desc:"Sewer camera scope of main drain line",price:199}
+];
+
+// Additional structure pricing: base $79 + sqft*0.267 + casita $350 + kitchen $100 + bath $75
+var structureCount=0;
+var structures=[];
+
+var selectedPkg="comp";
+var selectedAddons={};
+
+// Render add-on checkboxes
+function renderAddons(){
+  var html="";
+  ADDONS.forEach(function(a){
+    var ck=selectedAddons[a.id]?"checked":"";
+    html+='<div class="addon-item '+ck+'" onclick="toggleAddon(\''+a.id+'\')" id="addon-'+a.id+'">';
+    html+='<div class="left"><div class="chk">&#10003;</div><div><span class="aname">'+a.name+'</span><div style="font-size:11px;color:#666;margin-top:2px">'+a.desc+'</div></div></div>';
+    html+='<span class="aprice">+$'+a.price+'</span></div>';
+  });
+  // Additional structures section
+  html+='<div style="margin-top:12px;font-size:11px;font-weight:700;color:#C9A96E;letter-spacing:0.08em;font-family:ui-monospace,monospace;margin-bottom:6px">ADDITIONAL STRUCTURES</div>';
+  html+='<div style="font-size:11px;color:#666;margin-bottom:8px">Detached buildings, casitas, workshops</div>';
+  structures.forEach(function(s,i){
+    var sp=calcStructurePrice(s);
+    html+='<div class="addon-item checked" style="flex-wrap:wrap;gap:8px" id="struct-'+i+'">';
+    html+='<div style="width:100%;display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;color:#ccc">Structure '+(i+1)+'</span><div style="display:flex;align-items:center;gap:8px"><span class="aprice" id="struct-price-'+i+'">+$'+sp+'</span><span style="cursor:pointer;color:#666;font-size:16px" onclick="event.stopPropagation();removeStructure('+i+')">&times;</span></div></div>';
+    html+='<div style="width:100%;display:flex;gap:8px;align-items:center"><input type="number" placeholder="Sq ft" value="'+(s.sqft||"")+'" style="flex:1;padding:8px;background:#2a2a2e;border:1px solid #444;border-radius:6px;color:#fff;font-size:13px" oninput="event.stopPropagation();updateStructSqft('+i+',this.value)">';
+    html+='<label style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" '+(s.casita?"checked":"")+' onchange="event.stopPropagation();toggleStructOpt('+i+',\'casita\',this.checked)"> Casita</label>';
+    html+='<label style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" '+(s.kitchen?"checked":"")+' onchange="event.stopPropagation();toggleStructOpt('+i+',\'kitchen\',this.checked)"> Kitchen</label>';
+    html+='<label style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" '+(s.bath?"checked":"")+' onchange="event.stopPropagation();toggleStructOpt('+i+',\'bath\',this.checked)"> Bath</label>';
+    html+='</div></div>';
+  });
+  html+='<div class="addon-item" style="justify-content:center;color:#888;font-size:13px" onclick="addStructure()">+ Add Structure (from $79)</div>';
+  // Military / First Responder discount
+  var milCk=milDiscount?"checked":"";
+  html+='<div class="addon-item '+milCk+'" style="background:linear-gradient(135deg,#1a2744 0%,#2a3a5c 50%,#1a2744 100%);border:2px solid #C9A96E" onclick="toggleMilDiscount()" id="mil-toggle">';
+  html+='<div class="left"><div class="chk">&#10003;</div><div><span class="aname" style="color:#fff;font-weight:700">Military / First Responder</span><div style="font-size:11px;color:#C9A96E;margin-top:2px">Thank you for your service</div></div></div>';
+  html+='<span class="aprice" style="color:#3D8B5B">-$25</span></div>';
+  document.getElementById("addOnList").innerHTML=html;
+}
+
+function calcStructurePrice(s){
+  var p=79;
+  if(s.sqft&&s.sqft>0)p=Math.max(79,Math.round(s.sqft*0.375-51));
+  if(s.casita)p+=350;
+  if(s.kitchen)p+=100;
+  if(s.bath)p+=75;
+  return p;
+}
+function addStructure(){structures.push({sqft:0,casita:false,kitchen:false,bath:false});renderAddons();updateTotal();}
+function removeStructure(i){structures.splice(i,1);renderAddons();updateTotal();}
+function updateStructSqft(i,v){
+  structures[i].sqft=parseInt(v)||0;
+  // Update price display without re-rendering (keeps input focus)
+  var sp=calcStructurePrice(structures[i]);
+  var priceEl=document.getElementById("struct-price-"+i);
+  if(priceEl)priceEl.textContent="+$"+sp;
+  updateTotal();
+}
+function toggleStructOpt(i,opt,val){
+  structures[i][opt]=val;
+  // Update price display without re-rendering
+  var sp=calcStructurePrice(structures[i]);
+  var priceEl=document.getElementById("struct-price-"+i);
+  if(priceEl)priceEl.textContent="+$"+sp;
+  updateTotal();
+}
+
+var milDiscount=false;
+function toggleMilDiscount(){
+  milDiscount=!milDiscount;
+  var el=document.getElementById("mil-toggle");
+  if(milDiscount)el.classList.add("checked");else el.classList.remove("checked");
+  updateTotal();
+}
+
+function toggleAddon(id){
+  selectedAddons[id]=!selectedAddons[id];
+  var el=document.getElementById("addon-"+id);
+  if(selectedAddons[id])el.classList.add("checked");
+  else el.classList.remove("checked");
+  updateTotal();
+}
+
+function selectPkg(pkg){
+  selectedPkg=pkg;
+  document.querySelectorAll(".pkg-tab").forEach(function(t){t.classList.remove("active");});
+  document.querySelector('[data-pkg="'+pkg+'"]').classList.add("active");
+  updateTotal();
+}
+
+function calcPrices(){
+  var sqft=parseInt(document.getElementById("sqft").value)||2400;
+  var yearBuilt=parseInt(document.getElementById("yearBuilt").value)||2000;
+  var age=new Date().getFullYear()-yearBuilt;
+  var bp=Math.max(499,Math.round((499+sqft*0.07)*(1+age*0.002)));
+  var cp=Math.max(1099,Math.round(bp*2.67)-200);
+  var opRaw=Math.max(799,Math.round(bp*1.67)-100);
+  function vanityPrice(p){var v99=Math.floor(p/100)*100+99,v49=Math.floor(p/100)*100+49;return v99<=p?v99:(v49<=p?v49:v99-100);}
+  var compUpgrade=vanityPrice(cp-opRaw);
+  var op=cp-compUpgrade;
+  return {std:bp,opt:op,comp:cp};
+}
+
+function updateTotal(){
+  var prices=calcPrices();
+  var base=prices[selectedPkg];
+  var addTotal=0;
+  ADDONS.forEach(function(a){if(selectedAddons[a.id])addTotal+=a.price;});
+  structures.forEach(function(s){addTotal+=calcStructurePrice(s);});
+  var total=base+addTotal;
+  if(milDiscount)total-=25;
+  document.getElementById("pkgPrice").textContent="$"+base.toLocaleString();
+  document.getElementById("totalPrice").textContent="$"+total.toLocaleString();
+}
+
+// Update prices when sqft or year changes
+document.getElementById("sqft").addEventListener("input",updateTotal);
+document.getElementById("yearBuilt").addEventListener("input",updateTotal);
+
+// Peer distribution data from database (3,377 inspections)
+var PEERS = {
+  "0-2":   {p10:29,p25:38,p50:49,p75:70,p90:86,n:2399},
+  "3-5":   {p10:27,p25:31,p50:38,p75:44,p90:48,n:67},
+  "6-10":  {p10:38,p25:42,p50:49,p75:58,p90:71,n:67},
+  "11-15": {p10:40,p25:47,p50:54,p75:67,p90:75,n:61},
+  "16-20": {p10:45,p25:55,p50:65,p75:77,p90:87,n:138},
+  "21-30": {p10:52,p25:59,p50:73,p75:87,p90:96,n:143},
+  "31-50": {p10:58,p25:69,p50:79,p75:88,p90:100,n:190},
+  "51+":   {p10:50,p25:59,p50:73,p75:85,p90:100,n:186}
+};
+
+// Seller-paid repair data from 2,935 inspections. p=flag rate, c=avg seller repair cost when found, o=1 specialty tool required
+var DEFECTS = {
+  "0-2":[{n:"Foundation Settlement",p:21,o:1,c:7652},{n:"Moisture Damages",p:82,o:1,c:4607},{n:"Air Quality & Water Contamination",p:55,o:1,c:4071},{n:"Main Drain Issues",p:45,o:1,c:2653},{n:"HVAC Ductwork Defects",p:58,o:1,c:5913},{n:"Rodent/Pest Access",p:62,o:1,c:1500},{n:"Fire, Fall & Safety Hazards",p:65,o:1,c:1800},{n:"Roofing Repairs Needed",p:57,o:0,c:3200},{n:"HVAC Repairs Needed",p:48,o:0,c:2800}],
+  "21-30":[{n:"Foundation Settlement",p:42,o:1,c:7652},{n:"Moisture Damages",p:95,o:1,c:4607},{n:"Air Quality & Water Contamination",p:88,o:1,c:4071},{n:"Main Drain Issues",p:72,o:1,c:2653},{n:"HVAC Ductwork Defects",p:82,o:1,c:5913},{n:"Rodent/Pest Access",p:78,o:1,c:1500},{n:"Fire, Fall & Safety Hazards",p:80,o:1,c:1800},{n:"Roofing Repairs Needed",p:74,o:0,c:3200},{n:"HVAC Repairs Needed",p:52,o:0,c:2800}],
+  "31-50":[{n:"Foundation Settlement",p:38,o:1,c:7652},{n:"Moisture Damages",p:91,o:1,c:4607},{n:"Air Quality & Water Contamination",p:85,o:1,c:4071},{n:"Main Drain Issues",p:68,o:1,c:2653},{n:"HVAC Ductwork Defects",p:78,o:1,c:5913},{n:"Rodent/Pest Access",p:75,o:1,c:1500},{n:"Fire, Fall & Safety Hazards",p:82,o:1,c:1800},{n:"Roofing Repairs Needed",p:65,o:0,c:3200},{n:"HVAC Repairs Needed",p:42,o:0,c:2800}],
+  "51+":[{n:"Foundation Settlement",p:30,o:1,c:7652},{n:"Moisture Damages",p:85,o:1,c:4607},{n:"Air Quality & Water Contamination",p:72,o:1,c:4071},{n:"Main Drain Issues",p:55,o:1,c:2653},{n:"HVAC Ductwork Defects",p:68,o:1,c:5913},{n:"Rodent/Pest Access",p:65,o:1,c:1500},{n:"Fire, Fall & Safety Hazards",p:78,o:1,c:1800},{n:"Roofing Repairs Needed",p:42,o:0,c:3200},{n:"HVAC Repairs Needed",p:32,o:0,c:2800}]
+};
+
+function getAgeBracket(age) {
+  if (age <= 2) return "0-2";
+  if (age <= 5) return "3-5";
+  if (age <= 10) return "6-10";
+  if (age <= 15) return "11-15";
+  if (age <= 20) return "16-20";
+  if (age <= 30) return "21-30";
+  if (age <= 50) return "31-50";
+  return "51+";
+}
+
+function getDefectBracket(age) {
+  if (age <= 2) return "0-2";
+  if (age <= 30) return "21-30";
+  if (age <= 50) return "31-50";
+  return "51+";
+}
+
+function getGrade(age, defectCount) {
+  // Grade based on peer percentile position
+  var brk = getAgeBracket(age);
+  var peer = PEERS[brk];
+  if (defectCount <= peer.p25) return {letter:"A",color:"#3D8B5B",label:"Well Maintained"};
+  if (defectCount <= peer.p50) return {letter:"B",color:"#3D6B8B",label:"Typical Wear"};
+  if (defectCount <= peer.p75) return {letter:"C",color:"#C17A3A",label:"Multiple Systems Need Attention"};
+  return {letter:"D",color:"#A63D2F",label:"Significant Concerns"};
+}
+
+function showStatus(msg, isError) {
+  var el = document.getElementById("status");
+  el.textContent = msg;
+  el.className = "status show" + (isError ? " error" : "");
+}
+
+function generateReport() {
+  var name = document.getElementById("clientName").value.trim();
+  var addr = document.getElementById("address").value.trim();
+  var sqft = parseInt(document.getElementById("sqft").value);
+  var zip = document.getElementById("zip").value.trim();
+  var yearBuilt = parseInt(document.getElementById("yearBuilt").value);
+  var propType = document.getElementById("propType").value;
+
+  // Validation
+  if (!name) { showStatus("Enter client name.", true); return; }
+  if (!addr) { showStatus("Enter property address.", true); return; }
+  if (!sqft || sqft < 500 || sqft > 15000) { showStatus("Enter valid square footage (500-15,000).", true); return; }
+  if (!zip || zip.length !== 5) { showStatus("Enter 5-digit zip code.", true); return; }
+  if (!yearBuilt || yearBuilt < 1900 || yearBuilt > new Date().getFullYear()) { showStatus("Enter valid year built.", true); return; }
+
+  var currentYear = new Date().getFullYear();
+  var age = currentYear - yearBuilt;
+  var brk = getAgeBracket(age);
+  var defectBrk = getDefectBracket(age);
+  var peer = PEERS[brk];
+  var defects = DEFECTS[defectBrk] || DEFECTS["21-30"];
+
+  // Calculate predicted defect count (use p50 as baseline, adjust by sqft)
+  var sqftFactor = sqft > 2500 ? 1.15 : sqft < 1500 ? 0.9 : 1.0;
+  var predictedDefects = Math.round(peer.p50 * sqftFactor);
+
+  // Calculate grade
+  var grade = getGrade(age, predictedDefects);
+
+  // Calculate gap cost (specialty tool items weighted by probability)
+  var gapCost = 0;
+  defects.forEach(function(d) {
+    if (d.o) gapCost += Math.round(d.c * d.p / 100);
+  });
+
+  // Calculate total seller-paid repair estimate
+  var sellerPaid = defects.filter(function(d) { return d.o; });
+  var maintenance = defects.filter(function(d) { return !d.o; });
+
+  showStatus("Generating Atlas™ Intelligence Report...", false);
+
+  // Build the report URL with query params
+  var params = new URLSearchParams({
+    name: name,
+    addr: addr,
+    sqft: sqft,
+    zip: zip,
+    age: age,
+    brk: defectBrk,
+    grade: grade.letter,
+    gradeColor: grade.color,
+    gradeLabel: grade.label,
+    predicted: predictedDefects,
+    gap: gapCost,
+    p50: peer.p50,
+    n: peer.n
+  });
+
+  // For now, open the report in a new window with the data
+  // When backend is ready, this will POST to the API instead
+  setTimeout(function() {
+    showStatus("Report ready. Opening...", false);
+
+    // Collect add-ons
+    var addons=[];
+    ADDONS.forEach(function(a){if(selectedAddons[a.id])addons.push({id:a.id,name:a.name,desc:a.desc,price:a.price});});
+    var structs=structures.map(function(s){return{sqft:s.sqft,casita:s.casita,kitchen:s.kitchen,bath:s.bath,price:calcStructurePrice(s)};});
+    var prices=calcPrices();
+
+    // Store report data in sessionStorage for the sales page to read
+    sessionStorage.setItem("atlas_report", JSON.stringify({
+      name: name,
+      addr: addr,
+      sqft: sqft,
+      zip: zip,
+      age: age,
+      brk: defectBrk,
+      grade: grade,
+      predicted: predictedDefects,
+      gapCost: gapCost,
+      peer: peer,
+      defects: defects,
+      sellerPaid: sellerPaid.length,
+      maintenance: maintenance.length,
+      pkg: selectedPkg,
+      addons: addons,
+      structures: structs,
+      prices: prices,
+      propType: propType,
+      milDiscount: milDiscount
+    }));
+
+    // Build URL with compact data params
+    var data = encodeURIComponent(JSON.stringify({
+      name:name,addr:addr,sqft:sqft,zip:zip,age:age,brk:defectBrk,
+      grade:grade,predicted:predictedDefects,gapCost:gapCost,
+      pkg:selectedPkg,addons:addons,structures:structs,prices:prices,
+      propType:propType,milDiscount:milDiscount
+    }));
+
+    // Detect if we're on GitHub Pages or local
+    var base = window.location.href.replace(/atlas-entry\.html.*/,"");
+    var target = base + "inbound-sales.html?d=" + data;
+    window.open(target, "_blank");
+  }, 600);
+}
+
+// Init add-ons and pricing
+renderAddons();
+updateTotal();
+
+// Auto-detect new construction based on year built
+document.getElementById("yearBuilt").addEventListener("input", function() {
+  var year = parseInt(this.value);
+  var currentYear = new Date().getFullYear();
+  if (year && (currentYear - year) <= 2) {
+    document.getElementById("propType").value = "newcon";
+  } else if (year) {
+    document.getElementById("propType").value = "preowned";
+  }
+});
+</script>
+</body>
+</html>
