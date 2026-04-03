@@ -321,13 +321,13 @@ var riskMap=[
   {svc:"Ductwork Camera",ben:"HVAC ductwork & hidden damage",d:findDef("HVAC Ductwork Defects")},
   {svc:"Safety Audit",ben:"CO2/Gas, fire, fall & break-in risks",d:findDef("Electrical Wiring Deficiencies")},
   {svc:"Termite / WDI",ben:"Pest & rodent intrusion",d:findDef("Rodent/Pest Access")},
-  {svc:"Air Quality",ben:"Failed seals & air infiltration",d:findDef("Failed Window Seals")}
+  {svc:"Environmental Audit",ben:"Indoor air quality & water filtration",d:findDef("Failed Window Seals")}
 ];
 var compRisk=riskMap;
 var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
 var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos"];
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"All 7 specialty services included",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos","Instant report delivery, HomeScore\u2122 with ballpark pricing","Drinking water filtration assessment","Inspector consultation on-site"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
+  {n:"Comprehensive Risk Elimination",sub:"All 7 specialty services included",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,bonuses:["24-hour third-party repair quotes","Agent-ready repair request with photos","Instant report delivery, HomeScore\u2122 with ballpark pricing","Inspector consultation on-site"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
   {n:"Optimized Value Pack",sub:"3 of 7 specialty services",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:["Inspector consultation"],guarantee:null,std:null},
   {n:"Standard Inspection",sub:"Professional visual inspection",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
 ];
