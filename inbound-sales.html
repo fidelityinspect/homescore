@@ -451,9 +451,9 @@ pkgs.forEach(function(pk,pi){
     });
     // Upgrade to Comprehensive — gap cost + button
     pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.25);border-radius:6px;text-align:center">';
-    pHTML+='<div style="font-size:13px;color:#333;font-weight:700;margin-bottom:4px">$'+vpGapCost.toLocaleString()+' in seller-paid repairs left on the table</div>';
+    pHTML+='<div id="opt-gap-cost" style="font-size:13px;color:#333;font-weight:700;margin-bottom:4px">$'+vpGapCost.toLocaleString()+' in seller-paid repairs left on the table</div>';
     pHTML+='<div style="font-size:12px;color:#888;font-family:Georgia;margin-bottom:10px">Add all 7 specialty services, rush scheduling & guarantee</div>';
-    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button>';
+    pHTML+='<button id="opt-upgrade-btn" class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button>';
     pHTML+='</div>';
   }
   // No select button — opening card = selecting package
@@ -465,6 +465,8 @@ document.getElementById("pkgCards").innerHTML=pHTML;
 var optAddedCount=0;
 var optAddedCost=0;
 var optSvcPrices=[199,199,99,99]; // Sewer, Ductwork, Safety, Environmental
+var optSvcRepairs=[]; // repair costs for each missing service
+[2,3,4,6].forEach(function(i){var d=riskMap[i].d;optSvcRepairs.push(d?Math.round(d.c*d.p/100):0);});
 var optSvcAdded=[false,false,false,false];
 var optMissingDotIdx=[3,4,5,6];
 function addOptService(mi){
@@ -498,6 +500,20 @@ function addOptService(mi){
   if(label)label.textContent=(3+optAddedCount)+" of 7 risk categories covered";
   var prEl=document.querySelector("#pkg-body-1").parentElement.querySelector(".pr");
   if(prEl)prEl.textContent="$"+(op+optAddedCost).toLocaleString();
+  // Update upgrade button price and gap cost
+  var upgradePrice=cp-op-optAddedCost;
+  var upgradeBtn=document.getElementById("opt-upgrade-btn");
+  if(upgradeBtn){
+    if(upgradePrice<=0){upgradeBtn.textContent="You\u2019ve added all 7 services";upgradeBtn.disabled=true;upgradeBtn.style.opacity="0.5";}
+    else{upgradeBtn.textContent="Upgrade to Comprehensive +$"+upgradePrice.toLocaleString();upgradeBtn.disabled=false;upgradeBtn.style.opacity="1";}
+  }
+  var remainingGap=vpGapCost;
+  for(var g=0;g<4;g++){if(optSvcAdded[g])remainingGap-=optSvcRepairs[g];}
+  var gapEl=document.getElementById("opt-gap-cost");
+  if(gapEl){
+    if(remainingGap<=0){gapEl.textContent="All specialty risks covered";}
+    else{gapEl.textContent="$"+remainingGap.toLocaleString()+" in seller-paid repairs left on the table";}
+  }
   if(activePkg===1){renderClientAddons();}
 }
 // Override VP price when add-ons are active
