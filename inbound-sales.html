@@ -264,6 +264,7 @@ if(!atlas){
   try{
     var ps=new URLSearchParams(window.location.search);
     if(ps.get("d"))atlas=JSON.parse(decodeURIComponent(ps.get("d")));
+    if(!atlas&&ps.get("nc")){atlas={name:"James & Sarah Martinez",addr:"14203 Ridgewood Trail",sqft:3200,zip:"78258",age:1,brk:"0-2",grade:{letter:"B",color:"#3D6B8B",label:"Good"},predicted:44,gapCost:0,pkg:"comp",addons:[],structures:[],prices:null,propType:"newcon",milDiscount:false};}
   }catch(e){}
 }
 if(atlas){
