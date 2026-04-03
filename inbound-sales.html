@@ -327,7 +327,7 @@ var compRisk=riskMap;
 var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
 var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos"];
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"All 7 specialty services included",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,instantBonuses:["Complete inspection report","Concessions request report","Pricing avg. on major defects"],delayedBonus:"3rd party repair quote confirmation in 24hrs",bonuses:[],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
+  {n:"Comprehensive Risk Elimination",sub:"All 7 specialty services included",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,instantBonuses:[{name:"Inspection report",tag:"INSTANT"},{name:"Concessions request",tag:"INSTANT"},{name:"Major defect pricing",tag:"INSTANT"}],delayedBonus:{name:"3rd party itemized repair quotes",tag:"24 HRS"},bonuses:[],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
   {n:"Optimized Value Pack",sub:"3 of 7 specialty services",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:["Inspector consultation"],guarantee:null,std:null},
   {n:"Standard Inspection",sub:"Professional visual inspection",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
 ];
@@ -398,13 +398,12 @@ pkgs.forEach(function(pk,pi){
     pHTML+='</div>';
   }
   if(pk.instantBonuses&&pk.instantBonuses.length>0){
-    pHTML+='<div class="bonus"><h4>INSTANT BONUSES / ON-SITE DELIVERY</h4>';
-    pk.instantBonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});
+    pHTML+='<div class="bonus"><h4>INSTANT ON-SITE DELIVERY</h4>';
+    pk.instantBonuses.forEach(function(b){pHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0"><span style="color:#3D8B5B;font-size:13px">&#9733; '+b.name+'</span><span style="font-size:11px;color:#3D8B5B;font-family:ui-monospace,monospace;font-weight:600">'+b.tag+'</span></div>';});
     pHTML+='</div>';
   }
   if(pk.delayedBonus){
-    pHTML+='<div class="bonus" style="margin-top:8px;background:rgba(201,169,110,0.08)"><h4 style="color:#C9A96E">BONUS</h4>';
-    pHTML+='<p style="color:#C9A96E">&#9733; '+pk.delayedBonus+'</p></div>';
+    pHTML+='<div class="bonus" style="margin-top:8px;background:rgba(201,169,110,0.08)"><div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0"><span style="color:#C9A96E;font-size:13px">&#9733; '+pk.delayedBonus.name+'</span><span style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600">'+pk.delayedBonus.tag+'</span></div></div>';
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
