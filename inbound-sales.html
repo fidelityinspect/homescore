@@ -330,7 +330,7 @@ var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
 var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos"];
 var pkgs=[
   {n:"Comprehensive Risk Elimination",sub:"",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,instantBonuses:[{name:"Inspection report",tag:"INSTANT"},{name:"Concessions request",tag:"INSTANT"},{name:"Major defect pricing",tag:"INSTANT"}],delayedBonus:{name:"3rd party itemized repair quotes",tag:"24 HRS"},bonuses:[],guarantee:"We will find seller-paid repairs of 10x more than your inspection fee or we will double your refund.",std:null},
-  {n:"Optimized Value Pack",sub:"3 of 7 specialty services",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:["Inspector consultation"],guarantee:null,std:null},
+  {n:"Optimized Value Pack",sub:"3 of 7 specialty services",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:[],guarantee:null,std:null},
   {n:"Standard Inspection",sub:"Professional visual inspection",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
 ];
 var pHTML="";
@@ -383,12 +383,7 @@ pkgs.forEach(function(pk,pi){
     pHTML+='<span style="font-size:13px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#333")+';font-family:ui-monospace,monospace">TOTAL SELLER-PAID REPAIRS</span>';
     pHTML+='<span style="font-size:22px;font-weight:700;color:'+(pk.dk?"#C9A96E":"#C17A3A")+';font-family:ui-monospace,monospace">$'+protectedTotal.toLocaleString()+'</span>';
     pHTML+='</div>';
-    if(pi===1){
-      pHTML+='<div style="display:flex;justify-content:center;gap:4px;margin-top:4px">';
-      for(var s=0;s<7;s++){pHTML+='<div style="width:28px;height:6px;border-radius:3px;background:'+(s<3?"#C9A96E":"#444")+'"></div>';}
-      pHTML+='</div>';
-      pHTML+='<div style="font-size:11px;color:#999;font-family:ui-monospace,monospace;text-align:center;margin-top:6px">3 of 7 risk categories covered</div>';
-    }
+    // 7-segment bar moved into upgrade section below
   }
   if(pk.std){
     pk.std.forEach(function(it){pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:#555">'+it+'</span></div>';});
@@ -450,7 +445,7 @@ pkgs.forEach(function(pk,pi){
     // Upgrade to Comprehensive
     pHTML+='<div style="text-align:center;margin-top:12px">';
     pHTML+='<div style="font-size:12px;color:#888;font-family:Georgia;margin-bottom:8px">Get all 7 + bonuses + guarantee</div>';
-    pHTML+='<button class="sel-btn gold" style="font-size:12px;padding:10px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button>';
+    pHTML+='<button class="sel-btn gold" style="font-size:12px;padding:10px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$299</button>';
     pHTML+='</div></div>';
   }
   // Select button
@@ -465,8 +460,9 @@ document.getElementById("pkgCards").innerHTML=pHTML;
 
 // Optimized add-on service interaction
 var optAddedCount=0;
-var optDotMap=[0,1,5,2,3,4,6]; // riskMap order to dot order: Foundation(0),Infrared(1),Termite(5)->dot2, then missing: Sewer(2)->dot3,Ductwork(3)->dot4,Safety(4)->dot5,Env(6)->dot6
-var optMissingDotIdx=[3,4,5,6]; // which dots correspond to the 4 missing services
+var optAddedCost=0;
+var optSvcPrices=[199,199,99,99]; // Sewer, Ductwork, Safety, Environmental
+var optMissingDotIdx=[3,4,5,6];
 function addOptService(mi){
   var btn=document.getElementById("opt-add-btn-"+mi);
   if(!btn||btn.disabled)return;
@@ -484,9 +480,25 @@ function addOptService(mi){
     setTimeout(function(){dot.style.transform="scaleY(1)";},300);
   }
   optAddedCount++;
+  optAddedCost+=optSvcPrices[mi];
   var label=document.getElementById("opt-dot-label");
   if(label)label.textContent=(3+optAddedCount)+" of 7 risk categories covered";
+  // Update VP price in header
+  var prEl=document.querySelector("#pkg-body-1").parentElement.querySelector(".pr");
+  if(prEl)prEl.textContent="$"+(op+optAddedCost).toLocaleString();
+  // Update total if VP is selected
+  if(activePkg===1)updateClientTotal();
 }
+// Override VP price when add-ons are active
+var origGetSelectedPkgPrice;
+(function(){
+  var origFn=getSelectedPkgPrice;
+  getSelectedPkgPrice=function(){
+    var base=origFn();
+    if(activePkg===1)base+=optAddedCost;
+    return base;
+  };
+})();
 
 // Client-facing add-on selector
 function renderClientAddons(){
