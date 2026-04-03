@@ -111,11 +111,61 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .ftr{border-top:1px solid #D8D4CC;padding:14px 24px 28px;text-align:center}
 .ftr .ph{font-size:16px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-bottom:8px}
 .ftr .co{font-size:10px;color:#B0ADA6;font-family:ui-monospace,monospace;line-height:1.8}
+
+/* NC Flow Styles */
+.nc-hidden{display:none!important}
+.nc-hero{padding:24px;background:#F0EDE6}
+.nc-hero h2{font-size:20px;font-weight:700;color:#1A1A1A;margin-bottom:4px}
+.nc-hero .nc-sub{font-size:14px;color:#888;font-family:Georgia;font-style:italic;margin-bottom:16px}
+.nc-stat-box{padding:16px;background:#161618;border-radius:8px;text-align:center;margin-top:12px}
+.nc-stat-box .big{font-size:42px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
+.nc-stat-box .lbl{font-size:12px;color:#999;font-family:ui-monospace,monospace;margin-top:4px}
+.nc-builder{padding:20px 24px;background:#fff}
+.nc-builder h3{font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:12px}
+.nc-builder .insight{font-size:13px;color:#555;font-family:Georgia;line-height:1.6;margin-bottom:12px}
+.nc-builder .stat-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E8E4DC}
+.nc-builder .stat-row .sr-label{font-size:13px;color:#333}
+.nc-builder .stat-row .sr-val{font-size:14px;font-weight:700;color:#C17A3A;font-family:ui-monospace,monospace}
+.nc-phase-sel{padding:20px 24px;background:#F0EDE6}
+.nc-phase-sel h3{font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:6px}
+.nc-phase-sel .phase-desc{font-size:12px;color:#888;font-family:Georgia;margin-bottom:14px}
+.phase-tab{flex:1;padding:12px 8px;background:#fff;border:2px solid #E0DDD6;border-radius:8px;color:#888;font-size:14px;font-weight:700;font-family:system-ui;cursor:pointer;transition:all 0.2s;text-align:center}
+.phase-tab.active{background:#C9A96E;color:#161618;border-color:#C9A96E}
+.phase-tab .phase-price{font-size:11px;font-weight:600;font-family:ui-monospace,monospace;margin-top:2px}
+.nc-phase-card{padding:16px;background:#fff;border:1px solid #E0DDD6;border-radius:8px;margin-bottom:10px}
+.nc-phase-card .pc-hdr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.nc-phase-card .pc-num{width:28px;height:28px;background:#C9A96E;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#161618;font-family:ui-monospace,monospace;flex-shrink:0}
+.nc-phase-card .pc-title{font-size:15px;font-weight:700;color:#1A1A1A}
+.nc-phase-card .pc-items{list-style:none;padding:0;margin:0}
+.nc-phase-card .pc-items li{font-size:13px;color:#555;padding:4px 0;padding-left:18px;position:relative}
+.nc-phase-card .pc-items li::before{content:"\2713";position:absolute;left:0;color:#C9A96E;font-weight:700;font-size:12px}
+.nc-phase-card .pc-why{font-size:12px;color:#C17A3A;font-family:Georgia;font-style:italic;margin-top:8px;padding:8px;background:rgba(193,122,58,0.08);border-radius:4px}
+.nc-dnv{padding:20px 24px;background:#161618}
+.nc-dnv h3{font-size:14px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:4px}
+.nc-dnv .dnv-sub{font-size:12px;color:#999;font-family:Georgia;margin-bottom:16px}
+.dnv-step{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start}
+.dnv-step .dnv-num{width:32px;height:32px;background:#C9A96E;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#161618;font-family:ui-monospace,monospace;flex-shrink:0}
+.dnv-step .dnv-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.dnv-step .dnv-desc{font-size:12px;color:#999;font-family:Georgia;line-height:1.5}
+.nc-pkg-card{padding:16px;background:#fff;border:2px solid #E0DDD6;border-radius:8px;margin-bottom:10px;cursor:pointer;transition:border-color 0.2s}
+.nc-pkg-card.active{border-color:#C9A96E}
+.nc-pkg-card .npc-hdr{display:flex;justify-content:space-between;align-items:baseline}
+.nc-pkg-card .npc-name{font-size:16px;font-weight:700;color:#1A1A1A}
+.nc-pkg-card .npc-price{font-size:24px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
+.nc-pkg-card .npc-tag{display:inline-block;font-size:10px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;background:rgba(201,169,110,0.12);padding:3px 8px;border-radius:4px;margin-top:4px}
+.nc-pkg-card .npc-phases{font-size:12px;color:#888;font-family:ui-monospace,monospace;margin:8px 0 4px}
+.nc-pkg-card .npc-item{font-size:13px;color:#555;padding:3px 0;padding-left:18px;position:relative}
+.nc-pkg-card .npc-item::before{content:"\2713";position:absolute;left:0;color:#C9A96E;font-weight:700;font-size:12px}
+.nc-bonus{margin-top:10px;padding:10px;background:rgba(61,139,91,0.08);border:1px solid rgba(61,139,91,0.2);border-radius:6px}
+.nc-bonus .nb-title{font-size:11px;font-weight:700;color:#3D8B5B;font-family:ui-monospace,monospace;letter-spacing:0.06em;margin-bottom:4px}
+.nc-bonus .nb-desc{font-size:12px;color:#555;font-family:Georgia;line-height:1.5}
 </style>
 </head>
 <body>
 <div class="hdr"><h1>Fidelity</h1><span>Total Clarity. Zero Regret.</span></div>
 
+<!-- PRE-OWNED FLOW -->
+<div id="preowned-flow">
 <div class="info">
   <h2>Top Seller-Paid Repairs</h2>
   <h2>You Don't Want to Miss at</h2>
@@ -152,6 +202,80 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
     </div>
   </div>
 </div>
+
+</div><!-- /preowned-flow -->
+
+<!-- NEW CONSTRUCTION FLOW -->
+<div id="nc-flow" class="nc-hidden">
+
+<div class="nc-hero">
+  <h2 id="ncClientName">Your New Construction Report</h2>
+  <div id="ncSubhead" class="nc-sub">Independent verification for your investment</div>
+  <div class="addr" id="ncAddrLine"></div>
+  <div class="meta" id="ncMetaLine"></div>
+  <div class="nc-stat-box">
+    <div class="big">49</div>
+    <div class="lbl">median defects found in brand-new homes</div>
+    <div style="font-size:11px;color:#666;font-family:Georgia;margin-top:6px">Based on 2,524 new construction inspections in San Antonio & Austin</div>
+  </div>
+</div>
+
+<div class="nc-builder">
+  <h3>BUILDER QUALITY DATA</h3>
+  <div class="insight">Even the best builders benefit from independent verification. New homes have different risks, not fewer. Here's what we consistently find:</div>
+  <div class="stat-row"><span class="sr-label">Avg defects per new home</span><span class="sr-val">49</span></div>
+  <div class="stat-row"><span class="sr-label">Framing issues found</span><span class="sr-val">68%</span></div>
+  <div class="stat-row"><span class="sr-label">Plumbing rough-in defects</span><span class="sr-val">54%</span></div>
+  <div class="stat-row"><span class="sr-label">Electrical rough-in defects</span><span class="sr-val">61%</span></div>
+  <div class="stat-row"><span class="sr-label">HVAC installation issues</span><span class="sr-val">58%</span></div>
+  <div class="stat-row" style="border:none"><span class="sr-label">Grading / drainage problems</span><span class="sr-val">42%</span></div>
+</div>
+
+<div class="nc-phase-sel">
+  <h3>CHOOSE YOUR COVERAGE</h3>
+  <div class="phase-desc">Tap to compare inspection phases</div>
+  <div style="display:flex;gap:10px" id="ncPhaseTabs"></div>
+</div>
+
+<div id="ncPhaseCards" style="padding:10px 24px;background:#F5F2EB"></div>
+
+<div class="nc-dnv">
+  <h3>BUILDER ACCOUNTABILITY PROCESS</h3>
+  <div class="dnv-sub">How we ensure every defect gets resolved — not just documented</div>
+  <div class="dnv-step">
+    <div class="dnv-num">1</div>
+    <div>
+      <div class="dnv-title">DOCUMENT</div>
+      <div class="dnv-desc">Every defect photographed, location-mapped, severity-classified, and code-referenced. Creates an indisputable evidence package.</div>
+    </div>
+  </div>
+  <div class="dnv-step">
+    <div class="dnv-num">2</div>
+    <div>
+      <div class="dnv-title">NOTIFY</div>
+      <div class="dnv-desc">Formal written repair request delivered to the builder with defect list, photo evidence, and repair timeline. Creates a paper trail — builder can't claim they weren't informed.</div>
+    </div>
+  </div>
+  <div class="dnv-step">
+    <div class="dnv-num">3</div>
+    <div>
+      <div class="dnv-title">VERIFY</div>
+      <div class="dnv-desc">Re-inspection after builder claims repairs are complete. Side-by-side before/after documentation. If not fixed properly, the cycle repeats with escalation documentation.</div>
+    </div>
+  </div>
+</div>
+
+<div id="ncPkgSection" style="padding:20px 24px;background:#F0EDE6">
+  <div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:4px">YOUR QUOTE FOR <span id="ncQuoteAddr"></span></div>
+  <div style="font-size:12px;color:#999;font-family:ui-monospace,monospace;margin-bottom:14px" id="ncQuoteMeta"></div>
+  <div id="ncPkgCards"></div>
+  <div id="ncTotal" style="display:flex;justify-content:space-between;align-items:baseline;padding:14px;background:#161618;border:2px solid #C9A96E;border-radius:8px;margin-top:10px">
+    <span style="font-size:13px;font-weight:700;color:#888;font-family:ui-monospace,monospace">YOUR TOTAL</span>
+    <span id="ncTotalAmt" style="font-size:28px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace"></span>
+  </div>
+</div>
+
+</div><!-- /nc-flow -->
 
 <div class="rev">
   <h3>WHAT OUR CLIENTS SAY</h3>
@@ -703,6 +827,146 @@ function togglePkg(i){
     renderClientAddons();
     setTimeout(function(){el.parentElement.scrollIntoView({behavior:"smooth",block:"start"});},100);
   }
+}
+
+// ========== NEW CONSTRUCTION FLOW ==========
+var propType=(atlas&&atlas.propType)||"preowned";
+var isNC=propType==="newcon";
+
+if(isNC){
+  // Hide pre-owned, show NC
+  document.getElementById("preowned-flow").classList.add("nc-hidden");
+  document.getElementById("nc-flow").classList.remove("nc-hidden");
+  // Hide pre-owned package/addon sections
+  document.querySelector(".pkg").classList.add("nc-hidden");
+  document.getElementById("addonSection").classList.add("nc-hidden");
+
+  // Populate NC hero
+  if(clientName){
+    document.getElementById("ncClientName").textContent=clientName+",";
+    document.getElementById("ncSubhead").textContent="Here's what we find in brand-new homes like yours";
+  }
+  document.getElementById("ncAddrLine").textContent=addr;
+  document.getElementById("ncMetaLine").textContent=(age<=0?"New build":age+"yr old")+" \u00b7 "+sfv.toLocaleString()+" sqft \u00b7 "+zp;
+  document.getElementById("ncQuoteAddr").textContent=addr.toUpperCase();
+  document.getElementById("ncQuoteMeta").textContent=(age<=0?"New build":age+"yr old")+" \u00b7 "+sfv.toLocaleString()+" sqft";
+
+  // NC Pricing
+  var ncBase=Math.max(499,Math.round((499+sfv*0.07)*(1+age*0.002)));
+  var nc2Price=Math.max(699,Math.round(ncBase*1.5));
+  var nc3Price=Math.max(999,Math.round(ncBase*2.2));
+
+  // Phase data
+  var ncPhases={
+    2:{
+      name:"2-Phase Inspection",
+      price:nc2Price,
+      tag:null,
+      phases:[
+        {num:1,title:"Pre-Drywall Inspection",items:["Framing structural integrity & proper nailing","Electrical rough-in — wire gauge, junction boxes, panel prep","Plumbing rough-in — supply lines, drain lines, fixture placement","HVAC rough-in — ductwork routing, returns, unit placement","Insulation verification","Window & door flashing / weather barrier","Fire blocking"],why:"Once drywall goes up, all of this is hidden behind walls. Builders know inspectors rarely check at this stage."},
+        {num:2,title:"Final Phase Inspection",items:["Full systems inspection — electrical, plumbing, HVAC, appliances","Foundation levelness & performance","Exterior envelope — roof, siding, grading, drainage","Interior finishes — cosmetic & functional","Garage, attic, crawlspace","Safety items — smoke detectors, GFCI, AFCI, railings"],why:"This is the last checkpoint before you own every problem."}
+      ],
+      includes:["Pre-drywall + final phase inspections","Document \u2192 Notify \u2192 Verify for each phase","Builder defect report with photo evidence","Written repair request to builder"],
+      bonus:{title:"INCLUDED BONUS: GET IT IN WRITING",desc:"Your guide to builder repairs after inspection. Step-by-step process for ensuring the builder fixes every documented defect before closing — with escalation templates if they push back."}
+    },
+    3:{
+      name:"3-Phase Inspection",
+      price:nc3Price,
+      tag:"RECOMMENDED",
+      phases:[
+        {num:1,title:"Pre-Concrete Pour",items:["Plumbing rough-in inspection","Rebar and post-tension cable layout","Moisture barrier / vapor barrier integrity","Soil and grading conditions","Foundation form dimensions & alignment"],why:"Once concrete is poured, everything underneath is buried forever. This is the ONE chance to verify it's right."},
+        {num:2,title:"Pre-Drywall Inspection",items:["Framing structural integrity & proper nailing","Electrical rough-in — wire gauge, junction boxes, panel prep","Plumbing rough-in — supply lines, drain lines, fixture placement","HVAC rough-in — ductwork routing, returns, unit placement","Insulation verification","Window & door flashing / weather barrier","Fire blocking"],why:"Once drywall goes up, all of this is hidden behind walls. Builders know inspectors rarely check at this stage."},
+        {num:3,title:"Final Phase Inspection",items:["Full systems inspection — electrical, plumbing, HVAC, appliances","Foundation levelness & performance","Exterior envelope — roof, siding, grading, drainage","Interior finishes — cosmetic & functional","Garage, attic, crawlspace","Safety items — smoke detectors, GFCI, AFCI, railings"],why:"This is the last checkpoint before you own every problem."}
+      ],
+      includes:["Pre-concrete + pre-drywall + final phase inspections","Document \u2192 Notify \u2192 Verify for each phase","Builder defect report with photo evidence","Foundation-specific documentation","Written repair request to builder"],
+      bonus:{title:"INCLUDED BONUS: PRE-CONSTRUCTION QUALITY STANDARDS",desc:"Your benchmark for builder accountability. We establish quality standards BEFORE construction begins, so every phase inspection measures against documented expectations — not guesswork."}
+    }
+  };
+
+  var ncSelectedPhase=3; // default to 3-phase (recommended)
+
+  function renderNCPhaseTabs(){
+    var html="";
+    [2,3].forEach(function(p){
+      var ph=ncPhases[p];
+      var active=ncSelectedPhase===p?"active":"";
+      html+='<div class="phase-tab '+active+'" onclick="selectNCPhase('+p+')">';
+      html+=p+'-Phase';
+      if(ph.tag)html+='<div style="font-size:9px;color:'+(active?"#161618":"#C9A96E")+';font-family:ui-monospace,monospace;margin-top:2px">'+ph.tag+'</div>';
+      html+='<div class="phase-price" style="color:'+(active?"#161618":"#C9A96E")+'">$'+ph.price.toLocaleString()+'</div>';
+      html+='</div>';
+    });
+    document.getElementById("ncPhaseTabs").innerHTML=html;
+  }
+
+  function renderNCPhaseCards(){
+    var ph=ncPhases[ncSelectedPhase];
+    var html="";
+    ph.phases.forEach(function(p){
+      html+='<div class="nc-phase-card">';
+      html+='<div class="pc-hdr"><div class="pc-num">'+p.num+'</div><div class="pc-title">'+p.title+'</div></div>';
+      html+='<ul class="pc-items">';
+      p.items.forEach(function(it){html+='<li>'+it+'</li>';});
+      html+='</ul>';
+      html+='<div class="pc-why">'+p.why+'</div>';
+      html+='</div>';
+    });
+    document.getElementById("ncPhaseCards").innerHTML=html;
+  }
+
+  function renderNCPackages(){
+    var html="";
+    [3,2].forEach(function(p){
+      var ph=ncPhases[p];
+      var active=ncSelectedPhase===p?"active":"";
+      html+='<div class="nc-pkg-card '+active+'" onclick="selectNCPhase('+p+')">';
+      html+='<div class="npc-hdr"><div class="npc-name">'+ph.name+'</div><div class="npc-price">$'+ph.price.toLocaleString()+'</div></div>';
+      if(ph.tag)html+='<div class="npc-tag">'+ph.tag+'</div>';
+      html+='<div class="npc-phases">'+p+' PHASES</div>';
+      ph.includes.forEach(function(it){html+='<div class="npc-item">'+it+'</div>';});
+      html+='<div class="nc-bonus"><div class="nb-title">'+ph.bonus.title+'</div><div class="nb-desc">'+ph.bonus.desc+'</div></div>';
+      html+='</div>';
+    });
+    document.getElementById("ncPkgCards").innerHTML=html;
+    updateNCTotal();
+  }
+
+  function updateNCTotal(){
+    var ph=ncPhases[ncSelectedPhase];
+    document.getElementById("ncTotalAmt").textContent="$"+ph.price.toLocaleString();
+    // Update sticky bar for NC
+    document.getElementById("sbPkg").textContent=ncSelectedPhase+"-Phase";
+    document.getElementById("sbTotal").textContent="$"+ph.price.toLocaleString();
+  }
+
+  window.selectNCPhase=function(p){
+    ncSelectedPhase=p;
+    renderNCPhaseTabs();
+    renderNCPhaseCards();
+    renderNCPackages();
+  };
+
+  // Initial render
+  renderNCPhaseTabs();
+  renderNCPhaseCards();
+  renderNCPackages();
+
+  // Show sticky bar for NC
+  stickyVisible=true;
+  document.getElementById("stickyBar").classList.add("show");
+
+  // Update FAQ for NC context
+  document.querySelector(".faq").innerHTML='<h3>COMMON QUESTIONS</h3>'
+    +'<div class="q">It\'s brand new — why does it need an inspection?</div>'
+    +'<div class="a">The median new home in our database has 49 defects. New doesn\'t mean perfect — it means untested. Framing, plumbing, electrical, and HVAC are installed by dozens of subcontractors, and city inspections check code minimums, not quality.</div>'
+    +'<div class="q">What\'s the difference between 2-phase and 3-phase?</div>'
+    +'<div class="a">2-phase covers pre-drywall and final. 3-phase adds a pre-concrete pour inspection — your only chance to verify what\'s under the slab before it\'s buried forever. We recommend 3-phase for slab-on-grade foundations.</div>'
+    +'<div class="q">Will this slow down my build?</div>'
+    +'<div class="a">No. We coordinate with your builder\'s timeline. Inspections take 2-3 hours and we provide the report same-day so repairs can be scheduled immediately.</div>'
+    +'<div class="q">What if the builder pushes back on repairs?</div>'
+    +'<div class="a">Our Document \u2192 Notify \u2192 Verify process creates a paper trail the builder can\'t ignore. We deliver formal written repair requests with photo evidence and code references, then re-inspect to verify completion.</div>'
+    +'<div class="q">How fast can you get me scheduled?</div>'
+    +'<div class="a">Call or text us at (210) 961-5700 to ask about same-day and rush availability.</div>';
 }
 </script>
 
