@@ -455,19 +455,13 @@ function renderClientAddons(){
     html+='</div></div>';
   });
   html+='<div class="cao" style="justify-content:center;color:#999;font-size:13px" onclick="addClientStruct()">+ Add Structure (from $79)</div>';
-  // Military / First Responder discount
-  var milOn=milDiscount?"on":"";
-  html+='<div class="mil-row '+milOn+'" id="mil-toggle" onclick="toggleMilDiscount()">';
-  html+='<div style="display:flex;align-items:center"><div class="mchk">&#10003;</div><div><span style="font-size:14px;font-weight:700;color:#fff">Military / First Responder</span><div style="font-size:11px;color:#C9A96E;margin-top:1px">Thank you for your service</div></div></div>';
-  html+='<span style="font-size:14px;font-weight:700;color:#3D8B5B;font-family:ui-monospace,monospace">-$25</span></div>';
+  // Military / First Responder discount (display only — toggled on entry form)
+  if(milDiscount){
+    html+='<div class="mil-row on" style="cursor:default">';
+    html+='<div style="display:flex;align-items:center"><div class="mchk">&#10003;</div><div><span style="font-size:14px;font-weight:700;color:#fff">Military / First Responder</span><div style="font-size:11px;color:#C9A96E;margin-top:1px">Thank you for your service</div></div></div>';
+    html+='<span style="font-size:14px;font-weight:700;color:#3D8B5B;font-family:ui-monospace,monospace">-$25</span></div>';
+  }
   document.getElementById("clientAddons").innerHTML=html;
-  updateClientTotal();
-}
-
-function toggleMilDiscount(){
-  milDiscount=!milDiscount;
-  var el=document.getElementById("mil-toggle");
-  if(milDiscount)el.classList.add("on");else el.classList.remove("on");
   updateClientTotal();
 }
 
