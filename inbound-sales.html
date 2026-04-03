@@ -413,8 +413,8 @@ pkgs.forEach(function(pk,pi){
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee){
     pHTML+='<div style="margin-top:12px;padding:14px;background:#161618;border:2px solid #C9A96E;border-radius:6px">';
-    pHTML+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
-    pHTML+='<div style="width:32px;height:32px;background:#C9A96E;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#161618;font-family:Georgia;flex-shrink:0">F</div>';
+    pHTML+='<div style="display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:10px">';
+    pHTML+='<div style="width:32px;height:32px;background:#C9A96E;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#161618;font-family:Georgia">F</div>';
     pHTML+='<div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em">FIDELITY COMPREHENSIVE GUARANTEE</div>';
     pHTML+='</div>';
     pHTML+='<div style="font-size:13px;color:#fff;line-height:1.5;text-align:center">'+pk.guarantee+'</div>';
