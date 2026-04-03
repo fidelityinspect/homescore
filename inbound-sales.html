@@ -462,31 +462,39 @@ document.getElementById("pkgCards").innerHTML=pHTML;
 var optAddedCount=0;
 var optAddedCost=0;
 var optSvcPrices=[199,199,99,99]; // Sewer, Ductwork, Safety, Environmental
+var optSvcAdded=[false,false,false,false];
 var optMissingDotIdx=[3,4,5,6];
 function addOptService(mi){
   var btn=document.getElementById("opt-add-btn-"+mi);
-  if(!btn||btn.disabled)return;
-  btn.disabled=true;
-  btn.style.background="#3D8B5B";
-  btn.style.borderColor="#3D8B5B";
-  btn.style.color="#fff";
-  btn.textContent="\u2713 Added";
-  // Light up the dot
+  if(!btn)return;
+  optSvcAdded[mi]=!optSvcAdded[mi];
   var dotIdx=optMissingDotIdx[mi];
   var dot=document.getElementById("opt-dot-"+dotIdx);
-  if(dot){
-    dot.style.background="#C9A96E";
-    dot.style.transform="scaleY(1.5)";
-    setTimeout(function(){dot.style.transform="scaleY(1)";},300);
+  if(optSvcAdded[mi]){
+    btn.style.background="#3D8B5B";
+    btn.style.borderColor="#3D8B5B";
+    btn.style.color="#fff";
+    btn.textContent="\u2713 Added";
+    if(dot){
+      dot.style.background="#C9A96E";
+      dot.style.transform="scaleY(1.5)";
+      setTimeout(function(){dot.style.transform="scaleY(1)";},300);
+    }
+    optAddedCount++;
+    optAddedCost+=optSvcPrices[mi];
+  }else{
+    btn.style.background="transparent";
+    btn.style.borderColor="#C9A96E";
+    btn.style.color="#C9A96E";
+    btn.textContent="+$"+optSvcPrices[mi];
+    if(dot)dot.style.background="#ddd";
+    optAddedCount--;
+    optAddedCost-=optSvcPrices[mi];
   }
-  optAddedCount++;
-  optAddedCost+=optSvcPrices[mi];
   var label=document.getElementById("opt-dot-label");
   if(label)label.textContent=(3+optAddedCount)+" of 7 risk categories covered";
-  // Update VP price in header
   var prEl=document.querySelector("#pkg-body-1").parentElement.querySelector(".pr");
   if(prEl)prEl.textContent="$"+(op+optAddedCost).toLocaleString();
-  // Update total if VP is selected
   if(activePkg===1)updateClientTotal();
 }
 // Override VP price when add-ons are active
