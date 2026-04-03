@@ -399,30 +399,27 @@ pkgs.forEach(function(pk,pi){
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
-  // Upgrade pitch for Optimized — positive framing
+  // Upgrade pitch for Optimized — matches quote site upsell strategy
   if(pi===1){
-    var extraRisks=[riskMap[2],riskMap[3],riskMap[4],riskMap[6]]; // Sewer, Ductwork, Safety, Air Quality
-    var extraProtection=0;
+    var upsellItems=[
+      {risk:"Damages in Drain Under House",svc:"Sewer Line Scope",price:199},
+      {risk:"Rodent Intrusion in Ductwork",svc:"Ductwork Camera Inspection",price:199},
+      {risk:"Weak Negotiation Position",svc:"Repair Request Builder",price:149},
+      {risk:"Unknown True Repair Costs",svc:"Itemized Repair Quotes",price:199}
+    ];
     pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.25);border-radius:6px">';
-    pHTML+='<div style="display:flex;justify-content:space-between;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid rgba(201,169,110,0.2)">';
-    pHTML+='<span style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em">UPGRADE FOR +$'+(cp-op).toLocaleString()+'</span>';
-    pHTML+='<span style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em">REPAIR COST</span>';
-    pHTML+='</div>';
-    extraRisks.forEach(function(r){
-      var repairCost=r.d?r.d.c:0;
-      extraProtection+=repairCost;
-      pHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(201,169,110,0.1)">';
-      pHTML+='<div style="font-size:13px;color:#333">'+r.d.n+'</div>';
-      pHTML+='<div style="font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;white-space:nowrap">$'+repairCost.toLocaleString()+'</div>';
+    pHTML+='<div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em;padding-bottom:6px;margin-bottom:8px;border-bottom:1px solid rgba(201,169,110,0.2)">YOU ARE UNPROTECTED FROM</div>';
+    upsellItems.forEach(function(u){
+      pHTML+='<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(201,169,110,0.1)">';
+      pHTML+='<div style="font-size:13px;color:#333;flex:1">'+u.risk+'</div>';
+      pHTML+='<div style="font-size:11px;font-weight:600;color:#C9A96E;font-family:ui-monospace,monospace;white-space:nowrap;border:1px solid rgba(201,169,110,0.3);border-radius:4px;padding:4px 8px">Add '+u.svc+' +$'+u.price+'</div>';
       pHTML+='</div>';
     });
-    pHTML+='<div style="display:flex;justify-content:space-between;align-items:baseline;padding:8px 0">';
-    pHTML+='<span style="font-size:12px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace">ADDITIONAL SELLER REPAIRS</span>';
-    pHTML+='<span style="font-size:18px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace">$'+extraProtection.toLocaleString()+'</span>';
-    pHTML+='</div>';
-    pHTML+='<div style="text-align:center;margin-top:4px">';
-    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button></div>';
-    pHTML+='</div>';
+    pHTML+='<div style="font-size:13px;color:#888;font-family:Georgia;text-align:center;margin-top:10px">Get all these and more with Comprehensive</div>';
+    pHTML+='<div style="margin-top:8px;padding:10px;background:rgba(61,139,91,0.08);border-radius:6px;display:flex;justify-content:space-between;align-items:center">';
+    pHTML+='<div style="font-size:13px;font-weight:700;color:#3D8B5B">Maximize My Seller-Paid Repairs</div>';
+    pHTML+='<button class="sel-btn gold" style="font-size:12px;padding:8px 14px;margin:0;width:auto" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button>';
+    pHTML+='</div></div>';
   }
   // Select button
   var pkgKeys=["comp","opt","std"];
