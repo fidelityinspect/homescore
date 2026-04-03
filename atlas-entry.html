@@ -244,7 +244,9 @@ function calcPrices(){
   var age=new Date().getFullYear()-yearBuilt;
   var bp=Math.max(499,Math.round((499+sqft*0.07)*(1+age*0.002)));
   var op=Math.max(799,Math.round(bp*1.67)-100);
-  var cp=Math.max(1099,Math.round(bp*2.67)-200);
+  var cpRaw=Math.max(1099,Math.round(bp*2.67)-200);
+  function vanityPrice(p){var v99=Math.floor(p/100)*100+99,v49=Math.floor(p/100)*100+49;return v99<=p?v99:(v49<=p?v49:v99-100);}
+  var cp=vanityPrice(cpRaw);
   return {std:bp,opt:op,comp:cp};
 }
 
