@@ -748,7 +748,7 @@ var propType=(atlas&&atlas.propType)||"preowned";
 var isNC=propType==="newcon";
 
 if(isNC){
-  // Move NC-only sections into position: phase selector before packages, DNV before reviews
+  // Move NC-only sections into position
   var revSection=document.querySelector(".rev");
   var pkgSection2=document.querySelector(".pkg");
   document.getElementById("nc-phase-selector").classList.remove("nc-hidden");
@@ -756,58 +756,58 @@ if(isNC){
   revSection.parentNode.insertBefore(document.getElementById("nc-dnv"),revSection);
   pkgSection2.parentNode.insertBefore(document.getElementById("nc-phase-selector"),pkgSection2);
 
-  // NC Pricing
-  var ncBase=bp; // same base price formula already calculated
-  var nc2Price=Math.max(699,Math.round(ncBase*1.5));
-  var nc3Price=Math.max(999,Math.round(ncBase*2.2));
+  // NC Phase pricing (add-on cost per phase level)
+  var ncPreDrywall=349;
+  var ncPreConcrete=299;
+  var ncPhaseCost={1:0, 2:ncPreDrywall, 3:ncPreDrywall+ncPreConcrete};
+  var ncSelectedPhase=1; // 1=Final only, 2=Pre-Drywall+Final, 3=Pre-Concrete+Pre-Drywall+Final
 
-  // Phase data
-  var ncPhases={
+  // Phase descriptions for cards
+  var ncPhaseDetails={
+    1:{
+      label:"Final Phase",
+      phases:[
+        {num:1,title:"Final Inspection",items:["Full systems \u2014 electrical, plumbing, HVAC, appliances","Foundation levelness & performance","Exterior envelope \u2014 roof, siding, grading, drainage","Interior finishes \u2014 cosmetic & functional","Garage, attic, crawlspace","Safety \u2014 smoke detectors, GFCI, AFCI, railings"],why:"This is the last checkpoint before you own every problem."}
+      ]
+    },
     2:{
-      name:"2-Phase Inspection",
-      price:nc2Price,
-      tag:null,
+      label:"2-Phase",
+      bonus:{title:"INCLUDED: GET IT IN WRITING",desc:"Step-by-step guide to builder repairs. Ensures the builder fixes every documented defect before closing \u2014 with escalation templates if they push back."},
       phases:[
         {num:1,title:"Pre-Drywall Inspection",items:["Framing structural integrity & proper nailing","Electrical rough-in \u2014 wire gauge, junction boxes, panel prep","Plumbing rough-in \u2014 supply lines, drain lines, fixture placement","HVAC rough-in \u2014 ductwork routing, returns, unit placement","Insulation verification","Window & door flashing / weather barrier","Fire blocking"],why:"Once drywall goes up, all of this is hidden behind walls. Builders know inspectors rarely check at this stage."},
         {num:2,title:"Final Inspection",items:["Full systems \u2014 electrical, plumbing, HVAC, appliances","Foundation levelness & performance","Exterior envelope \u2014 roof, siding, grading, drainage","Interior finishes \u2014 cosmetic & functional","Garage, attic, crawlspace","Safety \u2014 smoke detectors, GFCI, AFCI, railings"],why:"This is the last checkpoint before you own every problem."}
-      ],
-      includes:["Pre-drywall + final phase inspections","Document \u2192 Notify \u2192 Verify for each phase","Builder defect report with photo evidence","Written repair request to builder"],
-      bonus:{title:"INCLUDED: GET IT IN WRITING",desc:"Step-by-step guide to builder repairs after inspection. Ensures the builder fixes every documented defect before closing \u2014 with escalation templates if they push back."}
+      ]
     },
     3:{
-      name:"3-Phase Inspection",
-      price:nc3Price,
-      tag:"RECOMMENDED",
+      label:"3-Phase",
+      bonus:{title:"INCLUDED: PRE-CONSTRUCTION QUALITY STANDARDS",desc:"We establish quality standards BEFORE construction begins, so every phase inspection measures against documented expectations \u2014 not guesswork."},
       phases:[
         {num:1,title:"Pre-Concrete Pour",items:["Plumbing rough-in inspection","Rebar and post-tension cable layout","Moisture barrier / vapor barrier integrity","Soil and grading conditions","Foundation form dimensions & alignment"],why:"Once concrete is poured, everything underneath is buried forever. This is the ONE chance to verify it\u2019s right."},
         {num:2,title:"Pre-Drywall Inspection",items:["Framing structural integrity & proper nailing","Electrical rough-in \u2014 wire gauge, junction boxes, panel prep","Plumbing rough-in \u2014 supply lines, drain lines, fixture placement","HVAC rough-in \u2014 ductwork routing, returns, unit placement","Insulation verification","Window & door flashing / weather barrier","Fire blocking"],why:"Once drywall goes up, all of this is hidden behind walls."},
         {num:3,title:"Final Inspection",items:["Full systems \u2014 electrical, plumbing, HVAC, appliances","Foundation levelness & performance","Exterior envelope \u2014 roof, siding, grading, drainage","Interior finishes \u2014 cosmetic & functional","Garage, attic, crawlspace","Safety \u2014 smoke detectors, GFCI, AFCI, railings"],why:"This is the last checkpoint before you own every problem."}
-      ],
-      includes:["Pre-concrete + pre-drywall + final inspections","Document \u2192 Notify \u2192 Verify for each phase","Builder defect report with photo evidence","Foundation-specific documentation","Written repair request to builder"],
-      bonus:{title:"INCLUDED: PRE-CONSTRUCTION QUALITY STANDARDS",desc:"We establish quality standards BEFORE construction begins, so every phase inspection measures against documented expectations \u2014 not guesswork."}
+      ]
     }
   };
 
-  var ncSelectedPhase=3;
-
   function renderNCPhaseTabs(){
     var html="";
-    [2,3].forEach(function(p){
-      var ph=ncPhases[p];
+    [1,2,3].forEach(function(p){
       var act=ncSelectedPhase===p;
-      html+='<div style="flex:1;padding:12px 8px;background:'+(act?"#C9A96E":"#fff")+';border:2px solid '+(act?"#C9A96E":"#E0DDD6")+';border-radius:8px;text-align:center;cursor:pointer;transition:all 0.2s" onclick="selectNCPhase('+p+')">';
-      html+='<div style="font-size:14px;font-weight:700;color:'+(act?"#161618":"#888")+'">'+p+'-Phase</div>';
-      if(ph.tag)html+='<div style="font-size:9px;font-weight:700;color:'+(act?"#161618":"#C9A96E")+';font-family:ui-monospace,monospace;margin-top:2px">'+ph.tag+'</div>';
-      html+='<div style="font-size:12px;font-weight:700;color:'+(act?"#161618":"#C9A96E")+';font-family:ui-monospace,monospace;margin-top:2px">$'+ph.price.toLocaleString()+'</div>';
+      var labels={1:"Final Only",2:"2-Phase",3:"3-Phase"};
+      var prices={1:"Included",2:"+$"+ncPreDrywall,3:"+$"+(ncPreDrywall+ncPreConcrete)};
+      html+='<div style="flex:1;padding:10px 6px;background:'+(act?"#C9A96E":"#fff")+';border:2px solid '+(act?"#C9A96E":"#E0DDD6")+';border-radius:8px;text-align:center;cursor:pointer;transition:all 0.2s" onclick="selectNCPhase('+p+')">';
+      html+='<div style="font-size:13px;font-weight:700;color:'+(act?"#161618":"#888")+'">'+labels[p]+'</div>';
+      if(p===3)html+='<div style="font-size:9px;font-weight:700;color:'+(act?"#161618":"#C9A96E")+';font-family:ui-monospace,monospace;margin-top:2px">RECOMMENDED</div>';
+      html+='<div style="font-size:11px;font-weight:700;color:'+(act?"#161618":"#C9A96E")+';font-family:ui-monospace,monospace;margin-top:2px">'+prices[p]+'</div>';
       html+='</div>';
     });
     document.getElementById("ncPhaseTabs").innerHTML=html;
   }
 
   function renderNCPhaseCards(){
-    var ph=ncPhases[ncSelectedPhase];
+    var pd=ncPhaseDetails[ncSelectedPhase];
     var html="";
-    ph.phases.forEach(function(p){
+    pd.phases.forEach(function(p){
       html+='<div class="nc-phase-card" style="padding:14px;background:#fff;border:1px solid #E0DDD6;border-radius:8px">';
       html+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">';
       html+='<div style="width:28px;height:28px;background:#C9A96E;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#161618;font-family:ui-monospace,monospace;flex-shrink:0">'+p.num+'</div>';
@@ -821,57 +821,53 @@ if(isNC){
     document.getElementById("ncPhaseCards").innerHTML=html;
   }
 
-  // Replace pre-owned packages with NC packages using same .pkc card style
-  function renderNCPackages(){
-    var pHTML="";
-    [3,2].forEach(function(p,pi){
-      var ph=ncPhases[p];
-      var act=ncSelectedPhase===p;
-      var bg=act?"#161618":"#F5F2EB";
-      var bdr=act?"2px solid #C9A96E":"1px solid #E0DDD6";
-      var nmColor=act?"#fff":"#1A1A1A";
-      var prColor=act?"#C9A96E":"#333";
-      var subColor=act?"#888":"#888";
-
-      pHTML+='<div class="pkc" style="margin-bottom:8px">';
-      pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="selectNCPhase('+p+')">';
-      if(ph.tag)pHTML+='<span class="tag">'+ph.tag+'</span>';
-      pHTML+='<div class="row2"><div><span class="nm" style="color:'+nmColor+'">'+ph.name+'</span>';
-      pHTML+='<div class="sub" style="color:'+subColor+'">'+p+' phases \u00b7 Document \u2192 Notify \u2192 Verify</div></div>';
-      pHTML+='<span class="pr" style="color:'+prColor+'">$'+ph.price.toLocaleString()+'</span></div>';
-      pHTML+='</div>';
-      pHTML+='<div class="body" id="nc-pkg-body-'+p+'" style="background:#fff;'+(act?"display:block":"display:none")+'">';
-      // Included items
-      ph.includes.forEach(function(it){
-        pHTML+='<div class="item"><span class="ck">&#10003;</span><span style="font-size:14px;color:#555">'+it+'</span></div>';
-      });
-      // Bonus
-      pHTML+='<div class="bonus"><h4>'+ph.bonus.title+'</h4><p>'+ph.bonus.desc+'</p></div>';
-      pHTML+='</div></div>';
+  // Re-render existing package cards with NC phase cost added to prices
+  function updateNCPackagePrices(){
+    var phaseAdd=ncPhaseCost[ncSelectedPhase];
+    // Update price display on each package card header
+    var cards=document.querySelectorAll(".pkc");
+    var basePrices=[cp,op,bp];
+    cards.forEach(function(card,i){
+      var pr=card.querySelector(".pr");
+      if(pr)pr.textContent="$"+(basePrices[i]+phaseAdd).toLocaleString();
     });
-    document.getElementById("pkgCards").innerHTML=pHTML;
-    updateNCTotal();
+    // Add phase bonus to Comp card if 2-phase or 3-phase
+    var pd=ncPhaseDetails[ncSelectedPhase];
+    var existingPhaseBonus=document.getElementById("nc-phase-bonus");
+    if(existingPhaseBonus)existingPhaseBonus.remove();
+    if(pd.bonus){
+      var compBody=document.getElementById("pkg-body-0");
+      if(compBody){
+        var bonusDiv=document.createElement("div");
+        bonusDiv.id="nc-phase-bonus";
+        bonusDiv.className="bonus";
+        bonusDiv.style.marginTop="8px";
+        bonusDiv.style.background="rgba(201,169,110,0.08)";
+        bonusDiv.innerHTML='<h4 style="color:#C9A96E">'+pd.bonus.title+'</h4><p style="color:#C9A96E">'+pd.bonus.desc+'</p>';
+        compBody.appendChild(bonusDiv);
+      }
+    }
+    updateClientTotal();
   }
 
-  function updateNCTotal(){
-    var ph=ncPhases[ncSelectedPhase];
-    document.getElementById("clientTotal").style.fontSize="28px";
-    document.getElementById("clientTotal").textContent="$"+ph.price.toLocaleString();
-    document.getElementById("sbPkg").textContent=ncSelectedPhase+"-Phase";
-    document.getElementById("sbTotal").textContent="$"+ph.price.toLocaleString();
-  }
+  // Override getSelectedPkgPrice to include phase cost
+  var origGetPkgPrice2=getSelectedPkgPrice;
+  getSelectedPkgPrice=function(){
+    return origGetPkgPrice2()+ncPhaseCost[ncSelectedPhase];
+  };
 
   window.selectNCPhase=function(p){
     ncSelectedPhase=p;
     renderNCPhaseTabs();
     renderNCPhaseCards();
-    renderNCPackages();
+    updateNCPackagePrices();
   };
 
   // Initial render
   renderNCPhaseTabs();
   renderNCPhaseCards();
-  renderNCPackages();
+  // Update package prices after a tick so the DOM is ready
+  setTimeout(function(){updateNCPackagePrices();},0);
 
   // Update hero for NC context
   document.querySelector(".info h2").textContent="What We Find in";
