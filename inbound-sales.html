@@ -332,6 +332,9 @@ var riskMap=[
 ];
 var compRisk=riskMap;
 var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
+// Gap cost for VP→Comp: repair value of the 4 missing services
+var vpGapCost=0;
+[2,3,4,6].forEach(function(i){var d=riskMap[i].d;if(d)vpGapCost+=Math.round(d.c*d.p/100);});
 var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos"];
 var pkgs=[
   {n:"Comprehensive Risk Elimination",sub:"",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,instantBonuses:[{name:"Inspection report",tag:"INSTANT"},{name:"Concessions request",tag:"INSTANT"},{name:"Major defect pricing",tag:"INSTANT"}],delayedBonus:{name:"3rd party itemized repair quotes",tag:"24 HRS"},bonuses:[],guarantee:"We will find seller-paid repairs of 10x more than your inspection fee or we will double your refund.",std:null},
@@ -446,10 +449,11 @@ pkgs.forEach(function(pk,pi){
       pHTML+='<button id="opt-add-btn-'+mi+'" style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;white-space:nowrap;border:1px solid #C9A96E;border-radius:4px;padding:4px 8px;background:transparent;cursor:pointer" onclick="event.stopPropagation();addOptService('+mi+')">+$'+ms.price+'</button>';
       pHTML+='</div>';
     });
-    // Upgrade to Comprehensive — compact dark block
-    pHTML+='<div style="margin-top:14px;padding:14px;background:#161618;border:1px solid #C9A96E;border-radius:6px;text-align:center">';
-    pHTML+='<div style="font-size:13px;color:rgba(255,255,255,0.8);font-family:Georgia;line-height:1.4;margin-bottom:12px">Add all 7 specialty services, rush scheduling, bonuses & guarantee — one price.</div>';
-    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px;margin-top:0" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button>';
+    // Upgrade to Comprehensive — gap cost + button
+    pHTML+='<div style="margin-top:14px;padding:14px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.25);border-radius:6px;text-align:center">';
+    pHTML+='<div style="font-size:13px;color:#333;font-weight:700;margin-bottom:4px">$'+vpGapCost.toLocaleString()+' in seller-paid repairs left on the table</div>';
+    pHTML+='<div style="font-size:12px;color:#888;font-family:Georgia;margin-bottom:10px">Add all 7 specialty services, rush scheduling & guarantee</div>';
+    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button>';
     pHTML+='</div>';
   }
   // No select button — opening card = selecting package
