@@ -246,10 +246,8 @@ document.getElementById("metaLine").textContent=age+"yr old · "+sfv.toLocaleStr
 var ig=IG[brk]||IG["21-30"];
 var bp=Math.max(499,Math.round((499+sfv*0.07)*(1+age*0.002)));
 var op=Math.max(799,Math.round(bp*1.67)-100);
-var cpRaw=Math.max(1099,Math.round(bp*2.67)-200);
-// Vanity price: round down to nearest $x49 or $x99
-var cp99=Math.floor(cpRaw/100)*100+99,cp49=Math.floor(cpRaw/100)*100+49;
-var cp=cp99<=cpRaw?cp99:(cp49<=cpRaw?cp49:cp99-100);
+var cp=Math.max(1099,Math.round(bp*2.67)-200);
+function vanityPrice(p){var v99=Math.floor(p/100)*100+99,v49=Math.floor(p/100)*100+49;return v99<=p?v99:(v49<=p?v49:v99-100);}
 // Use entry form prices if passed (keeps numbers congruent)
 if(entryPrices){bp=entryPrices.std;op=entryPrices.opt;cp=entryPrices.comp;}
 
@@ -448,7 +446,7 @@ pkgs.forEach(function(pk,pi){
     // Upgrade to Comprehensive
     pHTML+='<div style="text-align:center;margin-top:12px">';
     pHTML+='<div style="font-size:12px;color:#888;font-family:Georgia;margin-bottom:8px">Get all 7 + bonuses + guarantee</div>';
-    pHTML+='<button class="sel-btn gold" style="font-size:12px;padding:10px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button>';
+    pHTML+='<button class="sel-btn gold" style="font-size:12px;padding:10px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+vanityPrice(cp-op).toLocaleString()+'</button>';
     pHTML+='</div></div>';
   }
   // Select button
