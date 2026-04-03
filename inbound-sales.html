@@ -155,8 +155,9 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 </div>
 
 <div class="pkg">
-  <div class="qlbl">YOUR QUOTE</div>
+  <div class="qlbl">YOUR QUOTE FOR <span id="quoteAddr"></span></div>
   <div class="qmeta" id="quoteMeta"></div>
+  <div style="font-size:12px;color:#999;font-family:Georgia;font-style:italic;margin-top:-8px;margin-bottom:14px">Tap to compare</div>
   <div id="pkgCards"></div>
 </div>
 
@@ -310,7 +311,8 @@ reviews.forEach(function(r){
 document.getElementById("reviewCards").innerHTML=rHTML;
 
 // Packages
-document.getElementById("quoteMeta").textContent=sfv.toLocaleString()+" sqft \u00b7 "+age+" years old";
+document.getElementById("quoteAddr").textContent=addr.toUpperCase();
+document.getElementById("quoteMeta").textContent=age+"yr \u00b7 "+sfv.toLocaleString()+" sqft";
 // Map 7 risk factors to IG defect data for this age bracket
 var defs=IG[brk];
 function findDef(name){for(var i=0;i<defs.length;i++){if(defs[i].n===name)return defs[i];}return null;}
@@ -327,7 +329,7 @@ var compRisk=riskMap;
 var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
 var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos"];
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"Complete risk elimination",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,instantBonuses:[{name:"Inspection report",tag:"INSTANT"},{name:"Concessions request",tag:"INSTANT"},{name:"Major defect pricing",tag:"INSTANT"}],delayedBonus:{name:"3rd party itemized repair quotes",tag:"24 HRS"},bonuses:[],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
+  {n:"Comprehensive Risk Elimination",sub:"",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,instantBonuses:[{name:"Inspection report",tag:"INSTANT"},{name:"Concessions request",tag:"INSTANT"},{name:"Major defect pricing",tag:"INSTANT"}],delayedBonus:{name:"3rd party itemized repair quotes",tag:"24 HRS"},bonuses:[],guarantee:"We will find seller-paid repairs of 10x more than your inspection fee or we will refund the difference.",std:null},
   {n:"Optimized Value Pack",sub:"3 of 7 specialty services",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:["Inspector consultation"],guarantee:null,std:null},
   {n:"Standard Inspection",sub:"Professional visual inspection",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
 ];
@@ -341,9 +343,11 @@ pkgs.forEach(function(pk,pi){
   pHTML+='<div class="pkc">';
   pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="togglePkg('+pi+')">';
   if(pk.tag)pHTML+='<div class="tag">'+pk.tag+'</div>';
-  pHTML+='<div class="row2"><div><div class="nm" style="color:'+fg+'">'+pk.n+'</div><div class="sub" style="color:'+(pk.dk?"#C9A96E":"#999")+'">'+pk.sub+'</div></div><div class="pr" style="color:'+(pk.dk?"#C9A96E":fg)+'">$'+pk.p.toLocaleString()+'</div></div>';
+  pHTML+='<div class="row2"><div><div class="nm" style="color:'+fg+'">'+pk.n+'</div>';
+  if(pk.sub)pHTML+='<div class="sub" style="color:'+(pk.dk?"#C9A96E":"#999")+'">'+pk.sub+'</div>';
+  pHTML+='</div><div class="pr" style="color:'+(pk.dk?"#C9A96E":fg)+'">$'+pk.p.toLocaleString()+'</div></div>';
   if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-top:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
-  pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;margin-top:6px">\u25BE</div>';
+  // chevron removed — tap to compare instruction in section header
   pHTML+='</div>';
   pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
   // Rush scheduling now shown in bonuses section
@@ -407,7 +411,15 @@ pkgs.forEach(function(pk,pi){
     pHTML+='<div class="bonus" style="margin-top:8px;background:rgba(201,169,110,0.08)"><div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0"><span style="color:#C9A96E;font-size:13px">&#9733; '+pk.delayedBonus.name+'</span><span style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600">'+pk.delayedBonus.tag+'</span></div></div>';
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
-  if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
+  if(pk.guarantee){
+    pHTML+='<div style="margin-top:12px;padding:14px;background:#161618;border:2px solid #C9A96E;border-radius:6px">';
+    pHTML+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
+    pHTML+='<div style="width:32px;height:32px;background:#C9A96E;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#161618;font-family:Georgia;flex-shrink:0">F</div>';
+    pHTML+='<div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.08em">FIDELITY COMPREHENSIVE GUARANTEE</div>';
+    pHTML+='</div>';
+    pHTML+='<div style="font-size:13px;color:#fff;line-height:1.5">'+pk.guarantee+'</div>';
+    pHTML+='</div>';
+  }
   // Upgrade pitch for Optimized — matches quote site upsell strategy
   if(pi===1){
     var upsellItems=[
