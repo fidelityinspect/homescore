@@ -443,18 +443,27 @@ pkgs.forEach(function(pk,pi){
       pHTML+='<button id="opt-add-btn-'+mi+'" style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;white-space:nowrap;border:1px solid #C9A96E;border-radius:4px;padding:5px 10px;background:transparent;cursor:pointer" onclick="event.stopPropagation();addOptService('+mi+')">+$'+ms.price+'</button>';
       pHTML+='</div>';
     });
-    // Upgrade to Comprehensive
-    pHTML+='<div style="text-align:center;margin-top:12px">';
-    pHTML+='<div style="font-size:12px;color:#888;font-family:Georgia;margin-bottom:8px">Get all 7 + bonuses + guarantee</div>';
-    pHTML+='<button class="sel-btn gold" style="font-size:12px;padding:10px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+vanityPrice(cp-op).toLocaleString()+'</button>';
-    pHTML+='</div></div>';
+    // Upgrade to Comprehensive — the big value pitch
+    pHTML+='</div>';
+    pHTML+='<div style="margin-top:10px;padding:16px;background:#161618;border:2px solid #C9A96E;border-radius:8px">';
+    pHTML+='<div style="font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.1em;text-align:center;margin-bottom:10px">OR GET EVERYTHING</div>';
+    // All 7 dots filled
+    pHTML+='<div style="display:flex;justify-content:center;gap:6px;margin-bottom:6px">';
+    for(var u=0;u<7;u++){pHTML+='<div style="width:32px;height:8px;border-radius:4px;background:#C9A96E"></div>';}
+    pHTML+='</div>';
+    pHTML+='<div style="font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center;margin-bottom:12px">7 of 7 risk categories covered</div>';
+    // What you get
+    pHTML+='<div style="font-size:13px;color:#fff;line-height:1.8;padding:0 4px">';
+    pHTML+='<div>&#9733; All 7 specialty services</div>';
+    pHTML+='<div>&#9733; Rush scheduling</div>';
+    pHTML+='<div>&#9733; Instant on-site report + concessions request</div>';
+    pHTML+='<div>&#9733; 3rd party repair quotes in 24hrs</div>';
+    pHTML+='<div>&#9733; 10x guarantee or double your refund</div>';
+    pHTML+='</div>';
+    pHTML+='<button class="sel-btn gold" style="font-size:14px;padding:12px;margin-top:12px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+vanityPrice(cp-op).toLocaleString()+'</button>';
+    pHTML+='</div>';
   }
-  // Select button
-  var pkgKeys=["comp","opt","std"];
-  var isSelected=pkgKeys[pi]===selectedPkg;
-  var btnClass=isSelected?"sel-btn selected":(pi===0?"sel-btn gold":"sel-btn outline");
-  var btnText=isSelected?"SELECTED ✓":(pi===0?"SELECT COMPREHENSIVE":"SELECT THIS PACKAGE");
-  pHTML+='<button class="'+btnClass+'" id="sel-btn-'+pi+'" onclick="event.stopPropagation();selectPackage('+pi+')">'+btnText+'</button>';
+  // No select button — opening card = selecting package
   pHTML+='</div></div>';
 });
 document.getElementById("pkgCards").innerHTML=pHTML;
@@ -607,39 +616,23 @@ renderClientAddons();
 
 function selectPackage(i,scrollTo){
   activePkg=i;
-  // Open the selected card
   document.querySelectorAll(".pkc .body").forEach(function(b){b.classList.remove("open");});
   document.getElementById("pkg-body-"+i).classList.add("open");
-  // Update all select buttons
-  for(var j=0;j<3;j++){
-    var btn=document.getElementById("sel-btn-"+j);
-    if(!btn)continue;
-    if(j===i){
-      btn.className="sel-btn selected";
-      btn.textContent="SELECTED \u2713";
-    }else if(j===0){
-      btn.className="sel-btn gold";
-      btn.textContent="SELECT COMPREHENSIVE";
-    }else{
-      btn.className="sel-btn outline";
-      btn.textContent="SELECT THIS PACKAGE";
-    }
-  }
   updateClientTotal();
-  // Scroll to the selected package card (for upgrades) or add-on section (for direct select)
   if(scrollTo==="pkg"){
     setTimeout(function(){document.getElementById("pkg-body-"+i).parentElement.scrollIntoView({behavior:"smooth",block:"start"});},100);
-  }else{
-    setTimeout(function(){document.getElementById("addonSection").scrollIntoView({behavior:"smooth",block:"start"});},200);
   }
 }
 
 function togglePkg(i){
   var el=document.getElementById("pkg-body-"+i);
-  if(el.classList.contains("open")){el.classList.remove("open");}
-  else{
+  if(el.classList.contains("open")){
+    el.classList.remove("open");
+  }else{
     document.querySelectorAll(".pkc .body").forEach(function(b){b.classList.remove("open");});
     el.classList.add("open");
+    activePkg=i;
+    updateClientTotal();
     setTimeout(function(){el.parentElement.scrollIntoView({behavior:"smooth",block:"start"});},100);
   }
 }
