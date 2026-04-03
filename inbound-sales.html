@@ -327,7 +327,7 @@ var compRisk=riskMap;
 var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
 var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos"];
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"All 7 specialty services included",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,bonuses:["Instant on-site report delivery with consultation","3rd party itemized repair quotes in 24hrs","Instant Concession/Repair Request Builder"],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
+  {n:"Comprehensive Risk Elimination",sub:"All 7 specialty services included",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,instantBonuses:["Complete inspection report","Concessions request report","Pricing avg. on major defects"],delayedBonus:"3rd party repair quote confirmation in 24hrs",bonuses:[],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
   {n:"Optimized Value Pack",sub:"3 of 7 specialty services",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:["Inspector consultation"],guarantee:null,std:null},
   {n:"Standard Inspection",sub:"Professional visual inspection",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
 ];
@@ -396,6 +396,15 @@ pkgs.forEach(function(pk,pi){
     pHTML+='<div style="font-size:12px;color:#888;font-family:Georgia;margin-bottom:10px">Upgrade to cover 3 of 7 specialty risk categories</div>';
     pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px" onclick="event.stopPropagation();selectPackage(1,\'pkg\')">Upgrade to Value Pack +$'+(op-bp).toLocaleString()+'</button>';
     pHTML+='</div>';
+  }
+  if(pk.instantBonuses&&pk.instantBonuses.length>0){
+    pHTML+='<div class="bonus"><h4>INSTANT BONUSES / ON-SITE DELIVERY</h4>';
+    pk.instantBonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});
+    pHTML+='</div>';
+  }
+  if(pk.delayedBonus){
+    pHTML+='<div class="bonus" style="margin-top:8px;background:rgba(201,169,110,0.08)"><h4 style="color:#C9A96E">BONUS</h4>';
+    pHTML+='<p style="color:#C9A96E">&#9733; '+pk.delayedBonus+'</p></div>';
   }
   if(pk.bonuses.length>0){pHTML+='<div class="bonus"><h4>BONUSES</h4>';pk.bonuses.forEach(function(b){pHTML+='<p>&#9733; '+b+'</p>';});pHTML+='</div>';}
   if(pk.guarantee)pHTML+='<div class="guar">'+pk.guarantee+'</div>';
