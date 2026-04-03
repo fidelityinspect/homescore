@@ -244,7 +244,9 @@ function calcPrices(){
   var age=new Date().getFullYear()-yearBuilt;
   var bp=Math.max(499,Math.round((499+sqft*0.07)*(1+age*0.002)));
   var op=Math.max(799,Math.round(bp*1.67)-100);
-  var cp=Math.max(1099,Math.round(bp*2.67)-200);
+  var cpRaw=Math.max(1099,Math.round(bp*2.67)-200);
+  var cp99=Math.floor(cpRaw/100)*100+99,cp49=Math.floor(cpRaw/100)*100+49;
+  var cp=cp99<=cpRaw?cp99:(cp49<=cpRaw?cp49:cp99-100);
   return {std:bp,opt:op,comp:cp};
 }
 
