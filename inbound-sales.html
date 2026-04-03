@@ -447,16 +447,9 @@ pkgs.forEach(function(pk,pi){
       pHTML+='</div>';
     });
     // Upgrade to Comprehensive — compact dark block
-    pHTML+='<div style="margin-top:14px;padding:14px;background:#161618;border:1px solid #C9A96E;border-radius:6px">';
-    pHTML+='<div style="font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.05em;text-align:center;margin-bottom:10px">OR COVER EVERYTHING</div>';
-    pHTML+='<div style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.7;padding:0 2px">';
-    pHTML+='<div>&#9733; All 7 specialty services</div>';
-    pHTML+='<div>&#9733; Rush scheduling</div>';
-    pHTML+='<div>&#9733; On-site report + concessions request</div>';
-    pHTML+='<div>&#9733; 3rd party repair quotes in 24hrs</div>';
-    pHTML+='<div>&#9733; 10x guarantee or double your refund</div>';
-    pHTML+='</div>';
-    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px;margin-top:10px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button>';
+    pHTML+='<div style="margin-top:14px;padding:14px;background:#161618;border:1px solid #C9A96E;border-radius:6px;text-align:center">';
+    pHTML+='<div style="font-size:13px;color:rgba(255,255,255,0.8);font-family:Georgia;line-height:1.4;margin-bottom:12px">All 7 specialty services, rush scheduling, bonuses & guarantee — one price.</div>';
+    pHTML+='<button class="sel-btn gold" style="font-size:13px;padding:10px;margin-top:0" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button>';
     pHTML+='</div>';
   }
   // No select button — opening card = selecting package
