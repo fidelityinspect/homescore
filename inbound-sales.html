@@ -327,7 +327,7 @@ var compRisk=riskMap;
 var optRisk=[riskMap[0],riskMap[1],riskMap[5]]; // Foundation, Infrared, Termite
 var stdItems=["Visual inspection of all major systems","Roof, electrical, plumbing, HVAC, structure","Digital report with photos"];
 var pkgs=[
-  {n:"Comprehensive Risk Elimination",sub:"All 7 specialty services included",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,instantBonuses:[{name:"Inspection report",tag:"INSTANT"},{name:"Concessions request",tag:"INSTANT"},{name:"Major defect pricing",tag:"INSTANT"}],delayedBonus:{name:"3rd party itemized repair quotes",tag:"24 HRS"},bonuses:[],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
+  {n:"Comprehensive Risk Elimination",sub:"All 7 specialty services included",p:cp,dk:true,tag:"RECOMMENDED",rush:true,risk:compRisk,instantBonuses:[{name:"Rush scheduling",tag:"PRIORITY"},{name:"Inspection report",tag:"INSTANT"},{name:"Concessions request",tag:"INSTANT"},{name:"Major defect pricing",tag:"INSTANT"}],delayedBonus:{name:"3rd party itemized repair quotes",tag:"24 HRS"},bonuses:[],guarantee:"If we don't find qualified repair items in excess of your inspection cost, we will refund you the difference.",std:null},
   {n:"Optimized Value Pack",sub:"3 of 7 specialty services",p:op,dk:false,tag:null,rush:false,risk:optRisk,bonuses:["Inspector consultation"],guarantee:null,std:null},
   {n:"Standard Inspection",sub:"Professional visual inspection",p:bp,dk:false,tag:null,rush:false,risk:[],bonuses:[],guarantee:null,std:stdItems}
 ];
@@ -342,10 +342,10 @@ pkgs.forEach(function(pk,pi){
   pHTML+='<div class="hd" style="background:'+bg+';border:'+bdr+'" onclick="togglePkg('+pi+')">';
   if(pk.tag)pHTML+='<div class="tag">'+pk.tag+'</div>';
   pHTML+='<div class="row2"><div><div class="nm" style="color:'+fg+'">'+pk.n+'</div><div class="sub" style="color:'+(pk.dk?"#C9A96E":"#999")+'">'+pk.sub+'</div></div><div class="pr" style="color:'+(pk.dk?"#C9A96E":fg)+'">$'+pk.p.toLocaleString()+'</div></div>';
-  pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;margin-top:6px">Tap to see what\'s included \u25BE</div>';
+  pHTML+='<div style="font-size:11px;color:'+(pk.dk?"#666":"#aaa")+';font-family:ui-monospace,monospace;margin-top:6px">\u25BE</div>';
   pHTML+='</div>';
   pHTML+='<div class="body '+openClass+'" id="pkg-body-'+pi+'" style="background:'+bodyBg+';border:'+bdr+';border-top:none">';
-  if(pk.rush)pHTML+='<div style="padding:8px 12px;background:rgba(193,122,58,0.15);border-radius:4px;margin-bottom:10px;font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;text-align:center">RUSH SCHEDULING INCLUDED</div>';
+  // Rush scheduling now shown in bonuses section
   if(pk.risk.length>0){
     var protectedTotal=0;
     // Comprehensive inspection base includes thorough inspection bonus
