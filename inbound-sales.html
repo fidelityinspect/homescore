@@ -246,8 +246,9 @@ document.getElementById("metaLine").textContent=age+"yr old · "+sfv.toLocaleStr
 var ig=IG[brk]||IG["21-30"];
 var bp=Math.max(499,Math.round((499+sfv*0.07)*(1+age*0.002)));
 var op=Math.max(799,Math.round(bp*1.67)-100);
-var cp=Math.max(1099,Math.round(bp*2.67)-200);
+var cpRaw=Math.max(1099,Math.round(bp*2.67)-200);
 function vanityPrice(p){var v99=Math.floor(p/100)*100+99,v49=Math.floor(p/100)*100+49;return v99<=p?v99:(v49<=p?v49:v99-100);}
+var cp=vanityPrice(cpRaw);
 // Use entry form prices if passed (keeps numbers congruent)
 if(entryPrices){bp=entryPrices.std;op=entryPrices.opt;cp=entryPrices.comp;}
 
@@ -460,7 +461,7 @@ pkgs.forEach(function(pk,pi){
     pHTML+='<div>&#9733; 3rd party repair quotes in 24hrs</div>';
     pHTML+='<div>&#9733; 10x guarantee or double your refund</div>';
     pHTML+='</div>';
-    pHTML+='<button class="sel-btn gold" style="font-size:14px;padding:12px;margin-top:12px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+vanityPrice(cp-op).toLocaleString()+'</button>';
+    pHTML+='<button class="sel-btn gold" style="font-size:14px;padding:12px;margin-top:12px" onclick="event.stopPropagation();selectPackage(0,\'pkg\')">Upgrade to Comprehensive +$'+(cp-op).toLocaleString()+'</button>';
     pHTML+='</div>';
   }
   // No select button — opening card = selecting package
