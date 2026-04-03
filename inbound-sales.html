@@ -505,7 +505,7 @@ function addOptService(mi){
   if(label)label.textContent=(3+optAddedCount)+" of 7 risk categories covered";
   var prEl=document.querySelector("#pkg-body-1").parentElement.querySelector(".pr");
   if(prEl)prEl.textContent="$"+(op+optAddedCost).toLocaleString();
-  if(activePkg===1)updateClientTotal();
+  if(activePkg===1){renderClientAddons();}
 }
 // Override VP price when add-ons are active
 var origGetSelectedPkgPrice;
@@ -521,7 +521,12 @@ var origGetSelectedPkgPrice;
 // Client-facing add-on selector
 function renderClientAddons(){
   var html="";
+  // Hide add-ons that are already included in the selected package
+  // Comp includes all 7 specialty services (drain = sewer camera)
+  // VP includes 3 base + any added via interactive buttons (sewer=idx 0)
+  var hideDrain=activePkg===0||(activePkg===1&&optSvcAdded[0]);
   ADDONS.forEach(function(a){
+    if(a.id==="drain"&&hideDrain){clientAddons[a.id]=false;return;}
     var on=clientAddons[a.id]?"on":"";
     html+='<div class="cao '+on+'" id="cao-'+a.id+'" onclick="toggleClientAddon(\''+a.id+'\')">';
     html+='<div class="cleft"><div class="cchk">&#10003;</div><div><span class="cn">'+a.name+'</span><div style="font-size:11px;color:#999;margin-top:1px">'+a.desc+'</div></div></div>';
@@ -632,7 +637,7 @@ function togglePkg(i){
     document.querySelectorAll(".pkc .body").forEach(function(b){b.classList.remove("open");});
     el.classList.add("open");
     activePkg=i;
-    updateClientTotal();
+    renderClientAddons();
     setTimeout(function(){el.parentElement.scrollIntoView({behavior:"smooth",block:"start"});},100);
   }
 }
