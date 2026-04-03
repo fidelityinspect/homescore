@@ -104,6 +104,10 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .faq .a{font-size:13px;color:#666;font-family:Georgia;line-height:1.6;margin-bottom:12px}
 .sched-btn{display:block;width:calc(100% - 48px);margin:0 24px 20px;padding:16px;background:#C9A96E;color:#fff;font-size:16px;font-weight:700;font-family:ui-monospace,monospace;border:none;border-radius:8px;text-align:center;text-decoration:none;letter-spacing:0.04em;cursor:pointer}
 .slots{text-align:center;padding:0 24px 16px;font-size:12px;color:#A63D2F;font-weight:600;font-family:ui-monospace,monospace}
+.sticky-bar{position:fixed;bottom:0;left:0;right:0;background:#161618;border-top:2px solid #C9A96E;padding:10px 24px;display:flex;justify-content:space-between;align-items:center;max-width:440px;margin:0 auto;z-index:100;transform:translateY(100%);transition:transform 0.3s ease;box-sizing:border-box}
+.sticky-bar.show{transform:translateY(0)}
+.sticky-bar .sb-pkg{font-size:13px;color:#fff;font-weight:600}
+.sticky-bar .sb-total{font-size:20px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
 .ftr{border-top:1px solid #D8D4CC;padding:14px 24px 28px;text-align:center}
 .ftr .ph{font-size:16px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-bottom:8px}
 .ftr .co{font-size:10px;color:#B0ADA6;font-family:ui-monospace,monospace;line-height:1.8}
@@ -197,6 +201,11 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
   <div class="a">Call or text us at (210) 961-5700 to ask about same-day and rush availability.</div>
 </div>
 
+
+<div class="sticky-bar" id="stickyBar">
+  <div class="sb-pkg" id="sbPkg"></div>
+  <div class="sb-total" id="sbTotal"></div>
+</div>
 
 <div class="ftr">
   <div class="co">FIDELITY HOME INSPECTION<br>3,377 inspections in San Antonio and Austin</div>
@@ -578,10 +587,12 @@ function getSelectedPkgPrice(){
   return [cp,op,bp][activePkg];
 }
 
+var pkgNames=["Comprehensive","Value Pack","Standard"];
 function updateClientTotal(){
   if(activePkg<0){
     document.getElementById("clientTotal").textContent="Select a package";
     document.getElementById("clientTotal").style.fontSize="14px";
+    updateStickyBar();
     return;
   }
   var base=getSelectedPkgPrice();
@@ -592,6 +603,38 @@ function updateClientTotal(){
   if(milDiscount)total-=25;
   document.getElementById("clientTotal").style.fontSize="28px";
   document.getElementById("clientTotal").textContent="$"+total.toLocaleString();
+  updateStickyBar();
+}
+function updateStickyBar(){
+  var bar=document.getElementById("stickyBar");
+  if(activePkg<0){bar.classList.remove("show");return;}
+  document.getElementById("sbPkg").textContent=pkgNames[activePkg];
+  var base=getSelectedPkgPrice();
+  var addTotal=0;
+  ADDONS.forEach(function(a){if(clientAddons[a.id])addTotal+=a.price;});
+  clientStructures.forEach(function(s){addTotal+=calcStructurePrice(s);});
+  var total=base+addTotal;
+  if(milDiscount)total-=25;
+  document.getElementById("sbTotal").textContent="$"+total.toLocaleString();
+  if(stickyVisible)bar.classList.add("show");
+}
+var stickyVisible=false;
+var pkgSection=document.getElementById("pkgCards");
+if(pkgSection&&window.IntersectionObserver){
+  new IntersectionObserver(function(entries){
+    stickyVisible=entries[0].isIntersecting||entries[0].boundingClientRect.top<0;
+    var bar=document.getElementById("stickyBar");
+    if(stickyVisible&&activePkg>=0)bar.classList.add("show");else bar.classList.remove("show");
+  },{threshold:0}).observe(pkgSection);
+  window.addEventListener("scroll",function(){
+    var rect=pkgSection.getBoundingClientRect();
+    var vis=rect.top<window.innerHeight&&rect.bottom>0;
+    if(vis!==stickyVisible){
+      stickyVisible=vis;
+      var bar=document.getElementById("stickyBar");
+      if(stickyVisible&&activePkg>=0)bar.classList.add("show");else bar.classList.remove("show");
+    }
+  },{passive:true});
 }
 
 function addClientStruct(){clientStructures.push({sqft:0,casita:false,kitchen:false,bath:false});renderClientAddons();}
