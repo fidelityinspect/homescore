@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$(git rev-parse --show-toplevel)\" && git fetch origin main --quiet 2>/dev/null && LOCAL=$(git rev-parse main 2>/dev/null) && REMOTE=$(git rev-parse origin/main 2>/dev/null) && if [ \"$LOCAL\" != \"$REMOTE\" ]; then echo '⚠ Vault is behind remote. Run: git pull origin main'; fi; exit 0"
+          }
+        ]
+      }
+    ]
+  }
+}
