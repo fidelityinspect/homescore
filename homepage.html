@@ -106,27 +106,40 @@ body{background:#F0EDE6;font-family:system-ui,-apple-system,sans-serif;color:#1A
 .ftr .lic{font-size:11px;color:#999;font-family:ui-monospace,monospace;line-height:1.8}
 .ftr a{color:#C9A96E;text-decoration:none}
 
-/* Multi-step form */
-.funnel{background:#161618;padding:32px 24px;text-align:center}
-.funnel-q{font-size:20px;font-weight:700;color:#fff;margin-bottom:16px;line-height:1.3}
+/* Fullscreen form overlay */
+.funnel-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(22,22,24,0.97);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.funnel-overlay.open{display:flex}
+.funnel{background:#161618;padding:40px 24px;text-align:center;width:100%;max-width:440px;border-radius:12px;border:1px solid #333;position:relative}
+.funnel-close{position:absolute;top:14px;right:18px;font-size:24px;color:#666;cursor:pointer;background:none;border:none;font-family:system-ui}
+.funnel-close:hover{color:#fff}
+.funnel-q{font-size:22px;font-weight:700;color:#fff;margin-bottom:16px;line-height:1.3}
 .funnel-q em{color:#C9A96E;font-style:normal}
 .funnel-sub{font-size:13px;color:#999;font-family:Georgia;margin-bottom:20px}
 .funnel-step{display:none}
 .funnel-step.active{display:block}
-.funnel-input{width:100%;padding:14px 16px;font-size:16px;border:2px solid #333;border-radius:8px;background:#222;color:#fff;font-family:system-ui;outline:none;transition:border-color 0.2s}
+.funnel-input{width:100%;padding:16px 18px;font-size:18px;border:2px solid #333;border-radius:8px;background:#222;color:#fff;font-family:system-ui;outline:none;transition:border-color 0.2s}
 .funnel-input:focus{border-color:#C9A96E}
 .funnel-input::placeholder{color:#666}
-.funnel-btn{display:block;width:100%;padding:16px;margin-top:12px;background:#C9A96E;color:#fff;font-size:16px;font-weight:700;font-family:ui-monospace,monospace;border:none;border-radius:8px;cursor:pointer;letter-spacing:0.04em;transition:background 0.2s}
+.funnel-btn{display:block;width:100%;padding:18px;margin-top:14px;background:#C9A96E;color:#fff;font-size:18px;font-weight:700;font-family:ui-monospace,monospace;border:none;border-radius:8px;cursor:pointer;letter-spacing:0.04em;transition:background 0.2s}
 .funnel-btn:hover{background:#B8944E}
-.funnel-btn.prefilled{background:#3D8B5B;font-size:18px}
+.funnel-btn.prefilled{background:#3D8B5B;font-size:20px}
 .funnel-btn.prefilled:hover{background:#2E7A4A}
-.funnel-progress{display:flex;gap:4px;justify-content:center;margin-bottom:20px}
-.funnel-dot{width:8px;height:8px;border-radius:50%;background:#333}
+.funnel-progress{display:flex;gap:6px;justify-content:center;margin-bottom:24px}
+.funnel-dot{width:10px;height:10px;border-radius:50%;background:#333}
 .funnel-dot.done{background:#C9A96E}
-.funnel-dot.now{background:#C9A96E;box-shadow:0 0 6px rgba(201,169,110,0.5)}
+.funnel-dot.now{background:#C9A96E;box-shadow:0 0 8px rgba(201,169,110,0.6)}
 .funnel-label{font-size:11px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:700;letter-spacing:0.1em;margin-bottom:8px}
 .funnel-skip{font-size:12px;color:#666;margin-top:10px;cursor:pointer;font-family:Georgia}
 .funnel-skip:hover{color:#999}
+
+/* Testimonials — bigger */
+.save-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch}
+.save-card{min-width:280px;width:280px;background:#161618;border-radius:10px;overflow:hidden;flex-shrink:0}
+.save-img{width:100%;height:220px;object-fit:cover;display:block}
+.save-body{padding:20px}
+.save-amt{font-size:32px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;margin-bottom:4px}
+.save-name{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px}
+.save-quote{font-size:14px;color:#bbb;font-family:Georgia;font-style:italic;line-height:1.6}
 </style>
 </head>
 <body>
@@ -139,75 +152,85 @@ body{background:#F0EDE6;font-family:system-ui,-apple-system,sans-serif;color:#1A
   <a href="tel:2109615700" class="hdr-cta">(210) 961-5700</a>
 </div>
 
-<!-- MICRO-COMMITMENT FUNNEL -->
-<div class="funnel" id="funnel">
-  <div class="funnel-progress" id="funnelDots"></div>
+<!-- HERO -->
+<div class="hero">
+  <h2>Going Places <em>Nobody Else Goes</em></h2>
+  <p>Our forensic-level inspection uses specialty tools that find the seller-paid repairs standard inspections miss. In 3,377 inspections, the average home has over $12,000 in hidden repair items.</p>
+  <button class="hero-btn" onclick="openFunnel()">GET YOUR FREE RISK PREVIEW</button>
+  <div class="hero-sub">or call <a href="tel:2109615700">(210) 961-5700</a></div>
+</div>
 
-  <!-- Step 0: Hook -->
-  <div class="funnel-step active" data-step="0">
-    <div class="funnel-q">Want to know what your <em>new home is hiding?</em></div>
-    <div class="funnel-sub">We'll show you the top seller-paid repairs at your address — free, in 30 seconds.</div>
-    <button class="funnel-btn prefilled" onclick="nextStep()">Yes!</button>
-    <div class="funnel-skip" style="margin-top:14px"><a href="tel:2109615700" style="color:#666;text-decoration:none">or call (210) 961-5700</a></div>
-  </div>
+<!-- FUNNEL OVERLAY -->
+<div class="funnel-overlay" id="funnelOverlay">
+  <div class="funnel">
+    <button class="funnel-close" onclick="closeFunnel()">&times;</button>
+    <div class="funnel-progress" id="funnelDots"></div>
 
-  <!-- Step 1: Name -->
-  <div class="funnel-step" data-step="1">
-    <div class="funnel-label">STEP 1 OF 6</div>
-    <div class="funnel-q">What's your <em>name?</em></div>
-    <input class="funnel-input" id="fName" type="text" placeholder="First and last name" autocomplete="name">
-    <button class="funnel-btn" onclick="nextStep()">NEXT</button>
-  </div>
-
-  <!-- Step 2: Phone -->
-  <div class="funnel-step" data-step="2">
-    <div class="funnel-label">STEP 2 OF 6</div>
-    <div class="funnel-q">Best number to <em>reach you?</em></div>
-    <div class="funnel-sub">We'll text your report here — no spam, ever.</div>
-    <input class="funnel-input" id="fPhone" type="tel" placeholder="(210) 555-1234" autocomplete="tel">
-    <button class="funnel-btn" onclick="nextStep()">NEXT</button>
-  </div>
-
-  <!-- Step 3: Address -->
-  <div class="funnel-step" data-step="3">
-    <div class="funnel-label">STEP 3 OF 6</div>
-    <div class="funnel-q">What's the <em>property address?</em></div>
-    <input class="funnel-input" id="fAddr" type="text" placeholder="123 Main St, San Antonio" autocomplete="street-address">
-    <button class="funnel-btn" onclick="nextStep()">NEXT</button>
-  </div>
-
-  <!-- Step 4: Zip + Sqft -->
-  <div class="funnel-step" data-step="4">
-    <div class="funnel-label">STEP 4 OF 6</div>
-    <div class="funnel-q">Property <em>details</em></div>
-    <div style="display:flex;gap:10px">
-      <input class="funnel-input" id="fZip" type="text" placeholder="Zip code" style="width:40%" autocomplete="postal-code">
-      <input class="funnel-input" id="fSqft" type="number" placeholder="Sq ft" style="width:60%">
+    <!-- Step 0: Hook -->
+    <div class="funnel-step active" data-step="0">
+      <div class="funnel-q">Want to know what your <em>new home is hiding?</em></div>
+      <div class="funnel-sub">Our database of 3,377 inspections reveals the most common hidden defects at your address.</div>
+      <button class="funnel-btn prefilled" onclick="nextStep()">Yes!</button>
     </div>
-    <button class="funnel-btn" onclick="nextStep()" style="margin-top:12px">NEXT</button>
-  </div>
 
-  <!-- Step 5: Year built -->
-  <div class="funnel-step" data-step="5">
-    <div class="funnel-label">STEP 5 OF 6</div>
-    <div class="funnel-q">When was it <em>built?</em></div>
-    <div class="funnel-sub">Approximate is fine — this affects which defects are most likely.</div>
-    <input class="funnel-input" id="fYear" type="number" placeholder="e.g. 2004" min="1900" max="2026">
-    <button class="funnel-btn" onclick="nextStep()">NEXT</button>
-  </div>
+    <!-- Step 1: Name -->
+    <div class="funnel-step" data-step="1">
+      <div class="funnel-label">STEP 1 OF 6</div>
+      <div class="funnel-q">What's your <em>name?</em></div>
+      <input class="funnel-input" id="fName" type="text" placeholder="First Last" autocomplete="name">
+      <button class="funnel-btn" onclick="nextStep()">NEXT</button>
+    </div>
 
-  <!-- Step 6: Email -->
-  <div class="funnel-step" data-step="6">
-    <div class="funnel-label">STEP 6 OF 6</div>
-    <div class="funnel-q">Where should we <em>send your report?</em></div>
-    <input class="funnel-input" id="fEmail" type="email" placeholder="you@email.com" autocomplete="email">
-    <button class="funnel-btn prefilled" onclick="submitFunnel()">SHOW MY RISK PREVIEW</button>
-  </div>
+    <!-- Step 2: Phone -->
+    <div class="funnel-step" data-step="2">
+      <div class="funnel-label">STEP 2 OF 6</div>
+      <div class="funnel-q">Best <em>phone number?</em></div>
+      <div class="funnel-sub">We'll text your report link — no spam, ever.</div>
+      <input class="funnel-input" id="fPhone" type="tel" placeholder="(210) 555-1234" autocomplete="tel">
+      <button class="funnel-btn" onclick="nextStep()">NEXT</button>
+    </div>
 
-  <!-- Done -->
-  <div class="funnel-step" data-step="7">
-    <div class="funnel-q" style="color:#3D8B5B">Building your report...</div>
-    <div class="funnel-sub">Redirecting you now.</div>
+    <!-- Step 3: Address -->
+    <div class="funnel-step" data-step="3">
+      <div class="funnel-label">STEP 3 OF 6</div>
+      <div class="funnel-q">What's the <em>property address?</em></div>
+      <input class="funnel-input" id="fAddr" type="text" placeholder="123 Main St, San Antonio" autocomplete="street-address">
+      <button class="funnel-btn" onclick="nextStep()">NEXT</button>
+    </div>
+
+    <!-- Step 4: Zip + Sqft -->
+    <div class="funnel-step" data-step="4">
+      <div class="funnel-label">STEP 4 OF 6</div>
+      <div class="funnel-q">Property <em>details</em></div>
+      <div style="display:flex;gap:10px">
+        <input class="funnel-input" id="fZip" type="text" placeholder="Zip code" style="width:40%" autocomplete="postal-code">
+        <input class="funnel-input" id="fSqft" type="number" placeholder="Sq ft" style="width:60%">
+      </div>
+      <button class="funnel-btn" onclick="nextStep()" style="margin-top:12px">NEXT</button>
+    </div>
+
+    <!-- Step 5: Year built -->
+    <div class="funnel-step" data-step="5">
+      <div class="funnel-label">STEP 5 OF 6</div>
+      <div class="funnel-q">When was it <em>built?</em></div>
+      <div class="funnel-sub">Approximate is fine — this affects which defects are most likely.</div>
+      <input class="funnel-input" id="fYear" type="number" placeholder="e.g. 2004" min="1900" max="2026">
+      <button class="funnel-btn" onclick="nextStep()">NEXT</button>
+    </div>
+
+    <!-- Step 6: Email -->
+    <div class="funnel-step" data-step="6">
+      <div class="funnel-label">STEP 6 OF 6</div>
+      <div class="funnel-q">Where should we <em>send your report?</em></div>
+      <input class="funnel-input" id="fEmail" type="email" placeholder="you@email.com" autocomplete="email">
+      <button class="funnel-btn prefilled" onclick="submitFunnel()">SHOW MY RISK PREVIEW</button>
+    </div>
+
+    <!-- Done -->
+    <div class="funnel-step" data-step="7">
+      <div class="funnel-q" style="color:#3D8B5B">Building your report...</div>
+      <div class="funnel-sub">Redirecting you now.</div>
+    </div>
   </div>
 </div>
 
@@ -507,7 +530,7 @@ body{background:#F0EDE6;font-family:system-ui,-apple-system,sans-serif;color:#1A
 <div class="cta-bar">
   <h3>Ready for Total Clarity?</h3>
   <p>See what specialty tools find at your address — free, in 30 seconds.</p>
-  <a href="#funnel" class="hero-btn" onclick="scrollToFunnel(event)">GET YOUR FREE RISK PREVIEW</a>
+  <button class="hero-btn" onclick="openFunnel()">GET YOUR FREE RISK PREVIEW</button>
   <div style="margin-top:16px">
     <div class="ph"><a href="tel:2109615700" style="color:#C9A96E;text-decoration:none">(210) 961-5700</a></div>
     <div style="font-size:12px;color:#777;font-family:ui-monospace,monospace;margin-top:4px">Mon–Sat 7a–6p &middot; 7-day scheduling</div>
@@ -634,9 +657,18 @@ function submitFunnel(){
   },800);
 }
 
-function scrollToFunnel(e){
-  e.preventDefault();
-  document.getElementById('funnel').scrollIntoView({behavior:'smooth'});
+function openFunnel(){
+  currentStep=0;
+  var steps=document.querySelectorAll('.funnel-step');
+  for(var i=0;i<steps.length;i++) steps[i].classList.remove('active');
+  steps[0].classList.add('active');
+  updateDots();
+  document.getElementById('funnelOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeFunnel(){
+  document.getElementById('funnelOverlay').classList.remove('open');
+  document.body.style.overflow='';
 }
 </script>
 
