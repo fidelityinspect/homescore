@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fidelity Home Inspection — Total Clarity. Zero Regret.</title>
+<meta name="description" content="San Antonio & Austin's most thorough home inspection. 1,000+ five-star reviews. Specialty tools that find what standard inspections miss.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F0EDE6;font-family:system-ui,-apple-system,sans-serif;color:#1A1A1A}
+.wrap{max-width:680px;margin:0 auto}
+
+/* Header */
+.hdr{background:#161618;color:#fff;padding:16px 24px;display:flex;align-items:baseline;justify-content:space-between}
+.hdr h1{font-size:22px;font-weight:700;letter-spacing:0.04em}
+.hdr span{font-size:14px;color:#C9A96E;font-family:Georgia;font-style:italic}
+.hdr-cta{font-size:12px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;text-decoration:none;letter-spacing:0.04em}
+
+/* Hero */
+.hero{background:#161618;padding:40px 24px 48px;text-align:center}
+.hero h2{font-size:32px;font-weight:700;color:#fff;line-height:1.15;margin-bottom:8px}
+.hero h2 em{color:#C9A96E;font-style:normal}
+.hero p{font-size:15px;color:#999;font-family:Georgia;line-height:1.6;max-width:480px;margin:0 auto 24px}
+.hero-btn{display:inline-block;padding:16px 40px;background:#C9A96E;color:#fff;font-size:16px;font-weight:700;font-family:ui-monospace,monospace;border:none;border-radius:8px;text-decoration:none;letter-spacing:0.06em;cursor:pointer}
+.hero-btn:hover{background:#B8944E}
+.hero-sub{font-size:12px;color:#777;font-family:ui-monospace,monospace;margin-top:12px}
+.hero-sub a{color:#C9A96E;text-decoration:none}
+
+/* Trust strip */
+.trust{background:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;border-bottom:1px solid #E0DDD6}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:13px;font-family:ui-monospace,monospace;color:#555}
+.trust-item strong{color:#1A1A1A;font-size:14px}
+.stars{color:#C9A96E;font-size:14px;letter-spacing:1px}
+
+/* Section labels */
+.sec{padding:32px 24px}
+.sec-lbl{font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.15em;margin-bottom:6px}
+.sec-title{font-size:22px;font-weight:700;color:#1A1A1A;margin-bottom:6px;line-height:1.25}
+.sec-desc{font-size:14px;color:#777;font-family:Georgia;line-height:1.6;margin-bottom:20px}
+
+/* Dark section */
+.sec-dark{background:#161618;color:#fff}
+.sec-dark .sec-title{color:#fff}
+.sec-dark .sec-desc{color:#999}
+
+/* Inspection category cards */
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.cat-grid{grid-template-columns:1fr}}
+.cat{background:#fff;border-radius:8px;padding:20px 16px;border:1px solid #E0DDD6;transition:border-color 0.2s}
+.cat:hover{border-color:#C9A96E}
+.cat-icon{font-size:24px;margin-bottom:8px}
+.cat-name{font-size:14px;font-weight:700;color:#1A1A1A;margin-bottom:4px}
+.cat-cost{font-size:13px;font-weight:700;color:#C17A3A;font-family:ui-monospace,monospace;margin-bottom:6px}
+.cat-detail{font-size:12px;color:#888;font-family:Georgia;line-height:1.5}
+
+/* Specialty service cards */
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.svc-grid{grid-template-columns:1fr}}
+.svc{background:#222;border-radius:8px;padding:16px;border:1px solid #333}
+.svc-tag{font-size:9px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.1em;margin-bottom:6px}
+.svc-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
+.svc-desc{font-size:12px;color:#999;font-family:Georgia;line-height:1.5}
+.svc-price{font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;margin-top:8px}
+
+/* Story section */
+.story{background:#fff;padding:32px 24px}
+.story-grid{display:flex;gap:20px;align-items:flex-start}
+@media(max-width:520px){.story-grid{flex-direction:column}}
+.story-photo{width:140px;height:140px;border-radius:8px;flex-shrink:0;background:url(https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0) center 10%/cover no-repeat;border:3px solid #C9A96E}
+.story-text h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.story-text p{font-size:14px;color:#555;font-family:Georgia;line-height:1.7;margin-bottom:12px}
+.story-sig{font-size:13px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600}
+
+/* Client savings cards */
+.save-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch}
+.save-card{min-width:200px;background:#161618;border-radius:8px;padding:20px;flex-shrink:0}
+.save-amt{font-size:28px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;margin-bottom:6px}
+.save-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
+.save-quote{font-size:12px;color:#999;font-family:Georgia;font-style:italic;line-height:1.5}
+
+/* Stats strip */
+.stats{background:#161618;padding:24px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap;border-top:2px solid #C9A96E}
+.stat{text-align:center}
+.stat-num{font-size:28px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace}
+.stat-lbl{font-size:11px;color:#999;font-family:ui-monospace,monospace;margin-top:2px}
+
+/* FAQ */
+.faq{padding:32px 24px;background:#fff}
+.faq h3{font-size:11px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;letter-spacing:0.15em;margin-bottom:16px}
+.faq .q{font-size:15px;font-weight:700;margin-bottom:4px}
+.faq .a{font-size:13px;color:#666;font-family:Georgia;line-height:1.7;margin-bottom:16px}
+
+/* CTA */
+.cta-bar{background:#161618;padding:32px 24px;text-align:center;border-top:2px solid #C9A96E}
+.cta-bar h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
+.cta-bar p{font-size:14px;color:#999;font-family:Georgia;margin-bottom:20px}
+.cta-bar .hero-btn{display:inline-block;margin-bottom:12px}
+.cta-bar .ph{font-size:18px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600}
+
+/* Footer */
+.ftr{padding:20px 24px;text-align:center;border-top:1px solid #D8D4CC}
+.ftr .lic{font-size:11px;color:#999;font-family:ui-monospace,monospace;line-height:1.8}
+.ftr a{color:#C9A96E;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div><h1>Fidelity</h1></div>
+  <span>Total Clarity. Zero Regret.</span>
+  <a href="tel:2109615700" class="hdr-cta">(210) 961-5700</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h2>Going Places <em>Nobody Else Goes</em></h2>
+  <p>Our forensic-level inspection uses specialty tools that find the seller-paid repairs standard inspections miss. In 3,377 inspections, the average home has over $12,000 in hidden repair items.</p>
+  <a href="/homescore/inbound-sales.html" class="hero-btn">GET YOUR FREE RISK PREVIEW</a>
+  <div class="hero-sub">or call <a href="tel:2109615700">(210) 961-5700</a></div>
+</div>
+
+<!-- TRUST STRIP -->
+<div class="trust">
+  <div class="trust-item"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <strong>1,000+</strong> five-star reviews</div>
+  <div class="trust-item"><strong>Google</strong> &middot; <strong>Yelp</strong> &middot; <strong>Facebook</strong></div>
+  <div class="trust-item">TREC #22402</div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">3,377</div><div class="stat-lbl">INSPECTIONS</div></div>
+  <div class="stat"><div class="stat-num">1,000+</div><div class="stat-lbl">5-STAR REVIEWS</div></div>
+  <div class="stat"><div class="stat-num">$12K+</div><div class="stat-lbl">AVG REPAIRS FOUND</div></div>
+  <div class="stat"><div class="stat-num">8</div><div class="stat-lbl">SYSTEMS INSPECTED</div></div>
+</div>
+
+<!-- 8 INSPECTION CATEGORIES -->
+<div class="sec">
+  <div class="sec-lbl">WHAT WE INSPECT</div>
+  <div class="sec-title">Going Everywhere Really Adds Up</div>
+  <div class="sec-desc">Every system has hidden repair costs that sellers are responsible for before closing. Here's what we find — and what a standard inspection misses.</div>
+
+  <div class="cat-grid">
+    <div class="cat">
+      <div class="cat-icon">&#9651;</div>
+      <div class="cat-name">Roofing</div>
+      <div class="cat-cost">~$12,000</div>
+      <div class="cat-detail">We inspect from inside the attic — spotting damage from underneath the decking, granule buildup in gutters, and flashing failures most inspectors miss from the ground.</div>
+    </div>
+    <div class="cat">
+      <div class="cat-icon">&#9670;</div>
+      <div class="cat-name">Attic &amp; Insulation</div>
+      <div class="cat-cost">~$7,000</div>
+      <div class="cat-detail">Full crawl into hard-to-reach spaces. Insulation gaps, ventilation failures, moisture damage, and rodent intrusion — visible only when you physically enter the attic.</div>
+    </div>
+    <div class="cat">
+      <div class="cat-icon">&#9632;</div>
+      <div class="cat-name">Exterior &amp; Siding</div>
+      <div class="cat-cost">~$20,000</div>
+      <div class="cat-detail">Siding, windows, doors, trim, grading, drainage. Exterior clues reveal foundation performance, moisture intrusion paths, and structural settlement patterns.</div>
+    </div>
+    <div class="cat">
+      <div class="cat-icon">&#9679;</div>
+      <div class="cat-name">Plumbing</div>
+      <div class="cat-cost">~$6,600</div>
+      <div class="cat-detail">Water heater, supply lines, drain pipes, fixtures. Galvanized and cast iron pipes in older homes can cost $6,000–$12,000 to replace. We identify material and condition.</div>
+    </div>
+    <div class="cat">
+      <div class="cat-icon">&#9881;</div>
+      <div class="cat-name">HVAC Systems</div>
+      <div class="cat-cost">$12,000–$15,000</div>
+      <div class="cat-detail">Standard testing misses problems 90% of the time. Our advanced diagnostics check temperature differential, ductwork condition, and remaining service life.</div>
+    </div>
+    <div class="cat">
+      <div class="cat-icon">&#9889;</div>
+      <div class="cat-name">Electrical</div>
+      <div class="cat-cost">~$5,000</div>
+      <div class="cat-detail">Aluminum wiring, double-tapped breakers, missing GFCI protection, federal pacific panels. Safety hazards that are invisible without panel inspection.</div>
+    </div>
+    <div class="cat">
+      <div class="cat-icon">&#9587;</div>
+      <div class="cat-name">Foundation</div>
+      <div class="cat-cost">$10,000+</div>
+      <div class="cat-detail">Settlement can go undetected for years. Our precision altimeter measures elevation at 30+ points to detect active movement before it becomes catastrophic.</div>
+    </div>
+    <div class="cat">
+      <div class="cat-icon">&#9733;</div>
+      <div class="cat-name">Appliances &amp; Interiors</div>
+      <div class="cat-cost">$400–$4,000</div>
+      <div class="cat-detail">Every built-in appliance, cabinet, countertop, window, door. We test operation, check installation, and document everything the seller is responsible for.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 12 SPECIALTY SERVICES -->
+<div class="sec sec-dark">
+  <div class="sec-lbl">SPECIALTY TOOLS &amp; SERVICES</div>
+  <div class="sec-title" style="color:#fff">What Standard Inspections Can't Find</div>
+  <div class="sec-desc">These are the repairs that cost thousands after closing. Each service uses specialized equipment that most inspectors don't carry.</div>
+
+  <div class="svc-grid">
+    <div class="svc">
+      <div class="svc-tag">STRUCTURAL</div>
+      <div class="svc-name">Foundation Settlement Plotting</div>
+      <div class="svc-desc">Precision altimeter measures elevation at 30+ points. Detects active settlement to 1/10 inch accuracy.</div>
+      <div class="svc-price">$199</div>
+    </div>
+    <div class="svc">
+      <div class="svc-tag">THERMAL</div>
+      <div class="svc-name">Infrared Thermography</div>
+      <div class="svc-desc">Behind-the-walls scanning reveals hidden moisture, insulation gaps, and electrical hot spots invisible to the eye.</div>
+      <div class="svc-price">$199</div>
+    </div>
+    <div class="svc">
+      <div class="svc-tag">PEST</div>
+      <div class="svc-name">Termite Investigation (WDI)</div>
+      <div class="svc-desc">Wood-destroying insect inspection. Required by most lenders. We find the entry points — not just the damage.</div>
+      <div class="svc-price">$199</div>
+    </div>
+    <div class="svc">
+      <div class="svc-tag">HVAC</div>
+      <div class="svc-name">Ductwork Camera Inspection</div>
+      <div class="svc-desc">Visual inspection of HVAC ductwork for leaks, debris, mold, and disconnected runs that waste energy.</div>
+      <div class="svc-price">$199</div>
+    </div>
+    <div class="svc">
+      <div class="svc-tag">PLUMBING</div>
+      <div class="svc-name">Sewer Line Camera Scope</div>
+      <div class="svc-desc">Typically the most expensive fix in a home. Camera reveals bellies, root intrusion, cast iron deterioration, and blockages.</div>
+      <div class="svc-price">$199</div>
+    </div>
+    <div class="svc">
+      <div class="svc-tag">SAFETY</div>
+      <div class="svc-name">Safety Audit (CO2/Gas/Fire/Fall)</div>
+      <div class="svc-desc">Complete evaluation for gas leaks, fire hazards, fall risks, and break-in vulnerabilities.</div>
+      <div class="svc-price">$99</div>
+    </div>
+    <div class="svc">
+      <div class="svc-tag">AIR QUALITY</div>
+      <div class="svc-name">Indoor Air Quality Test</div>
+      <div class="svc-desc">Density count of allergens and air pollutants. Critical for families with allergies or respiratory concerns.</div>
+      <div class="svc-price">$49</div>
+    </div>
+    <div class="svc">
+      <div class="svc-tag">WATER</div>
+      <div class="svc-name">Drinking Water Assessment</div>
+      <div class="svc-desc">Tests for contaminants, heavy metals, and filtration needs. Know what's coming out of the tap.</div>
+      <div class="svc-price">$49</div>
+    </div>
+    <div class="svc">
+      <div class="svc-tag">POOL</div>
+      <div class="svc-name">Pool &amp; Spa Inspection</div>
+      <div class="svc-desc">Complete equipment evaluation — pump, filter, heater, surface condition, safety barriers, and electrical bonding.</div>
+      <div class="svc-price">$199</div>
+    </div>
+    <div class="svc">
+      <div class="svc-tag">SEPTIC</div>
+      <div class="svc-name">Septic System Evaluation</div>
+      <div class="svc-desc">Tank and drain field analysis. Aerobic system inspection. Identifies failures before they surface — literally.</div>
+      <div class="svc-price">$350</div>
+    </div>
+    <div class="svc">
+      <div class="svc-tag">WELL</div>
+      <div class="svc-name">Well Water Lab Testing</div>
+      <div class="svc-desc">Coliform bacteria, water quality, and flow rate testing. Lab-certified results.</div>
+      <div class="svc-price">$399</div>
+    </div>
+    <div class="svc">
+      <div class="svc-tag">FOUNDATION</div>
+      <div class="svc-name">Crawlspace Inspection</div>
+      <div class="svc-desc">We go under the house. Moisture, pests, structural piers, plumbing — the things nobody else checks because nobody else wants to crawl.</div>
+      <div class="svc-price">$199</div>
+    </div>
+  </div>
+</div>
+
+<!-- CLIENT SAVINGS / SOCIAL PROOF -->
+<div class="sec" style="background:#F5F2EB">
+  <div class="sec-lbl">REAL RESULTS</div>
+  <div class="sec-title">What Our Clients Saved</div>
+  <div class="sec-desc">These are seller-paid repairs our inspections discovered — money that would have come out of the buyer's pocket after closing.</div>
+
+  <div class="save-scroll">
+    <div class="save-card">
+      <div class="save-amt">$5,750</div>
+      <div class="save-name">Tony Hernandez</div>
+      <div class="save-quote">"I had no idea the foundation had that much movement. The seller covered everything."</div>
+    </div>
+    <div class="save-card">
+      <div class="save-amt">$22,910</div>
+      <div class="save-name">Ryan S.</div>
+      <div class="save-quote">"The sewer scope alone found a $12,000 problem the other inspector missed entirely."</div>
+    </div>
+    <div class="save-card">
+      <div class="save-amt">$22,050</div>
+      <div class="save-name">Caitlin V.</div>
+      <div class="save-quote">"My agent said she's never seen an inspection this thorough. The seller paid for everything."</div>
+    </div>
+    <div class="save-card">
+      <div class="save-amt">$14,200</div>
+      <div class="save-name">Marcus &amp; Diana</div>
+      <div class="save-quote">"The infrared found moisture behind the master bathroom wall. Standard inspection would have missed it completely."</div>
+    </div>
+    <div class="save-card">
+      <div class="save-amt">$10,300</div>
+      <div class="save-name">Jennifer K.</div>
+      <div class="save-quote">"I almost skipped the comprehensive package. That would have been a $10,000 mistake."</div>
+    </div>
+  </div>
+</div>
+
+<!-- MICHAEL'S STORY -->
+<div class="story">
+  <div class="sec-lbl">WHY WE EXIST</div>
+  <div class="sec-title" style="margin-bottom:16px">I Got Burned. Then I Built Something Better.</div>
+  <div class="story-grid">
+    <div class="story-photo"></div>
+    <div class="story-text">
+      <p>In 2011, I bought a home. The inspection looked fine. Within two years, I discovered foundation damage, hidden plumbing failures, and electrical hazards that cost me over $40,000 in repairs — none of which were caught because the inspector never used specialty tools.</p>
+      <p>I paid for that mistake for 12 years.</p>
+      <p>That's why Fidelity exists. We carry the equipment most inspectors don't — infrared cameras, sewer scopes, foundation altimeters, air quality monitors — because the things that cost you the most are the things you can't see.</p>
+      <p>Every inspection we perform is built on one principle: find everything the seller is responsible for <em>before</em> you close, so you never pay for someone else's deferred maintenance.</p>
+      <div class="story-sig">— Michael Street, Inspector &amp; Founder<br>TREC License #22402 &middot; 5,000+ inspections</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+  <h3>COMMON QUESTIONS</h3>
+  <div class="q">My agent said a standard inspection is fine.</div>
+  <div class="a">Standard covers what's visible — but foundation movement, drain damage, moisture behind walls, and pest entry points require specialty tools to detect. These are the repairs that cost thousands after closing and the ones sellers will pay for before closing.</div>
+  <div class="q">What if the house looks great?</div>
+  <div class="a">The better a house shows, the more important it is to verify what's behind the walls. In our database of 3,377 inspections, the average home has over $12,000 in seller-paid repair items — most invisible without specialty tools.</div>
+  <div class="q">How do seller-paid repairs work?</div>
+  <div class="a">Before closing, the seller is responsible for repairs found during inspection. We document every defect with photos and repair costs, then build a concession request your agent submits directly to the seller. Comprehensive clients average 10x their inspection fee in seller-paid repairs.</div>
+  <div class="q">What if you don't find much?</div>
+  <div class="a">With our Comprehensive package, if we don't find seller-paid repairs of 10x more than your inspection fee, we double your refund.</div>
+  <div class="q">Do you serve my area?</div>
+  <div class="a">We cover San Antonio, Austin, and the surrounding Hill Country — Boerne, New Braunfels, Dripping Springs, Kyle, Buda, and everywhere in between.</div>
+</div>
+
+<!-- SERVICE AREA -->
+<div class="sec sec-dark" style="text-align:center;padding:24px">
+  <div class="sec-lbl">SERVICE AREA</div>
+  <p style="font-size:14px;color:#999;font-family:Georgia;line-height:1.7;max-width:480px;margin:8px auto 0">San Antonio &middot; Austin &middot; Boerne &middot; New Braunfels &middot; Dripping Springs &middot; Kyle &middot; Buda &middot; Canyon Lake &middot; Bulverde &middot; Helotes &middot; Fair Oaks Ranch &middot; Johnson City &middot; Wimberley</p>
+</div>
+
+<!-- FINAL CTA -->
+<div class="cta-bar">
+  <h3>Ready for Total Clarity?</h3>
+  <p>See what specialty tools find at your address — free, in 30 seconds.</p>
+  <a href="/homescore/inbound-sales.html" class="hero-btn">GET YOUR FREE RISK PREVIEW</a>
+  <div style="margin-top:16px">
+    <div class="ph"><a href="tel:2109615700" style="color:#C9A96E;text-decoration:none">(210) 961-5700</a></div>
+    <div style="font-size:12px;color:#777;font-family:ui-monospace,monospace;margin-top:4px">Mon–Sat 7a–6p &middot; 7-day scheduling</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="ftr">
+  <div class="lic">
+    FIDELITY HOME INSPECTION<br>
+    3,377 inspections &middot; San Antonio &amp; Austin<br>
+    TREC License #22402, #23850, #25328<br>
+    <a href="tel:2109615700">(210) 961-5700</a> &middot; <a href="mailto:michael@fidelityinspect.com">michael@fidelityinspect.com</a>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
