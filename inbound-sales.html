@@ -123,6 +123,34 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
 .dnv-step .dnv-num{width:32px;height:32px;background:#C9A96E;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#161618;font-family:ui-monospace,monospace;flex-shrink:0}
 .dnv-step .dnv-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
 .dnv-step .dnv-desc{font-size:12px;color:#999;font-family:Georgia;line-height:1.5}
+
+/* Real defects section — live API data */
+.rd{padding:20px 24px;background:#161618;color:#fff}
+.rd-lbl{font-size:11px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;letter-spacing:0.1em;margin-bottom:4px}
+.rd-h{font-size:20px;font-weight:700;line-height:1.3;margin-bottom:4px}
+.rd-h em{color:#C9A96E;font-style:normal}
+.rd-sub{font-size:13px;color:#999;font-family:Georgia;margin-bottom:16px;line-height:1.5}
+.rd-stats{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.rd-stat{flex:1;min-width:90px;background:#222;border-radius:6px;padding:10px 12px;border-left:3px solid #C9A96E}
+.rd-stat .v{font-size:20px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;line-height:1}
+.rd-stat .l{font-size:9px;color:#888;font-family:ui-monospace,monospace;letter-spacing:0.05em;margin-top:4px;text-transform:uppercase}
+.rd-card{background:#222;border-radius:8px;overflow:hidden;margin-bottom:10px;display:flex;align-items:stretch;border-left:3px solid #444}
+.rd-card.spec{border-left-color:#C17A3A}
+.rd-img{width:90px;min-height:100px;object-fit:cover;flex-shrink:0;background:#333;display:block}
+.rd-info{padding:10px 12px;flex:1;display:flex;flex-direction:column;justify-content:center}
+.rd-tag{font-size:8px;font-weight:700;color:#C17A3A;font-family:ui-monospace,monospace;letter-spacing:0.08em;margin-bottom:3px;text-transform:uppercase}
+.rd-tag.std{color:#666}
+.rd-name{font-size:13px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:4px}
+.rd-meta{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:11px;font-family:ui-monospace,monospace}
+.rd-freq{color:#999}
+.rd-cost{color:#C9A96E;font-weight:700}
+.rd-rec{font-size:10px;color:#888;font-family:Georgia;font-style:italic;margin-top:4px}
+.rd-cta{padding:14px;background:rgba(193,122,58,0.12);border-radius:6px;text-align:center;margin-top:8px}
+.rd-cta .a{font-size:13px;color:#ddd;font-family:Georgia;line-height:1.5;margin-bottom:6px}
+.rd-cta .b{font-size:14px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace}
+
+/* Loading state */
+.rd-load{padding:40px 20px;text-align:center;color:#666;font-family:ui-monospace,monospace;font-size:12px}
 </style>
 </head>
 <body>
@@ -145,6 +173,23 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
   <div class="fn" id="fnote"></div>
 
   <div class="nb" id="nearbySection"></div>
+
+  <!-- LIVE: Real defects in homes like yours -->
+  <div class="rd" id="liveDefects" style="display:none;margin:16px -20px 0;border-radius:8px">
+    <div class="rd-lbl" id="rdLbl">REAL DEFECTS FOUND IN HOMES LIKE YOURS</div>
+    <div class="rd-h">What <em>specialty tools</em> actually find at <span id="rdAddr"></span></div>
+    <div class="rd-sub" id="rdSub"></div>
+    <div class="rd-stats" id="rdStats"></div>
+    <div id="rdCards"></div>
+    <div class="rd-cta">
+      <div class="a">Every one of these defects becomes a seller-paid repair when documented before closing.</div>
+      <div class="b">That's the difference Comprehensive makes.</div>
+    </div>
+  </div>
+
+  <div class="rd" id="liveDefectsLoading" style="display:none;margin:16px -20px 0;border-radius:8px">
+    <div class="rd-load">Loading defect data from inspections near you...</div>
+  </div>
 
   <div class="rf" id="contrastBox">
     <div class="lbl">AVG SELLER-PAID REPAIRS FOUND</div>
@@ -362,6 +407,103 @@ document.getElementById("compRepairs").textContent="$"+compRepairs.toLocaleStrin
 document.getElementById("stdFill").style.width=Math.round(stdRepairs/compRepairs*100)+"%";
 var gapDisplay=compRepairs-stdRepairs;
 document.getElementById("gapAmt").textContent="$"+gapDisplay.toLocaleString();
+
+// LIVE: Fetch real defect data from PythonAnywhere
+(function fetchLiveDefects(){
+  if(!addr || !zp || !sfv) return;
+  var loadEl=document.getElementById("liveDefectsLoading");
+  if(loadEl) loadEl.style.display="block";
+
+  var year=new Date().getFullYear()-age;
+  fetch("https://fidelity1.pythonanywhere.com/api/v2/property",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({address:addr,zip_code:zp,sqft:sfv,year_built:year})
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(loadEl) loadEl.style.display="none";
+    if(!data || !data.repairs) return;
+
+    // Flatten all defects with photos
+    var all=[];
+    (data.repairs||[]).forEach(function(r){
+      (r.subsystems||[]).forEach(function(sub){
+        (sub.defects||[]).forEach(function(d){
+          if(d.image && d.similar_homes>0){
+            // Score: frequency weight + cost weight, prioritize specialty-tool defects
+            var spec=/foundation|moisture|drain|hvac|insulation|rodent|leak|infrared|sewer|septic/i.test(d.name+" "+d.description);
+            d._score=(d.similar_homes||0)*0.6 + Math.min(d.avg_cost,3000)*0.04 + (spec?20:0);
+            d._spec=spec;
+            all.push(d);
+          }
+        });
+      });
+    });
+
+    // Top 6 by score
+    all.sort(function(a,b){return b._score-a._score;});
+    var top=all.slice(0,6);
+    if(top.length===0) return;
+
+    // Stats
+    var pd=data.property_details||{};
+    var sellerPaid=pd.seller_paid_repairs||0;
+    var totalDefects=all.length;
+    var nearbyCount=(data.nearby_properties||[]).length;
+    document.getElementById("rdAddr").textContent=addr.split(",")[0];
+    document.getElementById("rdSub").textContent="Pulled from "+(pd.local_inspections||100)+" actual inspection reports near "+(addr.split(",")[0])+". These are the defects most commonly found — and what the seller pays for when documented before closing.";
+    document.getElementById("rdStats").innerHTML=
+      '<div class="rd-stat"><div class="v">$'+sellerPaid.toLocaleString()+'</div><div class="l">Avg Seller Repairs</div></div>'+
+      '<div class="rd-stat"><div class="v">'+totalDefects+'</div><div class="l">Defect Types Found</div></div>'+
+      '<div class="rd-stat"><div class="v">'+nearbyCount+'</div><div class="l">Nearby Reports</div></div>';
+
+    // Cards
+    var html="";
+    top.forEach(function(d){
+      var freq=Math.round(d.similar_homes/(pd.local_inspections||100)*100);
+      var tag=d._spec?'<div class="rd-tag">⚙ SPECIALTY TOOL FINDS</div>':'<div class="rd-tag std">STANDARD INSPECTION</div>';
+      html+='<div class="rd-card'+(d._spec?' spec':'')+'">'+
+        '<img class="rd-img" src="'+d.image+'" alt="'+d.name+'" onerror="this.style.display=\'none\'">'+
+        '<div class="rd-info">'+
+          tag+
+          '<div class="rd-name">'+d.name+'</div>'+
+          '<div class="rd-meta"><span class="rd-freq">Found in '+d.similar_homes+' of '+(pd.local_inspections||100)+' homes ('+freq+'%)</span><span class="rd-cost">$'+d.avg_cost.toLocaleString()+'</span></div>'+
+          (d.recommendation?'<div class="rd-rec">'+d.recommendation+'</div>':'')+
+        '</div>'+
+      '</div>';
+    });
+    document.getElementById("rdCards").innerHTML=html;
+    document.getElementById("liveDefects").style.display="block";
+
+    // ALSO: replace nearby properties with live data
+    if(data.nearby_properties && data.nearby_properties.length>0){
+      var nb=data.nearby_properties.slice(0,8);
+      var nbHTML='<h3>INSPECTIONS NEAR '+addr.toUpperCase()+'</h3><div class="nbr">';
+      nb.forEach(function(p){
+        var cost=p.total_cost||p.seller_paid_repairs||0;
+        var dist=p.distance_km?p.distance_km.toFixed(1)+'km':'';
+        var grade='B',gc='#3D6B8B';
+        if(cost>30000){grade='F';gc='#A63D2F';}
+        else if(cost>20000){grade='D';gc='#C17A3A';}
+        else if(cost>10000){grade='C';gc='#8B8535';}
+        nbHTML+='<a href="'+(p.report_url||'#')+'" target="_blank" style="text-decoration:none;color:inherit"><div class="nbc">'+
+          (p.report_photo_url?'<img src="'+p.report_photo_url+'" style="width:100%;height:80px;object-fit:cover;display:block" onerror="this.style.display=\'none\'">':'')+
+          '<div class="nbc-body"><div class="tp"><div class="gr" style="background:'+gc+'">'+grade+'</div><div><div style="font-size:11px;font-weight:600;line-height:1.2">'+(p.address||'').substring(0,22)+'</div><div style="font-size:10px;color:#999;font-family:ui-monospace,monospace">'+dist+'</div></div></div>'+
+          '<div style="font-size:13px;font-weight:700;color:#C9A96E;font-family:ui-monospace,monospace;margin-top:4px">$'+cost.toLocaleString()+'</div>'+
+          '<div style="font-size:9px;color:#888;font-family:ui-monospace,monospace;margin-top:2px">total found</div>'+
+          '<div style="font-size:10px;color:#C9A96E;font-family:ui-monospace,monospace;font-weight:600;margin-top:6px">View report \u2192</div>'+
+          '</div></div></a>';
+      });
+      nbHTML+='</div>';
+      document.getElementById("nearbySection").innerHTML=nbHTML;
+    }
+  })
+  .catch(function(err){
+    if(loadEl) loadEl.style.display="none";
+    console.log("Live defect fetch failed:",err);
+  });
+})();
 
 // Nearby
 var nbHTML='<h3>INSPECTIONS NEAR '+addr.toUpperCase()+'</h3><div class="nbr">';
