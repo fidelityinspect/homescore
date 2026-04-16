@@ -212,8 +212,15 @@ body{background:#F0EDE6;font-family:system-ui;max-width:440px;margin:0 auto;colo
   </div>
 </div>
 
-<a href="#" class="sched-btn" id="schedBtn">SCHEDULE NOW</a>
+<a href="#" class="sched-btn" id="schedBtn" onclick="showCalendar(event)">SCHEDULE NOW</a>
 <div class="slots">2 priority slots available — lock in your spot</div>
+
+<!-- GHL Calendar Section -->
+<div id="ghl-cal-section" style="display:none;padding:0 24px 24px">
+  <div style="font-size:11px;color:#C9A96E;font-weight:700;font-family:ui-monospace,monospace;letter-spacing:0.15em;margin-bottom:4px">CHOOSE YOUR DATE</div>
+  <div style="font-size:13px;color:#888;font-family:Georgia;margin-bottom:14px">We inspect 7 days a week. Pick a date and time that works for you.</div>
+  <iframe id="ghl-cal-frame" src="" style="width:100%;min-height:600px;border:1px solid #E0DDD6;border-radius:8px;background:#fff" loading="lazy"></iframe>
+</div>
 
 <div class="insp-bar" style="padding:16px 24px;margin-top:12px">
   <div style="position:relative;flex-shrink:0"><div class="av" style="overflow:hidden;padding:0;background:url(https://lh3.googleusercontent.com/d/11OSonwFg6Cv9eadFiM3EqtD3J8wLVpz0) center 10% / 200% no-repeat"></div><div style="position:absolute;bottom:-4px;right:-4px;width:28px;height:28px;border-radius:50%;background:url(https://assets.cdn.filesafe.space/oNNJgl9ZvNFmWqqwJmHb/media/69ce4051fe4f1c0b67b87daf.png) center/cover no-repeat"></div></div>
@@ -885,6 +892,49 @@ if(isNC){
     +'<div class="a">Our Document \u2192 Notify \u2192 Verify process creates a paper trail the builder can\'t ignore. Formal repair requests with photo evidence and code references, then re-inspection to verify completion.</div>'
     +'<div class="q">How fast can you get me scheduled?</div>'
     +'<div class="a">Call or text us at (210) 961-5700 to ask about same-day and rush availability.</div>';
+}
+
+// ── GHL INTEGRATION ─────────────────────────────────────────
+var GHL_CALENDAR_ID = '34LhBynjwi3V4Tp2fjuF';
+
+function showCalendar(e) {
+  if (e) e.preventDefault();
+
+  // Create/update GHL contact (fire-and-forget via proxy)
+  var pkgName = activePkg >= 0 ? pkgNames[activePkg] : 'none';
+  var base = getSelectedPkgPrice();
+  var addTotal = 0;
+  ADDONS.forEach(function(a) { if (clientAddons[a.id]) addTotal += a.price; });
+  clientStructures.forEach(function(s) { addTotal += calcStructurePrice(s); });
+  var total = base + addTotal;
+  if (milDiscount) total -= 25;
+
+  fetch('https://fidelity1.pythonanywhere.com/api/v2/ghl-contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      address: addr,
+      zip: zp,
+      sqft: sfv,
+      year_built: 2026 - age,
+      source: 'atlas-inbound-sales',
+      tags: ['atlas-risk-preview', 'website-lead', 'package-' + pkgName.toLowerCase().replace(/\s+/g, '-')],
+      package: pkgName,
+      price: total
+    })
+  }).catch(function() {});
+
+  // Show calendar
+  var section = document.getElementById('ghl-cal-section');
+  var frame = document.getElementById('ghl-cal-frame');
+  if (!frame.src || frame.src === '' || frame.src === window.location.href) {
+    frame.src = 'https://api.leadconnectorhq.com/widget/booking/' + GHL_CALENDAR_ID;
+  }
+  section.style.display = 'block';
+  section.scrollIntoView({ behavior: 'smooth' });
+
+  // Update button text
+  document.getElementById('schedBtn').textContent = '↑ CALENDAR OPEN — PICK A DATE';
 }
 </script>
 
