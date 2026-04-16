@@ -431,44 +431,54 @@ document.getElementById("gapAmt").textContent="$"+gapDisplay.toLocaleString();
       (r.subsystems||[]).forEach(function(sub){
         (sub.defects||[]).forEach(function(d){
           if(d.image && d.similar_homes>0){
-            // Score: frequency weight + cost weight, prioritize specialty-tool defects
-            var spec=/foundation|moisture|drain|hvac|insulation|rodent|leak|infrared|sewer|septic/i.test(d.name+" "+d.description);
-            d._score=(d.similar_homes||0)*0.6 + Math.min(d.avg_cost,3000)*0.04 + (spec?20:0);
-            d._spec=spec;
+            // Score by likelihood-of-negotiation: severity (cost) + surprise (frequency in similar homes)
+            // High-cost expensive items rank higher than frequent cheap ones
+            d._score=(d.similar_homes||0)*0.4 + Math.min(d.avg_cost,5000)*0.05;
+            // Likely-negotiable: cost > $500 OR has professional recommendation
+            d._major=(d.avg_cost>=500) || (d.recommendation && /Professional|Contractor|Plumber|Electrician|Roofing/i.test(d.recommendation));
             all.push(d);
           }
         });
       });
     });
 
-    // Top 6 by score
-    all.sort(function(a,b){return b._score-a._score;});
+    // Top 6 — bias toward major (negotiable) items
+    all.sort(function(a,b){
+      if(a._major && !b._major) return -1;
+      if(!a._major && b._major) return 1;
+      return b._score-a._score;
+    });
     var top=all.slice(0,6);
     if(top.length===0) return;
 
-    // Stats
+    // Stats — use ESTIMATED negotiable subset, not the full $87k+ total
     var pd=data.property_details||{};
-    var sellerPaid=pd.seller_paid_repairs||0;
     var totalDefects=all.length;
+    var majorDefects=all.filter(function(d){return d._major;}).length;
+    // Estimated negotiable: sum of major item avg_cost weighted by frequency
+    var negotiable=0;
+    all.forEach(function(d){
+      if(d._major){negotiable+=Math.round(d.avg_cost*d.similar_homes/(pd.local_inspections||100));}
+    });
     var nearbyCount=(data.nearby_properties||[]).length;
     document.getElementById("rdAddr").textContent=addr.split(",")[0];
-    document.getElementById("rdSub").textContent="Pulled from "+(pd.local_inspections||100)+" actual inspection reports near "+(addr.split(",")[0])+". These are the defects most commonly found — and what the seller pays for when documented before closing.";
+    document.getElementById("rdSub").textContent="From "+(pd.local_inspections||100)+" actual inspections near "+(addr.split(",")[0])+". The seller pays for what surprises them — items not pre-disclosed, especially expensive or severe defects buyers ask to be fixed before closing.";
     document.getElementById("rdStats").innerHTML=
-      '<div class="rd-stat"><div class="v">$'+sellerPaid.toLocaleString()+'</div><div class="l">Avg Seller Repairs</div></div>'+
-      '<div class="rd-stat"><div class="v">'+totalDefects+'</div><div class="l">Defect Types Found</div></div>'+
+      '<div class="rd-stat"><div class="v">~$'+Math.round(negotiable/1000)*1000+'</div><div class="l">Likely Negotiable</div></div>'+
+      '<div class="rd-stat"><div class="v">'+majorDefects+'</div><div class="l">Major Items</div></div>'+
       '<div class="rd-stat"><div class="v">'+nearbyCount+'</div><div class="l">Nearby Reports</div></div>';
 
-    // Cards
+    // Cards — no false "specialty tool" tags; show MAJOR vs MINOR honestly
     var html="";
     top.forEach(function(d){
       var freq=Math.round(d.similar_homes/(pd.local_inspections||100)*100);
-      var tag=d._spec?'<div class="rd-tag">⚙ SPECIALTY TOOL FINDS</div>':'<div class="rd-tag std">STANDARD INSPECTION</div>';
-      html+='<div class="rd-card'+(d._spec?' spec':'')+'">'+
+      var tag=d._major?'<div class="rd-tag">⚠ MAJOR — TYPICAL ASK</div>':'<div class="rd-tag std">MINOR / MAINTENANCE</div>';
+      html+='<div class="rd-card'+(d._major?' spec':'')+'">'+
         '<img class="rd-img" src="'+d.image+'" alt="'+d.name+'" onerror="this.style.display=\'none\'">'+
         '<div class="rd-info">'+
           tag+
           '<div class="rd-name">'+d.name+'</div>'+
-          '<div class="rd-meta"><span class="rd-freq">Found in '+d.similar_homes+' of '+(pd.local_inspections||100)+' homes ('+freq+'%)</span><span class="rd-cost">$'+d.avg_cost.toLocaleString()+'</span></div>'+
+          '<div class="rd-meta"><span class="rd-freq">Found in '+freq+'% of similar homes</span><span class="rd-cost">$'+d.avg_cost.toLocaleString()+'</span></div>'+
           (d.recommendation?'<div class="rd-rec">'+d.recommendation+'</div>':'')+
         '</div>'+
       '</div>';
@@ -477,16 +487,24 @@ document.getElementById("gapAmt").textContent="$"+gapDisplay.toLocaleString();
     document.getElementById("liveDefects").style.display="block";
 
     // ALSO: replace nearby properties with live data
+    // Grade RELATIVE to local average (not absolute thresholds)
     if(data.nearby_properties && data.nearby_properties.length>0){
       var nb=data.nearby_properties.slice(0,8);
-      var nbHTML='<h3>INSPECTIONS NEAR '+addr.toUpperCase()+'</h3><div class="nbr">';
+      // Compute local average from all returned properties
+      var allCosts=data.nearby_properties.map(function(p){return p.total_cost||p.seller_paid_repairs||0;}).filter(function(c){return c>0;});
+      var avgCost=allCosts.length?allCosts.reduce(function(a,b){return a+b;},0)/allCosts.length:20000;
+
+      var nbHTML='<h3>INSPECTIONS NEAR '+addr.toUpperCase()+' &nbsp;<span style="color:#888;font-weight:400">(area avg ~$'+Math.round(avgCost/1000)+'k)</span></h3><div class="nbr">';
       nb.forEach(function(p){
         var cost=p.total_cost||p.seller_paid_repairs||0;
         var dist=p.distance_km?p.distance_km.toFixed(1)+'km':'';
-        var grade='B',gc='#3D6B8B';
-        if(cost>30000){grade='F';gc='#A63D2F';}
-        else if(cost>20000){grade='D';gc='#C17A3A';}
-        else if(cost>10000){grade='C';gc='#8B8535';}
+        // Grade vs local average ratio: <50%=A, <80%=B, <120%=C, <160%=D, >=160%=F
+        var ratio=cost/avgCost;
+        var grade='A',gc='#3D8B5B';
+        if(ratio>=1.6){grade='F';gc='#A63D2F';}
+        else if(ratio>=1.2){grade='D';gc='#C17A3A';}
+        else if(ratio>=0.8){grade='C';gc='#8B8535';}
+        else if(ratio>=0.5){grade='B';gc='#3D6B8B';}
         nbHTML+='<a href="'+(p.report_url||'#')+'" target="_blank" style="text-decoration:none;color:inherit"><div class="nbc">'+
           (p.report_photo_url?'<img src="'+p.report_photo_url+'" style="width:100%;height:80px;object-fit:cover;display:block" onerror="this.style.display=\'none\'">':'')+
           '<div class="nbc-body"><div class="tp"><div class="gr" style="background:'+gc+'">'+grade+'</div><div><div style="font-size:11px;font-weight:600;line-height:1.2">'+(p.address||'').substring(0,22)+'</div><div style="font-size:10px;color:#999;font-family:ui-monospace,monospace">'+dist+'</div></div></div>'+
